@@ -45,34 +45,40 @@ class ValidTXT
     public static function isValid($txt)
     {
         self::loadStructure();
+        
         $txt = Strings::removeSomeAlienCharsfromTxt($txt);
+        
         $rows = explode("\n", $txt);
-        foreach ($rows as $row) {
-            $fields = explode('|', $row);
+        
+        foreach ($rows as &$row) {
+
             if (empty($fields)) {
                 continue;
             }
+
+            $lastChar = substr($row, -1);
+            
+            $char = '';
+
+            if ($lastChar != '|') {
+               
+                $row .= '|';
+            }
+
+            $fields = explode('|', $row);
+
             $count = count($fields);
+
             $ref = strtoupper($fields[0]);
+
             if ($ref == "A") {
                 self::loadStructure($fields[1]);
             }
+            
             if (empty($ref)) {
                 continue;
             }
-            $lastChar = substr($row, -1);
-            $char = '';
-            if ($lastChar != '|') {
-                if ($lastChar == ' ') {
-                    $char = '[ESP]';
-                } elseif ($lastChar == "\r") {
-                    $char = '[CR]';
-                } elseif ($lastChar == "\t") {
-                    $char = '[TAB]';
-                }
-                self::$errors[] = "ERRO: $char Todas as linhas devem terminar com 'pipe'. [$row]";
-                continue;
-            }
+
             if (!array_key_exists($ref, self::$entities)) {
                 self::$errors[] = "ERRO: Essa referência não está definida. [$row]";
                 continue;

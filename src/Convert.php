@@ -61,7 +61,9 @@ class Convert
         if (!empty($txt)) {
             $this->txt = trim($txt);
         }
+        
         $txt = Strings::removeSomeAlienCharsfromTxt($this->txt);
+        
         if (!$this->isNFe($txt)) {
             throw DocumentsException::wrongDocument(12, '');
         }
@@ -71,7 +73,9 @@ class Convert
         $i = 0;
         foreach ($this->notas as $nota) {
             $version = $this->layouts[$i];
+
             $parser = new Parser($version);
+            
             $this->xmls[] = $parser->toXml($nota);
             $i++;
         }
@@ -89,7 +93,7 @@ class Convert
             throw DocumentsException::wrongDocument(15, '');
         }
         $this->dados = explode("\n", $txt);
-        $fields = explode('|', $this->dados[0]);
+        $fields = explode('|', $this->dados[0]); 
         if ($fields[0] == 'NOTAFISCAL') {
             $this->numNFe = (int) $fields[1];
             return true;
@@ -164,7 +168,9 @@ class Convert
     protected function loadLayouts($nota)
     {
         foreach ($nota as $campo) {
+            
             $fields = explode('|', $campo);
+            
             if ($fields[0] == 'A') {
                 $this->layouts[] = $fields[1];
                 break;
@@ -180,6 +186,7 @@ class Convert
     protected function isValidTxt($nota)
     {
         $errors = ValidTXT::isValid(implode("\n", $nota));
+
         if (!empty($errors)) {
             throw DocumentsException::wrongDocument(14, implode("\n", $errors));
         }
