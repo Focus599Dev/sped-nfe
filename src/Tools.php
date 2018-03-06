@@ -154,16 +154,20 @@ class Tools extends ToolsCommon
             $uf,
             $tpAmb
         );
+
         $request = "<consSitNFe xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
             . "<tpAmb>$tpAmb</tpAmb>"
             . "<xServ>CONSULTAR</xServ>"
             . "<chNFe>$chave</chNFe>"
             . "</consSitNFe>";
         $this->isValid($this->urlVersion, $request, 'consSitNFe');
+
         $this->lastRequest = $request;
         $parameters = ['nfeDadosMsg' => $request];
         $body = "<nfeDadosMsg xmlns=\"$this->urlNamespace\">$request</nfeDadosMsg>";
+
         $this->lastResponse = $this->sendRequest($body, $parameters);
+
         return $this->lastResponse;
     }
 

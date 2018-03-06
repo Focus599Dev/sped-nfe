@@ -317,6 +317,7 @@ class Make
         if (empty($this->xml)) {
             $this->montaNFe();
         }
+
         return $this->xml;
     }
 
@@ -479,6 +480,11 @@ class Make
         $this->tpAmb = $std->tpAmb;
         $this->mod = $std->mod;
         $identificador = 'B01 <ide> - ';
+        
+        $std->dhEmi = date('c');
+        
+        $std->dhSaiEnt = date('c');
+
         $ide = $this->dom->createElement("ide");
         $this->dom->addChild(
             $ide,
@@ -526,7 +532,7 @@ class Make
         $this->dom->addChild(
             $ide,
             "nNF",
-            $std->nNF,
+            (int)$std->nNF,
             true,
             $identificador . "Número do Documento Fiscal"
         );
@@ -6840,8 +6846,7 @@ class Make
      * Grupo Totais da NF-e W01 pai A01
      * tag NFe/infNFe/total
      */
-    protected function buildTotal()
-    {
+    protected function buildTotal(){
         if (empty($this->total)) {
             $this->total = $this->dom->createElement("total");
         }

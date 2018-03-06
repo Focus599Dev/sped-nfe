@@ -528,6 +528,7 @@ class Tools
     protected function sendRequest($request, array $parameters = [])
     {
         $this->checkSoap();
+
         return (string) $this->soap->send(
             $this->urlService,
             $this->urlMethod,

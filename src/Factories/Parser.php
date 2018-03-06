@@ -131,17 +131,20 @@ class Parser
      */
     protected function array2xml($nota)
     {
+
         foreach ($nota as $lin) {
             $fields = explode('|', $lin);
             if (empty($fields)) {
                 continue;
             }
             $metodo = strtolower(str_replace(' ', '', $fields[0])).'Entity';
+
             if (!method_exists(__CLASS__, $metodo)) {
                 //campo não definido
                 throw DocumentsException::wrongDocument(16, $lin);
             }
             $struct = $this->structure[strtoupper($fields[0])];
+
             $std = $this->fieldsToStd($fields, $struct);
             $this->$metodo($std);
         }
@@ -158,13 +161,20 @@ class Parser
         $sfls = explode('|', $struct);
         $len = count($sfls)-1;
         $std = new \stdClass();
+
         for ($i = 1; $i < $len; $i++) {
             $name = $sfls[$i];
-            $data = $dfls[$i];
+            
+            if (isset($dfls[$i]))
+                $data = $dfls[$i];
+            else 
+                $data = '';
+
             if (!empty($name)) {
                 $std->$name = $data;
             }
         }
+
         return $std;
     }
 
@@ -585,7 +595,7 @@ class Parser
      * I|cProd|cEAN|xProd|NCM|EXTIPI|CFOP|uCom|qCom|vUnCom|vProd|cEANTrib|uTrib|qTrib|vUnTrib|vFrete|vSeg|vDesc|vOutro|indTot|xPed|nItemPed|nFCI|
      *
      * NOTE: adjusted for NT2016_002_v1.30
-     * I|cProd|cEAN|xProd|NCM|cBenf|EXTIPI|CFOP|uCom|qCom|vUnCom|vProd|cEANTrib|uTrib|qTrib|vUnTrib|vFrete|vSeg|vDesc|vOutro|indTot|xPed|nItemPed|nFCI|
+     * I|cProd|cEAN|xProd|NCM|cBenef|EXTIPI|CFOP|uCom|qCom|vUnCom|vProd|cEANTrib|uTrib|qTrib|vUnTrib|vFrete|vSeg|vDesc|vOutro|indTot|xPed|nItemPed|nFCI|
      * @param stdClass $std
      * @return void
      */
@@ -1561,6 +1571,62 @@ class Parser
     protected function w02Entity($std)
     {
         $this->make->tagICMSTot($std);
+    }
+
+    /**
+     * Cria tag vFCPUFDest
+     * w04c|vFCPUFDest|
+     */
+    protected function w04cEntity($std){
+       
+       //fake não faz nada
+        $field = null;
+    }
+
+
+    /**
+     * Cria tag vICMSUFDest
+     * w04e|vICMSUFDest|
+     */
+    protected function w04eEntity($std){
+       //fake não faz nada
+        $field = null;
+    }
+
+    /**
+     * Cria tag vICMSUFRemet
+     * w04g|vICMSUFRemet|
+     */
+    protected function w04gEntity($std){
+        //fake não faz nada
+        $field = null;
+    }
+
+    /**
+     * Cria tag vFCP
+     * w04h|vFCP|
+     */
+    protected function w04hEntity($std){
+        //fake não faz nada
+        $field = null;
+    }
+
+     /**
+     * Cria tag vFCPST
+     * w06a|vFCPST|
+     */
+    protected function w06aEntity($std){
+        //fake não faz nada
+        $field = null;
+    }
+
+     /**
+     * Cria tag vFCPSTRet
+     * w06b|vFCPSTRet|
+     */
+    protected function w06bEntity($std){
+        //fake não faz nada
+        $field = null;
     }
 
     /**
