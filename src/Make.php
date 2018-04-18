@@ -485,9 +485,18 @@ class Make
         
         $std->dhEmi = date('c');
         
-        $std->dhSaiEnt = date('c');
+        if ($std->dhSaiEnt){        
+            
+            $dhSaintAux = new DateTime($std->dhSaiEnt);
+
+            $dhSaintAux->modify('+ 2 day');
+
+            $std->dhSaiEnt = $dhSaintAux->format('c');
+
+        }
 
         $ide = $this->dom->createElement("ide");
+
         $this->dom->addChild(
             $ide,
             "cUF",
@@ -510,13 +519,17 @@ class Make
             $identificador . "Descrição da Natureza da Operaçãoo"
         );
         //removido no layout 4.00
-        $this->dom->addChild(
-            $ide,
-            "indPag",
-            $std->indPag,
-            false,
-            $identificador . "Indicador da forma de pagamento"
-        );
+        if ($this->version == '4.00'){
+            
+            $this->dom->addChild(
+                $ide,
+                "indPag",
+                $std->indPag,
+                true,
+                $identificador . "Indicador da forma de pagamento"
+            );
+        }
+
         $this->dom->addChild(
             $ide,
             "mod",
@@ -1131,7 +1144,7 @@ class Make
                 false,
                 $identificador . "Identificação do destinatário no caso de comprador estrangeiro"
             );
-            
+
         }
 
         if ($std->idEstrangeiro != '') {
