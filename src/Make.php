@@ -518,8 +518,9 @@ class Make
             true,
             $identificador . "Descrição da Natureza da Operaçãoo"
         );
+        
         //removido no layout 4.00
-        if ($this->version == '4.00'){
+        if ($this->version == '3.10'){
             
             $this->dom->addChild(
                 $ide,
@@ -528,6 +529,7 @@ class Make
                 true,
                 $identificador . "Indicador da forma de pagamento"
             );
+
         }
 
         $this->dom->addChild(
