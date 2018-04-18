@@ -1121,13 +1121,19 @@ class Make
             false,
             $identificador . "CPF do destinatário"
         );
-        $this->dom->addChild(
-            $this->dest,
-            "idEstrangeiro",
-            Strings::onlyNumbers($std->idEstrangeiro),
-            false,
-            $identificador . "Identificação do destinatário no caso de comprador estrangeiro"
-        );
+
+        if ($std->idEstrangeiro){
+            
+            $this->dom->addChild(
+                $this->dest,
+                "idEstrangeiro",
+                Strings::onlyNumbers($std->idEstrangeiro),
+                false,
+                $identificador . "Identificação do destinatário no caso de comprador estrangeiro"
+            );
+            
+        }
+
         if ($std->idEstrangeiro != '') {
             $std->indIEDest = '9';
         }
