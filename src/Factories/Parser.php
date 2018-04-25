@@ -1107,7 +1107,7 @@ class Parser
 
     /**
      * Load field fot tag ICMSUFDest [NA]
-     * NA|vBCUFDest|pFCPUFDest|pICMSUFDest|pICMSInter|pICMSInterPart|vFCPUFDest|vICMSUFDest|vICMSFRemet|
+     * NA|vBCUFDest|vBCFCPUFDest|pFCPUFDest|pICMSUFDest|pICMSInter|pICMSInterPart|vFCPUFDest|vICMSUFDest|vICMSUFRemet|
      * @param stdClass $std
      * @return void
      */

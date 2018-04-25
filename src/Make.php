@@ -485,15 +485,7 @@ class Make
         
         $std->dhEmi = date('c');
         
-        if ($std->dhSaiEnt){        
-            
-            $dhSaintAux = new DateTime($std->dhSaiEnt);
-
-            $dhSaintAux->modify('+ 2 day');
-
-            $std->dhSaiEnt = $dhSaintAux->format('c');
-
-        }
+        $std->dhSaiEnt =  date('c');
 
         $ide = $this->dom->createElement("ide");
 
@@ -6221,6 +6213,7 @@ class Make
      */
     public function taginfAdic($std)
     {
+
         $possible = ['infAdFisco', 'infCpl'];
         $std = $this->equilizeParameters($std, $possible);
         
