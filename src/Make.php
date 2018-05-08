@@ -6815,10 +6815,17 @@ class Make
             $this->aProd[$nItem] = $prod;
         }
         //insere Rastro
-        foreach ($this->aRastro as $nItem => $child) {
+        foreach ($this->aRastro as $nItem => $rastros) {
+            
             $prod = $this->aProd[$nItem];
-            $this->dom->appChild($prod, $child, "Inclusão do node Rastro");
-            $this->aProd[$nItem] = $prod;
+
+            foreach ($rastros as $rastro) {
+                
+                $this->dom->appChild($prod, $rastro, "Inclusão do node Rastro");
+                
+                $this->aProd[$nItem] = $prod;
+
+            }
         }
         //insere veiculo
         foreach ($this->aVeicProd as $nItem => $child) {
