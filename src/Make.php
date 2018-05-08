@@ -534,7 +534,7 @@ class Make
         $this->dom->addChild(
             $ide,
             "serie",
-            $std->serie,
+            intval($std->serie),
             true,
             $identificador . "Série do Documento Fiscal"
         );
@@ -6779,6 +6779,7 @@ class Make
                 $cchild = $child->getElementsByTagName("CNPJFab")->item(0);
                 if (!empty($cchild)) {
                     $prod->insertBefore($cchild, $node);
+                    $this->aProd[$nItem] = $prod;
                 }
             }
         }
@@ -6787,20 +6788,36 @@ class Make
             $prod = $this->aProd[$nItem];
             foreach ($aDI as $child) {
                 $node = $prod->getElementsByTagName("xPed")->item(0);
-                if (! empty($node)) {
+                if (!empty($node)) {
                     $prod->insertBefore($child, $node);
                 } else {
-                    $this->dom->appChild($prod, $child, "Inclusão do node DI");
+                    $node = $prod->getElementsByTagName("FCI")->item(0);
+                    if (!empty($node)) {
+                        $prod->insertBefore($child, $node);
+                    } else {
+                        $this->dom->appChild($prod, $child, "Inclusão do node DI");
+                    }
                 }
             }
             $this->aProd[$nItem] = $prod;
         }
         //insere detExport
-        foreach ($this->aDetExport as $nItem => $child) {
+        foreach ($this->aDetExport as $nItem => $detexport) {
             $prod = $this->aProd[$nItem];
-            $node = $prod->getElementsByTagName("indTot")->item(0);
-            $prod->insertBefore($child, $node->nextSibling);
-//            $this->dom->appChild($prod, $child, "Inclusão do node detExport");
+            foreach ($detexport as $child) {
+                $node = $prod->getElementsByTagName("xPed")->item(0);
+                if (!empty($node)) {
+                    $prod->insertBefore($child, $node);
+                } else {
+                    $this->dom->appChild($prod, $child, "Inclusão do node DetExport");
+                }
+            }
+            $this->aProd[$nItem] = $prod;
+        }
+        //insere Rastro
+        foreach ($this->aRastro as $nItem => $child) {
+            $prod = $this->aProd[$nItem];
+            $this->dom->appChild($prod, $child, "Inclusão do node Rastro");
             $this->aProd[$nItem] = $prod;
         }
         //insere veiculo
@@ -6816,17 +6833,24 @@ class Make
             $this->aProd[$nItem] = $prod;
         }
         //insere armas
-        foreach ($this->aArma as $nItem => $child) {
+        foreach ($this->aArma as $nItem => $arma) {
             $prod = $this->aProd[$nItem];
-            $this->dom->appChild($prod, $child, "Inclusão do node arma");
+            foreach ($arma as $child) {
+                $node = $prod->getElementsByTagName("imposto")->item(0);
+                if (!empty($node)) {
+                    $prod->insertBefore($child, $node);
+                } else {
+                    $this->dom->appChild($prod, $child, "Inclusão do node arma");
+                }
+            }
             $this->aProd[$nItem] = $prod;
         }
         //insere combustivel
         foreach ($this->aComb as $nItem => $child) {
             $prod = $this->aProd[$nItem];
-            if (! empty($this->aEncerrante)) {
+            if (!empty($this->aEncerrante)) {
                 $encerrante = $this->aEncerrante[$nItem];
-                if (! empty($encerrante)) {
+                if (!empty($encerrante)) {
                     $this->dom->appChild($child, $encerrante, "inclusão do node encerrante na tag comb");
                 }
             }
@@ -6866,6 +6890,7 @@ class Make
         }
         return $this->aProd;
     }
+
 
     /**
      * Insere a tag pag, os detalhamentos dos pagamentos e cartoes
