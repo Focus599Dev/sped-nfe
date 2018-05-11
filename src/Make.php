@@ -352,8 +352,8 @@ class Make
 
     /**
      * NFe xml mount method
-     * this function returns TRUE on success or FALSE on error
-     * The xml of the NFe must be retrieved by the getXML() function or
+     * this function returns TRUE on success or FALSE on error
+     * The xml of the NFe must be retrieved by the getXML() function or
      * directly by the public property $xml
      * @return boolean
      */
@@ -412,7 +412,7 @@ class Make
         //[0] tag NFe
         $this->dom->appendChild($this->NFe);
         // testa da chave
-        $this->checkNFeKey($this->dom);
+        // $this->checkNFeKey($this->dom);
         $this->xml = $this->dom->saveXML();
         return true;
     }
@@ -483,9 +483,9 @@ class Make
         $this->mod = $std->mod;
         $identificador = 'B01 <ide> - ';
         
-        $std->dhEmi = date('c');
+        // $std->dhEmi = date('c');
         
-        $std->dhSaiEnt =  date('c');
+        // $std->dhSaiEnt =  date('c');
 
         $ide = $this->dom->createElement("ide");
 
