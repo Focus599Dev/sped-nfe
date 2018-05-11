@@ -274,6 +274,8 @@ class Make
 
     protected $detPag;
 
+    protected $newChave;
+
     /**
      * Função construtora cria um objeto DOMDocument
      * que será carregado com o documento fiscal
@@ -308,7 +310,10 @@ class Make
         $this->stdTot->vOutro = 0;
         $this->stdTot->vNF = 0;
         $this->stdTot->vTotTrib = 0;
+
+        $this->newChave = false;
     }
+
 
     /**
      * Returns xml string and assembly it is necessary
@@ -412,7 +417,9 @@ class Make
         //[0] tag NFe
         $this->dom->appendChild($this->NFe);
         // testa da chave
-        // $this->checkNFeKey($this->dom);
+        if ($this->newChave)
+            $this->checkNFeKey($this->dom);
+        
         $this->xml = $this->dom->saveXML();
         return true;
     }
@@ -483,10 +490,37 @@ class Make
         $this->mod = $std->mod;
         $identificador = 'B01 <ide> - ';
         
-        // $std->dhEmi = date('c');
-        
-        // $std->dhSaiEnt =  date('c');
+        $auxDhEmi = new \DateTime($std->dhEmi);
 
+        $std->dhEmi = new \DateTime($std->dhEmi);
+
+        if ($auxDhEmi > $std->dhEmi) {
+            
+            $std->dhEmi = date('c');
+
+            $this->newChave = true;
+
+        } else {
+
+            $std->dhEmi = $auxDhEmi->format('c');
+
+        }
+
+
+        if ($std->dhSaiEnt){
+
+            $auxSaiEnt = new \DateTime($std->dhSaiEnt);
+
+            $std->dhSaiEnt =  new \DateTime();
+
+            if ($auxSaiEnt > $std->dhSaiEnt){
+                $std->dhSaiEnt =  date('c');
+            } else {
+                $std->dhSaiEnt = $auxSaiEnt ->format('c');
+            }
+
+        }
+        
         $ide = $this->dom->createElement("ide");
 
         $this->dom->addChild(
