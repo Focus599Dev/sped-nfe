@@ -947,7 +947,7 @@ class Make
         $this->dom->addChild(
             $this->emit,
             "IM",
-            Strings::onlyNumbers($std->IM),
+            $std->IM,
             false,
             $identificador . "Inscrição Municipal do Prestador de Serviço do emitente"
         );
@@ -4643,7 +4643,8 @@ class Make
         $std = $this->equilizeParameters($std, $possible);
         
         //totalizador
-        $this->stdTot->vPIS += $std->vPIS;
+        if ($std->vPIS)
+            $this->stdTot->vPIS += $std->vPIS;
 
         switch ($std->CST) {
             case '01':

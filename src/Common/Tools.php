@@ -192,6 +192,9 @@ class Tools
         $this->setEnvironment($this->config->tpAmb);
         $this->contingency = new Contingency();
         $this->soap = new SoapCurl($certificate);
+        if ($this->config->proxy){
+            $this->soap->proxy($this->config->proxy, $this->config->proxyPort, $this->config->proxyUser, $this->config->proxyPass);
+        }
     }
     
     /**
