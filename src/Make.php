@@ -6792,11 +6792,27 @@ class Make
                 if (!empty($node)) {
                     $prod->insertBefore($child, $node);
                 } else {
-                    $node = $prod->getElementsByTagName("FCI")->item(0);
+                    $node = $prod->getElementsByTagName("nItemPed")->item(0);
                     if (!empty($node)) {
                         $prod->insertBefore($child, $node);
                     } else {
-                        $this->dom->appChild($prod, $child, "Inclusão do node DI");
+
+                        $node = $prod->getElementsByTagName("nItemPed")->item(0);
+
+                        if (!empty($node)) {
+                            $prod->insertBefore($child, $node);
+                        } else {
+
+                            $node = $prod->getElementsByTagName("nFCI")->item(0);
+
+                            if (!empty($node)) {
+                                $prod->insertBefore($child, $node);
+                            } else {
+                                $this->dom->appChild($prod, $child, "Inclusão do node DI");
+                            }
+                            
+                        }
+
                     }
                 }
             }
