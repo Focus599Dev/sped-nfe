@@ -98,6 +98,7 @@ class Parser
      */
     protected $stdTransporta;
 
+    protected $version;
     /**
      * Configure environment to correct NFe layout
      * @param string $version
@@ -107,6 +108,7 @@ class Parser
         $ver = str_replace('.', '', $version);
         $path = realpath(__DIR__."/../../storage/txtstructure$ver.json");
         $this->structure = json_decode(file_get_contents($path), true);
+        $this->version = $version;
         $this->make = new Make();
     }
 
@@ -1286,7 +1288,10 @@ class Parser
     protected function q05Entity($std)
     {
         $this->stdPIS->CST = $std->CST;
-        $this->stdPIS->vPIS = $std->vPIS;
+        
+        if ($this->version == '4.00')
+            $this->stdPIS->vPIS = $std->vPIS;
+
         $this->buildQEntity();
     }
 
@@ -1300,6 +1305,10 @@ class Parser
     {
         $this->stdPIS->vBC = $std->vBC;
         $this->stdPIS->pPIS = $std->pPIS;
+
+        if ($this->version == '3.10')
+            $this->stdPIS->vPIS = $std->vPIS;
+
         $this->buildQEntity();
     }
 
