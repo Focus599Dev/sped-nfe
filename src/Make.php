@@ -2754,6 +2754,7 @@ class Make
         ];
         $std = $this->equilizeParameters($std, $possible);
         //totalizador
+
         $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
         $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
         $this->stdTot->vICMSDeson += (float) !empty($std->vICMSDeson) ? $std->vICMSDeson : 0;
@@ -5177,6 +5178,7 @@ class Make
             'pDevol',
             'vIPIDevol'
         ];
+
         $std = $this->equilizeParameters($std, $possible);
         
         //totalizador
@@ -6900,7 +6902,8 @@ class Make
                 $this->dom->appChild($det, $child, "Inclusão do node imposto");
             }
             //insere impostoDevol
-            if (!empty($this->aImpostoDevol)) {
+
+            if (!empty($this->aImpostoDevol[$nItem])) {
                 $child = $this->aImpostoDevol[$nItem];
                 $this->dom->appChild($det, $child, "Inclusão do node impostoDevol");
             }
