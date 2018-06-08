@@ -1575,11 +1575,15 @@ class Make
         $std = $this->equilizeParameters($std, $possible);
         
         //totalizador
-        $this->stdTot->vProd += (float) $std->vProd;
-        $this->stdTot->vFrete += (float) $std->vFrete;
-        $this->stdTot->vSeg += (float) $std->vSeg;
-        $this->stdTot->vDesc += (float) $std->vDesc;
-        $this->stdTot->vOutro += (float) $std->vOutro;
+        try{
+            $this->stdTot->vProd += (float) $std->vProd;
+            $this->stdTot->vFrete += (float) $std->vFrete;
+            $this->stdTot->vSeg += (float) $std->vSeg;
+            $this->stdTot->vDesc += (float) $std->vDesc;
+            $this->stdTot->vOutro += (float) $std->vOutro;
+        } catch (\Exception $e){
+
+        }
 
         $identificador = 'I01 <prod> - ';
         $prod = $this->dom->createElement("prod");
@@ -2113,7 +2117,7 @@ class Make
         $this->dom->addChild(
             $rastro,
             "qLote",
-            number_format($std->qLote, 3, '.', ''),
+            $this->transformMoney($std->qLote, 3, '.', ''),
             true,
             $identificador . "[item $std->item] Quantidade do lote"
         );
@@ -2419,7 +2423,7 @@ class Make
         $this->dom->addChild(
             $med,
             "vPMC",
-            number_format($std->vPMC, 2, '.', ''),
+            $this->transformMoney($std->vPMC, 2, '.', ''),
             true,
             "$identificador [item $std->item] Preço máximo consumidor"
         );
@@ -2696,7 +2700,11 @@ class Make
         $std = $this->equilizeParameters($std, $possible);
         
         //totalizador dos valores dos itens
-        $this->stdTot->vTotTrib += (float) $std->vTotTrib;
+        try{
+            $this->stdTot->vTotTrib += (float) $std->vTotTrib;
+        } catch(\Exception $e){
+
+        }
 
         $identificador = 'M01 <imposto> - ';
         $imposto = $this->dom->createElement("imposto");
@@ -2754,12 +2762,17 @@ class Make
         ];
         $std = $this->equilizeParameters($std, $possible);
         //totalizador
+        try{
 
-        $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
-        $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
-        $this->stdTot->vICMSDeson += (float) !empty($std->vICMSDeson) ? $std->vICMSDeson : 0;
-        $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
-        $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+            $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+            $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+            $this->stdTot->vICMSDeson += (float) !empty($std->vICMSDeson) ? $std->vICMSDeson : 0;
+            $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
+            $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+
+        } catch(\Exception $e){
+
+        }
 
         $identificador = 'N01 <ICMSxx> - ';
         switch ($std->CST) {
@@ -3903,10 +3916,14 @@ class Make
         $std = $this->equilizeParameters($std, $possible);
         
         //totalizador
-        $this->stdTot->vBC += (float) $std->vBC;
-        $this->stdTot->vICMS += (float) $std->vICMS;
-        $this->stdTot->vBCST += (float) $std->vBCST;
-        $this->stdTot->vST += (float) $std->vICMSST;
+        try{
+            $this->stdTot->vBC += (float) $std->vBC;
+            $this->stdTot->vICMS += (float) $std->vICMS;
+            $this->stdTot->vBCST += (float) $std->vBCST;
+            $this->stdTot->vST += (float) $std->vICMSST;
+        } catch (\Exception $e){
+
+        }
 
         switch ($std->CSOSN) {
             case '101':
@@ -4372,10 +4389,14 @@ class Make
             'vICMSUFRemet'
         ];
         $std = $this->equilizeParameters($std, $possible);
-        
-        $this->stdTot->vICMSUFDest += (float) $std->vICMSUFDest;
-        $this->stdTot->vFCPUFDest += (float) $std->vFCPUFDest;
-        $this->stdTot->vICMSUFRemet += (float) $std->vICMSUFRemet;
+            
+        try{
+            $this->stdTot->vICMSUFDest += (float) $std->vICMSUFDest;
+            $this->stdTot->vFCPUFDest += (float) $std->vFCPUFDest;
+            $this->stdTot->vICMSUFRemet += (float) $std->vICMSUFRemet;
+        } catch (\Exception $e){
+
+        }
 
         $icmsUFDest = $this->dom->createElement('ICMSUFDest');
         $this->dom->addChild(
@@ -4471,7 +4492,11 @@ class Make
         $std = $this->equilizeParameters($std, $possible);
         
         //totalizador
-        $this->stdTot->vIPI += (float) $std->vIPI;
+        try{
+            $this->stdTot->vIPI += (float) $std->vIPI;
+        } catch(\Exception $e){
+
+        }
 
         $ipi = $this->dom->createElement('IPI');
         $this->dom->addChild(
@@ -4589,7 +4614,11 @@ class Make
         $std = $this->equilizeParameters($std, $possible);
         
         //totalizador
-        $this->stdTot->vII += (float) $std->vII;
+        try{
+            $this->stdTot->vII += (float) $std->vII;
+        } catch (\Exception $e){
+
+        }
 
         $tii = $this->dom->createElement('II');
         $this->dom->addChild(
@@ -4644,8 +4673,13 @@ class Make
         $std = $this->equilizeParameters($std, $possible);
         
         //totalizador
-        if ($std->vPIS)
+        try{
+            
             $this->stdTot->vPIS += $std->vPIS;
+
+        } catch(\Exception $e){
+
+        }
 
         switch ($std->CST) {
             case '01':
@@ -4881,7 +4915,11 @@ class Make
         $std = $this->equilizeParameters($std, $possible);
         
         //totalizador
-        $this->stdTot->vCOFINS += (float) $std->vCOFINS;
+        try{
+            $this->stdTot->vCOFINS += (float) $std->vCOFINS;
+        } catch (\Exception $e){
+
+        }
 
         switch ($std->CST) {
             case '01':
@@ -5182,7 +5220,11 @@ class Make
         $std = $this->equilizeParameters($std, $possible);
         
         //totalizador
-        $this->stdTot->vIPIDevol += (float) $std->vIPIDevol;
+        try{
+            $this->stdTot->vIPIDevol += (float) $std->vIPIDevol;
+        } catch (\Exception $e){
+
+        }
 
         $impostoDevol = $this->dom->createElement("impostoDevol");
         $this->dom->addChild(
@@ -5239,10 +5281,10 @@ class Make
         $vICMSUFRemet = !empty($std->vICMSUFRemet) ? $std->vICMSUFRemet : $this->stdTot->vICMSUFRemet;
         
         //campos opcionais incluir se maior que zero
-        $vFCPUFDest = ($vFCPUFDest > 0) ? number_format($vFCPUFDest, 2, '.', '') : null;
-        $vICMSUFDest = ($vICMSUFDest > 0) ? number_format($vICMSUFDest, 2, '.', '') : null;
-        $vICMSUFRemet = ($vICMSUFRemet > 0) ? number_format($vICMSUFRemet, 2, '.', '') : null;
-        $vTotTrib = ($vTotTrib > 0) ? number_format($vTotTrib, 2, '.', '') : null;
+        $vFCPUFDest = ($vFCPUFDest > 0) ? $this->transformMoney($vFCPUFDest, 2, '.', '') : null;
+        $vICMSUFDest = ($vICMSUFDest > 0) ? $this->transformMoney($vICMSUFDest, 2, '.', '') : null;
+        $vICMSUFRemet = ($vICMSUFRemet > 0) ? $this->transformMoney($vICMSUFRemet, 2, '.', '') : null;
+        $vTotTrib = ($vTotTrib > 0) ? $this->transformMoney($vTotTrib, 2, '.', '') : null;
         
         //campos especificos por layout
         if ($this->version == '3.10') {
@@ -5253,30 +5295,30 @@ class Make
             $vIPIDevol = null;
         } else {
             //campos obrigatórios para 4.00
-            $vFCP = number_format($vFCP, 2, '.', '');
-            $vFCPST = number_format($vFCPST, 2, '.', '');
-            $vFCPSTRet = number_format($vFCPSTRet, 2, '.', '');
-            $vIPIDevol = number_format($vIPIDevol, 2, '.', '');
+            $vFCP = $this->transformMoney($vFCP, 2, '.', '');
+            $vFCPST = $this->transformMoney($vFCPST, 2, '.', '');
+            $vFCPSTRet = $this->transformMoney($vFCPSTRet, 2, '.', '');
+            $vIPIDevol = $this->transformMoney($vIPIDevol, 2, '.', '');
         }
         $ICMSTot = $this->dom->createElement("ICMSTot");
         $this->dom->addChild(
             $ICMSTot,
             "vBC",
-            number_format($vBC, 2, '.', ''),
+            $this->transformMoney($vBC, 2, '.', ''),
             true,
             "Base de Cálculo do ICMS"
         );
         $this->dom->addChild(
             $ICMSTot,
             "vICMS",
-            number_format($vICMS, 2, '.', ''),
+            $this->transformMoney($vICMS, 2, '.', ''),
             true,
             "Valor Total do ICMS"
         );
         $this->dom->addChild(
             $ICMSTot,
             "vICMSDeson",
-            number_format($vICMSDeson, 2, '.', ''),
+            $this->transformMoney($vICMSDeson, 2, '.', ''),
             true,
             "Valor Total do ICMS desonerado"
         );
@@ -5314,14 +5356,14 @@ class Make
         $this->dom->addChild(
             $ICMSTot,
             "vBCST",
-            number_format($vBCST, 2, '.', ''),
+            $this->transformMoney($vBCST, 2, '.', ''),
             true,
             "Base de Cálculo do ICMS ST"
         );
         $this->dom->addChild(
             $ICMSTot,
             "vST",
-            number_format($vST, 2, '.', ''),
+            $this->transformMoney($vST, 2, '.', ''),
             true,
             "Valor Total do ICMS ST"
         );
@@ -5346,42 +5388,42 @@ class Make
         $this->dom->addChild(
             $ICMSTot,
             "vProd",
-            number_format($vProd, 2, '.', ''),
+            $this->transformMoney($vProd, 2, '.', ''),
             true,
             "Valor Total dos produtos e serviços"
         );
         $this->dom->addChild(
             $ICMSTot,
             "vFrete",
-            number_format($vFrete, 2, '.', ''),
+            $this->transformMoney($vFrete, 2, '.', ''),
             true,
             "Valor Total do Frete"
         );
         $this->dom->addChild(
             $ICMSTot,
             "vSeg",
-            number_format($vSeg, 2, '.', ''),
+            $this->transformMoney($vSeg, 2, '.', ''),
             true,
             "Valor Total do Seguro"
         );
         $this->dom->addChild(
             $ICMSTot,
             "vDesc",
-            number_format($vDesc, 2, '.', ''),
+            $this->transformMoney($vDesc, 2, '.', ''),
             true,
             "Valor Total do Desconto"
         );
         $this->dom->addChild(
             $ICMSTot,
             "vII",
-            number_format($vII, 2, '.', ''),
+            $this->transformMoney($vII, 2, '.', ''),
             true,
             "Valor Total do II"
         );
         $this->dom->addChild(
             $ICMSTot,
             "vIPI",
-            number_format($vIPI, 2, '.', ''),
+            $this->transformMoney($vIPI, 2, '.', ''),
             true,
             "Valor Total do IPI"
         );
@@ -5396,28 +5438,28 @@ class Make
         $this->dom->addChild(
             $ICMSTot,
             "vPIS",
-            number_format($vPIS, 2, '.', ''),
+            $this->transformMoney($vPIS, 2, '.', ''),
             true,
             "Valor do PIS"
         );
         $this->dom->addChild(
             $ICMSTot,
             "vCOFINS",
-            number_format($vCOFINS, 2, '.', ''),
+            $this->transformMoney($vCOFINS, 2, '.', ''),
             true,
             "Valor da COFINS"
         );
         $this->dom->addChild(
             $ICMSTot,
             "vOutro",
-            number_format($vOutro, 2, '.', ''),
+            $this->transformMoney($vOutro, 2, '.', ''),
             true,
             "Outras Despesas acessórias"
         );
         $this->dom->addChild(
             $ICMSTot,
             "vNF",
-            number_format($vNF, 2, '.', ''),
+            $this->transformMoney($vNF, 2, '.', ''),
             true,
             "Valor Total da NF-e"
         );
@@ -7072,5 +7114,14 @@ class Make
             }
         }
         return $std;
+    }
+
+    private function transformMoney($number, $decimal, $dec_point, $thousands_sep){
+
+        if (is_numeric($number)){
+            return number_format($number, $decimal, $dec_point, $thousands_sep);
+        }
+
+        return $number;
     }
 }
