@@ -316,6 +316,7 @@ class Tools extends ToolsCommon
             $uf = $this->config->siglaUF;
             $ignoreContingency = false;
         }
+
         $servico = 'NfeStatusServico';
         $this->checkContingencyForWebServices($servico);
         $this->servico(
@@ -697,6 +698,7 @@ class Tools extends ToolsCommon
         $this->lastRequest = $request;
         $parameters = ['nfeDadosMsg' => $request];
         $body = "<nfeDadosMsg xmlns=\"$this->urlNamespace\">$request</nfeDadosMsg>";
+
         $this->lastResponse = $this->sendRequest($body, $parameters);
         return $this->lastResponse;
     }

@@ -483,9 +483,17 @@ class Make
         $this->mod = $std->mod;
         $identificador = 'B01 <ide> - ';
         
-        $std->dhEmi = date('c');
-        
-        $std->dhSaiEnt =  date('c');
+        $dateNow = new \DateTime();
+
+        $dateTxt = new \DateTime($std->dhEmi);
+
+        if ($dateNow < $dateTxt){
+                
+            $std->dhEmi = date('c');
+            
+            $std->dhSaiEnt =  date('c');
+
+        }
 
         $ide = $this->dom->createElement("ide");
 
@@ -1129,13 +1137,13 @@ class Make
             $identificador . "CPF do destinatário"
         );
 
-        if ($std->idEstrangeiro){
+        if ($std->idEstrangeiro || (String) $this->ide->getElementsByTagName("idDest")->item(0)->nodeValue == 3){
             
             $this->dom->addChild(
                 $this->dest,
                 "idEstrangeiro",
-                Strings::onlyNumbers($std->idEstrangeiro),
-                false,
+                $std->idEstrangeiro,
+                true,
                 $identificador . "Identificação do destinatário no caso de comprador estrangeiro"
             );
 
@@ -1646,7 +1654,7 @@ class Make
         $this->dom->addChild(
             $prod,
             "uCom",
-            $std->uCom,
+            strtoupper(Strings::replaceSpecialsChars($std->uCom)),
             true,
             $identificador . "[item $std->item] Unidade Comercial do produto"
         );
@@ -1683,7 +1691,7 @@ class Make
         $this->dom->addChild(
             $prod,
             "uTrib",
-            $std->uTrib,
+            strtoupper(Strings::replaceSpecialsChars($std->uTrib)),
             true,
             $identificador . "[item $std->item] Unidade Tributável do produto"
         );

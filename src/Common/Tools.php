@@ -454,17 +454,20 @@ class Tools
         $tpAmb,
         $ignoreContingency = false
     ) {
+
         $ambiente = $tpAmb == 1 ? "producao" : "homologacao";
         $webs = new Webservices($this->getXmlUrlPath());
         $sigla = $uf;
         if (!$ignoreContingency) {
             $contType = $this->contingency->type;
+
             if (!empty($contType)
                 && ($contType == 'SVCRS' || $contType == 'SVCAN')
             ) {
                 $sigla = $contType;
             }
         }
+       
         $stdServ = $webs->get($sigla, $ambiente, $this->modelo);
         if ($stdServ === false) {
             throw new \RuntimeException(

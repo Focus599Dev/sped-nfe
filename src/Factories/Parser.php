@@ -18,6 +18,7 @@ namespace NFePHP\NFe\Factories;
 use NFePHP\NFe\Make;
 use NFePHP\NFe\Exception\DocumentsException;
 use stdClass;
+use NFePHP\Common\Strings;
 
 class Parser
 {
@@ -135,6 +136,7 @@ class Parser
     {
 
         foreach ($nota as $lin) {
+            
             $fields = explode('|', $lin);
             if (empty($fields)) {
                 continue;
@@ -891,7 +893,7 @@ class Parser
      * N04|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|vICMSDeson|motDesICMS|
      *
      * NOTE: adjusted for NT2016_002_v1.30
-     * N04|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|BCFCP|pFCP|vFCP|vICMSDeson|motDesICMS|
+     * N04|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|vBCFCP|pFCP|vFCP|vICMSDeson|motDesICMS|
      * @param stdClass $std
      * @return void
      */
