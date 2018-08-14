@@ -167,6 +167,9 @@ class Convert
      */
     protected function loadLayouts($nota)
     {
+        if (empty($nota)) {
+            throw DocumentsException::wrongDocument(17, '');
+        }
         foreach ($nota as $campo) {
             
             $fields = explode('|', $campo);

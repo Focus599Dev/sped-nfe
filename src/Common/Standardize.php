@@ -18,8 +18,6 @@ namespace NFePHP\NFe\Common;
 
 use NFePHP\Common\Validator;
 use NFePHP\NFe\Exception\DocumentsException;
-use Symfony\Component\Yaml\Yaml;
-use DOMDocument;
 use stdClass;
 
 class Standardize
@@ -27,15 +25,19 @@ class Standardize
     /**
      * @var string
      */
-    public $node = '';
+    private $node = '';
     /**
      * @var string
      */
-    public $json = '';
+    private $json = '';
     /**
      * @var string
      */
     public $key = '';
+    /**
+     * @var object
+     */
+    private $sxml;
     /**
      * @var array
      */
@@ -82,7 +84,7 @@ class Standardize
      * Identify node and extract from XML for convertion type
      * @param string $xml
      * @return string identificated node name
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function whichIs($xml)
     {
@@ -126,14 +128,26 @@ class Standardize
         if (!empty($xml)) {
             $this->key = $this->whichIs($xml);
         }
-        
-        $sxml = simplexml_load_string($this->node);
+        $this->sxml = simplexml_load_string($this->node);
         $this->json = str_replace(
             '@attributes',
             'attributes',
-            json_encode($sxml, JSON_PRETTY_PRINT)
+            json_encode($this->sxml, JSON_PRETTY_PRINT)
         );
         return json_decode($this->json);
+    }
+    
+    /**
+     * Returns the SimpleXml Object
+     * @param string $xml
+     * @return object
+     */
+    public function simpleXml($xml = null)
+    {
+        if (!empty($xml)) {
+            $this->toStd($xml);
+        }
+        return $this->sxml;
     }
     
     /**
@@ -160,19 +174,5 @@ class Standardize
             $this->toStd($xml);
         }
         return json_decode($this->json, true);
-    }
-    
-    /**
-     * Returns YAML from XML
-     * @param string $xml
-     * @return string
-     */
-    public function toYaml($xml = null)
-    {
-        if (!empty($xml)) {
-            $this->toStd($xml);
-        }
-        $array = $this->toArray();
-        return Yaml::dump($array, 6, 4);
     }
 }

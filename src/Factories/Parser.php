@@ -43,27 +43,27 @@ class Parser
      */
     protected $volId = -1;
     /**
-     * @var stdClass
+     * @var stdClass|null
      */
     protected $stdNFP;
     /**
-     * @var stdClass
+     * @var stdClass|null
      */
     protected $stdEmit;
     /**
-     * @var stdClass
+     * @var stdClass|null
      */
     protected $stdDest;
     /**
-     * @var stdClass
+     * @var stdClass|null
      */
     protected $stdRetirada;
     /**
-     * @var stdClass
+     * @var stdClass|null
      */
     protected $stdEntrega;
     /**
-     * @var stdClass
+     * @var stdClass|null
      */
     protected $stdAutXML;
     /**
@@ -95,7 +95,7 @@ class Parser
      */
     protected $stdCOFINSST;
     /**
-     * @var stdClass
+     * @var stdClass|null
      */
     protected $stdTransporta;
 
@@ -116,7 +116,7 @@ class Parser
     /**
      * Convert txt to XML
      * @param array $nota
-     * @return string
+     * @return string|null
      */
     public function toXml($nota)
     {
@@ -175,6 +175,7 @@ class Parser
                 $data = '';
 
             if (!empty($name)) {
+
                 $std->$name = $data;
             }
         }
@@ -811,7 +812,6 @@ class Parser
 
     /**
      * Create tag comb [LA]
-     * @param stdClass $std
      * @return void
      */
     protected function buildLAEntity()
@@ -1598,6 +1598,8 @@ class Parser
      *
      * NOTE: adjusted for NT2016_002_v1.30
      * W02|vBC|vICMS|vICMSDeson|vFCP|vBCST|vST|vFCPST|vFCPSTRet|vProd|vFrete|vSeg|vDesc|vII|vIPI|vIPIDevol|vPIS|vCOFINS|vOutro|vNF|vTotTrib|
+     * NOTE: adjusted for NT2016_002_v1.31
+     * W02|vBC|vICMS|vICMSDeson|vFCP|vBCST|vST|vFCPST|vFCPSTRet|vProd|vFrete|vSeg|vDesc|vII|vIPI|vIPIDevol|vPIS|vCOFINS|vOutro|vNF|vTotTrib|vFCPUFDest|vICMSUFDest|vICMSUFRemet|
      * @param stdClass $std
      * @return void
      */
@@ -1759,7 +1761,7 @@ class Parser
 
     /**
      * Create tag reboque [X22], belogns to [X]
-     * X22|placa|UF|RNTC|vagao|balsa|
+     * X22|placa|UF|RNTC|
      * @param stdClass $std
      * @return void
      */
@@ -1768,6 +1770,28 @@ class Parser
         $this->make->tagreboque($std);
     }
 
+    /**
+     * Create tag vagao [X25a], belogns to [X01]
+     * X25a|vagao|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function x25aEntity($std)
+    {
+        $this->make->tagvagao($std);
+    }
+
+    /**
+     * Create tag balsa [X25b], belogns to [X01]
+     * X25b|balsa|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function x25bEntity($std)
+    {
+        $this->make->tagbalsa($std);
+    }
+    
     /**
      * Create tag vol [X26], belongs to [X]
      * X26|qVol|esp|marca|nVol|pesoL|pesoB|
@@ -1819,13 +1843,13 @@ class Parser
 
     /**
      * Creates tag detPag and card [YA]
-     * YA|tPag|vPag|CNPJ|tBand|cAut|tpIntegra|
+     * YA|indPag|tPag|vPag|CNPJ|tBand|cAut|tpIntegra|
      * @param stdClass $std
      * @return void
      */
     protected function yaEntity($std)
     {
-        
+        // $this->make->tagdetPag($std);
     }
 
     /**

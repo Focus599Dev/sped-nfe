@@ -1,4 +1,14 @@
 ## LAYOUT NFe v4.00
+- Nota Técnica 2016.002 - v1.10
+- Nota Técnica 2016.002 - v1.20
+- Nota Técnica 2016.002 - v1.30
+- Nota Técnica 2016.002 - v1.31
+- Nota Técnica 2016.002 - v1.40
+- Nota Técnica 2016.002 - v1.41
+- Nota Técnica 2016.002 - v1.42
+- Nota Técnica 2016.002 - v1.50
+- Nota Técnica 2016.002 - v1.51
+- Nota Técnica 2016.002 - v1.60
 
 ```
 NOTAFISCAL|1|
@@ -45,7 +55,7 @@ F|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|
 
 F02|CNPJ|
 
-F02a|CPF
+F02a|CPF|
 
 G|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|
 
@@ -107,7 +117,7 @@ N06|orig|CST|vICMSDeson|motDesICMS|
 
 N07|orig|CST|modBC|pRedBC|vBC|pICMS|vICMSOp|pDif|vICMSDif|vICMS|vBCFCP|pFCP|vFCP|
 
-N08|orig|CST|vBCSTRet|pST|vICMSSTRet|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|
+N08|orig|CST|vBCSTRet|pST|vICMSSTRet|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|pRedBCEfet|vBCEfet|pICMSEfet|vICMSEfet|
 
 N09|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|vBCFCP|pFCP|vFCP|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCPST|pFCPST|vFCPST|vICMSDeson|motDesICMS|
 
@@ -121,11 +131,11 @@ N10c|orig|CSOSN|pCredSN|vCredICMSSN|
 
 N10d|orig|CSOSN|
 
-N10e|orig|CSOSN|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCPST|pFCPST|vFCPST|pCredSN|vCredICMSSN|pCredSN|vCredICMSSN|
+N10e|orig|CSOSN|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCPST|pFCPST|vFCPST|pCredSN|vCredICMSSN|
 
 N10f|orig|CSOSN|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCPST|pFCPST|vFCPST|
 
-N10g|orig|CSOSN|vBCSTRet|pST|vICMSSTRet|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|
+N10g|orig|CSOSN|vBCSTRet|pST|vICMSSTRet|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|pRedBCEfet|vBCEfet|pICMSEfet|vICMSEfet|
 
 N10h|orig|CSOSN|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCPST|pFCPST|vFCPST|pCredSN|vCredICMSSN|
 
@@ -189,7 +199,7 @@ UA|pDevol|vIPIDevol|
 
 W|
 
-W02|vBC|vICMS|vICMSDeson|vFCP|vBCST|vST|vFCPST|vFCPSTRet|vProd|vFrete|vSeg|vDesc|vII|vIPI|vIPIDevol|vPIS|vCOFINS|vOutro|vNF|vTotTrib|
+W02|vBC|vICMS|vICMSDeson|vFCP|vBCST|vST|vFCPST|vFCPSTRet|vProd|vFrete|vSeg|vDesc|vII|vIPI|vIPIDevol|vPIS|vCOFINS|vOutro|vNF|vTotTrib|vFCPUFDest|vICMSUFDest|vICMSUFRemet|
 
 W17|vServ|vBC|vISS|vPIS|vCOFINS|dCompet|vDeducao|vOutro|vDescIncond|vDescCond|vISSRet|cRegTrib|
 
@@ -207,7 +217,11 @@ X11|vServ|vBCRet|pICMSRet|vICMSRet|CFOP|cMunFG|
 
 X18|placa|UF|RNTC|
 
-X22|placa|UF|RNTC|vagao|balsa|
+X22|placa|UF|RNTC|
+
+X25a|vagao|
+
+X25b|balsa|
 
 X26|qVol|esp|marca|nVol|pesoL|pesoB|
 
@@ -219,7 +233,7 @@ Y02|nFat|vOrig|vDesc|vLiq|
 
 Y07|nDup|dVenc|vDup|
 
-YA|tPag|vPag|CNPJ|tBand|cAut|tpIntegra|
+YA|indPag|tPag|vPag|CNPJ|tBand|cAut|tpIntegra|
 
 Z|infAdFisco|infCpl|
 

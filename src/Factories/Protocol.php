@@ -18,14 +18,13 @@ namespace NFePHP\NFe\Factories;
 use NFePHP\Common\Strings;
 use NFePHP\Common\Validator;
 use InvalidArgumentException;
-use DOMDocument;
 
 class Protocol
 {
     /**
      * Add protocol to xml
      * @param string $xmlnfe xml
-     * @param string $protocol response xml
+     * @param string $xmlprotocol response xml
      * @return string
      * @throws InvalidArgumentException
      */
