@@ -2011,4 +2011,12 @@ class Parser
     {
         $this->make->taginfNFeSupl($std);
     }
+    
+    protected function zpdfEntity($std){
+        // boleto royal
+    }
+
+    protected function zpdf_endEntity($std){
+        // boleto royal
+    }
 }
