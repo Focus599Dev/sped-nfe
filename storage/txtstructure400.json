@@ -130,5 +130,7 @@
     "ZC":"ZC|safra|ref|qTotMes|qTotAnt|qTotGer|vFor|vTotDed|vLiqFor|",
     "ZC04":"ZC04|dia|qtde|",
     "ZC10":"ZC10|xDed|vDed|",
-    "ZX01":"ZX01|qrcode|urlChave|"
+    "ZX01":"ZX01|qrcode|urlChave|",
+    "ZPDF":"ZPDF|bin|",
+    "ZPDF_END":"ZPDF_END|"
 }
