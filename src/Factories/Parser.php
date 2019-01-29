@@ -176,7 +176,7 @@ class Parser
 
             if (!empty($name)) {
 
-                $std->$name = $data;
+                $std->$name = Strings::replaceSpecialsChars($data);
             }
         }
 
