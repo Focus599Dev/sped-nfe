@@ -449,6 +449,8 @@ class Parser
     /**
      * Load fields for tag retirada [F]
      * F|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|
+     * NOTE: adjusted for NT2018_005_v1.20
+     * F|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|xNome|CEP|cPais|xPais|fone|email|IE|
      * @param stdClass $std
      * @return void
      */
@@ -497,6 +499,8 @@ class Parser
     /**
      * Load fields for tag entrega [G]
      * G|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|
+     * NOTE: adjusted for NT2018_005_v1.20
+     * G|xLgr|nro|xCpl|xBairro|cMun|xMun|UF|xNome|CEP|cPais|xPais|fone|email|IE|
      * @param stdClass $std
      * @return void
      */
@@ -739,6 +743,8 @@ class Parser
      *
      * NOTE: adjusted for NT2016_002_v1.30
      * K|cProdANVISA|vPMC|
+     * NOTE: adjusted for NT2018_005_v1.20
+     * K|cProdANVISA|vPMC|xMotivoIsencao|
      * @param stdClass $std
      * @return void
      */
@@ -1010,6 +1016,8 @@ class Parser
     /**
      * Create tag ICMSST [N10b]
      * N10b|orig|CST|vBCSTRet|vICMSSTRet|vBCSTDest|vICMSSTDest|
+     * NOTE: adjusted for NT2018_005_v1.20
+     * N10b|orig|CST|vBCSTRet|vICMSSTRet|vBCSTDest|vICMSSTDest|pST|vICMSSubstituto|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|pRedBCEfet|vBCEfet|pICMSEfet|vICMSEfet|
      * @param stdClass $std
      * @return void
      */
@@ -1075,6 +1083,8 @@ class Parser
      *
      * NOTE: adjusted for NT2016_002_v1.30
      * N10g|orig|CSOSN|vBCSTRet|pST|vICMSSTRet|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|
+     * NOTE: adjusted for NT2018_005_v1.20
+     * N10g|orig|CSOSN|vBCSTRet|pST|vICMSSTRet|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|pRedBCEfet|vBCEfet|pICMSEfet|vICMSEfet|vICMSSubstituto|
      * @param stdClass $std
      * @return void
      */
@@ -2000,7 +2010,7 @@ class Parser
 
     /**
      * Create tag infRespTec [ZD01]
-     * ZD|CNPJ|xContato|email|fone|CSRTidCSRT|
+     * ZD|CNPJ|xContato|email|fone|CSRT|idCSRT
      * @param stdClass $std
      * @return void
      */

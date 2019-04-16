@@ -1339,6 +1339,7 @@ class Make
      * @param stdClass $std
      * @return DOMElement
      */
+    
     public function tagretirada(stdClass $std)
     {
         $possible = [
@@ -1350,7 +1351,14 @@ class Make
             'xMun',
             'UF',
             'CNPJ',
-            'CPF'
+            'CPF',
+            'xNome',
+            'CEP',
+            'cPais',
+            'xPais',
+            'fone',
+            'email',
+            'IE'  
         ];
         $std = $this->equilizeParameters($std, $possible);
 
@@ -1370,6 +1378,15 @@ class Make
             false,
             $identificador . "CPF do Cliente da Retirada"
         );
+
+        $this->dom->addChild(
+            $this->retirada,
+            "xNome",
+            $std->xNome,
+            false,
+            $identificador . "Razão Social ou Nome do Expedidor"
+        );
+
         $this->dom->addChild(
             $this->retirada,
             "xLgr",
@@ -1419,6 +1436,55 @@ class Make
             true,
             $identificador . "Sigla da UF do Endereco do Cliente da Retirada"
         );
+
+        $this->dom->addChild(
+            $this->retirada,
+            "CEP",
+            $std->CEP,
+            false,
+            $identificador . "Código do CEP"
+        );
+
+        $this->dom->addChild(
+            $this->retirada,
+            "cPais",
+            $std->cPais,
+            false,
+            $identificador . "Código do País"
+        );
+
+        $this->dom->addChild(
+            $this->retirada,
+            "xPais",
+            $std->xPais,
+            false,
+            $identificador . "Nome do País"
+        );
+
+        $this->dom->addChild(
+            $this->retirada,
+            "fone",
+            $std->fone,
+            false,
+            $identificador . "Telefone"
+        );
+
+        $this->dom->addChild(
+            $this->retirada,
+            "email",
+            $std->email,
+            false,
+            $identificador . "Endereço de e-mail do Expedidor"
+        );
+
+        $this->dom->addChild(
+            $this->retirada,
+            "IE",
+            $std->IE,
+            false,
+            $identificador . "Inscrição Estadual do Estabelecimento Expedidor"
+        );
+
         return $this->retirada;
     }
 
@@ -1439,7 +1505,14 @@ class Make
             'xMun',
             'UF',
             'CNPJ',
-            'CPF'
+            'CPF',
+            'xNome',
+            'CEP',
+            'cPais',
+            'xPais',
+            'fone',
+            'email',
+            'IE'
         ];
         $std = $this->equilizeParameters($std, $possible);
 
@@ -1459,6 +1532,15 @@ class Make
             false,
             $identificador . "CPF do Cliente da Entrega"
         );
+
+        $this->dom->addChild(
+            $this->entrega,
+            "xNome",
+            $std->xNome,
+            false,
+            $identificador . "Razão Social ou Nome do Recebedor"
+        );
+
         $this->dom->addChild(
             $this->entrega,
             "xLgr",
@@ -1508,6 +1590,55 @@ class Make
             true,
             $identificador . "Sigla da UF do Endereco do Cliente da Entrega"
         );
+
+                $this->dom->addChild(
+            $this->retirada,
+            "CEP",
+            $std->CEP,
+            false,
+            $identificador . "Código do CEP"
+        );
+
+        $this->dom->addChild(
+            $this->retirada,
+            "cPais",
+            $std->cPais,
+            false,
+            $identificador . "Código do País"
+        );
+
+        $this->dom->addChild(
+            $this->retirada,
+            "xPais",
+            $std->xPais,
+            false,
+            $identificador . "Nome do País"
+        );
+
+        $this->dom->addChild(
+            $this->retirada,
+            "fone",
+            $std->fone,
+            false,
+            $identificador . "Telefone"
+        );
+
+        $this->dom->addChild(
+            $this->retirada,
+            "email",
+            $std->email,
+            false,
+            $identificador . "Endereço de e-mail do Expedidor"
+        );
+
+        $this->dom->addChild(
+            $this->retirada,
+            "IE",
+            $std->IE,
+            false,
+            $identificador . "Inscrição Estadual do Estabelecimento Expedidor"
+        );
+        
         return $this->entrega;
     }
 
@@ -2423,6 +2554,7 @@ class Make
             'dVal',
             'vPMC',
             'cProdANVISA',
+            'xMotivoIsencao'
         ];
         $std = $this->equilizeParameters($std, $possible);
 
@@ -2436,6 +2568,15 @@ class Make
             false,
             "$identificador [item $std->item] Numero ANVISA"
         );
+
+        $this->dom->addChild(
+            $med,
+            "xMotivoIsencao",
+            $std->xMotivoIsencao,
+            false,
+            "$identificador [item $std->item] Motivo da isenção da ANVISA"
+        );
+
         //removido no layout 4.00
         $this->dom->addChild(
             $med,
@@ -2812,7 +2953,8 @@ class Make
             'pRedBCEfet',
             'vBCEfet',
             'pICMSEfet',
-            'vICMSEfet'
+            'vICMSEfet',
+            'vICMSSubstituto'
         ];
         $std = $this->equilizeParameters($std, $possible);
         //totalizador
@@ -2835,6 +2977,10 @@ class Make
         $identificador = 'N01 <ICMSxx> - ';
         switch ($std->CST) {
             case '00':
+
+                $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+                $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+
                 $icms = $this->dom->createElement("ICMS00");
                 $this->dom->addChild(
                     $icms,
@@ -2896,6 +3042,12 @@ class Make
                 );
                 break;
             case '10':
+                
+                $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+                $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+                $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
+                $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+                
                 $icms = $this->dom->createElement("ICMS10");
                 $this->dom->addChild(
                     $icms,
@@ -3027,6 +3179,9 @@ class Make
                 );
                 break;
             case '20':
+                $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+                $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+
                 $icms = $this->dom->createElement("ICMS20");
                 $this->dom->addChild(
                     $icms,
@@ -3115,6 +3270,9 @@ class Make
                 );
                 break;
             case '30':
+                $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
+                $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+
                 $icms = $this->dom->createElement("ICMS30");
                 $this->dom->addChild(
                     $icms,
@@ -3243,6 +3401,9 @@ class Make
                 );
                 break;
             case '51':
+                $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+                $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+
                 $icms = $this->dom->createElement("ICMS51");
                 $this->dom->addChild(
                     $icms,
@@ -3369,6 +3530,13 @@ class Make
                 );
                 $this->dom->addChild(
                     $icms,
+                    'vICMSSubstituto',
+                    $std->vICMSSubstituto,
+                    false,
+                    "$identificador [item $std->item] Valor do ICMS próprio do Substituto"
+                );
+                $this->dom->addChild(
+                    $icms,
                     'vICMSSTRet',
                     $std->vICMSSTRet,
                     false,
@@ -3429,6 +3597,11 @@ class Make
                 );
                 break;
             case '70':
+                $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+                $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+                $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
+                $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+
                 $icms = $this->dom->createElement("ICMS70");
                 $this->dom->addChild(
                     $icms,
@@ -3581,6 +3754,12 @@ class Make
                 );
                 break;
             case '90':
+
+                $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+                $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+                $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
+                $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+
                 $icms = $this->dom->createElement("ICMS90");
                 $this->dom->addChild(
                     $icms,
@@ -3904,12 +4083,18 @@ class Make
             'vICMSSTRet',
             'vBCSTDest',
             'vICMSSTDest',
+            'vBCFCPSTRet',
+            'pFCPSTRet',
+            'vFCPSTRet',
             'pST',
-            'vICMSSubstituto'
+            'vICMSSubstituto',
+            'pRedBCEfet',
+            'vBCEfet',
+            'pICMSEfet',
+            'vICMSEfet'
         ];
-        $std = $this->equilizeParameters($std, $possible);
 
-        var_dump($std);
+        $std = $this->equilizeParameters($std, $possible);
         $icmsST = $this->dom->createElement("ICMSST");
         $this->dom->addChild(
             $icmsST,
@@ -3932,35 +4117,47 @@ class Make
             true,
             "[item $std->item] Valor do BC do ICMS ST retido na UF remetente"
         );
-
-        if ($std->pST != ''){
-
-            $this->dom->addChild(
-                $icmsST,
-                'pST',
-                $std->pST,
-                true,
-                "[item $std->item] Deve ser informada a alíquota do cálculo do ICMS-ST, já incluso o FCP caso incida sobre a mercadoria."
-            );
-        }
-
-        if ($std->vICMSSubstituto != ''){
-            
-            $this->dom->addChild(
-                $icmsST,
-                'vICMSSubstituto',
-                $std->vICMSSubstituto,
-                true,
-                "[item $std->item] Valor do ICMS Próprio do Substituto cobrado em operação anterior."
-            );
-        }
-
+        $this->dom->addChild(
+            $icmsST,
+            'pST',
+            $std->pST,
+            false,
+            "[item $std->item] Alíquota suportada pelo Consumidor Final"
+        );
+        $this->dom->addChild(
+            $icmsST,
+            'vICMSSubstituto',
+            $std->vICMSSubstituto,
+            false,
+            "[item $std->item] Valor do ICMS próprio do Substituto"
+        );
         $this->dom->addChild(
             $icmsST,
             'vICMSSTRet',
             $std->vICMSSTRet,
             true,
             "[item $std->item] Valor do ICMS ST retido na UF remetente"
+        );
+        $this->dom->addChild(
+            $icmsST,
+            'vBCFCPSTRet',
+            $std->vBCFCPSTRet,
+            false,
+            "[item $std->item] Valor da Base de Cálculo do FCP"
+        );
+        $this->dom->addChild(
+            $icmsST,
+            'pFCPSTRet',
+            $std->pFCPSTRet,
+            false,
+            "[item $std->item] Percentual do FCP retido"
+        );
+        $this->dom->addChild(
+            $icmsST,
+            'vFCPSTRet',
+            $std->vFCPSTRet,
+            false,
+            "[item $std->item] Valor do FCP retido"
         );
         $this->dom->addChild(
             $icmsST,
@@ -3975,6 +4172,34 @@ class Make
             $std->vICMSSTDest,
             true,
             "[item $std->item] Valor do ICMS ST da UF destino"
+        );
+        $this->dom->addChild(
+            $icmsST,
+            'pRedBCEfet',
+            $std->pRedBCEfet,
+            false,
+            "[item $std->item] Percentual de redução da base de cálculo efetiva"
+        );
+        $this->dom->addChild(
+            $icmsST,
+            'vBCEfet',
+            $std->vBCEfet,
+            false,
+            "[item $std->item] Valor da base de cálculo efetiva"
+        );
+        $this->dom->addChild(
+            $icmsST,
+            'pICMSEfet',
+            $std->pICMSEfet,
+            false,
+            "[item $std->item] Alíquota do ICMS efetiva"
+        );
+        $this->dom->addChild(
+            $icmsST,
+            'vICMSEfet',
+            $std->vICMSEfet,
+            false,
+            "[item $std->item] Valor do ICMS efetivo"
         );
         //caso exista a tag aICMS[$std->item] inserir nela caso contrario criar
         if (!empty($this->aICMS[$std->item])) {
@@ -4024,7 +4249,8 @@ class Make
             'pRedBCEfet',
             'vBCEfet',
             'pICMSEfet',
-            'vICMSEfet'
+            'vICMSEfet',
+            'vICMSSubstituto'
         ];
         $std = $this->equilizeParameters($std, $possible);
 
@@ -4304,6 +4530,15 @@ class Make
                     isset($std->pST) ? true : false,
                     "[item $std->item] Alíquota suportada pelo Consumidor Final"
                 );
+
+                $this->dom->addChild(
+                    $icmsSN,
+                    'vICMSSubstituto',
+                    !empty($std->vICMSSubstituto) ? number_format($std->vICMSSubstituto, 2, '.', '') : null,
+                    false,
+                    "[item $std->item] Valor do ICMS próprio do Substituto"
+                );
+                
                 $this->dom->addChild(
                     $icmsSN,
                     'vICMSSTRet',
