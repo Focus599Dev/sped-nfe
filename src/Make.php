@@ -1591,8 +1591,8 @@ class Make
             $identificador . "Sigla da UF do Endereco do Cliente da Entrega"
         );
 
-                $this->dom->addChild(
-            $this->retirada,
+        $this->dom->addChild(
+            $this->entrega,
             "CEP",
             $std->CEP,
             false,
@@ -1600,7 +1600,7 @@ class Make
         );
 
         $this->dom->addChild(
-            $this->retirada,
+            $this->entrega,
             "cPais",
             $std->cPais,
             false,
@@ -1608,7 +1608,7 @@ class Make
         );
 
         $this->dom->addChild(
-            $this->retirada,
+            $this->entrega,
             "xPais",
             $std->xPais,
             false,
@@ -1616,7 +1616,7 @@ class Make
         );
 
         $this->dom->addChild(
-            $this->retirada,
+            $this->entrega,
             "fone",
             $std->fone,
             false,
@@ -1624,7 +1624,7 @@ class Make
         );
 
         $this->dom->addChild(
-            $this->retirada,
+            $this->entrega,
             "email",
             $std->email,
             false,
@@ -1632,7 +1632,7 @@ class Make
         );
 
         $this->dom->addChild(
-            $this->retirada,
+            $this->entrega,
             "IE",
             $std->IE,
             false,
