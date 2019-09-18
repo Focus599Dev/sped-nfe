@@ -331,7 +331,7 @@ class Tools
         //remove all invalid strings
         $xml = Strings::clearXmlString($xml);
         if ($this->contingency->type !== '') {
-            $xml = ContingencyNFe::adjust($xml, $this->contingency);
+            //$xml = ContingencyNFe::adjust($xml, $this->contingency);
         }
         $signed = Signer::sign(
             $this->certificate,
