@@ -2978,8 +2978,14 @@ class Make
         switch ($std->CST) {
             case '00':
 
-                $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
-                $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+                try {
+                    
+                    $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+                    $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+
+                } catch (\Exception $e) {
+                    
+                }
 
                 $icms = $this->dom->createElement("ICMS00");
                 $this->dom->addChild(
@@ -3043,10 +3049,17 @@ class Make
                 break;
             case '10':
                 
-                $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
-                $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
-                $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
-                $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+                try {
+                    
+                    $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+                    $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+                    $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
+                    $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+
+                } catch (\Exception $e) {
+                    
+                }
+                
                 
                 $icms = $this->dom->createElement("ICMS10");
                 $this->dom->addChild(
@@ -3179,8 +3192,15 @@ class Make
                 );
                 break;
             case '20':
-                $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
-                $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+
+                try {
+                    
+                    $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+                    $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+
+                } catch (\Exception $e) {
+                    
+                }
 
                 $icms = $this->dom->createElement("ICMS20");
                 $this->dom->addChild(
@@ -3270,8 +3290,15 @@ class Make
                 );
                 break;
             case '30':
-                $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
-                $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+
+                try {
+
+                    $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
+                    $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+                    
+                } catch (\Exception $e) {
+                    
+                }
 
                 $icms = $this->dom->createElement("ICMS30");
                 $this->dom->addChild(
@@ -3401,9 +3428,17 @@ class Make
                 );
                 break;
             case '51':
-                $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
-                $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
 
+                try {
+                    
+                    $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+                    $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+
+    
+                } catch (\Exception $e) {
+                    
+                }
+                
                 $icms = $this->dom->createElement("ICMS51");
                 $this->dom->addChild(
                     $icms,
@@ -3597,10 +3632,17 @@ class Make
                 );
                 break;
             case '70':
-                $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
-                $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
-                $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
-                $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+
+                try {
+
+                    $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+                    $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+                    $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
+                    $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+                    
+                } catch (\Exception $e) {
+                    
+                }
 
                 $icms = $this->dom->createElement("ICMS70");
                 $this->dom->addChild(
@@ -3755,10 +3797,16 @@ class Make
                 break;
             case '90':
 
-                $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
-                $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
-                $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
-                $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+                try {
+                    
+                    $this->stdTot->vBC += (float) !empty($std->vBC) ? $std->vBC : 0;
+                    $this->stdTot->vICMS += (float) !empty($std->vICMS) ? $std->vICMS : 0;
+                    $this->stdTot->vBCST += (float) !empty($std->vBCST) ? $std->vBCST : 0;
+                    $this->stdTot->vST += (float) !empty($std->vICMSST) ? $std->vICMSST : 0;
+                   
+                } catch (\Exception $e) {
+                    
+                }
 
                 $icms = $this->dom->createElement("ICMS90");
                 $this->dom->addChild(
@@ -3925,7 +3973,6 @@ class Make
         $this->aICMS[$std->item] = $tagIcms;
         return $tagIcms;
     }
-
     /**
      * Grupo de Partilha do ICMS entre a UF de origem e UF de destino ou
      * a UF definida na legislação. N10a pai N01
