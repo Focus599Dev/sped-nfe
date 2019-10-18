@@ -3880,18 +3880,14 @@ class Make
                     false,
                     "$identificador [item $std->item] Valor do FCP"
                 );
-                
-                if ($std->modBCST != ''){
                     
-                    $this->dom->addChild(
-                        $icms,
-                        'modBCST',
-                        $std->modBCST,
-                        true,
-                        "$identificador [item $std->item] Modalidade de determinação da BC do ICMS ST"
-                    );
-
-                }
+                $this->dom->addChild(
+                    $icms,
+                    'modBCST',
+                    $std->modBCST,
+                    false,
+                    "$identificador [item $std->item] Modalidade de determinação da BC do ICMS ST"
+                );
 
                 $this->dom->addChild(
                     $icms,
