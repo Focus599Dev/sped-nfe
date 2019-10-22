@@ -79,13 +79,15 @@ class Tools extends ToolsCommon
             $this->config->siglaUF,
             $this->tpAmb
         );
+        
+        $this->lastRequest = $sxml;
+        
         $request = "<enviNFe xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
             . "<idLote>$idLote</idLote>"
             . "<indSinc>$indSinc</indSinc>"
             . "$sxml"
             . "</enviNFe>";
         $this->isValid($this->urlVersion, $request, 'enviNFe');
-        $this->lastRequest = $request;
         //montagem dos dados da mensagem SOAP
         $parameters = ['nfeDadosMsg' => $request];
         $body = "<nfeDadosMsg xmlns=\"$this->urlNamespace\">$request</nfeDadosMsg>";
