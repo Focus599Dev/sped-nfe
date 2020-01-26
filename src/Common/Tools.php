@@ -323,7 +323,7 @@ class Tools
      * @return string signed NFe xml
      * @throws RuntimeException
      */
-    public function signNFe($xml)
+    public function signNFe(&$xml)
     {
         if (empty($xml)) {
             throw new InvalidArgumentException('$xml');
@@ -333,7 +333,7 @@ class Tools
         if ($this->contingency->type !== '') {
             //$xml = ContingencyNFe::adjust($xml, $this->contingency);
         }
-        $signed = Signer::sign(
+        $xml = Signer::sign(
             $this->certificate,
             $xml,
             'infNFe',
@@ -344,15 +344,16 @@ class Tools
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->preserveWhiteSpace = false;
         $dom->formatOutput = false;
-        $dom->loadXML($signed);
+        $dom->loadXML($xml);
         $modelo = $dom->getElementsByTagName('mod')->item(0)->nodeValue;
         $isInfNFeSupl = !empty($dom->getElementsByTagName('infNFeSupl')->item(0));
         if ($modelo == 65 && !$isInfNFeSupl) {
             $signed = $this->addQRCode($dom);
         }
         //exception will be throw if NFe is not valid
-        $this->isValid($this->versao, $signed, 'nfe');
-        return $signed;
+        $this->isValid($this->versao, $xml, 'nfe');
+        
+        return $xml;
     }
     
     /**
