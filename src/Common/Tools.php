@@ -390,6 +390,90 @@ class Tools
         );
     }
     
+     /**
+     * get xml validation with its respective
+     * JSON structure definition document
+     * NOTE: if dont exists the JSON file will return array
+     * @param string $version layout version
+     * @param string $body
+     * @return boolean
+    */
+    public function isValidByJson($version, $body)
+    {
+        $jsonFile = $this->pathwsfiles."jsonschemaValidade_$version.json";
+
+        if (!is_file($jsonFile)) {
+            return array();
+        }
+        
+        $json = json_decode(
+                    file_get_contents(
+                        $jsonFile
+                    ),
+                    true
+                );
+
+        $error = array();
+
+        $this->readXML($body, $json, $error);
+        
+        return $error;
+    }
+
+    /**
+     * Performs xml validation with its respective
+     * JSON structure definition document
+     * NOTE: if dont exists the JSON file will return array
+     * @param object $xml
+     * @param object $json
+     * @param array $error
+     * @param string $keyC
+     * @return boolean
+    */
+    private function readXML($xml, $json, &$error, $keyC = ''){
+
+        foreach ($xml as $key => $xmlTag) {
+
+            if ( $xmlTag->count()){
+
+                 if (!$keyC)
+                    $keyC = $key;
+                else
+                    $keyC = $keyC . '.' . $key;
+
+                $this->readXML($xmlTag, $json, $error, $keyC);
+
+                $keyC = substr($keyC, 0, strrpos($keyC, '.'));
+
+            } else {
+                                
+                if (isset($json[$keyC . '.' . $key])){
+
+                    if (isset($json[$keyC . '.' . $key]['patternOb'])){
+
+                        if (!preg_match('/^' . $json['patterns'][$json[$keyC . '.' . $key]['patternOb']] . '$/', (String) $xmlTag )){
+
+                            $error[] = $json[$keyC . '.' . $key];
+
+                        }
+
+                    } else if (isset($json[$keyC . '.' . $key]['pattern'])){
+
+                        if (!preg_match('/^' . $json[$keyC . '.' . $key]['pattern'] . '$/', (String) $xmlTag )){
+
+                            $json[$keyC . '.' . $key]['value'] = (String) $xmlTag;
+                            
+                            $json[$keyC . '.' . $key]['tag'] = $keyC . '.' . $key;
+
+                            $error[] = $json[$keyC . '.' . $key];
+
+                        }
+                    } 
+                }
+            }
+        }
+    }
+    
     /**
      * Verifies the existence of the service
      * @param string $service
