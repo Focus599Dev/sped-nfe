@@ -3,3787 +3,3787 @@
 		"pattern" : "(11|12|13|14|15|16|17|21|22|23|24|25|26|27|28|29|31|32|33|35|41|42|43|50|51|52|53)",
 		"message" : "O campo infNFe.ide.cUF deve ter o código do estado que pode ser consultado no link <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de estado</a>",
 		"desc"    : "Código da UF do emitente do Documento Fiscal. Utilizar a Tabela do IBGE.",
-		"code"    : "E001"
+		"code"    : "A01"
 	},
 	"infNFe.ide.cNF": {
 		"pattern" : "([0-9]{8})",
 		"message" : "O campo infNFe.ide.cNF deve ter 8 dígitos",
 		"desc"    : "Código numérico que compõe a Chave de Acesso. Número aleatório gerado pelo emitente para cada NF-e.",
-		"code"    : "E002"
+		"code"    : "A02"
 	},
 	"infNFe.ide.natOp": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.ide.natOp deve conter a descrição da nutereza da operação",
 		"desc"    : "Descrição da Natureza da Operação",
-		"code"    : "E003"
+		"code"    : "A03"
 	},
 	"infNFe.ide.mod": {
 		"pattern" : "(55|65)",
 		"message" : "O campo infNFe.ide.mod deve conter os seguintes valores 55 ou 65 ",
 		"desc"    : "Série do Documento Fiscal",
-		"code"    : "E004"
+		"code"    : "A04"
 	},
 	"infNFe.ide.serie": {
 		"pattern" : "(0|[1-9]{1}[0-9]{0,2})",
 		"message" : "O campo infNFe.ide.serie deve conter o valor entre 0 e 999",
 		"desc"    : "Código do modelo do Documento Fiscal. 55 = NF-e; 65 = NFC-e.",
-		"code"    : "E005"
+		"code"    : "A05"
 	},
 	"infNFe.ide.nNF": {
 		"pattern" : "([1-9]{1}[0-9]{0,8})",
 		"message" : "O campo infNFe.ide.nNF deve conter o valor entre 1 e 999999999",
 		"desc"    : "Número do Documento Fiscal",
-		"code"    : "E006"
+		"code"    : "A06"
 	},
 	"infNFe.ide.dhEmi": {
 		"patternOb" : "TDateTimeUTC",
 		"message" : "O campo infNFe.ide.dhEmi deve conter data e hora da emissão da NFe",
 		"desc"    : "Data e Hora de emissão do Documento Fiscal (AAAA-MM-DDThh:mm:ssTZD) ex.: 2012-09-01T13:00:00-03:00",
-		"code"    : "E007"
+		"code"    : "A07"
 	},
 	"infNFe.ide.dhSaiEnt": {
 		"patternOb" : "TDateTimeUTC",
 		"message" : "O campo infNFe.ide.dhSaiEnt deve conter data e hora da saída da NFe",
 		"desc"    : "Data e Hora da saída ou de entrada da mercadoria / produto (AAAA-MM-DDTHH:mm:ssTZD)",
-		"code"    : "E008"
+		"code"    : "A08"
 	},
 	"infNFe.ide.tpNF": {
 		"pattern" : "(0|1)",
 		"message" : "O campo infNFe.ide.tpNF deve conter 1 ou 0",
 		"desc"    : "Tipo do Documento Fiscal (0 - entrada; 1 - saída)",
-		"code"    : "E009"
+		"code"    : "A09"
 	},
 	"infNFe.ide.idDest": {
 		"pattern" : "(1|2|3)",
 		"message" : "O campo infNFe.ide.idDest deve conter 1, 2 ou 3",
 		"desc"    : "Identificador de Local de destino da operação (1-Interna;2-Interestadual;3-Exterior)",
-		"code"    : "E010"
+		"code"    : "A10"
 	},
 	"infNFe.ide.cMunFG": {
 		"patternOb" : "TCodMunIBGE",
 		"message" : "O campo infNFe.ide.cMunFG deve conter o código do município IBGE <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de municípios</a>",
 		"desc"    : "Código do Município de Ocorrência do Fato Gerador (utilizar a tabela do IBGE)",
-		"code"    : "E011"
+		"code"    : "A11"
 	},
 	"infNFe.ide.tpImp": {
 		"pattern" : "([0-5]{1})",
 		"message" : "O campo infNFe.ide.tpImp deve conter 0, 1, 2, 3, 4 ou 5",
 		"desc"    : "Formato de impressão do DANFE (0-sem DANFE; 1-DANFe Retrato; 2-DANFe Paisagem; 3-DANFe Simplificado; 4-DANFe NFC-e; 5-DANFe NFC-e em mensagem eletrônica)",
-		"code"    : "E012"
+		"code"    : "A12"
 	},
 	"infNFe.ide.tpEmis": {
 		"pattern" : "(1|2|3|4|5|6|7|9){1}",
 		"message" : "O campo infNFe.ide.tpEmis deve conter 1, 2, 3, 4, 5, 6, 7 ou 9",
 		"desc"    : "Forma de emissão da NF-e. 1 - Normal; 2 - Contingência FS 3 - Contingência SCAN 4 - Contingência DPEC 5 - Contingência FSDA 6 - Contingência SVC - AN 7 - Contingência SVC - RS 9 - Contingência off-line NFC-e",
-		"code"    : "E013"
+		"code"    : "A13"
 	},
 	"infNFe.ide.cDV": {
 		"pattern" : "([0-9]{1})",
 		"message" : "O campo infNFe.ide.cDV deve conter um número de 0 a 9",
 		"desc"    : "Digito Verificador da Chave de Acesso da NF-e",
-		"code"    : "E014"
+		"code"    : "A14"
 	},
 	"infNFe.ide.tpAmb": {
 		"pattern" : "([0-9]{1})",
 		"message" : "O campo infNFe.ide.tpAmb deve conter 1 ou 2",
 		"desc"    : "Identificação do Ambiente: 1 - Produção 2 - Homologação",
-		"code"    : "E015"
+		"code"    : "A15"
 	},
 	"infNFe.ide.finNFe": {
 		"pattern" : "(1|2|3|4)",
 		"message" : "O campo infNFe.ide.finNFe deve conter 1, 2, 3, 4",
 		"desc"    : "Finalidade da emissão da NF-e: 1 - NFe normal 2 - NFe complementar 3 - NFe de ajuste 4 - Devolução/Retorno",
-		"code"    : "E016"
+		"code"    : "A16"
 	},
 	"infNFe.ide.indFinal": {
 		"pattern" : "(0|1)",
 		"message" : "O campo infNFe.ide.indFinal deve conter 0,1",
 		"desc"    : "Indica operação com consumidor final (0-Não;1-Consumidor Final)",
-		"code"    : "E017"
+		"code"    : "A18"
 	},
 	"infNFe.ide.indPres": {
 		"pattern" : "(1|2|3|4|5|9)",
 		"message" : "O campo infNFe.ide.indPres deve conter 1, 2, 3, 4, 5 ou 9",
 		"desc"    : "Indicador de presença do comprador no estabelecimento comercial no momento da operação 0 - Não se aplica (ex.: Nota Fiscal complementar ou de ajuste); 1 - Operação presencial; 2 - Não presencial, internet; 3 - Não presencial, teleatendimento; 4 - NFC-e entrega em domicílio; 5 - Operação presencial, fora do estabelecimento; 9 - Não presencial, outros",
-		"code"    : "E018"
+		"code"    : "A19"
 	},
 	"infNFe.ide.procEmi": {
 		"pattern" : "(0|1|2|3)",
 		"message" : "O campo infNFe.ide.procEmi deve conter 0, 1, 2, ou 3",
 		"desc"    : "Processo de emissão utilizado com a seguinte codificação: 0 - emissão de NF-e com aplicativo do contribuinte; 1 - emissão de NF-e avulsa pelo Fisco; 2 - emissão de NF-e avulsa, pelo contribuinte com seu certificado digital, através do site do Fisco; 3- emissão de NF-e pelo contribuinte com aplicativo fornecido pelo Fisco.",
-		"code"    : "E020"
+		"code"    : "A20"
 	},
 	"infNFe.ide.verProc": {
 		"pattern" : "([\\s\\S]{1,20})",
 		"message" : "O campo infNFe.ide.verProc deve conter a versão do aplicativo emisor",
 		"desc"    : "versão do aplicativo utilizado no processo de emissão",
-		"code"    : "E021"
+		"code"    : "A21"
 	},
 	"infNFe.ide.dhCont": {
 		"patternOb" : "TDateTimeUTC",
 		"message" : "O campo infNFe.ide.dhCont deve conter a data da hora de entrada da contigencia",
 		"desc"    : "Informar a data e hora de entrada em contingência contingência no formato  (AAAA-MM-DDThh:mm:ssTZD) ex.: 2012-09-01T13:00:00-03:00.",
-		"code"    : "E022"
+		"code"    : "A22"
 	},
 	"infNFe.ide.xJust": {
 		"pattern" : "([\\s\\S]{15,256})",
 		"message" : "O campo infNFe.ide.xJust deve conter justificativa da entrada em contingência",
 		"desc"    : "Informar a Justificativa da entrada",
-		"code"    : "E023"
+		"code"    : "A23"
 	},
 	"infNFe.ide.NFref.refNFe": {
 		"pattern" : "([0-9]{44})",
 		"message" : "O campo infNFe.ide.NFref deve conter a chave com 44 dígitos",
 		"desc"    : "Chave de acesso das NF-e referenciadas. Chave de acesso compostas por Código da UF (tabela do IBGE) + AAMM da emissão + CNPJ do Emitente + modelo, série e número da NF-e Referenciada + Código Numérico + DV.",
-		"code"    : "E024"
+		"code"    : "A24"
 	},
 	"infNFe.ide.NFref.refNF.cUF": {
 		"pattern" : "(11|12|13|14|15|16|17|21|22|23|24|25|26|27|28|29|31|32|33|35|41|42|43|50|51|52|53)",
 		"message" : "O campo infNFe.ide.cUF deve ter o código do estado que pode ser consultado no link <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de estado</a>",
 		"desc"    : "Código da UF do emitente do Documento Fiscal. Utilizar a Tabela do IBGE.",
-		"code"    : "E025"
+		"code"    : "A25"
 	},
 	"infNFe.ide.NFref.refNF.AAMM": {
 		"pattern" : "([0-9]{2}[0]{1}[1-9]{1}|[0-9]{2}[1]{1}[0-2]{1})",
 		"message" : "O campo infNFe.ide.NFref.refNF.AAMM deve conter ano e mês da emissão da NFe referenciadas",
 		"desc"    : "AAMM da emissão",
-		"code"    : "E026"
+		"code"    : "A26"
 	},
 	"infNFe.ide.NFref.refNF.CNPJ": {
 		"pattern" : "([0-9]{14})",
 		"message" : "O campo infNFe.ide.NFref.refNF.CNPJ deve conter CNPJ da NFe referenciadas",
 		"desc"    : "CNPJ do emitente do documento fiscal referenciado",
-		"code"    : "E027"
+		"code"    : "A27"
 	},
 	"infNFe.ide.NFref.refNF.mod": {
 		"pattern" : "(01|02)",
  		"message" : "O campo infNFe.ide.NFref.refNF.mod deve conter CNPJ da NFe referenciadas",
 		"desc"    : "Código do modelo do Documento Fiscal. Utilizar 01 para NF modelo 1/1A e 02 para NF modelo 02",
-		"code"    : "E028"
+		"code"    : "A28"
 	},
 	"infNFe.ide.NFref.refNF.serie": {
 		"pattern" : "(0|[1-9]{1}[0-9]{0,2})",
  		"message" : "O campo infNFe.ide.NFref.refNF.serie deve conter o valor entre 0 e 999",
 		"desc"    : "Série do Documento Fiscal, informar zero se inexistente",
-		"code"    : "E029"
+		"code"    : "A29"
 	},
 	"infNFe.ide.NFref.refNF.nNF": {
 		"pattern" : "([1-9]{1}[0-9]{0,8})",
 		"message" : "O campo infNFe.ide.NFref.refNF.nNF deve conter o valor entre 1 e 999999999",
 		"desc"    : "Número do Documento Fiscal",
-		"code"    : "E030"
+		"code"    : "A30"
 	},
 	"infNFe.ide.NFref.refNFP.cUF": {
 		"pattern" : "(11|12|13|14|15|16|17|21|22|23|24|25|26|27|28|29|31|32|33|35|41|42|43|50|51|52|53)",
 		"message" : "O campo infNFe.ide.NFref.refNFP.cUF deve ter o código do estado que pode ser consultado no link <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de estado</a>",
 		"desc"    : "Código da UF do emitente do Documento Fiscal. Utilizar a Tabela do IBGE.",
-		"code"    : "E031"
+		"code"    : "A31"
 	},
 	"infNFe.ide.NFref.refNFP.AAMM": {
 		"pattern" : "([0-9]{2}[0]{1}[1-9]{1}|[0-9]{2}[1]{1}[0-2]{1})",
 		"message" : "O campo infNFe.ide.NFref.refNFP.AAMM deve conter ano e mês da emissão da NFe referenciadas",
 		"desc"    : "AAMM da emissão",
-		"code"    : "E032"
+		"code"    : "A32"
 	},
 	"infNFe.ide.NFref.refNFP.CNPJ": {
 		"pattern" : "([0-9]{14})",
 		"message" : "O campo infNFe.ide.NFref.refNFP.CNPJ deve conter CNPJ da NFe referenciadas",
 		"desc"    : "CNPJ do emitente do documento fiscal referenciado",
-		"code"    : "E033"
+		"code"    : "A33"
 	},
 	"infNFe.ide.NFref.refNFP.CPF": {
 		"pattern" : "([0-9]{11})",
 		"message" : "O campo infNFe.ide.NFref.refNFP.CPF deve conter CPF da NFe referenciadas",
 		"desc"    : "CPF do emitente da NF de produtor",
-		"code"    : "E033"
+		"code"    : "A34"
 	},
 	"infNFe.ide.NFref.refNFP.IE": {
 		"pattern" : "(ISENTO|[0-9]{2,14})",
 		"message" : "O campo infNFe.ide.NFref.refNFP.IE deve conter IE da NFe referenciadas",
 		"desc"    : "IE do emitente da NF de Produtor",
-		"code"    : "E034"
+		"code"    : "A35"
 	},
 	"infNFe.ide.NFref.refNFP.mod": {
 		"pattern" : "(01|04)",
 		"message" : "O campo infNFe.ide.NFref.refNFP.mod deve conter 01 ou 04",
 		"desc"    : "Código do modelo do Documento Fiscal - utilizar 04 para NF de produtor  ou 01 para NF Avulsa",
-		"code"    : "E034"
+		"code"    : "A36"
 	},
 	"infNFe.ide.NFref.refNFP.serie": {
 		"pattern" : "(0|[1-9]{1}[0-9]{0,2})",
  		"message" : "O campo infNFe.ide.NFref.refNFP.serie deve conter o valor entre 0 e 999",
 		"desc"    : "Série do Documento Fiscal, informar zero se inexistente",
-		"code"    : "E035"
+		"code"    : "A37"
 	},
 	"infNFe.ide.NFref.refNFP.nNF": {
 		"pattern" : "([1-9]{1}[0-9]{0,8})",
 		"message" : "O campo infNFe.ide.NFref.refNFP.nNF deve conter o valor entre 1 e 999999999",
 		"desc"    : "Número do Documento Fiscal",
-		"code"    : "E036"
+		"code"    : "A38"
 	},
 	"infNFe.ide.NFref.refCTe": {
 		"pattern" : "([0-9]{44})",
 		"message" : "O campo infNFe.ide.NFref.refCTe deve conter a chave do CTe com 44 posições",
 		"desc"    : "Utilizar esta TAG para referenciar um CT-e emitido anteriormente, vinculada a NF-e atual",
-		"code"    : "E037"
+		"code"    : "A39"
 	},
 	"infNFe.ide.NFref.refECF.mod": {
 		"pattern" : "(2B|2C|2D)",
 		"message" : "O campo infNFe.ide.NFref.refECF.mod deve conter 2B, 2C ou 2D",
 		"desc"    : "Código do modelo do Documento Fiscal. Preencher com `2B`, quando se tratar de Cupom Fiscal emitido por máquina registradora (não ECF), com `2C`, quando se tratar de Cupom Fiscal PDV, ou `2D`, quando se tratar de Cupom Fiscal (emitido por ECF)",
-		"code"    : "E038"
+		"code"    : "A40"
 	},
 	"infNFe.ide.NFref.refECF.nECF": {
 		"pattern" : "([0-9]{1,3})",
 		"message" : "O campo infNFe.ide.NFref.refECF.nECF deve conter um numero entre 1 e 999",
 		"desc"    : "Informar o número de ordem seqüencial do ECF que emitiu o Cupom Fiscal vinculado à NF-e",
-		"code"    : "E039"
+		"code"    : "A41"
 	},
 	"infNFe.ide.NFref.refECF.nCOO": {
 		"pattern" : "([0-9]{1,6})",
 		"message" : "O campo infNFe.ide.NFref.refECF.nCOO deve conter um numero entre 1 e 999999",
 		"desc"    : "Informar o número de ordem seqüencial do ECF que emitiu o Cupom Fiscal vinculado à NF-e",
-		"code"    : "E040"
+		"code"    : "A42"
 	},
 	"infNFe.emit.CNPJ": {
 		"patternOb" : "TCnpj",
 		"message" : "O campo infNFe.emit.CNPJ deve conter o CNPJ emitente com 14 posições de números",
 		"desc"    : "Número do CNPJ do emitente",
-		"code"    : "E041"
+		"code"    : "A43"
 	},
 	"infNFe.emit.CPF": {
 		"patternOb" : "TCpf",
 		"message" : "O campo infNFe.emit.CPF deve conter o CPF emitente com 11 posições de números",
 		"desc"    : "Número do CPF do emitente",
-		"code"    : "E042"
+		"code"    : "A44"
 	},
 	"infNFe.emit.xNome": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.emit.xNome deve deve ter no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Razão Social ou Nome do emitente",
-		"code"    : "E043"
+		"code"    : "A45"
 	},
 	"infNFe.emit.xFant": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.emit.xFant deve deve ter no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Nome fantasia",
-		"code"    : "E044"
+		"code"    : "A45"
 	},
 	"infNFe.emit.enderEmit.xLgr": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.emit.enderEmit.xLgr deve deve ter no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Logradouro",
-		"code"    : "E046"
+		"code"    : "A46"
 	},
 	"infNFe.emit.enderEmit.nro": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.emit.enderEmit.nro deve deve ter no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Número do local",
-		"code"    : "E047"
+		"code"    : "A47"
 	},
 	"infNFe.emit.enderEmit.xCpl": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.emit.enderEmit.xCpl deve deve ter no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Complemento",
-		"code"    : "E048"
+		"code"    : "A48"
 	},
 	"infNFe.emit.enderEmit.xBairro": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.emit.enderEmit.xBairro deve deve ter no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Bairro",
-		"code"    : "E049"
+		"code"    : "A49"
 	},
 	"infNFe.emit.enderEmit.cMun": {
 		"patternOb" : "TCodMunIBGE",
 		"message" : "O campo infNFe.emit.enderEmit.cMun deve conter o código do município IBGE <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de municípios</a>",
 		"desc"    : "Código do município",
-		"code"    : "E050"
+		"code"    : "A50"
 	},
 	"infNFe.emit.enderEmit.xMun": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.emit.enderEmit.xMun deve conter o nome do município com no município 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Nome do município",
-		"code"    : "E051"
+		"code"    : "A51"
 	},
 	"infNFe.emit.enderEmit.UF": {
 		"patternOb" : "TUf",
 		"message" : "O campo infNFe.emit.enderEmit.UF deve conter a siga do estado",
 		"desc"    : "Sigla da UF",
-		"code"    : "E052"
+		"code"    : "A52"
 	},
 	"infNFe.emit.enderEmit.CEP": {
 		"patternOb" : "TCEP",
 		"message" : "O campo infNFe.emit.enderEmit.CEP deve conter o CEP com 8 dígitos",
 		"desc"    : "CEP emitente",
-		"code"    : "E053"
+		"code"    : "A53"
 	},
 	"infNFe.emit.enderEmit.cPais": {
 		"pattern" : "(1058)",
 		"message" : "O campo infNFe.emit.enderEmit.cPais deve conter o número 1058",
 		"desc"    : "Código do país",
-		"code"    : "E054"
+		"code"    : "A54"
 	},
 	"infNFe.emit.enderEmit.xPais": {
 		"pattern" : "(Brasil|BRASIL)",
 		"message" : "O campo infNFe.emit.enderEmit.xPais deve conter o nome Brasil ou BRASIL",
 		"desc"    : "Código do país",
-		"code"    : "E055"
+		"code"    : "A55"
 	},
 	"infNFe.emit.enderEmit.fone": {
 		"patternOb" : "TFone",
 		"message" : "O campo infNFe.emit.enderEmit.fone deve um número de 6 a 14 dígitos",
 		"desc"    : "Preencher com Código DDD + número do telefone",
-		"code"    : "E056"
+		"code"    : "A56"
 	},
 	"infNFe.emit.IE": {
 		"patternOb" : "TIeDest",
 		"message" : "O campo infNFe.emit.IE deve ter um número de 2 a 14 dígitos ou a palavra ISENTO",
 		"desc"    : "Inscrição Estadual do Emitente",
-		"code"    : "E057"
+		"code"    : "A57"
 	},
 	"infNFe.emit.IEST": {
 		"pattern" : "([0-9]{2,14})",
 		"message" : "O campo infNFe.emit.IEST deve ter um número de 2 a 14 dígitos",
 		"desc"    : "Inscricao Estadual do Substituto Tributário",
-		"code"    : "E058"
+		"code"    : "A59"
 	},
 	"infNFe.emit.IM": {
 		"pattern" : "([\\s\\S]{1,15})",
 		"message" : "O campo infNFe.emit.IM deve conter uma string com no mínimo 2 caracteres e no maxímo 15 caracteres",
 		"desc"    : "Grupo de informações de interesse da Prefeitura ( Inscrição Municipal ) ",
-		"code"    : "E059"
+		"code"    : "A60"
 	},
 	"infNFe.emit.CNAE": {
 		"pattern" : "([0-9]{7})",
 		"message" : "O campo infNFe.emit.IM deve conter um número com 7 dígitos",
 		"desc"    : "CNAE Fiscal",
-		"code"    : "E060"
+		"code"    : "A61"
 	},
 	"infNFe.emit.CRT": {
 		"pattern" : "(1|2|3)",
 		"message" : "o campo infNFe.emit.CRT deve conter o seguinte número 1, 2, ou 3",
 		"desc"    : "Código de Regime Tributário.  Este campo será obrigatoriamente preenchido com:  1 – Simples Nacional; 2 – Simples Nacional – excesso de sublimite de receita bruta; 3 – Regime Normal.",
-		"code"    : "E061"
+		"code"    : "A61"
 	},
 	"infNFe.avulsa.CNPJ": {
 		"patternOb" : "TCnpj",
 		"message" : "o campo infNFe.avulsa.CNPJ deve conter o CNPJ com 14 dígitos",
 		"desc"    : "CNPJ do Órgão emissor, ",
-		"code"    : "E062"
+		"code"    : "A62"
 	},
 	"infNFe.avulsa.xOrgao": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "o campo infNFe.avulsa.xOrgao deve conter uma string com no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Órgão emitente",
-		"code"    : "E063"
+		"code"    : "A63"
 	},
 	"infNFe.avulsa.matr": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "o campo infNFe.avulsa.matr deve conter uma string com no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Matrícula do agente",
-		"code"    : "E064"
+		"code"    : "A64"
 	},
 	"infNFe.avulsa.xAgente": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "o campo infNFe.avulsa.xAgente deve conter uma string com no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Nome do agente",
-		"code"    : "E066"
+		"code"    : "A65"
 	},
 	"infNFe.avulsa.fone": {
 		"patternOb" : "TFone",
 		"message" : "o campo infNFe.avulsa.fone deve conter um número com no mínimo 6 digitos e no maxímo 14",
 		"desc"    : "Telefone",
-		"code"    : "E067"
+		"code"    : "A66"
 	},
 	"infNFe.avulsa.UF": {
 		"patternOb" : "TUfEmi",
 		"message" : "O campo infNFe.avulsa.UF deve conter a siga do estado",
 		"desc"    : "Sigla da UF",
-		"code"    : "E068"
+		"code"    : "A67"
 	},
 	"infNFe.avulsa.nDAR": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "o campo infNFe.avulsa.nDAR deve conter uma string com no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Número do Documento de Arrecadação de Receita",
-		"code"    : "E069"
+		"code"    : "A68"
 	},
 	"infNFe.avulsa.dEmi": {
 		"patternOb" : "TData",
 		"message" : "O campo infNFe.avulsa.dEmi deve conter data e hora da emissão da DAR",
 		"desc"    : "Data de emissão do DAR (AAAA-MM-DD)",
-		"code"    : "E070"
+		"code"    : "A69"
 	},
 	"infNFe.avulsa.vDAR": {
 		"pattern" : "(0|0\\.[0-9]{2}|[1-9]{1}[0-9]{0,12}(\\.[0-9]{2})?)",
 		"message" : "O campo infNFe.avulsa.vDAR deve conter um valor decimal com duas casas, Ex: 0.00",
 		"desc"    : "Valor Total constante no DAR",
-		"code"    : "E071"
+		"code"    : "A70"
 	},
 	"infNFe.avulsa.repEmi": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.avulsa.repEmi deve conter uma string com no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Repartição Fiscal emitente",
-		"code"    : "E072"
+		"code"    : "A71"
 	},
 	"infNFe.avulsa.dPag": {
 		"patternOb" : "TData",
 		"message" : "O campo infNFe.avulsa.dPag deve conter uma data no formato AAAA-MM-DD",
 		"desc"    : "Data de pagamento do DAR (AAAA-MM-DD)",
-		"code"    : "E073"
+		"code"    : "A72"
 	},
 	"infNFe.dest.CNPJ": {
 		"patternOb" : "TCnpj",
 		"message" : "O campo infNFe.dest.CNPJ deve conter CNPJ com 14 dígitos",
 		"desc"    : "Número do CNPJ",
-		"code"    : "E074"
+		"code"    : "A73"
 	},
 	"infNFe.dest.CPF": {
 		"patternOb" : "TCpf",
 		"message" : "O campo infNFe.dest.CPF deve conter CPF com 11 dígitos",
 		"desc"    : "Número do CNPJ",
-		"code"    : "E075"
+		"code"    : "A74"
 	},
 	"infNFe.dest.idEstrangeiro": {
 		"pattern" : "([!-ÿ]{0}|[!-ÿ]{5,20})?",
 		"message" : "O campo infNFe.dest.idEstrangeiro deve conter um numerico com pelo menos um dígitos",
 		"desc"    : "Identificador do destinatário, em caso de comprador estrangeiro",
-		"code"    : "E076"
+		"code"    : "A75"
 	},
 	"infNFe.dest.xNome": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.dest.xNome deve conter uma string com no mínimo 2 caracteres e no maxímo 60",
 		"desc"    : "Identificador do destinatário, em caso de comprador estrangeiro",
-		"code"    : "E077"
+		"code"    : "A76"
 	},
 	"infNFe.dest.enderDest.xLgr": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.dest.enderDest.xLgr deve deve ter no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Logradouro",
-		"code"    : "E078"
+		"code"    : "A77"
 	},
 	"infNFe.dest.enderDest.nro": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.dest.enderDest.nro deve deve ter no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Número do local",
-		"code"    : "E079"
+		"code"    : "A78"
 	},
 	"infNFe.dest.enderDest.xCpl": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.dest.enderDest.xCpl deve deve ter no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Complemento",
-		"code"    : "E080"
+		"code"    : "A79"
 	},
 	"infNFe.dest.enderDest.xBairro": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.dest.enderDest.xBairro deve deve ter no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Bairro",
-		"code"    : "E081"
+		"code"    : "A80"
 	},
 	"infNFe.dest.enderDest.cMun": {
 		"patternOb" : "TCodMunIBGE",
 		"message" : "O campo infNFe.dest.enderDest.cMun deve conter o código do município IBGE <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de municípios</a>",
 		"desc"    : "Código do município",
-		"code"    : "E082"
+		"code"    : "A81"
 	},
 	"infNFe.dest.enderDest.xMun": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.dest.enderDest.xMun deve conter o nome do município com no município 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Nome do município",
-		"code"    : "E083"
+		"code"    : "A82"
 	},
 	"infNFe.dest.enderDest.UF": {
 		"patternOb" : "TUfEmi",
 		"message" : "O campo infNFe.dest.enderDest.UF deve conter a siga do estado",
 		"desc"    : "Sigla da UF",
-		"code"    : "E084"
+		"code"    : "A83"
 	},
 	"infNFe.dest.enderDest.CEP": {
 		"patternOb" : "TCEP",
 		"message" : "O campo infNFe.dest.enderDest.CEP deve conter o CEP com 8 dígitos",
 		"desc"    : "CEP emitente",
-		"code"    : "E085"
+		"code"    : "A84"
 	},
 	"infNFe.dest.enderDest.cPais": {
 		"pattern" : "(1058)",
 		"message" : "O campo infNFe.dest.enderDest.cPais deve conter o número 1058",
 		"desc"    : "Código do país",
-		"code"    : "E086"
+		"code"    : "A85"
 	},
 	"infNFe.dest.enderDest.xPais": {
 		"pattern" : "(Brasil|BRASIL)",
 		"message" : "O campo infNFe.dest.enderDest.xPais deve conter o nome Brasil ou BRASIL",
 		"desc"    : "Código do país",
-		"code"    : "E087"
+		"code"    : "A86"
 	},
 	"infNFe.dest.enderDest.fone": {
 		"patternOb" : "TFone",
 		"message" : "O campo infNFe.dest.enderDest.fone deve um número de 6 a 14 dígitos",
 		"desc"    : "Preencher com Código DDD + número do telefone",
-		"code"    : "E088"
+		"code"    : "A87"
 	},
 	"infNFe.dest.indIEDest": {
 		"pattern" : "(1|2|9)",
 		"message" : "O campo infNFe.dest.indIEDest deve ter um dos seguintes números 1, 2 ou 9",
 		"desc"    : "Indicador da IE do destinatário: 1 – Contribuinte ICMSpagamento à vista; 2 – Contribuinte isento de inscrição; 9 – Não Contribuinte",
-		"code"    : "E090"
+		"code"    : "A88"
 	},
 	"infNFe.dest.IE": {
 		"patternOb" : "TIeDestNaoIsento",
 		"message" : "O campo infNFe.dest.indIEDest deve ter um dos seguintes números 1, 2 ou 9",
 		"desc"    : "Indicador da IE do destinatário: 1 – Contribuinte ICMSpagamento à vista; 2 – Contribuinte isento de inscrição; 9 – Não Contribuinte",
-		"code"    : "E091"
+		"code"    : "A89"
 	},
 	"infNFe.dest.ISUF": {
 		"pattern" : "([0-9]{8,9})",
 		"message" : "O campo infNFe.dest.ISUF deve conter um número de 8 ou 9 dígitos",
 		"desc"    : "Inscrição na SUFRAMA (Obrigatório nas operações com as áreas com benefícios de incentivos fiscais sob controle da SUFRAMA",
-		"code"    : "E092"
+		"code"    : "A90"
 	},
 	"infNFe.dest.IM": {
 		"pattern" : "([\\s\\S]{1,15})",
 		"message" : "O campo infNFe.dest.IM deve conter uma string com no mínimo 2 caracteres e no maxímo 15 caracteres",
 		"desc"    : "Inscrição Municipal do tomador do serviço",
-		"code"    : "E093"
+		"code"    : "A91"
 	},
 	"infNFe.dest.email": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.dest.email deve conter uma string com no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Informar o e-mail do destinatário. O campo pode ser utilizado para informar o e-mail de recepção da NF-e indicada pelo destinatário",
-		"code"    : "E094"
+		"code"    : "A92"
 	},
 	"infNFe.retirada.CNPJ": {
 		"patternOb" : "TCnpj",
 		"message" : "O campo infNFe.retirada.CNPJ deve conter um numerico com 14 dígitos",
 		"desc"    : "CNPJ do responsavel pela retirada",
-		"code"    : "E095"
+		"code"    : "A93"
 	},
 	"infNFe.retirada.CPF": {
 		"patternOb" : "TCpf",
 		"message" : "O campo infNFe.retirada.CPF deve conter um numerico com 11 dígitos",
 		"desc"    : "CPF do responsavel pela retirada",
-		"code"    : "E096"
+		"code"    : "A94"
 	},
 	"infNFe.retirada.xNome": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.retirada.xNome deve conter uma string com no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Razão Social ou Nome do Expedidor/Recebedor",
-		"code"    : "E097"
+		"code"    : "A95"
 	},
 	"infNFe.retirada.xLgr": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.retirada.xLgr deve conter uma string com no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Logradouro da retirada",
-		"code"    : "E098"
+		"code"    : "A96"
 	},
 	"infNFe.retirada.nro": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.retirada.nro deve conter uma string com no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Número da retirada",
-		"code"    : "E099"
+		"code"    : "A97"
 	},
 	"infNFe.retirada.xCpl": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.retirada.xCpl deve conter uma string com no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Complemento da retirada",
-		"code"    : "E100"
+		"code"    : "A98"
 	},
 	"infNFe.retirada.xBairro": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.retirada.xBairro deve conter uma string com no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Bairro da retirada",
-		"code"    : "E101"
+		"code"    : "A99"
 	},
 	"infNFe.retirada.cMun": {
 		"patternOb" : "TCodMunIBGE",
 		"message" : "O campo infNFe.retirada.cMun deve ter o código do estado que pode ser consultado no link <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de estado</a>",
 		"desc"    : "Código do município (utilizar a tabela do IBGE)",
-		"code"    : "E102"
+		"code"    : "AA1"
 	},
 	"infNFe.retirada.xMun": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.retirada.xMun deve conter uma string com no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Nome do município retirada",
-		"code"    : "E103"
+		"code"    : "AA2"
 	},
 	"infNFe.retirada.UF": {
 		"patternOb" : "TUf",
 		"message" : "O campo infNFe.retirada.UF deve conter a sigla do estado",
 		"desc"    : "Sigla da UF retirada",
-		"code"    : "E104"
+		"code"    : "AA3"
 	},
 	"infNFe.retirada.CEP": {
 		"patternOb" : "TCEP",
 		"message" : "O campo infNFe.retirada.CEP deve conter um numerico de 8 digitos",
 		"desc"    : "CEP retirada",
-		"code"    : "E105"
+		"code"    : "AA4"
 	},
 	"infNFe.retirada.cPais": {
 		"patternOb" : "TCpais",
 		"message" : "O campo infNFe.retirada.cPais deve conter um numerico de 4 digitos",
 		"desc"    : "Código de Pais",
-		"code"    : "E106"
+		"code"    : "AA5"
 	},
 	"infNFe.retirada.xPais": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.retirada.xPais deve conter uma string com no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Nome do país",
-		"code"    : "E107"
+		"code"    : "AA6"
 	},
 	"infNFe.retirada.fone": {
 		"patternOb" : "TFone",
 		"message" : "O campo infNFe.retirada.fone deve conter um numerico com no mínimo 6 digitos e maxímo 14 dígitos",
 		"desc"    : "Telefone, preencher com Código DDD + número do telefone , nas operações com exterior é permtido informar o código do país + código da localidade + número do telefone",
-		"code"    : "E108"
+		"code"    : "AA7"
 	},
 	"infNFe.retirada.email": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.retirada.xPais deve conter uma string com no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Informar o e-mail do expedidor/Recebedor. O campo pode ser utilizado para informar o e-mail de recepção da NF-e indicada pelo expedidor",
-		"code"    : "E109"
+		"code"    : "AA8"
 	},
 	"infNFe.retirada.IE": {
 		"patternOb" : "TIe",
 		"message" : "O campo infNFe.retirada.IE deve conter numerico de no mínimo 2 dígitos e no maxímo 14 ou a palavra ISENTO",
 		"desc"    : "Inscrição Estadual",
-		"code"    : "E110"
+		"code"    : "AA9"
 	},
 	"infNFe.entrega.CNPJ": {
 		"patternOb" : "TCnpj",
 		"message" : "O campo infNFe.entrega.CNPJ deve conter um numerico com 14 dígitos",
 		"desc"    : "CNPJ do responsavel pela entrega",
-		"code"    : "E095"
+		"code"    : "AAA"
 	},
 	"infNFe.entrega.CPF": {
 		"patternOb" : "TCpf",
 		"message" : "O campo infNFe.entrega.CPF deve conter um numerico com 11 dígitos",
 		"desc"    : "CPF do responsavel pela entrega",
-		"code"    : "E096"
+		"code"    : "AB1"
 	},
 	"infNFe.entrega.xNome": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.entrega.xNome deve conter uma string com no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Razão Social ou Nome do Expedidor/Recebedor",
-		"code"    : "E097"
+		"code"    : "AB2"
 	},
 	"infNFe.entrega.xLgr": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.entrega.xLgr deve conter uma string com no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Logradouro da entrega",
-		"code"    : "E098"
+		"code"    : "AB3"
 	},
 	"infNFe.entrega.nro": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.entrega.nro deve conter uma string com no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Número da entrega",
-		"code"    : "E099"
+		"code"    : "AB4"
 	},
 	"infNFe.entrega.xCpl": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.entrega.xCpl deve conter uma string com no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Complemento da entrega",
-		"code"    : "E100"
+		"code"    : "AB5"
 	},
 	"infNFe.entrega.xBairro": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.entrega.xBairro deve conter uma string com no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Bairro da entrega",
-		"code"    : "E101"
+		"code"    : "AB6"
 	},
 	"infNFe.entrega.cMun": {
 		"patternOb" : "TCodMunIBGE",
 		"message" : "O campo infNFe.entrega.cMun deve ter o código do estado que pode ser consultado no link <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de estado</a>",
 		"desc"    : "Código do município (utilizar a tabela do IBGE)",
-		"code"    : "E102"
+		"code"    : "AB6"
 	},
 	"infNFe.entrega.xMun": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.entrega.xMun deve conter uma string com no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Nome do município entrega",
-		"code"    : "E103"
+		"code"    : "AB7"
 	},
 	"infNFe.entrega.UF": {
 		"patternOb" : "TUf",
 		"message" : "O campo infNFe.entrega.UF deve conter a sigla do estado",
 		"desc"    : "Sigla da UF entrega",
-		"code"    : "E104"
+		"code"    : "AB8"
 	},
 	"infNFe.entrega.CEP": {
 		"patternOb" : "TCEP",
 		"message" : "O campo infNFe.entrega.CEP deve conter um numerico de 8 digitos",
 		"desc"    : "CEP entrega",
-		"code"    : "E105"
+		"code"    : "AB9"
 	},
 	"infNFe.entrega.cPais": {
 		"patternOb" : "TCpais",
 		"message" : "O campo infNFe.entrega.cPais deve conter um numerico de 4 digitos",
 		"desc"    : "Código de Pais",
-		"code"    : "E106"
+		"code"    : "ABA"
 	},
 	"infNFe.entrega.xPais": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.entrega.xPais deve conter uma string com no mínimo 2 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Nome do país",
-		"code"    : "E107"
+		"code"    : "ABB"
 	},
 	"infNFe.entrega.fone": {
 		"patternOb" : "TFone",
 		"message" : "O campo infNFe.entrega.fone deve conter um numerico com no mínimo 6 digitos e maxímo 14 dígitos",
 		"desc"    : "Telefone, preencher com Código DDD + número do telefone , nas operações com exterior é permtido informar o código do país + código da localidade + número do telefone",
-		"code"    : "E108"
+		"code"    : "AC1"
 	},
 	"infNFe.entrega.email": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.entrega.xPais deve conter uma string com no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Informar o e-mail do expedidor/Recebedor. O campo pode ser utilizado para informar o e-mail de recepção da NF-e indicada pelo expedidor",
-		"code"    : "E109"
+		"code"    : "AC2"
 	},
 	"infNFe.entrega.IE": {
 		"patternOb" : "TIe",
 		"message" : "O campo infNFe.entrega.IE deve conter numerico de no mínimo 2 dígitos e no maxímo 14 ou a palavra ISENTO",
 		"desc"    : "Inscrição Estadual",
-		"code"    : "E110"
+		"code"    : "AC3"
 	},
 	"infNFe.autXML.CNPJ": {
 		"patternOb" : "TCnpj",
 		"message" : "O campo infNFe.autXML.CNPJ deve conter numerico com 14 digitos",
 		"desc"    : "CNPJ Autorizado a fazere download da NFe",
-		"code"    : "E111"
+		"code"    : "AC4"
 	},
 	"infNFe.autXML.CPF": {
 		"patternOb" : "TCpf",
 		"message" : "O campo infNFe.autXML.CPF deve conter numerico com 11 digitos",
 		"desc"    : "CPF Autorizado a fazere download da NFe",
-		"code"    : "E112"
+		"code"    : "AC5"
 	},
 	"infNFe.det.prod.cProd": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.det.prod.cProd deve conter uma string com no mínimo 1 caracteres e no maxímo 60 caracteres",
 		"desc"    : "Código do produto ou serviço. Preencher com CFOP caso se trate de itens não relacionados com mercadorias/produto e que o contribuinte não possua codificação própriaFormato `CFOP9999`.",
-		"code"    : "E113"
+		"code"    : "AC6"
 	},
 	"infNFe.det.prod.cEAN": {
 		"pattern" : "(SEM GTIN|[0-9]{0}|[0-9]{8}|[0-9]{12,14})",
 		"message" : "O campo infNFe.det.prod.cProd deve conter um numerido de 8 ou 14 dígitos ou a palavra SEM GTIN",
 		"desc"    : "GTIN (Global Trade Item Number) do produto, antigo código EAN ou código de barras",
-		"code"    : "E114"
+		"code"    : "AC7"
 	},
 	"infNFe.det.prod.xProd": {
 		"pattern" : "([\\s\\S]{1,12})",
 		"message" : "O campo infNFe.det.prod.xProd deve conter uma string com no mínimo 1 caracteres e no maxímo 120 caracteres",
 		"desc"    : "GTIN (Global Trade Item Number) do produto, antigo código EAN ou código de barras",
-		"code"    : "E115"
+		"code"    : "AC9"
 	},
 	"infNFe.det.prod.NCM": {
 		"pattern" : "([0-9]{2}|[0-9]{8})",
 		"message" : "O campo infNFe.det.prod.NCM deve conter um numerico de 2 dígitos ou 8",
 		"desc"    : "Código NCM (8 posições), será permitida a informação do gênero (posição do capítulo do NCM) quando a operação não for de comércio exterior (importação/exportação) ou o produto não seja tributado pelo IPI. Em caso de item de serviço ou item que não tenham produto (Ex. transferência de crédito, crédito do ativo imobilizado, etc.), informar o código 00 (zeros) (v2.0)",
-		"code"    : "E117"
+		"code"    : "ACA"
 	},
 	"infNFe.det.prod.NVE": {
 		"pattern" : "([A-Z]{2}[0-9]{4})",
 		"message" : "O campo infNFe.det.prod.NVE deve conter uma string de 2 caracteres seguido de um numerico de 4 dígitos, Ex: ZZ9999 ",
 		"desc"    : "Nomenclatura de Valor aduaneio e Estatístico",
-		"code"    : "E118"
+		"code"    : "ACB"
 	},
 	"infNFe.det.prod.CEST": {
 		"pattern" : "([0-9]{7})",
 		"message" : "O campo infNFe.det.prod.CEST deve conter um numerico de 7 dígitos",
 		"desc"    : "Codigo especificador da Substuicao Tributaria - CEST, que identifica a mercadoria sujeita aos regimes de  substituicao tributária e de antecipação do recolhimento  do imposto",
-		"code"    : "E119"
+		"code"    : "ACC"
 	},
 	"infNFe.det.prod.indEscala": {
 		"pattern" : "(S|N)",
 		"message" : "O campo infNFe.det.prod.indEscala aceita S ou N",
 		"desc"    : "Indica se o item pode subemeter ao regime de substituição tributaria",
-		"code"    : "E120"
+		"code"    : "AD1"
 	},
 	"infNFe.det.prod.CNPJFab": {
 		"patternOb" : "TCnpj",
 		"message" : "O campo infNFe.det.prod.CNPJFab deve conter uma string de 14 dígitos.",
 		"desc"    : "CNPJ do Fabricante da Mercadoria, obrigatório para produto em escala NÃO relevante.",
-		"code"    : "E121"
+		"code"    : "AD2"
 	},
 	"infNFe.det.prod.EXTIPI": {
 		"pattern" : "([0-9]{2,3})",
 		"message" : "O campo infNFe.det.prod.EXTIPI deve conter numerico de 2 a 3 de comprimento",
 		"desc"    : "Código EX TIPI (3 posições)",
-		"code"    : "E122"
+		"code"    : "AD3"
 	},
 	"infNFe.det.prod.CFOP": {
 		"pattern" : "(1|2|3|5|6|7){1}([0-9]{3})",
 		"message" : "O campo infNFe.det.prod.CFOP deve conter numerico de 4 dígitos sendo o primeiro dígitos 1,2,3,5,6 ou 7",
 		"desc"    : "Codigo fiscal da operação",
-		"code"    : "E122"
+		"code"    : "AD4"
 	},
 	"infNFe.det.prod.uCom": {
 		"pattern" : "([\\s\\S]{1,6})",
 		"message" : "O campo infNFe.det.prod.uCom deve conter uma string com no mínimo 1 caracter e no maxímo 6 caracteres",
 		"desc"    : "Unidade comercial",
-		"code"    : "E123"
+		"code"    : "AD5"
 	},
 	"infNFe.det.prod.qCom": {
 		"patternOb" : "TDec_1104v",
 		"message" : "O campo infNFe.det.prod.qCom deve conter um numerico decimal com até 10 posições",
 		"desc"    : "Quantidade Comercial  do produto, alterado para aceitar de 0 a 4 casas decimais e 11 inteiros.",
-		"code"    : "E591"
+		"code"    : "AD6"
 	},
 	"infNFe.det.prod.vUnCom": {
 		"patternOb" : "TDec_1110v",
 		"message" : "O campo infNFe.det.prod.vUnCom deve conter um numerico decimal com até 10 posições",
 		"desc"    : "Valor unitário de comercialização",
-		"code"    : "E125"
+		"code"    : "AD7"
 	},
 	"infNFe.det.prod.vProd": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.prod.vProd deve conter um numerico decimal com até 2 posições",
 		"desc"    : "Valor bruto do produto ou serviço.",
-		"code"    : "E126"
+		"code"    : "AD8"
 	},
 	"infNFe.det.prod.cEANTrib": {
 		"pattern" : "(SEM GTIN|[0-9]{0}|[0-9]{8}|[0-9]{12,14})",
 		"message" : "O campo infNFe.det.prod.cEANTrib deve conter um numerico 8 dígitos ou um numero de 12 a 14 dígitos",
 		"desc"    : "GTIN (Global Trade Item Number) da unidade tributável, antigo código EAN ou código de barras.",
-		"code"    : "E127"
+		"code"    : "AD9"
 	},
 	"infNFe.det.prod.uTrib": {
 		"pattern" : "([\\s\\S]{1,6})",
 		"message" : "O campo infNFe.det.prod.uTrib deve conter uma string com no mínimo 1 caracter e no maxímo 6 caracteres",
 		"desc"    : "Unidade Tributável",
-		"code"    : "E129"
+		"code"    : "ADA"
 	},
 	"infNFe.det.prod.qTrib": {
 		"patternOb" : "TDec_1104v",
 		"message" : "O campo infNFe.det.prod.qTrib deve conter um decimal com 4 posições decimais.",
 		"desc"    : "Quantidade Tributável",
-		"code"    : "E130"
+		"code"    : "ADB"
 	},
 	"infNFe.det.prod.vUnTrib": {
 		"patternOb" : "TDec_1110v",
 		"message" : "O campo infNFe.det.prod.vUnTrib deve conter um decimal com 10 posições decimais.",
 		"desc"    : "Quantidade Tributável",
-		"code"    : "E131"
+		"code"    : "ADC"
 	},
 	"infNFe.det.prod.vFrete": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.det.prod.vFrete deve conter um decimal com 2 posições decimais.",
 		"desc"    : "Valor Total do Frete",
-		"code"    : "E132"
+		"code"    : "ADD"
 	},
 	"infNFe.det.prod.vSeg": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.det.prod.vSeg deve conter um decimal com 2 posições decimais.",
 		"desc"    : "Valor Total do Seguro",
-		"code"    : "E133"
+		"code"    : "AE1"
 	},
 	"infNFe.det.prod.vDesc": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.det.prod.vDesc deve conter um decimal com 2 posições decimais.",
 		"desc"    : "Valor do Desconto",
-		"code"    : "E134"
+		"code"    : "AE2"
 	},
 	"infNFe.det.prod.vOutro": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.det.prod.vOutro deve conter um decimal com 2 posições decimais.",
 		"desc"    : "Outras despesas acessórias",
-		"code"    : "E135"
+		"code"    : "AE2"
 	},
 	"infNFe.det.prod.indTot": {
 		"pattern" : "(0|1)",
 		"message" : "O campo infNFe.det.prod.indTot deve conter 0 ou 1",
 		"desc"    : "Este campo deverá ser preenchido com: 0 – o valor do item (vProd) não compõe o valor total da NF-e (vProd) ; 1  – o valor do item (vProd) compõe o valor total da NF-e (vProd)",
-		"code"    : "E136"
+		"code"    : "AE3"
 	},
 	"infNFe.det.prod.DI.nDI": {
 		"pattern" : "([\\s\\S]{1,12})",
 		"message" : "O campo infNFe.det.prod.DI.nDI deve conter um string uma string com no mínimo 1 caracter e no maxímo 12 caracteres",
 		"desc"    : "Numero do Documento de Importação DI/DSI/DA/DRI-E (DI/DSI/DA/DRI-E) ",
-		"code"    : "E137"
+		"code"    : "AE4"
 	},
 	"infNFe.det.prod.DI.dDI": {
 		"patternOb" : "TData",
 		"message" : "O campo infNFe.det.prod.DI.dDI deve conter uma data no formato AAAA-MM-DD",
 		"desc"    : "Data de registro da DI/DSI/DA (AAAA-MM-DD)",
-		"code"    : "E138"
+		"code"    : "AE5"
 	},
 	"infNFe.det.prod.DI.xLocDesemb": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.det.prod.DI.xLocDesemb deve conter um string uma string com no mínimo 1 caracter e no maxímo 60 caracteres",
 		"desc"    : "Local do desembaraço aduaneiro",
-		"code"    : "E139"
+		"code"    : "AE6"
 	},
 	"infNFe.det.prod.DI.UFDesemb": {
 		"patternOb" : "TUfEmi",
 		"message" : "O campo infNFe.det.prod.DI.UFDesemb deve conter um string uma com sigla da UF. <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de estado</a>",
 		"desc"    : "UF onde ocorreu o desembaraço aduaneiro",
-		"code"    : "E140"
+		"code"    : "AE7"
 	},
 	"infNFe.det.prod.DI.dDesemb": {
 		"patternOb" : "TData",
 		"message" : "O campo infNFe.det.prod.DI.dDesemb deve conter uma data no formato AAAA-MM-DD",
 		"desc"    : "Data do desembaraço aduaneiro (AAAA-MM-DD)",
-		"code"    : "E141"
+		"code"    : "AE8"
 	},
 	"infNFe.det.prod.DI.tpViaTransp": {
 		"pattern" : "(1|2|3|4|5|6|7|8|9|10|12)",
 		"message" : "O campo infNFe.det.prod.DI.tpViaTransp deve conter 1, 2, 3, 4, 5, 6, 7, 8, 9 ou 10",
 		"desc"    : "Via de transporte internacional informada na DI. 1-Maritima;2-Fluvial;3-Lacustre;4-Aerea;5-Postal;6-Ferroviaria;7-Rodoviaria;8-Conduto;9-Meios Proprios;10-Entrada/Saida Ficta.",
-		"code"    : "E142"
+		"code"    : "AE9"
 	},
 	"infNFe.det.prod.DI.vAFRMM": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.prod.DI.vAFRMM deve conter um numerico decimal com até 2 posições",
 		"desc"    : "Valor Adicional ao frete para renovação de marinha mercante",
-		"code"    : "E143"
+		"code"    : "AEA"
 	},
 	"infNFe.det.prod.DI.tpIntermedio": {
 		"pattern" : "(1|2|3)",
 		"message" : "O campo infNFe.det.prod.DI.tpIntermedio deve conter 1, 2 ou 3",
 		"desc"    : "Forma de Importação quanto a intermediação: 1-por conta propria; 2-por conta e ordem; 3-encomenda",
-		"code"    : "E144"
+		"code"    : "AEB"
 	},
 	"infNFe.det.prod.DI.CNPJ": {
 		"patternOb" : "TCnpj",
 		"message" : "O campo infNFe.det.prod.DI.CNPJ deve conter um numerico com 14 dígitos",
 		"desc"    : "CNPJ do adquirente ou do encomendante",
-		"code"    : "E145"
+		"code"    : "AEC"
 	},
 	"infNFe.det.prod.DI.UFTerceiro": {
 		"patternOb" : "TUfEmi",
 		"message" : "O campo infNFe.det.prod.DI.UFTerceiro deve a sigla do estado. <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de estado</a>",
 		"desc"    : "Sigla da UF do adquirente ou do encomendante",
-		"code"    : "E145"
+		"code"    : "AEC"
 	},
 	"infNFe.det.prod.DI.cExportador": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.det.prod.DI.cExportador deve conter um string com mínimo 1 caracter e no maxímo 60 caracteres",
 		"desc"    : "Código do exportador (usado nos sistemas internos de informação do emitente da NF-e)",
-		"code"    : "E146"
+		"code"    : "AED"
 	},
 	"infNFe.det.prod.DI.adi.nAdicao": {
 		"pattern" : "([1-9]{1}[0-9]{0,2})",
 		"message" : "O campo infNFe.det.prod.DI.adi.nAdicao deve conter um numerico de 1 a 3 dígitos",
 		"desc"    : "Número da Adição",
-		"code"    : "E147"
+		"code"    : "AEE"
 	},
 	"infNFe.det.prod.DI.adi.nSeqAdic": {
 		"pattern" : "([1-9]{1}[0-9]{0,2})",
 		"message" : "O campo infNFe.det.prod.DI.adi.nSeqAdic deve conter um numerico de 1 a 3 dígitos",
 		"desc"    : "Número seqüencial do item dentro da Adição",
-		"code"    : "E148"
+		"code"    : "AF1"
 	},
 	"infNFe.det.prod.DI.adi.cFabricante": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.det.prod.DI.adi.cFabricante deve conter um numerico de 1 a 3 dígitos",
 		"desc"    : "Número seqüencial do item dentro da Adição",
-		"code"    : "E149"
+		"code"    : "AF2"
 	},
 	"infNFe.det.prod.DI.adi.vDescDI": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.det.prod.DI.adi.vDescDI deve conter um decimal com 2 casas.",
 		"desc"    : "Valor do desconto do item da DI – adição",
-		"code"    : "E150"
+		"code"    : "AF3"
 	},
 	"infNFe.det.prod.DI.adi.nDraw": {
 		"pattern" : "([0-9]{0,11})",
 		"message" : "O campo infNFe.det.prod.DI.adi.nDraw deve conter numerico de 0 a 11 dígitos.",
 		"desc"    : "Número do ato concessório de Drawback",
-		"code"    : "E151"
+		"code"    : "AF4"
 	},
 	"infNFe.det.prod.detExport.nDraw": {
 		"pattern" : "([0-9]{0,11})",
 		"message" : "O campo infNFe.det.prod.detExport.nDraw deve conter numerico de 0 a 11 dígitos.",
 		"desc"    : "Número do ato concessório de Drawback",
-		"code"    : "E152"
+		"code"    : "AF5"
 	},
 	"infNFe.det.prod.detExport.exportInd.nRE": {
 		"pattern" : "([0-9]{0,12})",
 		"message" : "O campo infNFe.det.prod.detExport.exportInd.nRE deve conter numerico de 0 a 12 dígitos.",
 		"desc"    : "Registro de exportação",
-		"code"    : "E153"
+		"code"    : "AF6"
 	},
 	"infNFe.det.prod.detExport.exportInd.chNFe": {
 		"patternOb" : "TChNFe",
 		"message" : "O campo infNFe.det.prod.detExport.exportInd.chNFe deve conter numerico com 44 dígitos",
 		"desc"    : "Chave de acesso da NF-e recebida para exportação",
-		"code"    : "E154"
+		"code"    : "AF7"
 	},
 	"infNFe.det.prod.detExport.exportInd.qExport": {
 		"patternOb" : "TDec_1104v",
 		"message" : "O campo infNFe.det.prod.detExport.exportInd.qExport deve conter um inteiro com 4 casa decimais",
 		"desc"    : "Chave de acesso da NF-e recebida para exportação",
-		"code"    : "E155"
+		"code"    : "AF8"
 	},
 	"infNFe.det.prod.xPed": {
 		"pattern" : "([\\s\\S]{1,15})",
 		"message" : "O campo infNFe.det.prod.xPed deve conter uma string com no mínimo 1 caracter e no maxímo 15 caracteres",
 		"desc"    : "pedido de compra - Informação de interesse do emissor para controle do B2B.",
-		"code"    : "E156"
+		"code"    : "AF9"
 	},
 	"infNFe.det.prod.nFCI": {
 		"pattern" : "([0-9]{1,6})",
 		"message" : "O campo infNFe.det.prod.nFCI deve conter uma numerico de 1 a 6 dígitos",
 		"desc"    : "Número do Item do Pedido de Compra - Identificação do número do item do pedido de Compra",
-		"code"    : "E157"
+		"code"    : "AFA"
 	},
 	"infNFe.det.prod.rastro.nLote": {
 		"pattern" : "([\\s\\S]{1,20})",
 		"message" : "O campo infNFe.det.prod.rastro.nLote deve conter uma string com no mínimo 1 caracter e no maxímo 20 caracteres",
 		"desc"    : "Número do lote do produto.",
-		"code"    : "E159"
+		"code"    : "AFB"
 	},
 	"infNFe.det.prod.rastro.qLote": {
 		"patternOb" : "TDec_0803v",
 		"message" : "O campo infNFe.det.prod.rastro.qLote deve conter um inteiro com no maxímo 3 decimais",
 		"desc"    : "Quantidade de produto no lote.",
-		"code"    : "E160"
+		"code"    : "AFC"
 	},
 	"infNFe.det.prod.rastro.dFab": {
 		"patternOb" : "TData",
 		"message" : "O campo infNFe.det.prod.rastro.dFab deve conter uma data no formato AAAA-MM-DD",
 		"desc"    : "Data de fabricação/produção. Formato &quot;AAAA-MM-DD&quot;.",
-		"code"    : "E161"
+		"code"    : "AFD"
 	},
 	"infNFe.det.prod.rastro.dVal": {
 		"patternOb" : "TData",
 		"message" : "O campo infNFe.det.prod.rastro.dVal deve conter uma data no formato AAAA-MM-DD",
 		"desc"    : "Data de validade. Informar o último dia do mês caso a validade não especifique o dia. Formato &quot;AAAA-MM-DD&quot;.",
-		"code"    : "E162"
+		"code"    : "AFE"
 	},
 	"infNFe.det.prod.rastro.cAgreg": {
 		"pattern" : "([0-9]{1,20})",
 		"message" : "O campo infNFe.det.prod.rastro.cAgreg deve conter um numerico de 1 a 20 dígitos.",
 		"desc"    : "Código de Agregação",
-		"code"    : "E164"
+		"code"    : "AFF"
 	},
 	"infNFe.det.prod.veicProd.tpOp": {
 		"pattern" : "(0|1|2|3)",
 		"message" : "O campo infNFe.det.prod.veicProd.tpOp deve conter 0, 1, 2 ou 3",
 		"desc"    : "Tipo da Operação (1 - Venda concessionária; 2 - Faturamento direto; 3 - Venda direta; 0 - Outros)",
-		"code"    : "E166"
+		"code"    : "AG1"
 	},
 	"infNFe.det.prod.veicProd.chassi": {
 		"pattern" : "([A-Z0-9]+{,17})",
 		"message" : "O campo infNFe.det.prod.veicProd.chassi deve um string com no maxímo 17 caracteres",
 		"desc"    : "Chassi do veículo - VIN (código-identificação-veículo)",
-		"code"    : "E167"
+		"code"    : "AG2"
 	},
 	"infNFe.det.prod.veicProd.cCor": {
 		"pattern" : "([\\s\\S]{1,4})",
 		"message" : "O campo infNFe.det.prod.veicProd.cCor deve um string com no maxímo 4 caracteres",
 		"desc"    : "Cor do veículo (código de cada montadora)",
-		"code"    : "E168"
+		"code"    : "AG3"
 	},
 	"infNFe.det.prod.veicProd.pot": {
 		"pattern" : "([\\s\\S]{1,4})",
 		"message" : "O campo infNFe.det.prod.veicProd.pot deve um string com no maxímo 4 caracteres",
 		"desc"    : "Potência máxima do motor do veículo em cavalo vapor (CV). (potência-veículo)",
-		"code"    : "E169"
+		"code"    : "AG4"
 	},
 	"infNFe.det.prod.veicProd.cilin": {
 		"pattern" : "([\\s\\S]{1,4})",
 		"message" : "O campo infNFe.det.prod.veicProd.cilin deve um string com no maxímo 4 caracteres",
 		"desc"    : "Capacidade voluntária do motor expressa em centímetros cúbicos (CC). (cilindradas)",
-		"code"    : "E170"
+		"code"    : "AG5"
 	},
 	"infNFe.det.prod.veicProd.pesoL": {
 		"pattern" : "([\\s\\S]{1,9})",
 		"message" : "O campo infNFe.det.prod.veicProd.pesoL deve um string com no maxímo 9 caracteres",
 		"desc"    : "Peso líquido",
-		"code"    : "E171"
+		"code"    : "AG6"
 	},
 	"infNFe.det.prod.veicProd.pesoB": {
 		"pattern" : "([\\s\\S]{1,9})",
 		"message" : "O campo infNFe.det.prod.veicProd.pesoB deve um string com no maxímo 9 caracteres",
 		"desc"    : "Peso bruto",
-		"code"    : "E172"
+		"code"    : "AG7"
 	},
 	"infNFe.det.prod.veicProd.nSerie": {
 		"pattern" : "([\\s\\S]{1,9})",
 		"message" : "O campo infNFe.det.prod.veicProd.nSerie deve um string com no maxímo 9 caracteres",
 		"desc"    : "Serial (série)",
-		"code"    : "E173"
+		"code"    : "AG8"
 	},
 	"infNFe.det.prod.veicProd.tpComb": {
 		"pattern" : "([\\s\\S]{1,2})",
 		"message" : "O campo infNFe.det.prod.veicProd.tpComb deve um string com no maxímo 2 caracteres",
 		"desc"    : "Tipo de combustível-Tabela RENAVAM: 01-Álcool; 02-Gasolina; 03-Diesel; 16-Álcool/Gas.; 17-Gas./Álcool/GNV; 18-Gasolina/Elétrico",
-		"code"    : "E174"
+		"code"    : "AG9"
 	},
 	"infNFe.det.prod.veicProd.nMotor": {
 		"pattern" : "([\\s\\S]{1,21})",
 		"message" : "O campo infNFe.det.prod.veicProd.nMotor deve um string com no maxímo 21 caracteres",
 		"desc"    : "Número do motor",
-		"code"    : "E175"
+		"code"    : "AGA"
 	},
 	"infNFe.det.prod.veicProd.CMT": {
 		"pattern" : "([\\s\\S]{1,9})",
 		"message" : "O campo infNFe.det.prod.veicProd.CMT deve um string com no maxímo 9 caracteres",
 		"desc"    : "CMT-Capacidade Máxima de Tração - em Toneladas 4 casas decimais",
-		"code"    : "E176"
+		"code"    : "AGB"
 	},
 	"infNFe.det.prod.veicProd.dist": {
 		"pattern" : "([\\s\\S]{1,4})",
 		"message" : "O campo infNFe.det.prod.veicProd.dist deve um string com no maxímo 4 caracteres",
 		"desc"    : "Distância entre eixos",
-		"code"    : "E177"
+		"code"    : "AGC"
 	},
 	"infNFe.det.prod.veicProd.anoMod": {
 		"pattern" : "([0-9]{4})",
 		"message" : "O campo infNFe.det.prod.veicProd.anoMod deve conter o ano no formado de YYYY",
 		"desc"    : "Ano Modelo de Fabricação",
-		"code"    : "E178"
+		"code"    : "AGD"
 	},
 	"infNFe.det.prod.veicProd.anoFab": {
 		"pattern" : "([0-9]{4})",
 		"message" : "O campo infNFe.det.prod.veicProd.anoFab deve conter o ano no formado de YYYY",
 		"desc"    : "Ano de Fabricação",
-		"code"    : "E179"
+		"code"    : "AGE"
 	},
 	"infNFe.det.prod.veicProd.tpPint": {
 		"pattern" : "([\\s\\S]{1})",
 		"message" : "O campo infNFe.det.prod.veicProd.tpPint deve conter um string com no maxímo 1 caracter",
 		"desc"    : "Tipo de pintura",
-		"code"    : "E180"
+		"code"    : "AGF"
 	},
 	"infNFe.det.prod.veicProd.tpVeic": {
 		"pattern" : "([0-9]{1,2})",
 		"message" : "O campo infNFe.det.prod.veicProd.tpVeic deve conter um string com no maxímo 2 caracter",
 		"desc"    : "Tipo de veículo (utilizar tabela RENAVAM)",
-		"code"    : "E181"
+		"code"    : "AGG"
 	},
 	"infNFe.det.prod.veicProd.espVeic": {
 		"pattern" : "([0-9]{1})",
 		"message" : "O campo infNFe.det.prod.veicProd.espVeic deve conter um string com no maxímo 1 caracter",
 		"desc"    : "Espécie de veículo (utilizar tabela RENAVAM)",
-		"code"    : "E182"
+		"code"    : "AH1"
 	},
 	"infNFe.det.prod.veicProd.VIN": {
 		"pattern" : "(R|N)",
 		"message" : "O campo infNFe.det.prod.veicProd.VIN deve conter um string com R ou N",
 		"desc"    : "Informa-se o veículo tem VIN (chassi) remarcado.",
-		"code"    : "E183"
+		"code"    : "AH2"
 	},
 	"infNFe.det.prod.veicProd.condVeic": {
 		"pattern" : "(1|2|3)",
 		"message" : "O campo infNFe.det.prod.veicProd.condVeic deve conter um string com 1, 2, ou 3",
 		"desc"    : "Condição do veículo (1 - acabado; 2 - inacabado; 3 - semi-acabado)",
-		"code"    : "E183"
+		"code"    : "AH3"
 	},
 	"infNFe.det.prod.veicProd.cCorDENATRAN": {
 		"pattern" : "([0-9]{1,2})",
 		"message" : "O campo infNFe.det.prod.veicProd.cCorDENATRAN deve conter um string de 01 a 99",
 		"desc"    : "Código da Cor Segundo as regras de pré-cadastro do DENATRAN: 01-AMARELO; 02-AZUL; 03-BEGE; 04-BRANCA; 05-CINZA; 06-DOURADA; 07-GRENA; 08-LARANJA; 09-MARROM; 10-PRATA; 11-PRETA; 12-ROSA; 13-ROXA; 14-VERDE; 15-VERMELHA; 16-FANTASIA",
-		"code"    : "E184"
+		"code"    : "AH4"
 	},
 	"infNFe.det.prod.veicProd.lota": {
 		"pattern" : "([0-9]{1,3})",
 		"message" : "O campo infNFe.det.prod.veicProd.lota deve conter um string  de 01 a 999",
 		"desc"    : "Quantidade máxima de permitida de passageiros sentados, inclusive motorista.",
-		"code"    : "E185"
+		"code"    : "AH5"
 	},
 	"infNFe.det.prod.veicProd.tpRest": {
 		"pattern" : "(0|1|2|3|4|9)",
 		"message" : "O campo infNFe.det.prod.veicProd.tpRest deve conter 0, 1, 2, 3, 4 ou 9",
 		"desc"    : "Restrição: 0 - Não há; 1 - Alienação Fiduciária; 2 - Arrendamento Mercantil; 3 - Reserva de Domínio; 4 - Penhor de Veículos; 9 - outras.",
-		"code"    : "E186"
+		"code"    : "AH6"
 	},
 	"infNFe.det.prod.med.cProdANVISA": {
 		"pattern" : "([0-9]{13}|ISENTO)",
 		"message" : "O campo infNFe.det.prod.med.cProdANVISA deve conter numerico com 13 dígitos ou ISENTO",
 		"desc"    : "Utilizar o número do registro ANVISA  ou preencher com o literal “ISENTO”, no caso de medicamento isento de registro na ANVISA.",
-		"code"    : "E187"
+		"code"    : "AH7"
 	},
 	"infNFe.det.prod.med.xMotivoIsencao": {
 		"pattern" : "([\\s\\S]{1,255})",
 		"message" : "O campo infNFe.det.prod.med.xMotivoIsencao deve conter um strin com no maxímo 255 caracteres",
 		"desc"    : "Motivo Isenção: Obs. Para medicamento isento de registro na ANVISA, informar o número da decisão que o isenta, como por exemplo o número da Resolução da Diretoria Colegiada da ANVISA (RDC).",
-		"code"    : "E188"
+		"code"    : "AH8"
 	},
 	"infNFe.det.prod.med.vPMC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.prod.med.vPMC deve conter um inteiro com 2 casas decimais",
 		"desc"    : "Preço Máximo ao Consumidor.",
-		"code"    : "E189"
+		"code"    : "AH9"
 	},
 	"infNFe.det.prod.arma.tpArma": {
 		"pattern" : "(0|1)",
 		"message" : "O campo infNFe.det.prod.arma.tpArma deve conter 0 ou 1",
 		"desc"    : "Indicador do tipo de arma de fogo (0 - Uso permitido; 1 - Uso restrito)",
-		"code"    : "E190"
+		"code"    : "AHA"
 	},
 	"infNFe.det.prod.arma.nSerie": {
 		"pattern" : "([\\s\\S]{1,15})",
 		"message" : "O campo infNFe.det.prod.arma.nSerie deve conter uma string com no maxímo 15 caracteres",
 		"desc"    : "Número de série da arma",
-		"code"    : "E191"
+		"code"    : "AHB"
 	},
 	"infNFe.det.prod.arma.nCano": {
 		"pattern" : "([\\s\\S]{1,15})",
 		"message" : "O campo infNFe.det.prod.arma.nCano deve conter uma string com no maxímo 15 caracteres",
 		"desc"    : "Número de série do cano",
-		"code"    : "E192"
+		"code"    : "AHC"
 	},
 	"infNFe.det.prod.arma.descr": {
 		"pattern" : "([\\s\\S]{1,256})",
 		"message" : "O campo infNFe.det.prod.arma.descr deve conter uma string com no maxímo 256 caracteres",
 		"desc"    : "Descrição completa da arma, compreendendo: calibre, marca, capacidade, tipo de funcionamento, comprimento e demais elementos que permitam a sua perfeita identificação.",
-		"code"    : "E193"
+		"code"    : "AHD"
 	},
 	"infNFe.det.prod.comb.cProdANP": {
 		"pattern" : "([0-9]{9})",
 		"message" : "O campo infNFe.det.prod.comb.cProdANP deve conter um numerico com 9 dígitos",
 		"desc"    : "Código de produto da ANP. codificação de produtos do SIMP <a href=\"http://www.anp.gov.br\">(http://www.anp.gov.br)</a>",
-		"code"    : "E194"
+		"code"    : "AHE"
 	},
 	"infNFe.det.prod.comb.descANP": {
 		"pattern" : "([\\s\\S]{2,95})",
 		"message" : "O campo infNFe.det.prod.comb.descANP deve conter uma string de no maxímo 95 caracteres",
 		"desc"    : "Descrição do Produto conforme ANP. Utilizar a descrição de produtos do Sistema de Informações de Movimentação de Produtos - SIMP (<a href=\"http://www.anp.gov.br/simp/\">http://www.anp.gov.br/simp/</a>)",
-		"code"    : "E195"
+		"code"    : "AHF"
 	},
 	"infNFe.det.prod.comb.pGLP": {
 		"patternOb" : "TDec_0302a04Max100",
 		"message" : "O campo infNFe.det.prod.comb.pGLP deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual do GLP derivado do petróleo no produto GLP (cProdANP=210203001). Informar em número decimal o percentual do GLP derivado de petróleo no produto GLP. Valores 0 a 100.",
-		"code"    : "E196"
+		"code"    : "AHG"
 	},
 	"infNFe.det.prod.comb.pGNn": {
 		"patternOb" : "TDec_0302a04Max100",
 		"message" : "O campo infNFe.det.prod.comb.pGNn deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de gás natural nacional - GLGNn para o produto GLP (cProdANP=210203001). Informar em número decimal o percentual do Gás Natural Nacional - GLGNn para o produto GLP. Valores de 0 a 100.",
-		"code"    : "E197"
+		"code"    : "AHH"
 	},
 	"infNFe.det.prod.comb.pGNi": {
 		"patternOb" : "TDec_0302a04Max100",
 		"message" : "O campo infNFe.det.prod.comb.pGNi deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de gás natural importado GLGNi para o produto GLP (cProdANP=210203001). Informar em número deciaml o percentual do Gás Natural Importado - GLGNi para o produto GLP. Valores de 0 a 100.",
-		"code"    : "E198"
+		"code"    : "AI1"
 	},
 	"infNFe.det.prod.comb.vPart": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.prod.comb.vPart deve conter um inteiro com 2 casas decimais",
 		"desc"    : "Valor de partida (cProdANP=210203001). Deve ser informado neste campo o valor por quilograma sem ICMS.",
-		"code"    : "E199"
+		"code"    : "AI2"
 	},
 	"infNFe.det.prod.comb.CODIF": {
 		"pattern" : "([0-9]{1,21})",
 		"message" : "O campo infNFe.det.prod.comb.CODIF deve conter um inteiro de 1 a 21 dígitos",
 		"desc"    : "Código de autorização registro do CODIF. Informar apenas quando a UF utilizar o CODIF (Sistema de Controle do Diferimento do Imposto nas Operações com AEAC - Álcool Etílico Anidro Combustível)",
-		"code"    : "E200"
+		"code"    : "AI3"
 	},
 	"infNFe.det.prod.comb.qTemp": {
 		"patternOb" : "TDec_1204temperatura",
 		"message" : "O campo infNFe.det.prod.comb.qTemp deve conter um inteiro com 4 casas decimais",
 		"desc"    : "Quantidade de combustível ,faturada à temperatura ambiente. Informar quando a quantidade ,faturada informada no campo ,qCom (I10) tiver sido ajustada para ,uma temperatura diferente da ambiente.",
-		"code"    : "E201"
+		"code"    : "AI4"
 	},
 	"infNFe.det.prod.comb.UFCons": {
 		"patternOb" : "TUf",
 		"message" : "O campo infNFe.det.prod.comb.UFCons deve conter a sigla do estado",
 		"desc"    : "Sigla da UF de Consumo",
-		"code"    : "E202"
+		"code"    : "AI5"
 	},
 	"infNFe.det.prod.comb.CIDE.qBCProd": {
 		"patternOb" : "TDec_1204v",
 		"message" : "O campo infNFe.det.prod.comb.CIDE.qBCProd deve conter um inteiro com 4 decimais",
 		"desc"    : "BC do CIDE ( Quantidade comercializada)",
-		"code"    : "E203"
+		"code"    : "AI6"
 	},
 	"infNFe.det.prod.comb.CIDE.vAliqProd": {
 		"patternOb" : "TDec_1104",
 		"message" : "O campo infNFe.det.prod.comb.CIDE.vAliqProd deve conter um inteiro com 4 decimais",
 		"desc"    : "Alíquota do CIDE  (em reais)",
-		"code"    : "E204"
+		"code"    : "AI7"
 	},
 	"infNFe.det.prod.comb.CIDE.vCIDE": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.prod.comb.CIDE.vCIDE deve conter um inteiro com 4 decimais",
 		"desc"    : "Valor do CIDE",
-		"code"    : "E205"
+		"code"    : "AI8"
 	},
 	"infNFe.det.prod.comb.encerrante.nBico": {
 		"pattern" : "([0-9]{1,3})",
 		"message" : "O campo infNFe.det.prod.comb.encerrante.nBico deve conter um inteiro entre 1 e 999",
 		"desc"    : "Numero de identificação do Bico utilizado no abastecimento",
-		"code"    : "E206"
+		"code"    : "AI9"
 	},
 	"infNFe.det.prod.comb.encerrante.nBomba": {
 		"pattern" : "([0-9]{1,3})",
 		"message" : "O campo infNFe.det.prod.comb.encerrante.nBomba deve conter um inteiro entre 1 e 999",
 		"desc"    : "Numero de identificação da bomba ao qual o bico está interligado",
-		"code"    : "E207"
+		"code"    : "AIA"
 	},
 	"infNFe.det.prod.comb.encerrante.nTanque": {
 		"pattern" : "([0-9]{1,3})",
 		"message" : "O campo infNFe.det.prod.comb.encerrante.nTanque deve conter um inteiro entre 1 e 999",
 		"desc"    : "Numero de identificação do tanque ao qual o bico está interligado",
-		"code"    : "E208"
+		"code"    : "AIB"
 	},
 	"infNFe.det.prod.comb.encerrante.vEncIni": {
 		"patternOb" : "TDec_1203",
 		"message" : "O campo infNFe.det.prod.comb.encerrante.vEncIni deve conter um inteiro com 3 decimais",
 		"desc"    : "Valor do Encerrante no ínicio do abastecimento",
-		"code"    : "E209"
+		"code"    : "AIC"
 	},
 	"infNFe.det.prod.comb.encerrante.vEncFin": {
 		"patternOb" : "TDec_1203",
 		"message" : "O campo infNFe.det.prod.comb.encerrante.vEncFin deve conter um inteiro com 3 decimais",
 		"desc"    : "Valor do Encerrante no final do abastecimento",
-		"code"    : "E210"
+		"code"    : "AID"
 	},
 	"infNFe.det.prod.nRECOPI": {
 		"pattern" : "([0-9]{20})",
 		"message" : "O campo infNFe.det.prod.nRECOPI deve conter numerico com 20 dígitos",
 		"desc"    : "Número do RECOPI",
-		"code"    : "E211"
+		"code"    : "AIE"
 	},
 	"infNFe.det.imposto.vTotTrib": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.vTotTrib deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor estimado total de impostos federais, estaduais e municipais",
-		"code"    : "E212"
+		"code"    : "AIF"
 	},
 	"infNFe.det.imposto.ICMS.ICMS00.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS00.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E213"
+		"code"    : "AIG"
 	},
 	"infNFe.det.imposto.ICMS.ICMS00.CST": {
 		"pattern" : "(00)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS00.CST deve conter 00",
 		"desc"    : "Tributção pelo ICMS 00 - Tributada integralmente",
-		"code"    : "E214"
+		"code"    : "AIH"
 	},
 	"infNFe.det.imposto.ICMS.ICMS00.modBC": {
 		"pattern" : "(0|1|2|3)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS00.modBC deve conter 0, 1, 2 ou 3",
 		"desc"    : "Modalidade de determinação da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Preço Tabelado Máximo (valor); 3 - Valor da Operação.",
-		"code"    : "E215"
+		"code"    : "AII"
 	},
 	"infNFe.det.imposto.ICMS.ICMS00.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS00.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS",
-		"code"    : "E216"
+		"code"    : "AJ1"
 	},
 	"infNFe.det.imposto.ICMS.ICMS00.pICMS": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS00.pICMS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS",
-		"code"    : "E217"
+		"code"    : "AJ2"
 	},
 	"infNFe.det.imposto.ICMS.ICMS00.vICMS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS00.vICMS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS",
-		"code"    : "E218"
+		"code"    : "AJ3"
 	},
 	"infNFe.det.imposto.ICMS.ICMS00.pFCP": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS00.pFCP deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de ICMS relativo ao Fundo de Combate à Pobreza (FCP).",
-		"code"    : "E219"
+		"code"    : "AJ4"
 	},
 	"infNFe.det.imposto.ICMS.ICMS00.vFCP": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS00.vFCP deve um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP).",
-		"code"    : "E219"
+		"code"    : "AJ5"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E219"
+		"code"    : "AJ6"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.CST": {
 		"pattern" : "(10)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.CST deve conter 10",
 		"desc"    : "10 - Tributada e com cobrança do ICMS por substituição tributária",
-		"code"    : "E220"
+		"code"    : "AJ7"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.modBC": {
 		"pattern" : "(0|1|2|3)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.modBC deve conter 0, 1, 2 ou 3",
 		"desc"    : "Modalidade de determinação da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Preço Tabelado Máximo (valor); 3 - Valor da Operação.",
-		"code"    : "E221"
+		"code"    : "AJ8"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS",
-		"code"    : "E222"
+		"code"    : "AJ9"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.pICMS": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.pICMS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS",
-		"code"    : "E223"
+		"code"    : "AJA"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.vICMS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.vICMS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS",
-		"code"    : "E224"
+		"code"    : "AJB"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.vBCFCP": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.vBCFCP deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP.",
-		"code"    : "E225"
+		"code"    : "AJC"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.pFCP": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.pFCP deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de ICMS relativo ao Fundo de Combate à Pobreza (FCP).",
-		"code"    : "E226"
+		"code"    : "AJD"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.vFCP": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.vFCP deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP.",
-		"code"    : "E227"
+		"code"    : "AJE"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.modBCST": {
 		"pattern" : "(0|1|2|3|4|5)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.modBCST deve conter 0,1,2,3,4 ou 5",
 		"desc"    : "Modalidade de determinação da BC do ICMS ST: 0 – Preço tabelado ou máximo  sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%);",
-		"code"    : "E228"
+		"code"    : "AJF"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.pMVAST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.pMVAST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual da Margem de Valor Adicionado ICMS ST",
-		"code"    : "E229"
+		"code"    : "AJG"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.pRedBCST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.pRedBCST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da BC ICMS ST",
-		"code"    : "E230"
+		"code"    : "AJH"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.vBCST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.vBCST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS ST",
-		"code"    : "E231"
+		"code"    : "AJI"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.pICMSST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.pICMSST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS ST",
-		"code"    : "E231"
+		"code"    : "AJJ"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.vICMSST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.vICMSST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS ST",
-		"code"    : "E232"
+		"code"    : "AL1"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.vBCFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.vBCFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP retido por substituicao tributaria.",
-		"code"    : "E233"
+		"code"    : "AL2"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.pFCPST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.pFCPST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de FCP retido por substituição tributária.",
-		"code"    : "E234"
+		"code"    : "AL3"
 	},
 	"infNFe.det.imposto.ICMS.ICMS10.vFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS10.vFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do FCP retido por substituição tributária.",
-		"code"    : "E235"
+		"code"    : "AL4"
 	},
 	"infNFe.det.imposto.ICMS.ICMS20.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS20.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E236"
+		"code"    : "AL5"
 	},
 	"infNFe.det.imposto.ICMS.ICMS20.CST": {
 		"pattern" : "(20)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS20.CST deve conter 20",
 		"desc"    : "Tributção pelo ICMS 20 - Com redução de base de cálculo",
-		"code"    : "E237"
+		"code"    : "AL6"
 	},
 	"infNFe.det.imposto.ICMS.ICMS20.modBC": {
 		"pattern" : "(0|1|2|3)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS20.modBC deve conter 0, 1, 2 ou 3",
 		"desc"    : "Modalidade de determinação da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Preço Tabelado Máximo (valor); 3 - Valor da Operação.",
-		"code"    : "E238"
+		"code"    : "AL7"
 	},
 	"infNFe.det.imposto.ICMS.ICMS20.pRedBC": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS20.pRedBC deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da BC",
-		"code"    : "E238"
+		"code"    : "AL8"
 	},
 	"infNFe.det.imposto.ICMS.ICMS20.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS20.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS",
-		"code"    : "E239"
+		"code"    : "AL9"
 	},
 	"infNFe.det.imposto.ICMS.ICMS20.pICMS": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS20.pICMS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS",
-		"code"    : "E240"
+		"code"    : "ALA"
 	},
 	"infNFe.det.imposto.ICMS.ICMS20.vICMS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS20.vICMS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS",
-		"code"    : "E241"
+		"code"    : "ALB"
 	},
 	"infNFe.det.imposto.ICMS.ICMS20.vBCFCP": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS20.vBCFCP deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP.",
-		"code"    : "E242"
+		"code"    : "ALC"
 	},
 	"infNFe.det.imposto.ICMS.ICMS20.pFCP": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS20.pFCP deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de ICMS relativo ao Fundo de Combate à Pobreza (FCP).",
-		"code"    : "E243"
+		"code"    : "ALD"
 	},
 	"infNFe.det.imposto.ICMS.ICMS20.vFCP": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS20.vFCP deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP).",
-		"code"    : "E244"
+		"code"    : "ALE"
 	},
 	"infNFe.det.imposto.ICMS.ICMS20.vICMSDeson": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS20.vICMSDeson deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS de desoneração",
-		"code"    : "E245"
+		"code"    : "ALF"
 	},
 	"infNFe.det.imposto.ICMS.ICMS20.motDesICMS": {
 		"pattern" : "(3|9|12)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS20.motDesICMS deve conter 3,9 ou 12",
 		"desc"    : "Motivo da desoneração do ICMS:3-Uso na agropecuária;9-Outros;12-Fomento agropecuário",
-		"code"    : "E246"
+		"code"    : "ALG"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E247"
+		"code"    : "ALH"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.CST": {
 		"pattern" : "(30)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.CST deve conter 20",
 		"desc"    : "Tributção pelo ICMS 30 - Isenta ou não tributada e com cobrança do ICMS por substituição tributária",
-		"code"    : "E248"
+		"code"    : "ALI"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.modBCST": {
 		"pattern" : "(0|1|2|3|4|5)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.modBCST deve conter 0, 1, 2, 3, 4 ou 5",
 		"desc"    : "Modalidade de determinação da BC do ICMS ST: 0 – Preço tabelado ou máximo  sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor).",
-		"code"    : "E248"
+		"code"    : "ALJ"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.pMVAST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.pMVAST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual da Margem de Valor Adicionado ICMS ST",
-		"code"    : "E248"
+		"code"    : "ALL"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.pRedBCST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.pRedBCST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da BC ICMS ST",
-		"code"    : "E249"
+		"code"    : "AM1"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.vBCST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.vBCST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS ST",
-		"code"    : "E250"
+		"code"    : "AM2"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.pICMSST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.pICMSST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS ST",
-		"code"    : "E251"
+		"code"    : "AM3"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.vICMSST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.vICMSST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS ST",
-		"code"    : "E252"
+		"code"    : "AM4"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.vBCFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.vBCFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP.",
-		"code"    : "E253"
+		"code"    : "AM5"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.pFCPST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.pFCPST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de FCP retido por substituição tributária.",
-		"code"    : "E254"
+		"code"    : "AM6"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.vFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.vFCPST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de FCP retido por substituição tributária.",
-		"code"    : "E255"
+		"code"    : "AM7"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.vICMSDeson": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.vICMSDeson deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS de desoneração",
-		"code"    : "E256"
+		"code"    : "AM8"
 	},
 	"infNFe.det.imposto.ICMS.ICMS30.motDesICMS": {
 		"pattern" : "(6|7|9)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS30.motDesICMS deve conter 6, 7 ou 9",
 		"desc"    : "Motivo da desoneração do ICMS: 6-Utilitários Motocicleta Área Livre; 7-SUFRAMA; 9-Outros",
-		"code"    : "E257"
+		"code"    : "AM9"
 	},
 	"infNFe.det.imposto.ICMS.ICMS40.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS40.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E258"
+		"code"    : "AMA"
 	},
 	"infNFe.det.imposto.ICMS.ICMS40.CST": {
 		"pattern" : "(40|41|50)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS40.CST deve conter 40, 41 ou 50",
 		"desc"    : "Tributação pelo ICMS:  40 - Isenta; 41 - Não tributada; 50 - Suspensão; 51 - Diferimento",
-		"code"    : "E259"
+		"code"    : "AMB"
 	},
 	"infNFe.det.imposto.ICMS.ICMS40.vICMSDeson": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS40.vICMSDeson deve conter um inteiro com 2 decimais",
 		"desc"    : "Tributção pelo ICMS 30 - Isenta ou não tributada e com cobrança do ICMS por substituição tributária",
-		"code"    : "E260"
+		"code"    : "AMC"
 	},
 	"infNFe.det.imposto.ICMS.ICMS40.motDesICMS": {
 		"pattern" : "(1|2|3|4|5|6|7|8|9|10|11|16|90)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS40.motDesICMS deve conter 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 16 ou 90",
 		"desc"    : "Motivo da desoneração: 1 – Táxi; 3 – Produtor Agropecuário; 4 – Frotista/Locadora; 5 – Diplomático/Consular; 6 – Utilitários e Motocicletas da Amazônia Ocidental e Áreas de Livre Comércio; 7 – SUFRAMA; 8 - Venda a órgão Público; 9 – Outros; 10- Deficiente Condutor; 11- Deficiente não condutor; 16 - Olimpíadas Rio 2016; 90 - Solicitado pelo Fisco",
-		"code"    : "E261"
+		"code"    : "AMD"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E262"
+		"code"    : "AME"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.CST": {
 		"pattern" : "(51)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.CST deve conter 51",
 		"desc"    : "Tributação pelo ICMS:  51 - diferença de aliquota de origem.",
-		"code"    : "E263"
+		"code"    : "AMF"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.modBC": {
 		"pattern" : "(0|1|2|3)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.modBC deve conter 0, 1, 2 ou 3",
 		"desc"    : "Modalidade de determinação da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Preço Tabelado Máximo (valor); 3 - Valor da Operação.",
-		"code"    : "E264"
+		"code"    : "AMG"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.pRedBC": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.pRedBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Percentual de redução da BC",
-		"code"    : "E265"
+		"code"    : "AMH"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS",
-		"code"    : "E266"
+		"code"    : "AMI"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.pICMS": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.pICMS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do imposto",
-		"code"    : "E267"
+		"code"    : "AMJ"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.vICMSOp": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.vICMSOp deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS da Operação",
-		"code"    : "E268"
+		"code"    : "AML"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.pDif": {
 		"patternOb" : "TDec_0302a04Max100",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.pDif deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual do diferemento",
-		"code"    : "E269"
+		"code"    : "AMM"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.vICMSDif": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.vICMSDif deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS da diferido",
-		"code"    : "E270"
+		"code"    : "AN1"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.vICMS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.vICMS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS",
-		"code"    : "E271"
+		"code"    : "AN2"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.vBCFCP": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.vBCFCP deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP.",
-		"code"    : "E272"
+		"code"    : "AN3"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.pFCP": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.pFCP deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de ICMS relativo ao Fundo de Combate à Pobreza (FCP).",
-		"code"    : "E273"
+		"code"    : "AN3"
 	},
 	"infNFe.det.imposto.ICMS.ICMS51.vFCP": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS51.vFCP deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP).",
-		"code"    : "E274"
+		"code"    : "AN4"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E275"
+		"code"    : "AN5"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.CST": {
 		"pattern" : "(60)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.CST deve conter 60",
 		"desc"    : "Tributação pelo ICMS: 60 - ICMS cobrado anteriormente por substituição tributária",
-		"code"    : "E276"
+		"code"    : "AN6"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.vBCSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.vBCSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS ST retido anteriormente",
-		"code"    : "E277"
+		"code"    : "AN7"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.pST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.pST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Aliquota suportada pelo consumidor final.",
-		"code"    : "E278"
+		"code"    : "AN8"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.vICMSSubstituto": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.vICMSSubstituto deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS Próprio do Substituto cobrado em operação anterior",
-		"code"    : "E279"
+		"code"    : "AN9"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.vICMSSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.vICMSSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS ST retido anteriormente",
-		"code"    : "E280"
+		"code"    : "ANA"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.vBCFCPSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.vBCFCPSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP retido anteriormente por ST.",
-		"code"    : "E281"
+		"code"    : "ANB"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.pFCPSTRet": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.pFCPSTRet deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de FCP retido anteriormente por substituição tributária.",
-		"code"    : "E282"
+		"code"    : "ANC"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.vFCPSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.vFCPSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do FCP retido por substituição tributária.",
-		"code"    : "E283"
+		"code"    : "AND"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.pRedBCEfet": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.pRedBCEfet deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da base de cálculo efetiva.",
-		"code"    : "E284"
+		"code"    : "ANE"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.vBCEfet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.vBCEfet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da base de cálculo efetiva.",
-		"code"    : "E285"
+		"code"    : "ANF"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.pICMSEfet": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.pICMSEfet deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS efetiva.",
-		"code"    : "E286"
+		"code"    : "ANG"
 	},
 	"infNFe.det.imposto.ICMS.ICMS60.vICMSEfet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS60.vICMSEfet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS efetivo.",
-		"code"    : "E287"
+		"code"    : "ANH"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E288"
+		"code"    : "ANI"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.CST": {
 		"pattern" : "(70)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.CST deve conter 70",
 		"desc"    : "Tributação pelo ICMS: 70 - Com redução de base de cálculo e cobrança do ICMS por substituição tributária",
-		"code"    : "E289"
+		"code"    : "ANJ"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.modBC": {
 		"pattern" : "(0|1|2|3)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.modBC deve conter 0,1,2 ou 3",
 		"desc"    : "Modalidade de determinação da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Preço Tabelado Máximo (valor); 3 - Valor da Operação.",
-		"code"    : "E290"
+		"code"    : "ANM"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.pRedBC": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.pRedBC deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da BC",
-		"code"    : "E291"
+		"code"    : "ANN"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS",
-		"code"    : "E292"
+		"code"    : "AO1"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.pICMS": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.pICMS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS",
-		"code"    : "E293"
+		"code"    : "AO2"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.vICMS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.vICMS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS",
-		"code"    : "E294"
+		"code"    : "AO3"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.vBCFCP": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.vBCFCP deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP.",
-		"code"    : "E295"
+		"code"    : "AO4"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.pFCP": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.pFCP deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de ICMS relativo ao Fundo de Combate à Pobreza (FCP).",
-		"code"    : "E296"
+		"code"    : "AO5"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.vFCP": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.vFCP deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP).",
-		"code"    : "E297"
+		"code"    : "AO6"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.modBCST": {
 		"pattern" : "(0|1|2|3|4|5)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.modBCST deve conter 0, 1, 2, 3, 4 ou 5",
 		"desc"    : "Modalidade de determinação da BC do ICMS ST: 0 – Preço tabelado ou máximo  sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor).",
-		"code"    : "E298"
+		"code"    : "AO7"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.pMVAST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.pMVAST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual da Margem de Valor Adicionado ICMS ST",
-		"code"    : "E299"
+		"code"    : "AO8"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.pRedBCST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.pRedBCST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da BC ICMS ST",
-		"code"    : "E300"
+		"code"    : "AO9"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.vBCST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.vBCST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS ST",
-		"code"    : "E301"
+		"code"    : "AOA"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.vICMSST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.vICMSST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS ST",
-		"code"    : "E302"
+		"code"    : "AOB"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.pICMSST": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.pICMSST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS ST",
-		"code"    : "E303"
+		"code"    : "AOC"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.vBCFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.vBCFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP retido por substituição tributária.",
-		"code"    : "E305"
+		"code"    : "AOD"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.pFCPST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.pFCPST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de FCP retido por substituição tributária.",
-		"code"    : "E306"
+		"code"    : "AOE"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.vFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.vFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do FCP retido por substituição tributária.",
-		"code"    : "E307"
+		"code"    : "AOF"
 	},
 	"infNFe.det.imposto.ICMS.ICMS70.vICMSDeson": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS70.vICMSDeson deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS de desoneração",
-		"code"    : "E308"
+		"code"    : "AOG"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E310"
+		"code"    : "AOH"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.CST": {
 		"pattern" : "(90)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.CST deve conter 90",
 		"desc"    : "Tributação pelo ICMS: 90 - Outras",
-		"code"    : "E311"
+		"code"    : "AOI"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.modBC": {
 		"pattern" : "(0|1|2|3)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.modBC deve conter 0, 1, 2 ou 3",
 		"desc"    : "Modalidade de determinação da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Preço Tabelado Máximo (valor); 3 - Valor da Operação.",
-		"code"    : "E312"
+		"code"    : "AOJ"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS",
-		"code"    : "E313"
+		"code"    : "AOL"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.pRedBC": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.pRedBC deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da BC",
-		"code"    : "E314"
+		"code"    : "AOM"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.pICMS": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.pICMS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS",
-		"code"    : "E315"
+		"code"    : "AON"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.vICMS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.vICMS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS",
-		"code"    : "E316"
+		"code"    : "AOO"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.vBCFCP": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.vBCFCP deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP.",
-		"code"    : "E317"
+		"code"    : "AP1"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.pFCP": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.pFCP deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de ICMS relativo ao Fundo de Combate à Pobreza (FCP).",
-		"code"    : "E318"
+		"code"    : "AP2"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.vFCP": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.vFCP deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP).",
-		"code"    : "E319"
+		"code"    : "AP3"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.modBCST": {
 		"pattern" : "(0|1|2|3|4|5)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.modBCST deve conter 0, 1, 2, 3, 4 ou 5",
 		"desc"    : "Modalidade de determinação da BC do ICMS ST: 0 – Preço tabelado ou máximo  sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor).",
-		"code"    : "E320"
+		"code"    : "AP4"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.pMVAST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.pMVAST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual da Margem de Valor Adicionado ICMS ST",
-		"code"    : "E321"
+		"code"    : "AP5"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.pRedBCST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.pRedBCST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da BC ICMS ST",
-		"code"    : "E322"
+		"code"    : "AP6"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.vBCST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.vBCST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS ST",
-		"code"    : "E323"
+		"code"    : "AP7"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.pICMSST": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.pICMSST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS ST",
-		"code"    : "E324"
+		"code"    : "AP8"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.vICMSST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.vICMSST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP.",
-		"code"    : "E325"
+		"code"    : "AP9"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.vBCFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.vBCFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP.",
-		"code"    : "E326"
+		"code"    : "APA"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.pFCPST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.pFCPST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de FCP retido por substituição tributária.",
-		"code"    : "E327"
+		"code"    : "APB"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.vFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.vFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do FCP retido por substituição tributária.",
-		"code"    : "E328"
+		"code"    : "APC"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.vICMSDeson": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.vICMSDeson deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS de desoneração",
-		"code"    : "E329"
+		"code"    : "APD"
 	},
 	"infNFe.det.imposto.ICMS.ICMS90.motDesICMS": {
 		"pattern" : "(3|9|12)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMS90.motDesICMS deve conter um inteiro com 2 decimais",
 		"desc"    : "Motivo da desoneração do ICMS:3-Uso na agropecuária;9-Outros;12-Fomento agropecuário",
-		"code"    : "E330"
+		"code"    : "APE"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E331"
+		"code"    : "APF"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.CST": {
 		"pattern" : "(10|90)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.CST deve conter 10 ou 90",
 		"desc"    : "Tributação pelo ICMS: 10 - Tributada e com cobrança do ICMS por substituição tributária; 90 – Outros.",
-		"code"    : "E332"
+		"code"    : "APG"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.modBC": {
 		"pattern" : "(0|1|2|3)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.modBC deve conter 0, 1, 2, 3",
 		"desc"    : "Modalidade de determinação da BC do ICMS: 0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Preço Tabelado Máximo (valor); 3 - Valor da Operação.",
-		"code"    : "E333"
+		"code"    : "APH"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS",
-		"code"    : "E334"
+		"code"    : "API"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.pRedBC": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.pRedBC deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Valor da BC do ICMS",
-		"code"    : "E335"
+		"code"    : "APJ"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.pICMS": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.pICMS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS",
-		"code"    : "E336"
+		"code"    : "APL"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.vICMS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.vICMS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS",
-		"code"    : "E337"
+		"code"    : "APM"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.modBCST": {
 		"pattern" : "(0|1|2|3|4|5)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.modBCST deve conter 0, 1, 2, 3, 4 ou 5",
 		"desc"    : "Modalidade de determinação da BC do ICMS ST: 0 – Preço tabelado ou máximo  sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor).",
-		"code"    : "E337"
+		"code"    : "APN"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.pMVAST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.pMVAST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual da Margem de Valor Adicionado ICMS ST",
-		"code"    : "E338"
+		"code"    : "APO"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.pRedBCST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.pRedBCST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da BC ICMS ST",
-		"code"    : "E339"
+		"code"    : "APP"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.vBCST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.vBCST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS ST",
-		"code"    : "E341"
+		"code"    : "AQ1"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.pICMSST": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.pICMSST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS ST",
-		"code"    : "E342"
+		"code"    : "AQ2"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.vICMSST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.vICMSST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS ST",
-		"code"    : "E343"
+		"code"    : "AQ3"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.pBCOp": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.pBCOp deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual para determinação do valor  da Base de Cálculo da operação própria.",
-		"code"    : "E344"
+		"code"    : "AQ4"
 	},
 	"infNFe.det.imposto.ICMS.ICMSPart.UFST": {
 		"patternOb" : "TUf",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSPart.UFST deve conter a siga do estado",
 		"desc"    : "Sigla da UF para qual é devido o ICMS ST da operação.",
-		"code"    : "E345"
+		"code"    : "AQ5"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E331"
+		"code"    : "AQ6"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.CST": {
 		"pattern" : "(41|60)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.CST deve conter 41 ou 60",
 		"desc"    : "Tributação pelo ICMS: 10 - Tributada e com cobrança do ICMS por substituição tributária; 90 – Outros.",
-		"code"    : "E332"
+		"code"    : "AQ7"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.vBCSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.vBCSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Informar o valor da BC do ICMS ST retido na UF remetente",
-		"code"    : "E333"
+		"code"    : "AQ8"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.pST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.pST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Aliquota suportada pelo consumidor final.",
-		"code"    : "E334"
+		"code"    : "AQ9"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.vICMSSubstituto": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.vICMSSubstituto deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS Próprio do Substituto cobrado em operação anterior",
-		"code"    : "E335"
+		"code"    : "AQA"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.vICMSSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.vICMSSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Informar o valor do ICMS ST retido na UF remetente (iv2.0))",
-		"code"    : "E336"
+		"code"    : "AQB"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.vBCFCPSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.vBCFCPSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Informar o valor da Base de Cálculo do FCP retido anteriormente por ST.",
-		"code"    : "E337"
+		"code"    : "AQC"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.pFCPSTRet": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.pFCPSTRet deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual relativo ao Fundo de Combate à Pobreza (FCP) retido por substituição tributária.",
-		"code"    : "E338"
+		"code"    : "AQD"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.vFCPSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.vFCPSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP) retido por substituição tributária.",
-		"code"    : "E339"
+		"code"    : "AQE"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.vBCSTDest": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.vBCSTDest deve conter um inteiro com 2 decimais",
 		"desc"    : "Informar o valor da BC do ICMS ST da UF destino",
-		"code"    : "E342"
+		"code"    : "AQF"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.vICMSSTDest": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.vICMSSTDest deve conter um inteiro com 2 decimais",
 		"desc"    : "Informar o valor da BC do ICMS ST da UF destino",
-		"code"    : "E343"
+		"code"    : "AQG"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.pRedBCEfet": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.pRedBCEfet deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da base de cálculo efetiva.",
-		"code"    : "E344"
+		"code"    : "AQH"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.vBCEfet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.vBCEfet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da base de cálculo efetiva.",
-		"code"    : "E345"
+		"code"    : "AQI"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.pICMSEfet": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.pICMSEfet deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS efetivo.",
-		"code"    : "E346"
+		"code"    : "AQJ"
 	},
 	"infNFe.det.imposto.ICMS.ICMSST.vICMSEfet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSST.vICMSEfet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS efetivo.",
-		"code"    : "E347"
+		"code"    : "AQL"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN101.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN101.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E348"
+		"code"    : "AQM"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN101.CSOSN": {
 		"pattern" : "(101)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN101.CSOSN deve conter 101",
 		"desc"    : "101- Tributada pelo Simples Nacional com permissão de crédito.",
-		"code"    : "E349"
+		"code"    : "AQN"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN101.pCredSN": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN101.pCredSN deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota aplicável de cálculo do crédito (Simples Nacional).",
-		"code"    : "E350"
+		"code"    : "AQO"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN101.vCredICMSSN": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN101.vCredICMSSN deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor crédito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123.",
-		"code"    : "E351"
+		"code"    : "AQP"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN201.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN201.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E352"
+		"code"    : "AQQ"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN102.CSOSN": {
 		"pattern" : "(201)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN102.CSOSN deve conter 201",
 		"desc"    : "201 - Tributada pelo Simples Nacional com permissão de crédito e com cobrança do ICMS por Substituição Tributária",
-		"code"    : "E353"
+		"code"    : "AR1"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN102.modBCST": {
 		"pattern" : "(0|1|2|3|4|5)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN102.modBCST deve conter 0, 1, 2, 3, 4 ou 5",
 		"desc"    : "Modalidade de determinação da BC do ICMS ST: 0 – Preço tabelado ou máximo  sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor).",
-		"code"    : "E354"
+		"code"    : "AR2"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN102.pMVAST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN102.pMVAST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual da Margem de Valor Adicionado ICMS ST",
-		"code"    : "E355"
+		"code"    : "AR3"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN102.pRedBCST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN102.pRedBCST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da BC ICMS ST",
-		"code"    : "E356"
+		"code"    : "AR4"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN102.vBCST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN102.vBCST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS ST",
-		"code"    : "E357"
+		"code"    : "AR5"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN102.pICMSST": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN102.pICMSST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS ST",
-		"code"    : "E358"
+		"code"    : "AR6"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN102.vBCFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN102.vBCFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP.",
-		"code"    : "E359"
+		"code"    : "AR7"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN102.pFCPST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN102.pFCPST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de FCP retido por substituição tributária.",
-		"code"    : "E360"
+		"code"    : "AR8"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN102.vFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN102.vFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do FCP retido por substituição tributária.",
-		"code"    : "E361"
+		"code"    : "AR9"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN102.pCredSN": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN102.pCredSN deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota aplicável de cálculo do crédito (Simples Nacional).",
-		"code"    : "E362"
+		"code"    : "ARA"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN102.vCredICMSSN": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN102.vCredICMSSN deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor crédito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123.",
-		"code"    : "E363"
+		"code"    : "ARB"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN202.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN202.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E364"
+		"code"    : "ARC"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN202.CSOSN": {
 		"pattern" : "(202|203)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN202.CSOSN deve conter 202 ou 203",
 		"desc"    : "202- Tributada pelo Simples Nacional sem permissão de crédito e com cobrança do ICMS por Substituição Tributária; 203-  Isenção do ICMS nos Simples Nacional para faixa de receita bruta e com cobrança do ICMS por Substituição Tributária",
-		"code"    : "E365"
+		"code"    : "ARD"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN202.modBCST": {
 		"pattern" : "(0|1|2|3|4|5)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN202.modBCST deve conter 0, 1, 2, 3, 4 ou 5",
 		"desc"    : "Modalidade de determinação da BC do ICMS ST: 0 – Preço tabelado ou máximo  sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor).",
-		"code"    : "E365"
+		"code"    : "ARE"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN202.pMVAST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN202.pMVAST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual da Margem de Valor Adicionado ICMS ST",
-		"code"    : "E366"
+		"code"    : "ARF"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN202.pRedBCST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN202.pRedBCST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da BC ICMS ST",
-		"code"    : "E367"
+		"code"    : "ARG"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN202.vBCST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN202.vBCST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS ST",
-		"code"    : "E368"
+		"code"    : "ARH"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN202.pICMSST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN202.pICMSST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS ST",
-		"code"    : "E369"
+		"code"    : "ARI"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN202.vICMSST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN202.vICMSST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS ST",
-		"code"    : "E370"
+		"code"    : "ARJ"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN202.vBCFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN202.vBCFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP.",
-		"code"    : "E371"
+		"code"    : "ARL"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN202.pFCPST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN202.pFCPST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de FCP retido por substituição tributária.",
-		"code"    : "E372"
+		"code"    : "ARM"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN202.vFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN202.vFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do FCP retido por substituição tributária.",
-		"code"    : "E373"
+		"code"    : "ARN"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E374"
+		"code"    : "ARO"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.CSOSN": {
 		"pattern" : "(500)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.CSOSN deve conter 500",
 		"desc"    : "500 – ICMS cobrado anterirmente por substituição tributária (substituído) ou por antecipação",
-		"code"    : "E375"
+		"code"    : "ARP"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.vBCSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.vBCSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS ST retido anteriormente",
-		"code"    : "E376"
+		"code"    : "ARQ"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.pST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.pST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Aliquota suportada pelo consumidor final.",
-		"code"    : "E377"
+		"code"    : "ARR"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.vICMSSubstituto": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.vICMSSubstituto deve conter um inteiro com 2 decimais",
 		"desc"    : "Aliquota suportada pelo consumidor final.",
-		"code"    : "E378"
+		"code"    : "AS1"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.vICMSSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.vICMSSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS ST retido anteriormente",
-		"code"    : "E379"
+		"code"    : "AS2"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.vBCFCPSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.vBCFCPSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP retido anteriormente.",
-		"code"    : "E380"
+		"code"    : "AS3"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.pFCPSTRet": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.pFCPSTRet deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de FCP retido anteriormente por substituição tributária.",
-		"code"    : "E381"
+		"code"    : "AS4"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.vFCPSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.vFCPSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do FCP retido por substituição tributária.",
-		"code"    : "E382"
+		"code"    : "AS5"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.pRedBCEfet": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.pRedBCEfet deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da base de cálculo efetiva.",
-		"code"    : "E383"
+		"code"    : "AS6"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.vBCEfet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.vBCEfet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da base de cálculo efetiva.",
-		"code"    : "E384"
+		"code"    : "AS7"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.pICMSEfet": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.pICMSEfet deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS efetiva.",
-		"code"    : "E385"
+		"code"    : "AS8"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN500.vICMSEfet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN500.vICMSEfet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS efetivo.",
-		"code"    : "E386"
+		"code"    : "AS9"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.orig": {
 		"patternOb" : "Torig",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.orig deve conter 0,1,2,3,4,5,6,7 ou 8 ",
 		"desc"    : "origem da mercadoria: 0 - Nacional; 1 - Estrangeira - Importação direta; 2 - Estrangeira - Adquirida no mercado interno",
-		"code"    : "E387"
+		"code"    : "ASA"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.CSOSN": {
 		"pattern" : "(900)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.CSOSN deve conter 900",
 		"desc"    : "Tributação pelo ICMS 900 - Outros",
-		"code"    : "E388"
+		"code"    : "ASB"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.modBC": {
 		"pattern" : "(0|1|2|3)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.modBCST deve conter 0, 1, 2 ou  3",
 		"desc"    : "Modalidade de determinação da BC do ICMS:  0 - Margem Valor Agregado (%); 1 - Pauta (valor); 2 - Preço Tabelado Máximo (valor); 3 - Valor da Operação.",
-		"code"    : "E389"
+		"code"    : "ASC"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS",
-		"code"    : "E390"
+		"code"    : "ASD"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.pRedBC": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.pRedBC deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da BC",
-		"code"    : "E391"
+		"code"    : "ASE"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.pICMS": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.pICMS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS",
-		"code"    : "E392"
+		"code"    : "ASF"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.vICMS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.vICMS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS",
-		"code"    : "E393"
+		"code"    : "ASG"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.modBCST": {
 		"pattern" : "(0|1|2|3|4|5)",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.vICMS deve conter 0, 1, 2, 3, 4 ou 5",
 		"desc"    : "Modalidade de determinação da BC do ICMS ST: 0 – Preço tabelado ou máximo  sugerido; 1 - Lista Negativa (valor); 2 - Lista Positiva (valor); 3 - Lista Neutra (valor); 4 - Margem Valor Agregado (%); 5 - Pauta (valor).",
-		"code"    : "E394"
+		"code"    : "ASH"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.pMVAST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.pMVAST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual da Margem de Valor Adicionado ICMS ST",
-		"code"    : "E395"
+		"code"    : "ASI"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.pRedBCST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.pRedBCST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de redução da BC ICMS ST",
-		"code"    : "E396"
+		"code"    : "ASJ"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.vBCST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.vBCST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ICMS ST",
-		"code"    : "E397"
+		"code"    : "ASL"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.pICMSST": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.pICMSST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ICMS ST",
-		"code"    : "E398"
+		"code"    : "ASM"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.vICMSST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.vICMSST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS ST",
-		"code"    : "E399"
+		"code"    : "ASN"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.vBCFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.vBCFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de cálculo do FCP.",
-		"code"    : "E400"
+		"code"    : "ASO"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.pFCPST": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.pFCPST deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de FCP retido por substituição tributária.",
-		"code"    : "E401"
+		"code"    : "ASP"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.vFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.vFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do FCP retido por substituição tributária.",
-		"code"    : "E402"
+		"code"    : "ASQ"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.pCredSN": {
 		"patternOb" : "TDec_0302a04Opc",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.pCredSN deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota aplicável de cálculo do crédito (Simples Nacional).",
-		"code"    : "E403"
+		"code"    : "ASR"
 	},
 	"infNFe.det.imposto.ICMS.ICMSSN900.vCredICMSSN": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ICMS.ICMSSN900.vCredICMSSN deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor crédito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123",
-		"code"    : "E403"
+		"code"    : "ASS"
 	},
 	"infNFe.det.imposto.IPI.CNPJProd": {
 		"patternOb" : "TCnpj",
 		"message" : "O campo infNFe.det.imposto.IPI.CNPJProd deve um numerico de 14 digitos",
 		"desc"    : "CNPJ do produtor da mercadoria, quando diferente do emitente. Somente para os casos de exportação direta ou indireta.",
-		"code"    : "E404"
+		"code"    : "AT1"
 	},
 	"infNFe.det.imposto.IPI.cSelo": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.det.imposto.IPI.cSelo deve conter uma string com no máximo 60 caracteres",
 		"desc"    : "Código do selo de controle do IPI",
-		"code"    : "E405"
+		"code"    : "AT2"
 	},
 	"infNFe.det.imposto.IPI.qSelo": {
 		"pattern" : "([0-9]{1,12})",
 		"message" : "O campo infNFe.det.imposto.IPI.qSelo deve conter um numerico com no mínimo 1 dígitos e no maxímo 12 dígitos",
 		"desc"    : "Quantidade de selo de controle do IPI",
-		"code"    : "E406"
+		"code"    : "AT3"
 	},
 	"infNFe.det.imposto.IPI.cEnq": {
 		"pattern" : "([\\s\\S]{1,3})",
 		"message" : "O campo infNFe.det.imposto.IPI.cEnq deve conter uma string com no máximo 3 caracteres",
 		"desc"    : "Código de Enquadramento Legal do IPI (tabela a ser criada pela RFB)",
-		"code"    : "E407"
+		"code"    : "AT4"
 	},
 	"infNFe.det.imposto.IPI.IPITrib.CST": {
 		"pattern" : "(00|49|50|99)",
 		"message" : "O campo infNFe.det.imposto.IPI.IPITrib.CST deve conter 00, 49, 50 ou 99",
 		"desc"    : "Código da Situação Tributária do IPI: 00-Entrada com recuperação de crédito;  49 - Outras entradas; 50-Saída tributada; 99-Outras saídas",
-		"code"    : "E408"
+		"code"    : "AT5"
 	},
 	"infNFe.det.imposto.IPI.IPITrib.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.IPI.IPITrib.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do IPI",
-		"code"    : "E409"
+		"code"    : "AT6"
 	},
 	"infNFe.det.imposto.IPI.IPITrib.pIPI": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.IPI.IPITrib.pIPI deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do IPI",
-		"code"    : "E410"
+		"code"    : "AT7"
 	},
 	"infNFe.det.imposto.IPI.IPITrib.qUnid": {
 		"patternOb" : "TDec_1204v",
 		"message" : "O campo infNFe.det.imposto.IPI.IPITrib.qUnid deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Quantidade total na unidade padrão para tributação",
-		"code"    : "E411"
+		"code"    : "AT8"
 	},
 	"infNFe.det.imposto.IPI.IPITrib.vUnid": {
 		"patternOb" : "TDec_1104",
 		"message" : "O campo infNFe.det.imposto.IPI.IPITrib.vUnid deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Valor por Unidade Tributável. Informar o valor do imposto Pauta por unidade de medida.",
-		"code"    : "E412"
+		"code"    : "AT9"
 	},
 	"infNFe.det.imposto.IPI.IPITrib.vIPI": {
 		"patternOb" : "TDec_1104",
 		"message" : "O campo infNFe.det.imposto.IPI.IPITrib.vIPI deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Valor por Unidade Tributável. Informar o valor do imposto Pauta por unidade de medida.",
-		"code"    : "E412"
+		"code"    : "ATA"
 	},
 	"infNFe.det.imposto.IPI.IPINT.CST": {
 		"pattern" : "(01|02|03|04|05|51|52|53|54|55)",
 		"message" : "O campo infNFe.det.imposto.IPI.IPINT.CST deve conter 01, 02, 03, 04, 05, 51, 52, 53, 54 ou 55",
 		"desc"    : "Código da Situação Tributária do IPI: 01-Entrada tributada com alíquota zero; 02-Entrada isenta; 03-Entrada não-tributada; 04-Entrada imune; 05-Entrada com suspensão; 51-Saída tributada com alíquota zero; 52-Saída isenta; 53-Saída não-tributada; 54-Saída imune; 55-Saída com suspensão",
-		"code"    : "E413"
+		"code"    : "ATB"
 	},
 	"infNFe.det.imposto.II.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.II.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Base da BC do Imposto de Importação",
-		"code"    : "E414"
+		"code"    : "ATC"
 	},
 	"infNFe.det.imposto.II.vDespAdu": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.II.vDespAdu deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor das despesas aduaneiras.",
-		"code"    : "E414"
+		"code"    : "ATD"
 	},
 	"infNFe.det.imposto.II.vII": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.II.vII deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do Imposto de Importação",
-		"code"    : "E415"
+		"code"    : "ATE"
 	},
 	"infNFe.det.imposto.II.vIOF": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.II.vIOF deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do Imposto de Importação",
-		"code"    : "E416"
+		"code"    : "ATF"
 	},
 	"infNFe.det.imposto.ISSQN.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ISSQN.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do ISSQN",
-		"code"    : "E417"
+		"code"    : "ATG"
 	},
 	"infNFe.det.imposto.ISSQN.vAliq": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.ISSQN.vAliq deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do ISSQN",
-		"code"    : "E418"
+		"code"    : "ATH"
 	},
 	"infNFe.det.imposto.ISSQN.vISSQN": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.ISSQN.vISSQN deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da do ISSQN",
-		"code"    : "E419"
+		"code"    : "ATI"
 	},
 	"infNFe.det.imposto.ISSQN.cMunFG": {
 		"patternOb" : "TCodMunIBGE",
 		"message" : "O campo infNFe.det.imposto.ISSQN.cMunFG deve conter um numerico de 7 dígitos",
 		"desc"    : "Informar o município de ocorrência do fato gerador do ISSQN. Utilizar a Tabela do IBGE <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de municípios</a>",
-		"code"    : "E420"
+		"code"    : "ATJ"
 	},
 	"infNFe.det.imposto.ISSQN.cListServ": {
 		"patternOb" : "TCListServ",
 		"message" : "O campo infNFe.det.imposto.ISSQN.cListServ númerico no seguinte padrão 00.00",
 		"desc"    : "Informar o Item da lista de serviços da LC 116/03 em que se classifica o serviço.",
-		"code"    : "E421"
+		"code"    : "ATL"
 	},
 	"infNFe.det.imposto.ISSQN.vDeducao": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.det.imposto.ISSQN.vDeducao deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor dedução para redução da base de cálculo",
-		"code"    : "E422"
+		"code"    : "ATM"
 	},
 	"infNFe.det.imposto.ISSQN.vOutro": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.det.imposto.ISSQN.vOutro deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor outras retenções",
-		"code"    : "E423"
+		"code"    : "ATN"
 	},
 	"infNFe.det.imposto.ISSQN.vDescIncond": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.det.imposto.ISSQN.vDescIncond deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor desconto incondicionado",
-		"code"    : "E424"
+		"code"    : "ATO"
 	},
 	"infNFe.det.imposto.ISSQN.vDescCond": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.det.imposto.ISSQN.vDescCond deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor desconto condicionado",
-		"code"    : "E425"
+		"code"    : "P"
 	},
 	"infNFe.det.imposto.ISSQN.vISSRet": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.det.imposto.ISSQN.vISSRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Retenção ISS",
-		"code"    : "E425"
+		"code"    : "ATQ"
 	},
 	"infNFe.det.imposto.ISSQN.indISS": {
 		"pattern" : "(1|2|3|4|5|6|7)",
 		"message" : "O campo infNFe.det.imposto.ISSQN.indISS deve conter 1, 2, 3, 4, 5, 6 ou 7",
 		"desc"    : "Valor Retenção ISS",
-		"code"    : "E426"
+		"code"    : "ATR"
 	},
 	"infNFe.det.imposto.ISSQN.cServico": {
 		"pattern" : "([\\s\\S]{1,20})",
 		"message" : "O campo infNFe.det.imposto.ISSQN.cServico deve conter um string com no mínimo 1 caracter e no máximo 20 caracteres.",
 		"desc"    : "Código do serviço prestado dentro do município",
-		"code"    : "E427"
+		"code"    : "ATS"
 	},
 	"infNFe.det.imposto.ISSQN.cMun": {
 		"patternOb" : "TCodMunIBGE",
 		"message" : "O campo infNFe.det.imposto.ISSQN.cMun deve conter um numerico de 7 dígitos",
 		"desc"    : "Código do Município de Incidência do Imposto. Utilizar a Tabela do IBGE <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de municípios</a>",
-		"code"    : "E428"
+		"code"    : "ATT"
 	}, 
 	"infNFe.det.imposto.ISSQN.cPais": {
 		"pattern" : "([0-9]{1,4})",
 		"message" : "O campo infNFe.det.imposto.ISSQN.cPais deve conter um numerico de 7 dígitos",
 		"desc"    : "Código do Município de Incidência do Imposto. Utilizar a Tabela do IBGE <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de municípios</a>",
-		"code"    : "E428"
+		"code"    : "AU1"
 	},  
 	"infNFe.det.imposto.ISSQN.nProcesso": {
 		"pattern" : "([0-9]{1,4})",
 		"message" : "O campo infNFe.det.imposto.ISSQN.nProcesso deve conter uma string de no máximo 30 caracteres",
 		"desc"    : "Número do Processo administrativo ou judicial de suspenção do processo",
-		"code"    : "E429"
+		"code"    : "AU2"
 	}, 
 	"infNFe.det.imposto.ISSQN.indIncentivo": {
 		"pattern" : "(1|2)",
 		"message" : "O campo infNFe.det.imposto.ISSQN.indIncentivo deve conter 1 ou 2",
 		"desc"    : "Indicador de Incentivo Fiscal. 1=Sim; 2=Não",
-		"code"    : "E430"
+		"code"    : "AU3"
 	},
 	"infNFe.det.imposto.PIS.PISAliq.CST": {
 		"pattern" : "(01|02)",
 		"message" : "O campo infNFe.det.imposto.PISAliq.CST deve conter 01 ou 02",
 		"desc"    : "Código de Situação Tributária do PIS.; 01 – Operação Tributável - Base de Cálculo = Valor da Operação Alíquota Normal (Cumulativo/Não Cumulativo); 02 - Operação Tributável - Base de Calculo = Valor da Operação (Alíquota Diferenciada)",
-		"code"    : "E431"
+		"code"    : "AU4"
 	},
 	"infNFe.det.imposto.PIS.PISAliq.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.PIS.PISAliq.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do PIS",
-		"code"    : "E432"
+		"code"    : "AU5"
 	}, 
 	"infNFe.det.imposto.PIS.PISAliq.pPIS": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.PIS.PISAliq.pPIS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do PIS (em percentual)",
-		"code"    : "E433"
+		"code"    : "AU6"
 	}, 
 	"infNFe.det.imposto.PIS.PISAliq.vPIS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.PIS.PISAliq.vPIS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do PIS",
-		"code"    : "E434"
+		"code"    : "AU7"
 	},  
 	"infNFe.det.imposto.PIS.PISQtde.CST": {
 		"pattern" : "(01)",
 		"message" : "O campo infNFe.det.imposto.PISQtde.CST deve conter 01",
 		"desc"    : "Código de Situação Tributária do PIS.;03 - Operação Tributável - Base de Calculo = Quantidade Vendida x Alíquota por Unidade de Produto",
-		"code"    : "E435"
+		"code"    : "AU8"
 	},  
 	"infNFe.det.imposto.PIS.PISQtde.qBCProd": {
 		"patternOb" : "TDec_1204v",
 		"message" : "O campo infNFe.det.imposto.PIS.PISQtde.qBCProd deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Quantidade Vendida ",
-		"code"    : "E436"
+		"code"    : "AU9"
 	}, 
 	"infNFe.det.imposto.PIS.PISQtde.vAliqProd": {
 		"patternOb" : "TDec_1204v",
 		"message" : "O campo infNFe.det.imposto.PIS.PISQtde.vAliqProd deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Quantidade Vendida",
-		"code"    : "E437"
+		"code"    : "AUA"
 	},
 	"infNFe.det.imposto.PIS.PISQtde.vPIS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.PIS.PISQtde.vPIS deve conter um inteiro com 2 decimais",
 		"desc"    : "Quantidade Vendida",
-		"code"    : "E438"
+		"code"    : "AUB"
 	},  
 	"infNFe.det.imposto.PIS.PISNT.CST": {
 		"pattern" : "(04|05|06|07|08|09)",
 		"message" : "O campo infNFe.det.imposto.PISNT.CST deve conter 04, 05, 06, 07, 08 ou 09",
 		"desc"    : "Código de Situação Tributária do PIS.; 04 - Operação Tributável - Tributação Monofásica - (Alíquota Zero); 05 - Operação Tributável (ST); 06 - Operação Tributável - Alíquota Zero; 07 - Operação Isenta da contribuição; 08 - Operação Sem Incidência da contribuição; 09 - Operação com suspensão da contribuição",
-		"code"    : "E439"
+		"code"    : "AUC"
 	},  
 	"infNFe.det.imposto.PIS.PISOutr.CST": {
 		"pattern" : "(49|50|51|52|53|54|55|56|60|61|62|63|64|65|66|67|70|71|72|73|74|75|98|99)",
 		"message" : "O campo infNFe.det.imposto.PISOutr.CST deve conter 49, 50, 51, 52, 53, 54, 55, 56, 60, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73 ou 74, 75, 98, 99",
 		"desc"    : "Código de Situação Tributária do PIS.",
-		"code"    : "E440"
+		"code"    : "AUD"
 	},  
 	"infNFe.det.imposto.PIS.PISOutr.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.PIS.PISOutr.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do PIS",
-		"code"    : "E441"
+		"code"    : "AUE"
 	},
 	"infNFe.det.imposto.PIS.PISOutr.pPIS": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.PIS.PISOutr.pPIS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do PIS (em percentual)",
-		"code"    : "E442"
+		"code"    : "AUF"
 	},
 	"infNFe.det.imposto.PIS.PISOutr.qBCProd": {
 		"patternOb" : "TDec_1204v",
 		"message" : "O campo infNFe.det.imposto.PIS.PISOutr.qBCProd deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Quantidade Vendida",
-		"code"    : "E443"
+		"code"    : "AUG"
 	},  
 	"infNFe.det.imposto.PIS.PISOutr.vAliqProd": {
 		"patternOb" : "TDec_1104v",
 		"message" : "O campo infNFe.det.imposto.PIS.PISOutr.vAliqProd deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Alíquota do PIS (em reais)",
-		"code"    : "E443"
+		"code"    : "AUH"
 	},    
 	"infNFe.det.imposto.PIS.PISOutr.vPIS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.PIS.PISOutr.vPIS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do PIS",
-		"code"    : "E444"
+		"code"    : "AUI"
 	},
 	"infNFe.det.imposto.PIS.PISST.vBC": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.det.imposto.PIS.PISST.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do PIS ST",
-		"code"    : "E445"
+		"code"    : "AUJ"
 	}, 
 	"infNFe.det.imposto.PIS.PISST.pPIS": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.PIS.PISST.pPIS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do PIS ST (em percentual)",
-		"code"    : "E446"
+		"code"    : "AUL"
 	}, 
 	"infNFe.det.imposto.PIS.PISST.qBCProd": {
 		"patternOb" : "TDec_1204",
 		"message" : "O campo infNFe.det.imposto.PIS.PISST.qBCProd deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Quantidade Vendida",
-		"code"    : "E447"
+		"code"    : "AUM"
 	}, 
 	"infNFe.det.imposto.PIS.PISST.vAliqProd": {
 		"patternOb" : "TDec_1104",
 		"message" : "O campo infNFe.det.imposto.PIS.PISST.vAliqProd deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Alíquota do PIS ST (em reais)",
-		"code"    : "E448"
+		"code"    : "AUN"
 	}, 
 	"infNFe.det.imposto.PIS.PISST.vPIS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.PIS.PISST.vPIS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do PIS ST",
-		"code"    : "E448"
+		"code"    : "AUO"
 	},   
 	"infNFe.det.imposto.COFINS.COFINSAliq.CST": {
 		"pattern" : "(01|02)",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSAliq.CST deve conter 01 ou 02",
 		"desc"    : "Código de Situação Tributária do COFINS.;01 – Operação Tributável - Base de Cálculo = Valor da Operação Alíquota Normal (Cumulativo/Não Cumulativo); 02 - Operação Tributável - Base de Calculo = Valor da Operação (Alíquota Diferenciada)",
-		"code"    : "E449"
+		"code"    : "AUP"
 	},     
 	"infNFe.det.imposto.COFINS.COFINSAliq.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSAliq.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do COFINS",
-		"code"    : "E450"
+		"code"    : "AUQ"
 	},  
 	"infNFe.det.imposto.COFINS.COFINSAliq.pCOFINS": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.PIS.PISST.pCOFINS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do COFINS (em percentual)",
-		"code"    : "E451"
+		"code"    : "AUR"
 	}, 
 	"infNFe.det.imposto.COFINS.COFINSAliq.vCOFINS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSAliq.vCOFINS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do COFINS",
-		"code"    : "E451"
+		"code"    : "AUS"
 	}, 
 	"infNFe.det.imposto.COFINS.COFINSQtde.CST": {
 		"pattern" : "(03)",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSQtde.CST deve conter 03",
 		"desc"    : "Código de Situação Tributária do COFINS.; 03 - Operação Tributável - Base de Calculo = Quantidade Vendida x Alíquota por Unidade de Produto",
-		"code"    : "E452"
+		"code"    : "AUT"
 	},   
 	"infNFe.det.imposto.COFINS.COFINSQtde.qBCProd": {
 		"patternOb" : "TDec_1204v",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSQtde.qBCProd deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Quantidade Vendida",
-		"code"    : "E453"
+		"code"    : "AUU"
 	},  
 	"infNFe.det.imposto.COFINS.COFINSQtde.vAliqProd": {
 		"patternOb" : "TDec_1204v",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSQtde.vAliqProd deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Alíquota do COFINS (em reais)",
-		"code"    : "E454"
+		"code"    : "AV1"
 	}, 
 	"infNFe.det.imposto.COFINS.COFINSQtde.vCOFINS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSQtde.vCOFINS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do COFINS",
-		"code"    : "E455"
+		"code"    : "AV2"
 	}, 
 	"infNFe.det.imposto.COFINS.COFINSNT.CST": {
 		"pattern" : "(04|06|07|08|09)",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSNT.CST deve conter 04, 06, 07, 08 ou 09",
 		"desc"    : "Código de Situação Tributária do COFINS:;04 - Operação Tributável - Tributação Monofásica - (Alíquota Zero);06 - Operação Tributável - Alíquota Zero;07 - Operação Isenta da contribuição;08 - Operação Sem Incidência da contribuição;09 - Operação com suspensão da contribuição;",
-		"code"    : "E592"
+		"code"    : "AV3"
 	}, 
 	"infNFe.det.imposto.COFINS.COFINSOutr.CST": {
 		"pattern" : "(49|50|51|52|53|54|55|56|60|61|62|63|64|65|66|67|70|71|72|73|74|75|98|99)",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSOutr.CST deve conter 49, 50, 51, 52, 53, 54, 55, 56, 60, 61, 62, 63, 64, 65, 66, 67, 70, 71, 72, 73, 74, 75, 98 ou 99",
 		"desc"    : "Código de Situação Tributária do COFINS: 49 - Outras Operações de Saída; 50 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno; 51 - Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno;52 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação;53 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno;54 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação;55 - Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação;56 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação;60 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno;61 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno;62 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação;63 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno;64 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação;65 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação;66 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação;67 - Crédito Presumido - Outras Operações;70 - Operação de Aquisição sem Direito a Crédito;71 - Operação de Aquisição com Isenção;72 - Operação de Aquisição com Suspensão;73 - Operação de Aquisição a Alíquota Zero;74 - Operação de Aquisição sem Incidência da Contribuição;75 - Operação de Aquisição por Substituição Tributária;98 - Outras Operações de Entrada;99 - Outras Operações.",
-		"code"    : "E456"
+		"code"    : "AV4"
 	},   
 	"infNFe.det.imposto.COFINS.COFINSOutr.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSQtde.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do COFINS",
-		"code"    : "E457"
+		"code"    : "AV5"
 	},
 	"infNFe.det.imposto.COFINS.COFINSOutr.pCOFINS": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSQtde.pCOFINS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do COFINS",
-		"code"    : "E458"
+		"code"    : "AV6"
 	},  
 	"infNFe.det.imposto.COFINS.COFINSOutr.qBCProd": {
 		"patternOb" : "TDec_1204v",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSOutr.qBCProd deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Quantidade Vendida",
-		"code"    : "E459"
+		"code"    : "AV7"
 	},  
 	"infNFe.det.imposto.COFINS.COFINSOutr.vAliqProd": {
 		"patternOb" : "TDec_1104v",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSOutr.vAliqProd deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Alíquota do COFINS (em reais)",
-		"code"    : "E460"
+		"code"    : "AV8"
 	}, 
 	"infNFe.det.imposto.COFINS.COFINSOutr.vCOFINS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSOutr.vCOFINS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do COFINS",
-		"code"    : "E461"
+		"code"    : "AV9"
 	},  
 	"infNFe.det.imposto.COFINS.COFINSST.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSST.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da BC do COFINS ST",
-		"code"    : "E462"
+		"code"    : "AVA"
 	},               
 	"infNFe.det.imposto.COFINS.COFINSST.pCOFINS": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSST.pCOFINS deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota do COFINS ST(em percentual)",
-		"code"    : "E463"
+		"code"    : "AVB"
 	},
 	"infNFe.det.imposto.COFINS.COFINSST.qBCProd": {
 		"patternOb" : "TDec_1204",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSST.qBCProd deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Quantidade Vendida",
-		"code"    : "E464"
+		"code"    : "AVC"
 	},
 	"infNFe.det.imposto.COFINS.COFINSST.vAliqProd": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSST.vAliqProd deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Alíquota do COFINS ST",
-		"code"    : "E465"
+		"code"    : "AVD"
 	},
 	"infNFe.det.imposto.COFINS.COFINSST.vCOFINS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.COFINSST.vCOFINS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do COFINS ST",
-		"code"    : "E466"
+		"code"    : "AVE"
 	},
 	"infNFe.det.imposto.COFINS.ICMSUFDest.vBCUFDest": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.ICMSUFDest.vBCUFDest deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de Cálculo do ICMS na UF do destinatário.",
-		"code"    : "E467"
+		"code"    : "AVF"
 	},
 	"infNFe.det.imposto.COFINS.ICMSUFDest.vBCFCPUFDest": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.ICMSUFDest.vBCFCPUFDest deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Base de Cálculo do FCP na UF do destinatário.",
-		"code"    : "E468"
+		"code"    : "AVG"
 	},
 	"infNFe.det.imposto.COFINS.ICMSUFDest.pFCPUFDest": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.COFINS.ICMSUFDest.pFCPUFDest deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual adicional inserido na alíquota interna da UF de destino, relativo ao Fundo de Combate à Pobreza (FCP) naquela UF.",
-		"code"    : "E469"
+		"code"    : "AVH"
 	},
 	"infNFe.det.imposto.COFINS.ICMSUFDest.pICMSUFDest": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.COFINS.ICMSUFDest.pICMSUFDest deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota adotada nas operações internas na UF do destinatário para o produto / mercadoria.",
-		"code"    : "E470"
+		"code"    : "AVI"
 	},
 	"infNFe.det.imposto.COFINS.ICMSUFDest.pICMSInter": {
 		"pattern" : "(4.00|7.00|12.00)",
 		"message" : "O campo infNFe.det.imposto.COFINS.ICMSUFDest.pICMSInter deve conter 4.00, 7.00 ou 12.00",
 		"desc"    : "Alíquota interestadual das UF envolvidas: - 4% alíquota interestadual para produtos importados; - 7% para os Estados de origem do Sul e Sudeste (exceto ES), destinado para os Estados do Norte e Nordeste  ou ES; - 12% para os demais casos.",
-		"code"    : "E471"
+		"code"    : "AVJ"
 	},
 	"infNFe.det.imposto.COFINS.ICMSUFDest.pICMSInterPart": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.det.imposto.COFINS.ICMSUFDest.pICMSInterPart deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de partilha para a UF do destinatário: - 40% em 2016; - 60% em 2017; - 80% em 2018; - 100% a partir de 2019.",
-		"code"    : "E472"
+		"code"    : "AVM"
 	},
 	"infNFe.det.imposto.COFINS.ICMSUFDest.vFCPUFDest": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.ICMSUFDest.vFCPUFDest deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP) da UF de destino.",
-		"code"    : "E473"
+		"code"    : "AVN"
 	},
 	"infNFe.det.imposto.COFINS.ICMSUFDest.vICMSUFRemet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.ICMSUFDest.vICMSUFRemet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS de partilha para a UF do remetente. Nota: A partir de 2019, este valor será zero.",
-		"code"    : "E475"
+		"code"    : "AVO"
 	},
 	"infNFe.det.impostoDevol.IpDevol": {
 		"patternOb" : "TDec_0302Max100",
 		"message" : "O campo infNFe.det.imposto.COFINS.ICMSUFDest.vICMSUFRemet deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Percentual de mercadoria devolvida",
-		"code"    : "E476"
+		"code"    : "AVP"
 	},
 	"infNFe.det.impostoDevol.IPI.vIPIDevol": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.COFINS.ICMSUFDest.vICMSUFRemet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do IPI devolvido",
-		"code"    : "E477"
+		"code"    : "AVQ"
 	},
 	"infNFe.det.infAdProd": {
 		"pattern" : "([\\s\\S]{1,500})",
 		"message" : "O campo infNFe.det.infAdProd deve conter uma string com no maxímo 500 caracteres",
 		"desc"    : "Valor do IPI devolvido",
-		"code"    : "E478"
+		"code"    : "AVR"
 	},
 	"infNFe.total.ICMSTot.vBC": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "BC do ICMS",
-		"code"    : "E479"
+		"code"    : "AVS"
 	},
 	"infNFe.total.ICMSTot.vICMSDeson": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vICMSDeson deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do ICMS",
-		"code"    : "E480"
+		"code"    : "AVT"
 	},
 	"infNFe.total.ICMSTot.vICMS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vICMS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do ICMS desonerado",
-		"code"    : "E481"
+		"code"    : "AVU"
 	},
 	"infNFe.total.ICMSTot.vFCPUFDest": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vFCPUFDest deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor total do ICMS relativo ao Fundo de Combate à Pobreza (FCP) para a UF de destino.",
-		"code"    : "E482"
+		"code"    : "AVV"
 	},
 	"infNFe.total.ICMSTot.vICMSUFDest": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vICMSUFDest deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor total do ICMS de partilha para a UF do destinatário",
-		"code"    : "E483"
+		"code"    : "AX1"
 	},
 	"infNFe.total.ICMSTot.vICMSUFRemet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vICMSUFRemet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor total do ICMS de partilha para a UF do remetente",
-		"code"    : "E484"
+		"code"    : "AX2"
 	},
 	"infNFe.total.ICMSTot.vFCP": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vFCP deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do FCP (Fundo de Combate à Pobreza).",
-		"code"    : "E485"
+		"code"    : "AX3"
 	},
 	"infNFe.total.ICMSTot.vBCST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vBCST deve conter um inteiro com 2 decimais",
 		"desc"    : "BC do ICMS ST",
-		"code"    : "E486"
+		"code"    : "AX4"
 	},
 	"infNFe.total.ICMSTot.vST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do ICMS ST",
-		"code"    : "E487"
+		"code"    : "AX5"
 	},
 	"infNFe.total.ICMSTot.vFCPST": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vFCPST deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do FCP (Fundo de Combate à Pobreza) retido por substituição tributária.",
-		"code"    : "E488"
+		"code"    : "AX6"
 	},
 	"infNFe.total.ICMSTot.vFCPSTRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vFCPSTRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do FCP (Fundo de Combate à Pobreza) retido anteriormente por substituição tributária.",
-		"code"    : "E489"
+		"code"    : "AX7"
 	},
 	"infNFe.total.ICMSTot.vProd": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vProd deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total dos produtos e serviços",
-		"code"    : "E490"
+		"code"    : "AX8"
 	},
 	"infNFe.total.ICMSTot.vFrete": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vFrete deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do Frete",
-		"code"    : "E491"
+		"code"    : "AX9"
 	},
 	"infNFe.total.ICMSTot.vSeg": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vSeg deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do Seguro",
-		"code"    : "E492"
+		"code"    : "AXA"
 	},
 	"infNFe.total.ICMSTot.vDesc": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vDesc deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do Desconto",
-		"code"    : "E493"
+		"code"    : "AXB"
 	},
 	"infNFe.total.ICMSTot.vII": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vII deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do II",
-		"code"    : "E494"
+		"code"    : "AXC"
 	},
 	"infNFe.total.ICMSTot.vIPI": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vIPI deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do IPI",
-		"code"    : "E495"
+		"code"    : "AXD"
 	},
 	"infNFe.total.ICMSTot.vIPIDevol": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vIPIDevol deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do IPI devolvido. Deve ser informado quando preenchido o Grupo Tributos Devolvidos na emissão de nota finNFe=4 (devolução) nas operações com não contribuintes do IPI",
-		"code"    : "E496"
+		"code"    : "AXE"
 	},
 	"infNFe.total.ICMSTot.vPIS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vPIS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do PIS",
-		"code"    : "E497"
+		"code"    : "AXF"
 	},
 	"infNFe.total.ICMSTot.vCOFINS": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vCOFINS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do COFINS",
-		"code"    : "E498"
+		"code"    : "AXG"
 	},
 	"infNFe.total.ICMSTot.vOutro": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vOutro deve conter um inteiro com 2 decimais",
 		"desc"    : "Outras Despesas acessórias",
-		"code"    : "E499"
+		"code"    : "AXH"
 	},
 	"infNFe.total.ICMSTot.vNF": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vNF deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total da NF-e",
-		"code"    : "E500"
+		"code"    : "AXI"
 	},
 	"infNFe.total.ICMSTot.vTotTrib": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.total.ICMSTot.vTotTrib deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor estimado total de impostos federais, estaduais e municipais",
-		"code"    : "E501"
+		"code"    : "AXJ"
 	},
 	"infNFe.ISSQNtot.vServ": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vServ deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total dos Serviços sob não-incidência ou não tributados pelo ICMS",
-		"code"    : "E502"
+		"code"    : "AXM"
 	},
 	"infNFe.ISSQNtot.vBC": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vBC deve conter um inteiro com 2 decimais",
 		"desc"    : "Base de Cálculo do ISS",
-		"code"    : "E503"
+		"code"    : "AXN"
 	},
 	"infNFe.ISSQNtot.vISS": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vISS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total do ISS",
-		"code"    : "E504"
+		"code"    : "AXO"
 	},
 	"infNFe.ISSQNtot.vPIS": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vPIS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do PIS sobre serviços",
-		"code"    : "E505"
+		"code"    : "AXP"
 	},
 	"infNFe.ISSQNtot.vCOFINS": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vCOFINS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do COFINS sobre serviços",
-		"code"    : "E506"
+		"code"    : "AXQ"
 	},
 	"infNFe.ISSQNtot.dCompet": {
 		"patternOb" : "TData",
 		"message" : "O campo infNFe.total.ICMSTot.dCompet deve conter uma data no formato AAAA-MM-DD",
 		"desc"    : "Data da prestação do serviço",
-		"code"    : "E507"
+		"code"    : "AXR"
 	},
 	"infNFe.ISSQNtot.vDeducao": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vDeducao deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor dedução para redução da base de cálculo",
-		"code"    : "E508"
+		"code"    : "AXS"
 	},
 	"infNFe.ISSQNtot.vOutro": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vOutro deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor outras retenções",
-		"code"    : "E509"
+		"code"    : "AXT"
 	},
 	"infNFe.ISSQNtot.vDescIncond": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vDescIncond deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor desconto incondicionado",
-		"code"    : "E510"
+		"code"    : "AXU"
 	},
 	"infNFe.ISSQNtot.vDescCond": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vDescCond deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor desconto condicionado",
-		"code"    : "E511"
+		"code"    : "AXX"
 	},
 	"infNFe.ISSQNtot.vISSRet": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vDescCond deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Total Retenção ISS",
-		"code"    : "E512"
+		"code"    : "AW1"
 	},
 	"infNFe.ISSQNtot.cRegTrib": {
 		"pattern" : "(1|2|3|4|5|6)",
 		"message" : "O campo infNFe.total.ICMSTot.cRegTrib deve conter 0, 1, 2, 3, 4, 5, 6",
 		"desc"    : "Código do regime especial de tributação",
-		"code"    : "E513"
+		"code"    : "AW2"
 	},
 	"infNFe.retTrib.vRetPIS": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vRetPIS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Retido de PIS",
-		"code"    : "E512"
+		"code"    : "AW3"
 	},
 	"infNFe.retTrib.vRetCOFINS": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vRetCOFINS deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Retido de COFINS",
-		"code"    : "E513"
+		"code"    : "AW4"
 	},
 	"infNFe.retTrib.vRetCSLL": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vRetCSLL deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Retido de CSLL",
-		"code"    : "E514"
+		"code"    : "AW5"
 	},
 	"infNFe.retTrib.vBCIRRF": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vBCIRRF deve conter um inteiro com 2 decimais",
 		"desc"    : "Base de Cálculo do IRRF",
-		"code"    : "E515"
+		"code"    : "AW6"
 	},
 	"infNFe.retTrib.vIRRF": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vIRRF deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor Retido de IRRF",
-		"code"    : "E516"
+		"code"    : "AW7"
 	},
 	"infNFe.retTrib.vBCRetPrev": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vBCRetPrev deve conter um inteiro com 2 decimais",
 		"desc"    : "Base de Cálculo da Retenção da Previdêncica Social",
-		"code"    : "E517"
+		"code"    : "AW8"
 	},
 	"infNFe.retTrib.vRetPrev": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.total.ICMSTot.vRetPrev deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor da Retenção da Previdêncica Social",
-		"code"    : "E518"
+		"code"    : "AW9"
 	},
 	"infNFe.transp.modFrete": {
 		"pattern" : "(0|1|2|3|4|9)",
 		"message" : "O campo infNFe.transp.modFrete deve conter 0, 1, 2, 3, 4, 9",
 		"desc"    : "Modalidade do frete; 0- Contratação do Frete por conta do Remetente (CIF); 1- Contratação do Frete por conta do destinatário/remetente (FOB); 2- Contratação do Frete por conta de terceiros; 3- Transporte próprio por conta do remetente; 4- Transporte próprio por conta do destinatário; 9- Sem Ocorrência de transporte.",
-		"code"    : "E519"
+		"code"    : "AWA"
 	},
 	"infNFe.transp.transporta.CNPJ": {
 		"patternOb" : "TCnpj",
 		"message" : "O campo infNFe.transp.transporta.CNPJ deve conter um numerico de 14 digitos",
 		"desc"    : "CNPJ do transportador",
-		"code"    : "E520"
+		"code"    : "AWB"
 	},
 	"infNFe.transp.transporta.CPF": {
 		"patternOb" : "TCpf",
 		"message" : "O campo infNFe.transp.transporta.CPF deve conter um numerico de 11 digitos",
 		"desc"    : "CPF do transportador",
-		"code"    : "E521"
+		"code"    : "AWC"
 	},
 	"infNFe.transp.transporta.xNome": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.transp.transporta.xNome deve conter uma string com no máximo 60 caracteres",
 		"desc"    : "Razão Social ou nome do transportador",
-		"code"    : "E522"
+		"code"    : "AWD"
 	},
 	"infNFe.transp.transporta.IE": {
 		"patternOb" : "TIeDest",
 		"message" : "O campo infNFe.transp.transporta.IE deve conter numerido com no maxímo 14 dígitos",
 		"desc"    : "Inscrição Estadual",
-		"code"    : "E523"
+		"code"    : "AWE"
 	},
 	"infNFe.transp.transporta.xEnder": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.transp.transporta.xEnder deve conter uma string com no máximo 60 caracteres",
 		"desc"    : "Endereço completo",
-		"code"    : "E524"
+		"code"    : "AWF"
 	},
 	"infNFe.transp.transporta.xMun": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.transp.transporta.xMun deve conter uma string com no máximo 60 caracteres",
 		"desc"    : "Nome do munícipio",
-		"code"    : "E525"
+		"code"    : "AWG"
 	},
 	"infNFe.transp.transporta.UF": {
 		"patternOb" : "TUf",
 		"message" : "O campo infNFe.transp.transporta.UF deve conter a sigla do estado",
 		"desc"    : "Sigla da UF",
-		"code"    : "E526"
+		"code"    : "AWH"
 	},
 	"infNFe.transp.retTransp.vServ": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.transp.retTransp.vServ deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do Serviço",
-		"code"    : "E527"
+		"code"    : "AWI"
 	},
 	"infNFe.transp.retTransp.vBCRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.transp.retTransp.vBCRet deve conter um inteiro com 2 decimais",
 		"desc"    : "BC da Retenção do ICMS",
-		"code"    : "E528"
+		"code"    : "AWJ"
 	},
 	"infNFe.transp.retTransp.pICMSRet": {
 		"patternOb" : "TDec_0302a04",
 		"message" : "O campo infNFe.transp.retTransp.pICMSRet deve conter uma porcentagem de 0 a 100",
 		"desc"    : "Alíquota da Retenção",
-		"code"    : "E529"
+		"code"    : "AWL"
 	},
 	"infNFe.transp.retTransp.vICMSRet": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.transp.retTransp.vICMSRet deve conter um inteiro com 2 decimais",
 		"desc"    : "Valor do ICMS Retido",
-		"code"    : "E530"
+		"code"    : "AWM"
 	},
 	"infNFe.transp.retTransp.CFOP": {
 		"pattern" : "((1|2|3|5|6|7){1}[0-9]{3})",
 		"message" : "O campo infNFe.transp.retTransp.CFOP deve conter um número que comece com 1, 2, 3, 5, 6 ou 7 e tenha mais 3 digitos",
 		"desc"    : "Código Fiscal de Operações e Prestações",
-		"code"    : "E531"
+		"code"    : "AWN"
 	},
 	"infNFe.transp.retTransp.cMunFG": {
 		"patternOb" : "TCodMunIBGE",
 		"message" : "O campo infNFe.transp.retTransp.cMunFG deve conter o código do município IBGE <a href=\"https://www.ibge.gov.br/explica/codigos-dos-municipios.php\">Códigos de municípios</a>",
 		"desc"    : "Código do Município de Ocorrência do Fato Gerador",
-		"code"    : "E532"
+		"code"    : "AWO"
 	},
 	"infNFe.transp.veicTransp.placa": {
 		"pattern" : "([A-Z]{2,3}[0-9]{4}|[A-Z]{3,4}[0-9]{3}|[A-Z0-9]{7})",
 		"message" : "O campo infNFe.transp.veicTransp.placa deve conter uma string no padrão AAAA9999",
 		"desc"    : "Placa do veículo",
-		"code"    : "E533"
+		"code"    : "AWP"
 	},
 	"infNFe.transp.veicTransp.UF": {
 		"patternOb" : "TUf",
 		"message" : "O campo infNFe.transp.veicTransp.UF deve conter a sigla do estado",
 		"desc"    : "Sigla da UF",
-		"code"    : "E534"
+		"code"    : "AWQ"
 	},
 	"infNFe.transp.veicTransp.RNTC": {
 		"pattern" : "([\\s\\S]{1,20})",
 		"message" : "O campo infNFe.transp.veicTransp.RNTC deve conter uma string com no maxímo 20 caracteres",
 		"desc"    : "Registro Nacional de Transportador de Carga (ANTT)",
-		"code"    : "E535"
+		"code"    : "AWR"
 	},
 	"infNFe.transp.reboque.placa": {
 		"pattern" : "([A-Z]{2,3}[0-9]{4}|[A-Z]{3,4}[0-9]{3}|[A-Z0-9]{7})",
 		"message" : "O campo infNFe.transp.reboque.placa deve conter uma string no padrão AAAA9999",
 		"desc"    : "Placa do veículo",
-		"code"    : "E533"
+		"code"    : "AWS"
 	},
 	"infNFe.transp.reboque.UF": {
 		"patternOb" : "TUf",
 		"message" : "O campo infNFe.transp.reboque.UF deve conter a sigla do estado",
 		"desc"    : "Sigla da UF",
-		"code"    : "E534"
+		"code"    : "AWT"
 	},
 	"infNFe.transp.reboque.RNTC": {
 		"pattern" : "([\\s\\S]{1,20})",
 		"message" : "O campo infNFe.transp.reboque.RNTC deve conter uma string com no maxímo 20 caracteres",
 		"desc"    : "Registro Nacional de Transportador de Carga (ANTT)",
-		"code"    : "E535"
+		"code"    : "AWU"
 	},
 	"infNFe.transp.vagao": {
 		"pattern" : "([\\s\\S]{1,20})",
 		"message" : "O campo infNFe.transp.vagao deve conter uma string com no maxímo 20 caracteres",
 		"desc"    : "Identificação do vagão",
-		"code"    : "E536"
+		"code"    : "AWV"
 	},
 	"infNFe.transp.balsa": {
 		"pattern" : "([\\s\\S]{1,20})",
 		"message" : "O campo infNFe.transp.balsa deve conter uma string com no maxímo 20 caracteres",
 		"desc"    : "Identificação da balsa",
-		"code"    : "E537"
+		"code"    : "AWX"
 	},
 	"infNFe.transp.vol.qVol": {
 		"pattern" : "([0-9]{1,15})",
 		"message" : "O campo infNFe.transp.vol.qVol deve conter um numerico de no maxímo 15 dígitos",
 		"desc"    : "Quantidade de volumes transportados",
-		"code"    : "E538"
+		"code"    : "AWW"
 	},
 	"infNFe.transp.vol.esp": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.transp.vol.esp deve conter uma string de no máximo 60 caracteres",
 		"desc"    : "Espécie dos volumes transportados",
-		"code"    : "E540"
+		"code"    : "AY1"
 	},
 	"infNFe.transp.vol.marca": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.transp.vol.marca deve conter uma string de no máximo 60 caracteres",
 		"desc"    : "Marca dos volumes transportados",
-		"code"    : "E541"
+		"code"    : "AY2"
 	},
 	"infNFe.transp.vol.nVol": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.transp.vol.nVol deve conter uma string de no máximo 60 caracteres",
 		"desc"    : "Numeração dos volumes transportados",
-		"code"    : "E542"
+		"code"    : "AY3"
 	},
 	"infNFe.transp.vol.pesoL": {
 		"patternOb" : "TDec_1203",
 		"message" : "O campo infNFe.transp.vol.pesoL deve conter um inteiro com com 3 casas decimais",
 		"desc"    : "Peso líquido (em kg)",
-		"code"    : "E543"
+		"code"    : "AY4"
 	},
 	"infNFe.transp.vol.pesoB": {
 		"patternOb" : "TDec_1203",
 		"message" : "O campo infNFe.transp.vol.pesoB deve conter um inteiro com com 3 casas decimais",
 		"desc"    : "Peso bruto (em kg)",
-		"code"    : "E544"
+		"code"    : "AY5"
 	},
 	"infNFe.transp.vol.lacres.nLacre": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.transp.vol.lacres.nLacre deve conter uma string no no máximo 60 caracteres",
 		"desc"    : "Número dos Lacres",
-		"code"    : "E545"
+		"code"    : "AY6"
 	},
 	"infNFe.cobr.fat.nFat": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.cobr.fat.nFat deve conter uma string no no máximo 60 caracteres",
 		"desc"    : "Número da fatura",
-		"code"    : "E546"
+		"code"    : "AY7"
 	},
 	"infNFe.cobr.fat.vOrig": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.cobr.fat.vOrig deve conter um inteiro com com 2 casas decimais",
 		"desc"    : "Valor original da fatura",
-		"code"    : "E547"
+		"code"    : "AY8"
 	},
 	"infNFe.cobr.fat.vDesc": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.cobr.fat.vDesc deve conter um inteiro com com 2 casas decimais",
 		"desc"    : "Valor do desconto da fatura",
-		"code"    : "E548"
+		"code"    : "AY9"
 	},
 	"infNFe.cobr.fat.vLiq": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.cobr.fat.vLiq deve conter um inteiro com com 2 casas decimais",
 		"desc"    : "Valor líquido da fatura",
-		"code"    : "E549"
+		"code"    : "AYA"
 	},
 	"infNFe.cobr.dup.nDup": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.cobr.dup.nDup deve conter uma string com no máximo 60 caracteres",
 		"desc"    : "Número da duplicata",
-		"code"    : "E551"
+		"code"    : "AYB"
 	},
 	"infNFe.cobr.dup.dVenc": {
 		"patternOb" : "TData",
 		"message" : "O campo infNFe.cobr.dup.dVenc deve conter uma data no formato AAAA-MM-DD",
 		"desc"    : "Data de vencimento da duplicata",
-		"code"    : "E552"
+		"code"    : "AYC"
 	},
 	"infNFe.cobr.dup.vDup": {
 		"patternOb" : "TDec_1302Opc",
 		"message" : "O campo infNFe.cobr.dup.vDup deve conter um inteiro com com 2 casas decimais",
 		"desc"    : "Valor da duplicata",
-		"code"    : "E553"
+		"code"    : "AYD"
 	},
 	"infNFe.pag.detPag.indPag": {
 		"pattern" : "(0|1)",
 		"message" : "O campo infNFe.pag.detPag.indPag deve conter 0 ou 1",
 		"desc"    : "Indicador da Forma de Pagamento:0-Pagamento à Vista;1-Pagamento à Prazo;",
-		"code"    : "E554"
+		"code"    : "AYE"
 	},
 	"infNFe.pag.detPag.tPag": {
 		"pattern" : "(01|02|03|04|05|10|11|12|13|14|15|90|99)",
 		"message" : "O campo infNFe.pag.detPag.tPag deve conter 01, 02, 03, 04, 05, 10, 11, 12, 13, 14, 15, 90 ou 99 ",
 		"desc"    : "Forma de Pagamento:01-Dinheiro;02-Cheque;03-Cartão de Crédito;04-Cartão de Débito;05-Crédito Loja;10-Vale Alimentação;11-Vale Refeição;12-Vale Presente;13-Vale Combustível;14 - Duplicata Mercantil;15 - Boleto Bancario;90 - Sem Pagamento;99 - Outros",
-		"code"    : "E555"
+		"code"    : "AYF"
 	},
 	"infNFe.pag.detPag.vPag": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.pag.detPag.vPag deve conter um inteiro com com 2 casas decimais",
 		"desc"    : "Valor do Pagamento. Esta tag poderá ser omitida quando a tag tPag=90 (Sem Pagamento), caso contrário deverá ser preenchida.",
-		"code"    : "E556"
+		"code"    : "AYG"
 	},
 	"infNFe.pag.detPag.card.tpIntegra": {
 		"pattern" : "(1|2)",
 		"message" : "O campo infNFe.pag.detPag.card.tpIntegra deve conter 1 ou 2",
 		"desc"    : "Tipo de Integração do processo de pagamento com o sistema de automação da empresa; 1=Pagamento integrado com o sistema de automação da empresa Ex. equipamento TEF , Comercio Eletronico; 2=Pagamento não integrado com o sistema de automação da empresa Ex: equipamento POS",
-		"code"    : "E557"
+		"code"    : "AYH"
 	},
 	"infNFe.pag.detPag.card.CNPJ": {
 		"patternOb" : "TCnpj",
 		"message" : "O campo infNFe.pag.detPag.card.CNPJ deve conter um numerico de 14 dígitos",
 		"desc"    : "CNPJ da credenciadora de cartão de crédito/débito",
-		"code"    : "E558"
+		"code"    : "AYI"
 	},
 	"infNFe.pag.detPag.card.tBand": {
 		"pattern" : "(01|02|03|04|05|06|07|08|09|99)",
 		"message" : "O campo infNFe.pag.detPag.card.tBand deve conter 01, 02, 03, 04, 05, 06, 07, 08, 09 ou 99",
 		"desc"    : "Bandeira da operadora de cartão de crédito/débito:01–Visa; 02–Mastercard; 03–American Express; 04–Sorocred;05-Diners Club;06-Elo;07-Hipercard;08-Aura;09-Cabal;99–Outros",
-		"code"    : "E559"
+		"code"    : "AYJ"
 	},
 	"infNFe.pag.detPag.card.cAut": {
 		"pattern" : "([\\s\\S]{1,20})",
 		"message" : "O campo infNFe.pag.detPag.card.cAut deve conter uma string com no máximo 20 caracteres",
 		"desc"    : "Número da duplicata",
-		"code"    : "E560"
+		"code"    : "AYL"
 	},
 	"infNFe.pag.vTroco": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.pag.vTroco deve conter um inteiro com com 2 casas decimais",
 		"desc"    : "Valor do Troco",
-		"code"    : "E561"
+		"code"    : "AYM"
 	},
 	"infNFe.infAdic.infAdFisco": {
 		"pattern" : "([\\s\\S]{1,2000})",
 		"message" : "O campo infNFe.infAdic.infAdFisco deve conter uma string com no maxímo 2000 caracteres",
 		"desc"    : "Informações adicionais de interesse do Fisco",
-		"code"    : "E562"
+		"code"    : "AYN"
 	},
 	"infNFe.infAdic.infCpl": {
 		"pattern" : "([\\s\\S]{1,5000})",
 		"message" : "O campo infNFe.infAdic.infCpl deve conter uma string com no maxímo 5000 caracteres",
 		"desc"    : "Informações complementares de interesse do Contribuinte",
-		"code"    : "E563"
+		"code"    : "AYO"
 	},
 	"infNFe.infAdic.obsCont.xTexto": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.infAdic.obsCont.xTexto deve conter uma string com no maxímo 60 caracteres",
 		"desc"    : "Campo de uso livre do contribuinte",
-		"code"    : "E564"
+		"code"    : "AYP"
 	},
 	"infNFe.infAdic.obsFisco.xTexto": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.infAdic.obsFisco.xTexto deve conter uma string com no maxímo 60 caracteres",
 		"desc"    : "Campo de uso livre do contribuinte",
-		"code"    : "E565"
+		"code"    : "AYQ"
 	},
 	"infNFe.infAdic.procRef.nProc": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.infAdic.procRef.nProc deve conter uma string com no maxímo 60 caracteres",
 		"desc"    : "Indentificador do processo ou ato concessório",
-		"code"    : "E566"
+		"code"    : "AYR"
 	},
 	"infNFe.infAdic.procRef.indProc": {
 		"pattern" : "(0|1|2|3|9)",
 		"message" : "O campo infNFe.infAdic.procRef.indProc deve conter 0, 1, 2, 3 ou 9",
 		"desc"    : "Origem do processo, informar com:; 0 - SEFAZ; 1 - Justiça Federal; 2 - Justiça Estadual; 3 - Secex/RFB; 9 - Outros",
-		"code"    : "E567"
+		"code"    : "AYS"
 	},
 	"infNFe.exporta.UFSaidaPais": {
 		"patternOb" : "TUfEmi",
 		"message" : "O campo infNFe.exporta.UFSaidaPais deve conter a uma sigla do estado",
 		"desc"    : "Sigla da UF de Embarque ou de transposição de fronteira",
-		"code"    : "E568"
+		"code"    : "AYT"
 	},
 	"infNFe.exporta.xLocExporta": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.exporta.xLocExporta deve conter uma string com no maxímo 60 caracteres",
 		"desc"    : "Local de Embarque ou de transposição de fronteira",
-		"code"    : "E569"
+		"code"    : "AYU"
 	},
 	"infNFe.exporta.xLocDespacho": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.exporta.xLocDespacho deve conter uma string com no maxímo 60 caracteres",
 		"desc"    : "Descrição do local de despacho",
-		"code"    : "E570"
+		"code"    : "AYV"
 	},
 	"infNFe.compra.xNEmp": {
 		"pattern" : "([\\s\\S]{1,22})",
 		"message" : "O campo infNFe.compra.xNEmp deve conter uma string com no maxímo 22 caracteres",
 		"desc"    : "Informação da Nota de Empenho de compras públicas",
-		"code"    : "E571"
+		"code"    : "AYX"
 	},
 	"infNFe.compra.xPed": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.compra.xPed deve conter uma string com no maxímo 60 caracteres",
 		"desc"    : "Informação do pedido",
-		"code"    : "E572"
+		"code"    : "AYW"
 	},
 	"infNFe.compra.xCont": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.compra.xCont deve conter uma string com no maxímo 60 caracteres",
 		"desc"    : "Informação do contrato",
-		"code"    : "E573"
+		"code"    : "AYY"
 	},
 	"infNFe.cana.safra": {
 		"pattern" : "([\\s\\S]{4,9})",
 		"message" : "O campo infNFe.compra.xCont deve conter uma string com no mínimo 4 caracteres 3 no maxímo 9 caracteres",
 		"desc"    : "Identificação da safra",
-		"code"    : "E574"
+		"code"    : "AZ1"
 	},
 	"infNFe.cana.ref": {
 		"pattern" : "((0[1-9]|1[0-2])([/][2][0-9][0-9][0-9]))",
 		"message" : "O campo infNFe.compra.xCont deve conter uma data no formato MM/AAAA",
 		"desc"    : "Mês e Ano de Referência, formato: MM/AAAA",
-		"code"    : "E575"
+		"code"    : "AZ2"
 	},
 	"infNFe.cana.forDia.qtde": {
 		"patternOb" : "TDec_1110v",
 		"message" : "O campo infNFe.cana.forDia.qtde deve conter um inteiro com 10 a 1 decimal.",
 		"desc"    : "Quantidade em quilogramas - peso líquido",
-		"code"    : "E576"
+		"code"    : "AZ3"
 	},
 	"infNFe.cana.forDia.dia": {
 		"pattern" : "([1-9]|[1][0-9]|[2][0-9]|[3][0-1])",
 		"message" : "O campo infNFe.cana.forDia.dia deve conter um inteiro de 1 a 31",
 		"desc"    : "Número do dia",
-		"code"    : "E577"
+		"code"    : "AZ4"
 	},
 	"infNFe.cana.qTotMes": {
 		"patternOb" : "TDec_1110v",
 		"message" : "O campo infNFe.cana.qTotMes deve conter um inteiro com 10 a 1 decimal.",
 		"desc"    : "Total do mês",
-		"code"    : "E578"
+		"code"    : "AZ5"
 	},
 	"infNFe.cana.qTotAnt": {
 		"patternOb" : "TDec_1110v",
 		"message" : "O campo infNFe.cana.qTotAnt deve conter um inteiro com 10 a 1 decimal.",
 		"desc"    : "Total Anterior",
-		"code"    : "E579"
+		"code"    : "AZ6"
 	},
 	"infNFe.cana.qTotGer": {
 		"patternOb" : "TDec_1110v",
 		"message" : "O campo infNFe.cana.qTotGer deve conter um inteiro com 10 a 1 decimal.",
 		"desc"    : "Total Geral",
-		"code"    : "E580"
+		"code"    : "AZ7"
 	},
 	"infNFe.cana.deduc.xDed": {
 		"pattern" : "([\\s\\S]{1,60})",
 		"message" : "O campo infNFe.cana.deduc.xDed deve conter uma string com no máximo 60 caracteres",
 		"desc"    : "Descrição da Dedução",
-		"code"    : "E581"
+		"code"    : "AZ8"
 	},
 	"infNFe.cana.deduc.vDed": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.cana.deduc.vDed deve conter um inteiro com 2 decimais.",
 		"desc"    : "valor da dedução",
-		"code"    : "E582"
+		"code"    : "AZ9"
 	},
 	"infNFe.cana.vFor": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.cana.vFor deve conter um inteiro com 2 decimais.",
 		"desc"    : "Valor  dos fornecimentos",
-		"code"    : "E583"
+		"code"    : "AZA"
 	},
 	"infNFe.cana.vTotDed": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.cana.vTotDed deve conter um inteiro com 2 decimais.",
 		"desc"    : "Valor Total das Deduções",
-		"code"    : "E584"
+		"code"    : "AZB"
 	},
 	"infNFe.cana.vLiqFor": {
 		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.cana.vLiqFor deve conter um inteiro com 2 decimais.",
 		"desc"    : "Valor Líquido dos fornecimentos",
-		"code"    : "E585"
+		"code"    : "AZC"
 	},
 	"infNFe.infRespTec.CNPJ": {
 		"patternOb" : "TCnpjOpc",
 		"message" : "O campo infNFe.infRespTec.CNPJ deve conter um numerico com 14 dígitos",
 		"desc"    : "Tipo Número do CNPJ Opcional",
-		"code"    : "E586"
+		"code"    : "AZD"
 	},
 	"infNFe.infRespTec.xContato": {
 		"pattern" : "([\\s\\S]{2,60})",
 		"message" : "O campo infNFe.infRespTec.xContato deve conter uma string com no maxímo 60 caracteres",
 		"desc"    : "Informar o nome da pessoa a ser contatada na empresa desenvolvedora do sistema utilizado na emissão do documento fiscal eletrônico.",
-		"code"    : "E587"
+		"code"    : "AZE"
 	},
 	"infNFe.infRespTec.email": {
 		"pattern" : "([\\s\\S]{6,60})",
 		"message" : "O campo infNFe.infRespTec.email deve conter uma string com no maxímo 60 caracteres",
 		"desc"    : "Informar o e-mail da pessoa a ser contatada na empresa desenvolvedora do sistema.",
-		"code"    : "E588"
+		"code"    : "AZF"
 	},
 	"infNFe.infRespTec.fone": {
 		"pattern" : "([0-9]{6,14})",
 		"message" : "O campo infNFe.infRespTec.fone deve conter um numerico com no máximo 14 dígitos",
 		"desc"    : "Informar o telefone da pessoa a ser contatada na empresa desenvolvedora do sistema. Preencher com o Código DDD + número do telefone.",
-		"code"    : "E589"
+		"code"    : "AZG"
 	},
 	"infNFe.infRespTec.idCSRT": {
 		"pattern" : "([0-9]{2})",
 		"message" : "O campo infNFe.infRespTec.idCSRT deve conter um numerico com 2 digitos",
 		"desc"    : "Identificador do CSRT utilizado para montar o hash do CSRT",
-		"code"    : "E590"
+		"code"    : "AZH"
 	},
 	"patterns" :{
 		"TData": "(((20(([02468][048])|([13579][26]))-02-29))|(20[0-9][0-9])-((((0[1-9])|(1[0-2]))-((0[1-9])|(1\\d)|(2[0-8])))|((((0[13578])|(1[02]))-31)|(((0[1,3-9])|(1[0-2]))-(29|30)))))",
