@@ -768,7 +768,7 @@
 		"code"    : "AC7"
 	},
 	"infNFe.det.prod.xProd": {
-		"pattern" : "([\\s\\S]{1,12})",
+		"pattern" : "([\\s\\S]{1,120})",
 		"message" : "O campo infNFe.det.prod.xProd deve conter uma string com no mínimo 1 caracteres e no maxímo 120 caracteres",
 		"desc"    : "GTIN (Global Trade Item Number) do produto, antigo código EAN ou código de barras",
 		"code"    : "AC9"
