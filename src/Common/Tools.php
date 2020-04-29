@@ -453,6 +453,10 @@ class Tools
 
                         if (!preg_match('/^' . $json['patterns'][$json[$keyC . '.' . $key]['patternOb']] . '$/', (String) $xmlTag )){
 
+                            $json[$keyC . '.' . $key]['value'] = (String) $xmlTag;
+                            
+                            $json[$keyC . '.' . $key]['tag'] = $keyC . '.' . $key;
+
                             $error[] = $json[$keyC . '.' . $key];
 
                         }
