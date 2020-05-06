@@ -2658,7 +2658,7 @@
 		"code"    : "AT9"
 	},
 	"infNFe.det.imposto.IPI.IPITrib.vIPI": {
-		"patternOb" : "TDec_1104",
+		"patternOb" : "TDec_1302",
 		"message" : "O campo infNFe.det.imposto.IPI.IPITrib.vIPI deve conter um inteiro com 2 a 4 decimais",
 		"desc"    : "Valor por Unidade Tributável. Informar o valor do imposto Pauta por unidade de medida.",
 		"code"    : "ATA"
