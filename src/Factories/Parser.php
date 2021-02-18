@@ -1910,6 +1910,17 @@ class Parser
     }
 
     /**
+     * Create tag infIntermed [YB]
+     * YB|CNPJ|idCadIntTran|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function ybEntity($std)
+    {
+        $this->make->buildInfIntermed($std);
+    }
+
+    /**
      * Create a tag infAdic [Z]
      * Z|infAdFisco|infCpl|
      * @param stdClass $std

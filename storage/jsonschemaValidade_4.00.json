@@ -107,6 +107,12 @@
 		"desc"    : "Indicador de presença do comprador no estabelecimento comercial no momento da operação 0 - Não se aplica (ex.: Nota Fiscal complementar ou de ajuste); 1 - Operação presencial; 2 - Não presencial, internet; 3 - Não presencial, teleatendimento; 4 - NFC-e entrega em domicílio; 5 - Operação presencial, fora do estabelecimento; 9 - Não presencial, outros",
 		"code"    : "A19"
 	},
+	"infNFe.ide.indIntermed": {
+		"pattern" : "(0|1)",
+		"message" : "O campo infNFe.ide.indIntermed deve conter 0 ou 1",
+		"desc"    : "Indicador de intermediador/marketplace  0=Operação sem intermediador (em site ou plataforma própria); 1=Operação em site ou plataforma de terceiros (intermediadores/marketplace)",
+		"code"    : "A19"
+	},
 	"infNFe.ide.procEmi": {
 		"pattern" : "(0|1|2|3)",
 		"message" : "O campo infNFe.ide.procEmi deve conter 0, 1, 2, ou 3",
@@ -3610,6 +3616,18 @@
 		"message" : "O campo infNFe.pag.vTroco deve conter um inteiro com com 2 casas decimais",
 		"desc"    : "Valor do Troco",
 		"code"    : "AYM"
+	},
+	"infNFe.infIntermed.CNPJ": {
+		"patternOb" : "TCnpj",
+		"message" : "O campo infNFe.infIntermed.CNPJ deve conter um inteiro com com 14 casas decimais",
+		"desc"    : "CNPJ do Intermediador da Transação (agenciador, plataforma de delivery, marketplace e similar) de serviços e de negócios.",
+		"code"    : "AZJ"
+	},
+	"infNFe.infIntermed.idCadIntTran": {
+		"pattern" : "([\\s\\S]{2,60})",
+		"message" : "O campo infNFe.infIntermed.idCadIntTran deve conter uma string com no maxímo 60 caracteres",
+		"desc"    : "Identificador cadastrado no intermediador",
+		"code"    : "AZL"
 	},
 	"infNFe.infAdic.infAdFisco": {
 		"pattern" : "([\\s\\S]{1,2000})",

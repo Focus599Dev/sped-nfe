@@ -125,6 +125,10 @@ class Make
      */
     protected $infNFeSupl;
     /**
+     * @var DOMElement
+     */
+    protected $infIntermed;
+    /**
      * @var array of DOMElements
      */
     protected $aNFref = [];
@@ -410,6 +414,11 @@ class Make
         //[42] tag pag (398a YA01)
         //processa aPag e coloca as tags na tag pag
         $this->buildTagPag();
+
+        //tag infIntermed( YB01 )
+        if ($this->infIntermed){
+            $this->dom->appChild($this->infNFe, $this->infIntermed, 'Falta tag "infNFe"');
+        }
         //[44] tag infAdic (399 Z01)
         $this->dom->appChild($this->infNFe, $this->infAdic, 'Falta tag "infNFe"');
         //[48] tag exporta (402 ZA01)
@@ -487,6 +496,7 @@ class Make
             'finNFe',
             'indFinal',
             'indPres',
+            'indIntermed',
             'procEmi',
             'verProc',
             'dhCont',
@@ -656,6 +666,19 @@ class Make
             true,
             $identificador . "Indicador de presença do comprador no estabelecimento comercial no momento da operação"
         );
+
+        if ($std->indIntermed != ''){
+
+            $this->dom->addChild(
+                $ide,
+                "indIntermed",
+                $std->indIntermed,
+                true,
+                $identificador . "Indicador de intermediador/marketplace"
+            );
+
+        }
+
         $this->dom->addChild(
             $ide,
             "procEmi",
@@ -6650,6 +6673,45 @@ class Make
         }
 
     }
+
+     /**
+     * Grupo de Informações do Intermediador da Transação YB
+     * NOTA: Ajuste NT_2020_006_v1.10
+     * tag NFe/infNFe/infIntermed
+     * @param stdClass $std
+     * @return DOMElement
+     */
+    public function buildInfIntermed($std){
+
+        $possible = [
+            'CNPJ',
+            'idCadIntTran',
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $infIntermed = $this->dom->createElement("infIntermed");
+
+        $this->dom->addChild(
+            $infIntermed,
+            "CNPJ",
+            $std->CNPJ,
+            true,
+            "CNPJ do Intermediador da Transação (agenciador, plataforma de delivery, marketplace e similar) de serviços e de negócios."
+        );
+
+        $this->dom->addChild(
+            $infIntermed,
+            "idCadIntTran",
+            $std->idCadIntTran,
+            true,
+            "Identificador cadastrado no intermediador"
+        );
+
+        $this->infIntermed =  $infIntermed;
+
+        return $infIntermed;
+    }   
 
      /**
      * Grupo de Formas de Pagamento YA04 pai YA
