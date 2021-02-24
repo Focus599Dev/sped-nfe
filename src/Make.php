@@ -496,11 +496,11 @@ class Make
             'finNFe',
             'indFinal',
             'indPres',
-            'indIntermed',
             'procEmi',
             'verProc',
             'dhCont',
-            'xJust'
+            'xJust',
+            'indIntermed',
         ];
         $std = $this->equilizeParameters($std, $possible);
         if (empty($std->cNF)) {
