@@ -2053,4 +2053,8 @@ class Parser
     protected function zpdf_endEntity($std){
         // boleto royal
     }
+
+    protected function z_userEntity($std){
+        // identificação user nota
+    }
 }
