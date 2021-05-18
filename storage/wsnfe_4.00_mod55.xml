@@ -111,6 +111,7 @@
             <NfeRetAutorizacao method="nfeRetAutorizacaoLote" operation="NFeRetAutorizacao4" version="4.00">https://hnfe.fazenda.mg.gov.br/nfe2/services/NFeRetAutorizacao4</NfeRetAutorizacao>
             <RecepcaoEvento method="nfeRecepcaoEvento" operation="NFeRecepcaoEvento4" version="1.00">https://hnfe.fazenda.mg.gov.br/nfe2/services/NFeRecepcaoEvento4</RecepcaoEvento>
             <NfeConsultaCadastro method="consultaCadastro" operation="CadConsultaCadastro4" version="2.00"></NfeConsultaCadastro>
+            <RegistrarSaida method="registrarSaida" operation="RegistrarSaida2" version="1.00">https://hnfe.fazenda.mg.gov.br/nfe2/services/RegistrarSaida2</RegistrarSaida>
         </homologacao>
         <producao>
             <NfeStatusServico method="nfeStatusServicoNF" operation="NFeStatusServico4" version="4.00">https://nfe.fazenda.mg.gov.br/nfe2/services/NFeStatusServico4</NfeStatusServico>
@@ -120,6 +121,7 @@
             <NfeRetAutorizacao method="nfeRetAutorizacaoLote" operation="NFeRetAutorizacao4" version="4.00">https://nfe.fazenda.mg.gov.br/nfe2/services/NFeRetAutorizacao4</NfeRetAutorizacao>
             <RecepcaoEvento method="nfeRecepcaoEvento" operation="NFeRecepcaoEvento4" version="1.00">https://nfe.fazenda.mg.gov.br/nfe2/services/NFeRecepcaoEvento4</RecepcaoEvento>
             <NfeConsultaCadastro method="consultaCadastro4" operation="CadConsultaCadastro4" version="2.00"></NfeConsultaCadastro>
+            <RegistrarSaida method="registrarSaida" operation="RegistrarSaida2" version="1.00">https://nfe.fazenda.mg.gov.br/nfe2/services/RegistrarSaida2</RegistrarSaida>
         </producao>
     </UF>
     <UF>

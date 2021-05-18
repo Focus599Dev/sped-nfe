@@ -168,7 +168,8 @@ class Tools
      */
     protected $availableVersions = [
         '3.10' => 'PL_008i2',
-        '4.00' => 'PL_009_V4_01'
+        '4.00' => 'PL_009_V4_01',
+        '1.00' => 'PL_100d'
     ];
     
     /**
@@ -266,6 +267,7 @@ class Tools
         if (null === $version) {
             return $this->versao;
         }
+
         //Verify version template is defined
         if (false === isset($this->availableVersions[$version])) {
             throw new \InvalidArgumentException('Essa versão de layout não está disponível');
@@ -618,7 +620,7 @@ class Tools
             . "\"";
         //montagem do SOAP Header
         //para versões posteriores a 3.10 não incluir o SoapHeader !!!!
-        if ($this->versao < '4.00') {
+        if (floatval($this->versao) < 4.00) {
             $this->objHeader = new SoapHeader(
                 $this->urlNamespace,
                 'nfeCabecMsg',

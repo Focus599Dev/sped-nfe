@@ -891,6 +891,209 @@ class Tools extends ToolsCommon
         $this->lastResponse = $this->sendRequest($body, $parameters);
         return $this->lastResponse;
     }
+    
+    /**
+     * Request emit event of saída de mercadoria
+     * using new service in RegistrarSaida2
+     * @param  string $chave
+     * @param  string $date
+     * @return string
+     */
+    public function sefazEnviaSaidaDeMercadoria($chave, $data, $seq){
+
+        if (empty($chave) || empty($data)) {
+            throw new RuntimeException('Não foram passados todos os dados necessários.');
+        }
+
+        if (substr($chave, 0, 2) != '31'){
+            throw new RuntimeException('Evento permitido apenas para MG');
+        }
+
+        $servico = 'RegistrarSaida';
+
+        $this->version('1.00');
+
+        $this->checkContingencyForWebServices($servico);
+        
+        $this->servico(
+            $servico,
+            'MG',
+            $this->tpAmb,
+            false
+        );
+
+        $dt = new \DateTime();
+
+        $lote = $dt->format('YmdHis').rand(0, 9);
+
+        $request = "<envRegSaida xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
+                . "<idLote>" . $lote . "</idLote>"   
+                . "<regSaida versao=\"$this->urlVersion\" Id=\"" . $chave . "\">"
+                .   "<tpAmb>" . $this->tpAmb . "</tpAmb>"
+                .   "<chNFe>" . $chave . "</chNFe>"
+                .   "<nSeqRegSaida>" . $seq . "</nSeqRegSaida>"
+                .   "<dtHrRegSaida>" . $data . "</dtHrRegSaida>"
+                . "</regSaida>"
+                . "</envRegSaida>";
+
+        $request = Signer::sign(
+            $this->certificate,
+            $request,
+            'regSaida',
+            'Id',
+            $this->algorithm,
+            $this->canonical,
+            'regSaida',
+        );
+
+        $request = preg_replace("/<\?xml.*?\?>/", "", $request);
+
+        $this->isValid($this->urlVersion, $request, 'enviRegSaida');
+
+        $this->lastRequest = $request;
+        $parameters = ['nfeDadosMsg' => $request];
+        $body = "<nfeDadosMsg xmlns=\"$this->urlNamespace\">$request</nfeDadosMsg>";
+
+        $this->lastResponse = $this->sendRequest($body, $parameters);
+
+        return $this->lastResponse;
+
+    }
+
+
+
+    /**
+     * Request cancel event of saída de mercadoria
+     * using new service in CancRegSaida2
+     * @param  string $chave
+     * @param  string $seq
+     * @param  string $just
+     * @param  string $nProt
+     * @return string
+     */
+    public function sefazCancelSaidaDeMercadoria($chave, $seq = 1, $just, $nProt){
+
+        if (empty($chave) || empty($just) || empty($nProt)) {
+            throw new RuntimeException('Não foram passados todos os dados necessários.');
+        }
+
+        if (substr($chave, 0, 2) != '31'){
+            throw new RuntimeException('Evento permitido apenas para MG');
+        }
+
+        $servico = 'CancRegSaida';
+
+        $this->version('1.00');
+
+        $this->checkContingencyForWebServices($servico);
+        
+        $this->servico(
+            $servico,
+            'MG',
+            $this->tpAmb,
+            false
+        );
+
+        $request = "<cancRegSaida xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
+                . "<infCanc Id=\"" . $chave . "\">"
+                .   "<tpAmb>" . $this->tpAmb . "</tpAmb>"
+                .   "<chNFe>" . $chave . "</chNFe>"
+                .   "<nProt>" . $nProt . "</nProt>"
+                .   "<xJust>" .  \NFePHP\Common\Strings::replaceSpecialsChars($just) . "</xJust>"
+                . "</infCanc>"
+                . "</cancRegSaida>";
+
+        $request = Signer::sign(
+            $this->certificate,
+            $request,
+            'infCanc',
+            'Id',
+            $this->algorithm,
+            $this->canonical,
+        );
+
+        $request = preg_replace("/<\?xml.*?\?>/", "", $request);
+
+        $this->isValid($this->urlVersion, $request, 'cancRegSaida');
+
+        $this->lastRequest = $request;
+        $parameters = ['nfeDadosMsg' => $request];
+        $body = "<nfeDadosMsg xmlns=\"$this->urlNamespace\">$request</nfeDadosMsg>";
+
+        $this->lastResponse = $this->sendRequest($body, $parameters);
+        
+        return $this->lastResponse;
+
+    }
+    /**
+     * Request emit event of saída de mercadoria with lote
+     * using new service in RegistrarSaida2
+     * @param  string $chave
+     * @param  string $date
+     * @return string
+     */
+    public function sefazEnviaSaidaDeMercadoriaLote($lote, $date){
+
+        if (empty($lote) || empty($date)) {
+            throw new RuntimeException('Não foram passados todos os dados necessários.');
+        }
+
+        $servico = 'RegistrarSaida';
+
+        $this->version('1.00');
+
+        $this->checkContingencyForWebServices($servico);
+        
+        $this->servico(
+            $servico,
+            'MG',
+            $this->tpAmb,
+            false
+        );
+
+        $dt = new \DateTime();
+
+        $loteID = $dt->format('YmdHis').rand(0, 9);
+
+        $request = "<envRegSaida xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
+                . "<idLote>" . $loteID . "</idLote>";
+                
+        foreach($lote as $event){
+            $regSaida =  "<regSaida versao=\"$this->urlVersion\" Id=\"" . $event['chave'] . "\">"
+                        .   "<tpAmb>" . $this->tpAmb . "</tpAmb>"
+                        .   "<chNFe>" . $event['chave'] . "</chNFe>"
+                        .   "<nSeqRegSaida>" .$event['seq'] . "</nSeqRegSaida>"
+                        .   "<dtHrRegSaida>" . $date . "</dtHrRegSaida>"
+                        . "</regSaida>";
+
+            $regSaida = Signer::sign(
+                $this->certificate,
+                $regSaida,
+                'regSaida',
+                'Id',
+                $this->algorithm,
+                $this->canonical,
+                'regSaida',
+            );
+
+            $request .= $regSaida;
+        }
+
+        $request .= "</envRegSaida>";
+
+        $request = preg_replace("/<\?xml.*?\?>/", "", $request);
+
+        $this->isValid($this->urlVersion, $request, 'enviRegSaida');
+
+        $this->lastRequest = $request;
+        $parameters = ['nfeDadosMsg' => $request];
+        $body = "<nfeDadosMsg xmlns=\"$this->urlNamespace\">$request</nfeDadosMsg>";
+
+        $this->lastResponse = $this->sendRequest($body, $parameters);
+
+        return $this->lastResponse;
+
+    }
 
     /**
      * Maintenance of the Taxpayer Security Code - CSC (Old Token)
