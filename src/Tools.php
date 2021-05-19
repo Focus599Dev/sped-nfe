@@ -943,7 +943,7 @@ class Tools extends ToolsCommon
             'Id',
             $this->algorithm,
             $this->canonical,
-            'regSaida',
+            'regSaida'
         );
 
         $request = preg_replace("/<\?xml.*?\?>/", "", $request);
@@ -1009,7 +1009,7 @@ class Tools extends ToolsCommon
             'infCanc',
             'Id',
             $this->algorithm,
-            $this->canonical,
+            $this->canonical
         );
 
         $request = preg_replace("/<\?xml.*?\?>/", "", $request);
