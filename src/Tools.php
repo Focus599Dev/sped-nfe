@@ -1073,7 +1073,7 @@ class Tools extends ToolsCommon
                 'Id',
                 $this->algorithm,
                 $this->canonical,
-                'regSaida',
+                'regSaida'
             );
 
             $request .= $regSaida;
