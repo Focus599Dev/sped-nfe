@@ -119,7 +119,7 @@
     "Y02":"Y02|nFat|vOrig|vDesc|vLiq|",
     "Y07":"Y07|nDup|dVenc|vDup|",
     "YA":"YA|indPag|tPag|vPag|CNPJ|tBand|cAut|tpIntegra|",
-    "YA01A":"YA01A|tPag|vPag|",
+    "YA01A":"YA01A|tPag|vPag|xPag|",
     "YA04":"YA04|tpIntegra|CNPJ|tBand|cAut|",
     "YB":"YB|CNPJ|idCadIntTran|",
     "Z":"Z|infAdFisco|infCpl|",
