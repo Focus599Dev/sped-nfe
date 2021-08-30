@@ -1864,7 +1864,7 @@ class Parser
 
     /**
      * Creates tag detPag and card [YA01A]
-     * YA01A|tPag|vPag|
+     * YA01A|tPag|vPag|xPag|
      * @param stdClass $std
      * @return void
      */
