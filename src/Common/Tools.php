@@ -168,7 +168,7 @@ class Tools
      */
     protected $availableVersions = [
         '3.10' => 'PL_008i2',
-        '4.00' => 'PL_009_V4_01',
+        '4.00' => 'PL_009_V4_02',
         '1.00' => 'PL_100d'
     ];
     
