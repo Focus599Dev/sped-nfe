@@ -6550,6 +6550,7 @@ class Make
             'indPag',
             'tPag',
             'vPag',
+            'xPag',
         ];
 
         $std = $this->equilizeParameters($std, $possible);
@@ -6619,6 +6620,13 @@ class Make
                 $std->tPag,
                 true,
                 "Forma de pagamento"
+            );
+            $this->dom->addChild(
+                $detPag,
+                "xPag",
+                $std->xPag,
+                false,
+                "Descrição do Meio de Pagamento"
             );
             $this->dom->addChild(
                 $detPag,
