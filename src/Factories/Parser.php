@@ -233,6 +233,19 @@ class Parser
         $this->make->tagrefNFe($std);
     }
 
+     /**
+     * Create tag refNFeSig [BA02A]
+     * BA02A|refNFeSig|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function ba02aEntity($std)
+    {
+        $this->make->tagrefNFeSing($std);
+    }
+
+    
+
     /**
      * Create tag refNF [BA03]
      * BA03|cUF|AAMM|CNPJ|mod|serie|nNF|

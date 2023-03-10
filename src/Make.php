@@ -726,8 +726,40 @@ class Make
 
         $num = $this->buildNFref();
         $refNFe = $this->dom->createElement("refNFe", $std->refNFe);
+        
+        $refNFeSig = $this->dom->createElement("refNFeSig", str_pad((string)0, 44, "0", STR_PAD_LEFT) );
+
         $this->dom->appChild($this->aNFref[$num - 1], $refNFe);
+
+        $this->dom->appChild($this->aNFref[$num - 1], $refNFeSig);
+
         return $refNFe;
+    }
+
+    /**
+     * Chave de acesso da NF-e referenciada zerada BA02A pai BA01
+     * tag NFe/infNFe/ide/NFref/refNFeSig
+     * @param  stdClass $std
+     * @return DOMElement
+     */
+    
+    public function tagrefNFeSing(stdClass $std)
+    {
+        $possible = ['refNFeSig'];
+        
+        $std = $this->equilizeParameters($std, $possible);
+
+        $num = $this->buildNFref();
+        
+        $refNFe = $this->dom->createElement("refNFe",  str_pad((string)0, 44, "0", STR_PAD_LEFT));
+
+        $refNFeSig = $this->dom->createElement("refNFeSig", $std->refNFeSig);
+        
+        $this->dom->appChild($this->aNFref[$num - 1], $refNFe);
+
+        $this->dom->appChild($this->aNFref[$num - 1], $refNFeSig);
+
+        return $refNFeSig;
     }
 
     /**

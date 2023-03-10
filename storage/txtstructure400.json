@@ -4,6 +4,7 @@
     "B":"B|cUF|cNF|natOp|mod|serie|nNF|dhEmi|dhSaiEnt|tpNF|idDest|cMunFG|tpImp|tpEmis|cDV|tpAmb|finNFe|indFinal|indPres|procEmi|verProc|dhCont|xJust|indIntermed|",
     "BA":"BA|",
     "BA02":"BA02|refNFe|",
+    "BA02A":"BA02A|refNFeSig|",
     "BA03":"BA03|cUF|AAMM|CNPJ|mod|serie|nNF|",
     "BA10":"BA10|cUF|AAMM|IE|mod|serie|nNF|",
     "BA13":"BA13|CNPJ|",
