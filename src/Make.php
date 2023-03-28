@@ -731,7 +731,7 @@ class Make
 
         $this->dom->appChild($this->aNFref[$num - 1], $refNFe);
 
-        $this->dom->appChild($this->aNFref[$num - 1], $refNFeSig);
+        //$this->dom->appChild($this->aNFref[$num - 1], $refNFeSig);
 
         return $refNFe;
     }
@@ -755,7 +755,7 @@ class Make
 
         $refNFeSig = $this->dom->createElement("refNFeSig", $std->refNFeSig);
         
-        $this->dom->appChild($this->aNFref[$num - 1], $refNFe);
+        //$this->dom->appChild($this->aNFref[$num - 1], $refNFe);
 
         $this->dom->appChild($this->aNFref[$num - 1], $refNFeSig);
 
