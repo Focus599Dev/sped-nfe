@@ -734,7 +734,7 @@ class Tools
             $this->soap = new SoapCurl($this->certificate);
             
             // set TLS 1.3
-            $this->soap->protocol(7);
+            //$this->soap->protocol(7);
         }
     }
 }
