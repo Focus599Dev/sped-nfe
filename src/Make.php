@@ -323,6 +323,13 @@ class Make
         $this->stdTot->vOutro = 0;
         $this->stdTot->vNF = 0;
         $this->stdTot->vTotTrib = 0;
+
+        $this->stdTot->qBCMono = 0;
+        $this->stdTot->vICMSMono = 0;
+        $this->stdTot->qBCMonoReten = 0;
+        $this->stdTot->vICMSMonoReten = 0;
+        $this->stdTot->qBCMonoRet = 0;
+        $this->stdTot->vICMSMonoRet = 0;
     }
 
     /**
@@ -517,11 +524,19 @@ class Make
 
         $dateTxt = new \DateTime($std->dhEmi);
 
+        $dateTxtSaida = new \DateTime($std->dhSaiEnt);
+
         if ($dateNow < $dateTxt){
                 
             $std->dhEmi = date('c');
             
             $std->dhSaiEnt =  date('c');
+
+        }
+
+        if ($dateTxt > $dateTxtSaida){
+
+            $std->dhSaiEnt =  $dateTxt->format('c');
 
         }
 
@@ -727,11 +742,11 @@ class Make
         $num = $this->buildNFref();
         $refNFe = $this->dom->createElement("refNFe", $std->refNFe);
         
-        $refNFeSig = $this->dom->createElement("refNFeSig", str_pad((string)0, 44, "0", STR_PAD_LEFT) );
+        // $refNFeSig = $this->dom->createElement("refNFeSig", str_pad((string)0, 44, "0", STR_PAD_LEFT) );
 
         $this->dom->appChild($this->aNFref[$num - 1], $refNFe);
 
-        $this->dom->appChild($this->aNFref[$num - 1], $refNFeSig);
+        // $this->dom->appChild($this->aNFref[$num - 1], $refNFeSig);
 
         return $refNFe;
     }
@@ -751,11 +766,11 @@ class Make
 
         $num = $this->buildNFref();
         
-        $refNFe = $this->dom->createElement("refNFe",  str_pad((string)0, 44, "0", STR_PAD_LEFT));
+        // $refNFe = $this->dom->createElement("refNFe",  str_pad((string)0, 44, "0", STR_PAD_LEFT));
 
         $refNFeSig = $this->dom->createElement("refNFeSig", $std->refNFeSig);
         
-        $this->dom->appChild($this->aNFref[$num - 1], $refNFe);
+        // $this->dom->appChild($this->aNFref[$num - 1], $refNFe);
 
         $this->dom->appChild($this->aNFref[$num - 1], $refNFeSig);
 
@@ -3009,7 +3024,22 @@ class Make
             'vBCEfet',
             'pICMSEfet',
             'vICMSEfet',
-            'vICMSSubstituto'
+            'vICMSSubstituto',
+            'vICMSSTDeson',
+            'motDesICMSST',
+            'pFCPDif',
+            'vFCPDif',
+            'vFCPEfet',
+            'pRedAdRem',
+            'qBCMono',
+            'adRemiICMS',
+            'vICMSMono',
+            'vICMSMonoOp',
+            'adRemICMSReten',
+            'vICMSMonoReten',
+            'vICMSMonoDif',
+            'vICMSMonoRet'
+
         ];
         $std = $this->equilizeParameters($std, $possible);
         //totalizador
@@ -3684,6 +3714,47 @@ class Make
                     $std->vICMSEfet,
                     false,
                     "$identificador [item $std->item] Valor do ICMS efetivo"
+                );
+                break;
+            case '61':
+                $this->stdTot->qBCMonoRet += (float) !empty($std->qBCMonoRet) ? $std->qBCMonoRet : 0;
+                $this->stdTot->vICMSMonoRet += (float) !empty($std->vICMSMonoRet) ? $std->vICMSMonoRet : 0;
+
+                $icms = $this->dom->createElement("ICMS61");
+                $this->dom->addChild(
+                    $icms,
+                    'orig',
+                    $std->orig,
+                    true,
+                    "$identificador [item $std->item] Origem da mercadoria"
+                );
+                $this->dom->addChild(
+                    $icms,
+                    'CST',
+                    $std->CST,
+                    true,
+                    "$identificador [item $std->item] Tributação do ICMS = 61"
+                );
+                $this->dom->addChild(
+                    $icms,
+                    'qBCMonoRet',
+                    $this->conditionalNumberFormatting($std->qBCMonoRet, 4),
+                    false,
+                    "$identificador [item $std->item] Quantidade tributada retida anteriormente"
+                );
+                $this->dom->addChild(
+                    $icms,
+                    'adRemICMSRet',
+                    $this->conditionalNumberFormatting($std->adRemICMSRet, 4),
+                    true,
+                    "$identificador [item $std->item] Alíquota ad rem do imposto retido anteriormente"
+                );
+                $this->dom->addChild(
+                    $icms,
+                    'vICMSMonoRet',
+                    $this->conditionalNumberFormatting($std->vICMSMonoRet),
+                    true,
+                    "$identificador [item $std->item] Valor do ICMS retido anteriormente"
                 );
                 break;
             case '70':
@@ -5768,6 +5839,12 @@ class Make
         $vFCPUFDest = !empty($std->vFCPUFDest) ? $std->vFCPUFDest : $this->stdTot->vFCPUFDest;
         $vICMSUFDest = !empty($std->vICMSUFDest) ? $std->vICMSUFDest : $this->stdTot->vICMSUFDest;
         $vICMSUFRemet = !empty($std->vICMSUFRemet) ? $std->vICMSUFRemet : $this->stdTot->vICMSUFRemet;
+        $qBCMono = !empty($std->qBCMono) ? $std->qBCMono : $this->stdTot->qBCMono;
+        $vICMSMono = !empty($std->vICMSMono) ? $std->vICMSMono : $this->stdTot->vICMSMono;
+        $qBCMonoReten = !empty($std->qBCMonoReten) ? $std->qBCMonoReten : $this->stdTot->qBCMonoReten;
+        $vICMSMonoReten = !empty($std->vICMSMonoReten) ? $std->vICMSMonoReten : $this->stdTot->vICMSMonoReten;
+        $qBCMonoRet = !empty($std->qBCMonoRet) ? $std->qBCMonoRet : $this->stdTot->qBCMonoRet;
+        $vICMSMonoRet = !empty($std->vICMSMonoRet) ? $std->vICMSMonoRet : $this->stdTot->vICMSMonoRet;
 
         //campos opcionais incluir se maior que zero
 
@@ -5875,6 +5952,51 @@ class Make
             "Valor Total do FCP retido anteriormente por "
             . "Substituição Tributária"
         );
+
+        //incluso NT 2023.001-1.10
+        $this->dom->addChild(
+            $ICMSTot,
+            "qBCMono",
+            $this->conditionalNumberFormatting(!empty($qBCMono) ? $qBCMono : null),
+            false,
+            "Valor total da quantidade tributada do ICMS monofásico próprio"
+        );
+        $this->dom->addChild(
+            $ICMSTot,
+            "vICMSMono",
+            $this->conditionalNumberFormatting(!empty($vICMSMono) ? $vICMSMono : null),
+            false,
+            "Valor total do ICMS monofásico próprio"
+        );
+        $this->dom->addChild(
+            $ICMSTot,
+            "qBCMonoReten",
+            $this->conditionalNumberFormatting(!empty($qBCMonoReten) ? $qBCMonoReten : null),
+            false,
+            "Valor total da quantidade tributada do ICMS monofásico sujeito a retenção"
+        );
+        $this->dom->addChild(
+            $ICMSTot,
+            "vICMSMonoReten",
+            $this->conditionalNumberFormatting(!empty($vICMSMonoReten) ? $vICMSMonoReten : null),
+            false,
+            "Valor total do ICMS monofásico sujeito a retenção"
+        );
+        $this->dom->addChild(
+            $ICMSTot,
+            "qBCMonoRet",
+            $this->conditionalNumberFormatting(!empty($qBCMonoRet) ? $qBCMonoRet : null),
+            false,
+            "Valor total da quantidade tributada do ICMS monofásico retido anteriormente"
+        );
+        $this->dom->addChild(
+            $ICMSTot,
+            "vICMSMonoRet",
+            $this->conditionalNumberFormatting(!empty($vICMSMonoRet) ? $vICMSMonoRet : null),
+            false,
+            "Valor total do ICMS monofásico retido anteriormente"
+        );
+        
         $this->dom->addChild(
             $ICMSTot,
             "vProd",
@@ -7872,5 +7994,18 @@ class Make
     protected function hashCSRT($CSRT){
         $comb = $CSRT . $this->chNFe;
         return base64_encode(sha1($comb));
+    }
+
+    /**
+     * Formatação numerica condicional
+     * @param string|float|int|null $value
+     */
+    protected function conditionalNumberFormatting($value = null, int $decimal = 2): ?string
+    {
+        if (is_numeric($value)) {
+            return number_format($value, $decimal, '.', '');
+        }
+
+        return null;
     }
 }

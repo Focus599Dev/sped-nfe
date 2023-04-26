@@ -975,6 +975,21 @@ class Parser
     }
 
     /**
+     * Load fields for tag ICMS [N08]
+     * N08|orig|CST|vBCSTRet|vICMSSTRet|
+     *
+     * NOTE: adjusted for NT2023_001_v1.20
+     * N08a|orig|CST|qBCMonoRet|adRemICMSRet|vICMSMonoRet|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function n08aEntity($std)
+    {
+        $this->buildNEntity($std);
+    }
+
+    
+    /**
      * Load fields for tag ICMS [N09]
      * N09|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vICMSDeson|motDesICMS|
      *
