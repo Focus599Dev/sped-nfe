@@ -732,6 +732,7 @@ class Tools
     {
         if (empty($this->soap)) {
             $this->soap = new SoapCurl($this->certificate);
+            
             // set TLS 1.3
             //$this->soap->protocol(7);
         }
