@@ -95,6 +95,10 @@ class Parser
      */
     protected $stdCOFINSST;
     /**
+     * @var stdClass
+     */
+    protected $stdICMSTot;
+    /**
      * @var stdClass|null
      */
     protected $stdTransporta;
@@ -152,6 +156,15 @@ class Parser
             $std = $this->fieldsToStd($fields, $struct);
             $this->$metodo($std);
         }
+
+        $this->createObjectEnds();
+
+    }
+
+    private function createObjectEnds(){
+
+        $this->make->tagICMSTot($this->stdICMSTot);
+
     }
 
     /**
@@ -1642,8 +1655,9 @@ class Parser
      * @return void
      */
     protected function w02Entity($std)
-    {
-        $this->make->tagICMSTot($std);
+    {   
+        $this->stdICMSTot = $this->mergeObject($std, (new \stdClass()));
+        // $this->make->tagICMSTot($std);
     }
 
     /**
@@ -1700,6 +1714,14 @@ class Parser
     protected function w06bEntity($std){
         //fake não faz nada
         $field = null;
+    }
+
+     /**
+     * Cria tag ICMSTot fiedls
+     * W06c|qBCMono|vICMSMono|qBCMonoReten|vICMSMonoReten|qBCMonoRet|vICMSMonoRet|
+     */
+    protected function w06cEntity($std){
+        $this->stdICMSTot = $this->mergeObject( $this->stdICMSTot , $std);
     }
 
     /**
@@ -2084,5 +2106,16 @@ class Parser
 
     protected function z_userEntity($std){
         // identificação user nota
+    }
+
+    protected function mergeObject($std1, $std2){
+
+
+        foreach ( $std2 as $attr => $value ) {
+            $std1->{$attr} = $value;
+        }
+
+        return $std1
+
     }
 }
