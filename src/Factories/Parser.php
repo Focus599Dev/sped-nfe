@@ -165,6 +165,11 @@ class Parser
 
         $this->make->tagICMSTot($this->stdICMSTot);
 
+        if (isset($this->stdICMSTot->vISS))
+            $this->make->tagISSQNTot($this->stdICMSTot);
+
+        if (isset($this->stdICMSTot->vRetCOFINS))
+            $this->make->tagretTrib($this->stdICMSTot);
     }
 
     /**
@@ -1732,8 +1737,9 @@ class Parser
      * @return void
      */
     protected function w17Entity($std)
-    {
-        $this->make->tagISSQNTot($std);
+    {   
+        $this->stdICMSTot = $this->mergeObject( $this->stdICMSTot , $std);
+
     }
 
     /**
@@ -1744,7 +1750,8 @@ class Parser
      */
     protected function w23Entity($std)
     {
-        $this->make->tagretTrib($std);
+        $this->stdICMSTot = $this->mergeObject( $this->stdICMSTot , $std);
+
     }
 
     /**
@@ -2115,7 +2122,7 @@ class Parser
             $std1->{$attr} = $value;
         }
 
-        return $std1
+        return $std1;
 
     }
 }
