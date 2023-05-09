@@ -911,6 +911,17 @@ class Parser
         $this->buildNEntity($std);
     }
 
+     /**
+     * Load field for tag ICMS N03a
+     * Note: Nota tecnica 2023.001 v1.20
+     * N02a|orig|CST|qBCMono|adRemICMS|vICMSMono|
+    */
+
+    protected function n02aEntity($std)
+    {
+        $this->buildNEntity($std);
+    }
+
     /**
      * Load fields for tag ICMS [N03]
      * N03|orig|CST|modBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|
@@ -921,6 +932,17 @@ class Parser
      * @return void
      */
     protected function n03Entity($std)
+    {
+        $this->buildNEntity($std);
+    }
+
+    /**
+     * Load field for tag ICMS N03a
+     * Note: Nota tecnica 2023.001 v1.20
+     * N03a|orig|CST|qBCMono|adRemICMS|vICMSMono|qBCMonoReten|adRemICMSReten|vICMSMonoReten|pRedAdRem|motRedAdRem|
+    */
+
+    protected function n03aEntity($std)
     {
         $this->buildNEntity($std);
     }
@@ -977,6 +999,18 @@ class Parser
     {
         $this->buildNEntity($std);
     }
+
+    /**
+     * Load field for tag ICMS N03a
+     * Note: Nota tecnica 2023.001 v1.20
+     * N07a|orig|CST|qBCMono|adRemICMS|vICMSMonoOp|pDif|vICMSMonoDif|vICMSMono|
+    */
+
+    protected function n07aEntity($std)
+    {
+        $this->buildNEntity($std);
+    }
+
 
     /**
      * Load fields for tag ICMS [N08]
