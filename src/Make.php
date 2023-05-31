@@ -2904,7 +2904,8 @@ class Make
             'nBomba',
             'nTanque',
             'vEncIni',
-            'vEncFin'
+            'vEncFin',
+            'pBio'
         ];
         $std = $this->equilizeParameters($std, $possible);
 
@@ -2945,6 +2946,15 @@ class Make
             true,
             "$identificador [item $std->item] Valor do Encerrante no final do abastecimento"
         );
+        $this->dom->addChild(
+            $encerrante,
+            "pBio",
+            $std->pBio,
+            false,
+            "$identificador [item $std->item] Percentual do índice de mistura do Biodiesel (B100) no
+            Óleo Diesel B instituído pelo órgão regulamentador"
+        );
+        
         $this->aEncerrante[$std->item] = $encerrante;
         return $encerrante;
     }
