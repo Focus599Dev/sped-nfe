@@ -837,7 +837,7 @@ class Parser
 
     /**
      * Load fields for tag encerrante [LA11]
-     * LA11|nBico|nBomba|nTanque|vEncIni|vEncFin|pBio
+     * LA11|nBico|nBomba|nTanque|vEncIni|vEncFin
      * @param stdClass $std
      * @return void
      */

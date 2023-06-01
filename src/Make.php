@@ -2771,7 +2771,8 @@ class Make
             'UFCons',
             'qBCProd',
             'vAliqProd',
-            'vCIDE'
+            'vCIDE',
+            'pBio'
         ];
         $std = $this->equilizeParameters($std, $possible);
 
@@ -2884,6 +2885,16 @@ class Make
             );
             $this->dom->appChild($comb, $tagCIDE);
         }
+
+         //NT 2023.01 1.20
+         $this->dom->addChild(
+            $comb,
+            "pBio",
+            $std->pBio,
+            false,
+            "$identificador [item $std->item] Percentual do índice de mistura do Biodiesel (B100) no Óleo Diesel B instituído pelo órgão regulamentador"
+        );
+
         $this->aComb[$std->item] = $comb;
         return $comb;
     }
@@ -2905,7 +2916,6 @@ class Make
             'nTanque',
             'vEncIni',
             'vEncFin',
-            'pBio'
         ];
         $std = $this->equilizeParameters($std, $possible);
 
@@ -2945,14 +2955,6 @@ class Make
             $std->vEncFin,
             true,
             "$identificador [item $std->item] Valor do Encerrante no final do abastecimento"
-        );
-        $this->dom->addChild(
-            $encerrante,
-            "pBio",
-            $std->pBio,
-            false,
-            "$identificador [item $std->item] Percentual do índice de mistura do Biodiesel (B100) no
-            Óleo Diesel B instituído pelo órgão regulamentador"
         );
         
         $this->aEncerrante[$std->item] = $encerrante;
@@ -7967,8 +7969,27 @@ class Make
             $prod = $this->aProd[$nItem];
             if (!empty($this->aEncerrante)) {
                 $encerrante = $this->aEncerrante[$nItem];
+                
+                $node = $child->getElementsByTagName("CIDE")->item(0);
+
+                if (!$node){
+    
+                    $node = $child->getElementsByTagName("UFCons")->item(0);
+
+                }
+
                 if (!empty($encerrante)) {
-                    $this->dom->appChild($child, $encerrante, "inclusão do node encerrante na tag comb");
+
+                    if (!empty($node)) {
+                        
+                        $prod->insertBefore($node, $encerrante);
+
+                    } else {
+                        
+                        $this->dom->appChild($child, $encerrante, "inclusão do node encerrante na tag comb");
+                        
+                    }
+
                 }
             }
             $this->dom->appChild($prod, $child, "Inclusão do node combustivel");
