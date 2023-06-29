@@ -848,6 +848,18 @@ class Parser
     }
 
     /**
+     * Load fields for tag origComb [LA18]
+     * LA18|indImport|cUFOrig|pOrig
+     * @param stdClass $std
+     * @return void
+     */
+    protected function la18Entity($std)
+    {
+        $std->item = $this->item;
+        $this->make->tagorigComb($std);
+    }
+
+    /**
      * Create tag comb [LA]
      * @return void
      */

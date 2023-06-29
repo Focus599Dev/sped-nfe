@@ -212,6 +212,10 @@ class Make
      * @var array of DOMElements
      */
     protected $aEncerrante = [];
+     /**
+     * @var array of DOMElements
+     */
+    protected $aOrigComb = [];
     /**
      * @var array of DOMElements
      */
@@ -2959,6 +2963,50 @@ class Make
         
         $this->aEncerrante[$std->item] = $encerrante;
         return $encerrante;
+    }
+
+    /**
+     * Grupo indicador da origem do combustível
+     * encerrante que permite o controle sobre as operações de venda de combustíveis
+     * LA18 pai LA01
+     * tag NFe/infNFe/det[]/prod/comb/origComb[]
+     *
+     * NOTA: Adicionado para NT2023_0001_v1.10
+     */
+    public function tagorigComb(stdClass $std)
+    {
+        $possible = [
+            'item',
+            'indImport',
+            'cUFOrig',
+            'pOrig'
+        ];
+        $std = $this->equilizeParameters($std, $possible);
+        $identificador = 'LA18 <origComb> - ';
+        $origComb = $this->dom->createElement("origComb");
+        $this->dom->addChild(
+            $origComb,
+            "indImport",
+            $std->indImport,
+            true,
+            "$identificador [item $std->item] Indicador de importação"
+        );
+        $this->dom->addChild(
+            $origComb,
+            "cUFOrig",
+            $std->cUFOrig,
+            true,
+            "$identificador [item $std->item] Código da UF"
+        );
+        $this->dom->addChild(
+            $origComb,
+            "pOrig",
+            $this->conditionalNumberFormatting($std->pOrig, 4),
+            true,
+            "$identificador [item $std->item] Percentual originário para a UF"
+        );
+        $this->aOrigComb[$std->item][] = $origComb;
+        return $origComb;
     }
 
     /**
@@ -7992,6 +8040,14 @@ class Make
 
                 }
             }
+
+            //incluso NT 2023.001-1.10 /1.20
+            if (!empty($this->aOrigComb[$nItem])) {
+                foreach ($this->aOrigComb[$nItem] as $origcomb) {
+                     $this->dom->appChild($child, $origcomb, "inclusão do node origComb na tag comb");
+                }
+            }
+            
             $this->dom->appChild($prod, $child, "Inclusão do node combustivel");
             $this->aProd[$nItem] = $prod;
         }

@@ -46,6 +46,7 @@
     "LA":"LA|cProdANP|descANP|pGLP|pGNn|pGNi|vPart|CODIF|qTemp|UFCons|pBio|",
     "LA07":"LA07|qBCProd|vAliqProd|vCIDE|",
     "LA11":"LA11|nBico|nBomba|nTanque|vEncIni|vEncFin|",
+    "LA18":"LA18|indImport|cUFOrig|pOrig",
     "LB":"LB|nRECOPI|",
     "M":"M|vTotTrib|",
     "N":"N|",
