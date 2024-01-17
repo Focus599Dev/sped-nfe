@@ -3576,9 +3576,9 @@
 		"code"    : "AYE"
 	},
 	"infNFe.pag.detPag.tPag": {
-		"pattern" : "(01|02|03|04|05|10|11|12|13|14|15|90|99)",
-		"message" : "O campo infNFe.pag.detPag.tPag deve conter 01, 02, 03, 04, 05, 10, 11, 12, 13, 14, 15, 90 ou 99 ",
-		"desc"    : "Forma de Pagamento:01-Dinheiro;02-Cheque;03-Cartão de Crédito;04-Cartão de Débito;05-Crédito Loja;10-Vale Alimentação;11-Vale Refeição;12-Vale Presente;13-Vale Combustível;14 - Duplicata Mercantil;15 - Boleto Bancario;90 - Sem Pagamento;99 - Outros",
+		"pattern" : "(01|02|03|04|05|10|11|12|13|14|15|16|17|18|19|90|99)",
+		"message" : "O campo infNFe.pag.detPag.tPag deve conter 01, 02, 03, 04, 05, 10, 11, 12, 13, 14, 15, 16,17,18,19, 90 ou 99 ",
+		"desc"    : "Forma de Pagamento:01-Dinheiro;02-Cheque;03-Cartão de Crédito;04-Cartão de Débito;05-Crédito Loja;10-Vale Alimentação;11-Vale Refeição;12-Vale Presente;13-Vale Combustível;14 - Duplicata Mercantil;15 - Boleto Bancario;16 - Depósito Bancário;17 - Pagamento Instantâneo (PIX);18 - Transferência Bancária;19 - Programa de Fidelidade;90 - Sem Pagamento;99 - Outros",
 		"code"    : "AYF"
 	},
 	"infNFe.pag.detPag.vPag": {
