@@ -695,7 +695,7 @@ class Parser
 
     /**
      * Create tag DI [I18]
-     * I18|nDI|dDI|xLocDesemb|UFDesemb|dDesemb|tpViaTransp|vAFRMM|tpIntermedio|CNPJ|UFTerceiro|cExportador|
+     * I18|nDI|dDI|xLocDesemb|UFDesemb|dDesemb|tpViaTransp|vAFRMM|tpIntermedio|CNPJ|UFTerceiro|cExportador|CPF|
      * @param stdClass $std
      * @return void
      */
@@ -964,7 +964,7 @@ class Parser
      * N04|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|vICMSDeson|motDesICMS|
      *
      * NOTE: adjusted for NT2016_002_v1.30
-     * N04|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|vBCFCP|pFCP|vFCP|vICMSDeson|motDesICMS|
+     * N04|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|vBCFCP|pFCP|vFCP|vICMSDeson|motDesICMS|indDeduzDeson|
      * @param stdClass $std
      * @return void
      */
@@ -1967,7 +1967,7 @@ class Parser
 
     /**
      * Creates tag detPag and card [YA01A]
-     * YA01A|tPag|vPag|xPag|
+     * YA01A|tPag|vPag|xPag|dPag|CNPJPag|UFPag|
      * @param stdClass $std
      * @return void
      */
@@ -1979,7 +1979,7 @@ class Parser
 
      /**
      * Creates tag detPag and card [YA04]
-     * YA|tpIntegra|CNPJ|tBand|cAut|
+     * YA04|tpIntegra|CNPJ|tBand|cAut|CNPJReceb|idTermPag|
      * @param stdClass $std
      * @return void
      */
