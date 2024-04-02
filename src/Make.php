@@ -7086,7 +7086,7 @@ class Make
                 $detPag,
                 "dPag",
                 $std->dPag,
-                true,
+                false,
                 "Data do Pagamento"
             );
             $this->dom->addChild(
