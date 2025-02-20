@@ -8352,7 +8352,7 @@ class Make
     */
     protected function hashCSRT($CSRT){
         $comb = $CSRT . $this->chNFe;
-        return base64_encode(sha1($comb));
+        return base64_encode(sha1($comb, true));
     }
 
     /**
