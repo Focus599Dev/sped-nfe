@@ -45,7 +45,7 @@ class Tools extends ToolsCommon
     public function sefazEnviaLote(
         $aXml,
         $idLote = '',
-        $indSinc = 0,
+        $indSinc = 1,
         $compactar = false,
         &$xmls = []
     ) {
@@ -54,6 +54,7 @@ class Tools extends ToolsCommon
         }
         $servico = 'NfeAutorizacao';
         $this->checkContingencyForWebServices($servico);
+        
         if (count($aXml) > 1) {
             $indSinc = 0;
         }
@@ -99,6 +100,11 @@ class Tools extends ToolsCommon
         }
 
         $this->lastResponse = $this->sendRequest($body, $parameters);
+
+        var_dump($this->lastResponse);
+
+        var_dump($request);
+        
         return $this->lastResponse;
     }
 
