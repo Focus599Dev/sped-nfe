@@ -3553,7 +3553,7 @@ class Make
                 $this->dom->addChild(
                     $icms,
                     'vICMSDeson',
-                    $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
+                    $std->vICMSDeson,
                     false,
                     "$identificador [item $std->item] Valor do ICMS desonerado"
                 );
@@ -3665,7 +3665,7 @@ class Make
                 $this->dom->addChild(
                     $icms,
                     'vICMSDeson',
-                    $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
+                    $std->vICMSDeson,
                     false,
                     "$identificador [item $std->item] Valor do ICMS desonerado"
                 );
@@ -3705,7 +3705,7 @@ class Make
                 $this->dom->addChild(
                     $icms,
                     'vICMSDeson',
-                    $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
+                    $std->vICMSDeson,
                     false,
                     "$identificador [item $std->item] Valor do ICMS desonerado"
                 );
@@ -4188,7 +4188,7 @@ class Make
                 $this->dom->addChild(
                     $icms,
                     'vICMSDeson',
-                    $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
+                    $std->vICMSDeson,
                     false,
                     "$identificador [item $std->item] Valor do ICMS desonerado"
                 );
@@ -4365,7 +4365,7 @@ class Make
                 $this->dom->addChild(
                     $icms,
                     'vICMSDeson',
-                    $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
+                    $std->vICMSDeson,
                     false,
                     "$identificador [item $std->item] Valor do ICMS desonerado"
                 );
