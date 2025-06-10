@@ -3550,13 +3550,16 @@ class Make
                     false,
                     "$identificador [item $std->item] Valor do FCP"
                 );
-                $this->dom->addChild(
-                    $icms,
-                    'vICMSDeson',
-                    $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
-                    false,
-                    "$identificador [item $std->item] Valor do ICMS desonerado"
-                );
+                if($std->vICMSDeson != ''){
+                    
+                    $this->dom->addChild(
+                        $icms,
+                        'vICMSDeson',
+                        $std->vICMSDeson,
+                        true,
+                        "$identificador [item $std->item] Valor do ICMS desonerado"
+                    );
+                }
                 $this->dom->addChild(
                     $icms,
                     'motDesICMS',
@@ -3662,13 +3665,16 @@ class Make
                     false,
                     "$identificador [item $std->item] Valor do FCP ST"
                 );
-                $this->dom->addChild(
-                    $icms,
-                    'vICMSDeson',
-                    $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
-                    false,
-                    "$identificador [item $std->item] Valor do ICMS desonerado"
-                );
+                if($std->vICMSDeson != ''){
+                    
+                    $this->dom->addChild(
+                        $icms,
+                        'vICMSDeson',
+                        $std->vICMSDeson,
+                        true,
+                        "$identificador [item $std->item] Valor do ICMS desonerado"
+                    );
+                }
                 $this->dom->addChild(
                     $icms,
                     'motDesICMS',
@@ -3702,13 +3708,16 @@ class Make
                     true,
                     "$identificador [item $std->item] Tributação do ICMS $std->CST"
                 );
-                $this->dom->addChild(
-                    $icms,
-                    'vICMSDeson',
-                    $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
-                    false,
-                    "$identificador [item $std->item] Valor do ICMS desonerado"
-                );
+                if($std->vICMSDeson != ''){
+                    
+                    $this->dom->addChild(
+                        $icms,
+                        'vICMSDeson',
+                        $std->vICMSDeson,
+                        true,
+                        "$identificador [item $std->item] Valor do ICMS desonerado"
+                    );
+                }
                 $this->dom->addChild(
                     $icms,
                     'motDesICMS',
@@ -4185,13 +4194,16 @@ class Make
                     false,
                     "$identificador [item $std->item] Valor do FCP ST"
                 );
-                $this->dom->addChild(
-                    $icms,
-                    'vICMSDeson',
-                    $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
-                    false,
-                    "$identificador [item $std->item] Valor do ICMS desonerado"
-                );
+                if($std->vICMSDeson != ''){
+                    
+                    $this->dom->addChild(
+                        $icms,
+                        'vICMSDeson',
+                        $std->vICMSDeson,
+                        true,
+                        "$identificador [item $std->item] Valor do ICMS desonerado"
+                    );
+                }
                 $this->dom->addChild(
                     $icms,
                     'motDesICMS',
@@ -4362,13 +4374,16 @@ class Make
                     false,
                     "$identificador [item $std->item] Valor do FCP ST"
                 );
-                $this->dom->addChild(
-                    $icms,
-                    'vICMSDeson',
-                    $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
-                    false,
-                    "$identificador [item $std->item] Valor do ICMS desonerado"
-                );
+                if($std->vICMSDeson != ''){
+                    
+                    $this->dom->addChild(
+                        $icms,
+                        'vICMSDeson',
+                        $std->vICMSDeson,
+                        true,
+                        "$identificador [item $std->item] Valor do ICMS desonerado"
+                    );
+                }
                 $this->dom->addChild(
                     $icms,
                     'motDesICMS',
