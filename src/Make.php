@@ -3556,7 +3556,7 @@ class Make
                         $icms,
                         'vICMSDeson',
                         $std->vICMSDeson,
-                        true,
+                        false,
                         "$identificador [item $std->item] Valor do ICMS desonerado"
                     );
                 }
