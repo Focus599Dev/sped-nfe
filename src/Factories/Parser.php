@@ -46,6 +46,12 @@ class Parser
      * @var stdClass|null
      */
     protected $stdNFP;
+    
+    /**
+     * @var stdClass|null
+     */
+    protected $stdIDE;
+
     /**
      * @var stdClass|null
      */
@@ -98,6 +104,10 @@ class Parser
      * @var stdClass
      */
     protected $stdICMSTot;
+    /**
+     * @var stdClass
+     */
+    protected $stdTotISIBSCBS;
     /**
      * @var stdClass|null
      */
@@ -170,6 +180,15 @@ class Parser
 
         if (isset($this->stdICMSTot->vRetCOFINS))
             $this->make->tagretTrib($this->stdICMSTot);
+
+        if (isset( $this->stdTotISIBSCBS->ISTot) && !empty($this->stdTotISIBSCBS->ISTot)) {
+            $this->make->tagISTot($this->stdTotISIBSCBS->ISTot);
+        }
+
+        if (isset( $this->stdTotISIBSCBS->IBSCBSTot) && !empty($this->stdTotISIBSCBS->IBSCBSTot)) {
+            $this->make->tagTotISIBSCBS($this->stdTotISIBSCBS->IBSCBSTot);
+        }
+
     }
 
     /**
@@ -220,6 +239,7 @@ class Parser
      * NOTE: adjusted for NT2016_002_v1.30
      * B|cUF|cNF|natOp|mod|serie|nNF|dhEmi|dhSaiEnt|tpNF|idDest|cMunFG|tpImp
      *  |tpEmis|cDV|tpAmb|finNFe|indFinal|indPres|procEmi|verProc|dhCont|xJust|
+     * NOTE : adjusted for NT2025_002_v1.30
      * @param stdClass $std
      * @return void
      */
@@ -345,6 +365,52 @@ class Parser
         $this->make->tagrefECF($std);
     }
 
+     /**
+     * Create tag gCompraGov [BB]
+     * BB|tpEnteGov|pRedutor|tpOperGov|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function bbEntity($std)
+    {
+        $this->make->tagCompraGov($std);
+    }
+
+    /**
+     * Create tag refNFP [BC]
+     * BC|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function bcEntity($std)
+    {
+        $this->stdIDE = $std;
+
+        $this->stdIDE->gPagAntecipado = [];
+    }
+
+    /**
+     * Create tag PagAntecipado [BC01], belongs to [BC]
+     * BC01|refNFe|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function bc01Entity($std)
+    {
+        $this->stdIDE->gPagAntecipado[] = $std;
+    }
+
+    /**
+     * Create tag avulsa [BD]
+     * BD|CNPJ|xOrgao|matr|xAgente|fone|UF|nDAR|dEmi|vDAR|repEmi|dPag|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function bdEntity($std)
+    {
+        $this->make->tagAvulsa($std);
+    }
+
     /**
      * Load fields for tag emit [C]
      * C|XNome|XFant|IE|IEST|IM|CNAE|CRT|
@@ -353,6 +419,12 @@ class Parser
      */
     protected function cEntity($std)
     {
+        if (isset( $this->stdIDE->gPagAntecipado) && !empty($this->stdIDE->gPagAntecipado)) {
+            
+            $this->make->tagPagAntecipado($this->stdIDE->gPagAntecipado);
+            
+        }
+
         $this->stdEmit = $std;
         $this->stdEmit->CNPJ = null;
         $this->stdEmit->CPF = null;
@@ -636,6 +708,9 @@ class Parser
      *
      * NOTE: adjusted for NT2016_002_v1.30
      * I|cProd|cEAN|xProd|NCM|cBenef|EXTIPI|CFOP|uCom|qCom|vUnCom|vProd|cEANTrib|uTrib|qTrib|vUnTrib|vFrete|vSeg|vDesc|vOutro|indTot|xPed|nItemPed|nFCI|
+     * 
+     * * NOTE: adjusted for NT2025_002_v1.21
+     * I|cProd|cEAN|xProd|NCM|cBenef|EXTIPI|CFOP|uCom|qCom|vUnCom|vProd|cEANTrib|uTrib|qTrib|vUnTrib|vFrete|vSeg|vDesc|vOutro|indTot|xPed|nItemPed|nFCI|cBarra|cBarraTrib|indBemMovelUsado|
      * @param stdClass $std
      * @return void
      */
@@ -691,6 +766,19 @@ class Parser
     protected function i05eEntity($std)
     {
         
+    }
+
+    /**
+     * Create tag gCred [I06A]
+     * I06A|cCredPresumido|pCredPresumido|vCredPresumido
+     * @param stdClass $std
+     * @return void
+     */
+    protected function i06aEntity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagCred($std);
     }
 
     /**
@@ -756,6 +844,28 @@ class Parser
         $this->make->tagRastro($std);
     }
 
+    /**
+     * Create tag infProdNFF [I81]
+     * I81|cProdFisco|cOperNFF|
+     * @param stdClass $std
+     * @return void
+     */
+
+    protected function i81Entity($std){
+        $std->item = $this->item;
+
+        $this->make->taginfProdNFF($std);
+    }
+
+    /**
+     * create tag infProdEmb [I82]
+     * I82|xEmb|qVolEmb|uEmb
+     */
+
+    protected function i82Entity($std){
+        $std->item = $this->item;
+
+        $this->make->taginfProdEmb($std);
     /**
      * Create tag veicProd [JA]
      * JA|tpOp|chassi|cCor|xCor|pot|cilin|pesoL|pesoB|nSerie|tpComb|nMotor|CMT|dist|anoMod|anoFab|tpPint|tpVeic|espVeic|VIN|condVeic|cMod|cCorDENATRAN|lota|tpRest|
@@ -940,6 +1050,8 @@ class Parser
      *
      * NOTE: adjusted for NT2016_002_v1.30
      * N03|orig|CST|modBC|vBC|pICMS|vICMS|vBCFCP|pFCP|vFCP|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCPST|pFCPST|vFCPST|
+     * NOTE: adjusted for NT2025_002_v1.21
+     * N03|orig|CST|modBC|vBC|pICMS|vICMS|vBCFCP|pFCP|vFCP|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCPST|pFCPST|vFCPST|vICMSSTDeson|motDesICMSST|",
      * @param stdClass $std
      * @return void
      */
@@ -1004,6 +1116,8 @@ class Parser
      *
      * NOTE: adjusted for NT2016_002_v1.30
      * N07|orig|CST|modBC|pRedBC|vBC|pICMS|vICMSOp|pDif|vICMSDif|vICMS|vBCFCP|pFCP|vFCP|
+     * NOTE: adjusted for NT2025_002_v1.21
+     * N07|orig|CST|modBC|pRedBC|vBC|pICMS|vICMSOp|pDif|vICMSDif|vICMS|vBCFCP|pFCP|vFCP|cBenefRBC|pFCPDif|vFCPDif|vFCPEfet|
      * @param stdClass $std
      * @return void
      */
@@ -1016,6 +1130,8 @@ class Parser
      * Load field for tag ICMS N03a
      * Note: Nota tecnica 2023.001 v1.20
      * N07a|orig|CST|qBCMono|adRemICMS|vICMSMonoOp|pDif|vICMSMonoDif|vICMSMono|
+     * NOTE: adjusted for NT2025_002_v1.21
+     * N07a|orig|CST|qBCMono|adRemICMS|vICMSMonoOp|pDif|vICMSMonoDif|vICMSMono|qBCMonoDif|adRemICMSDif|
     */
 
     protected function n07aEntity($std)
@@ -1059,6 +1175,8 @@ class Parser
      *
      * NOTE: adjusted for NT2016_002_v1.30
      * N09|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|vBCFCP|pFCP|vFCP|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCPST|pFCPST|vFCPST|vICMSDeson|motDesICMS|
+     * NOTE: adjusted for NT2025_002_v1.21
+     * N09|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|vBCFCP|pFCP|vFCP|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCPST|pFCPST|vFCPST|vICMSDeson|motDesICMS|indDeduzDeson|vICMSSTDeson|motDesICMSST|
      * @param stdClass $std
      * @return void
      */
@@ -1073,6 +1191,9 @@ class Parser
      *
      * NOTE: adjusted for NT2016_002_v1.30
      * N10|orig|CST|modBC|vBC|pRedBC|pICMS|vICMS|vBCFCP|pFCP|vFCP|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCPST|pFCPST|vFCPST|vICMSDeson|motDesICMS|
+     * 
+     * NOTE: adjusted for NT2025_002_v1.21
+     * N10|orig|CST|modBC|vBC|pRedBC|pICMS|vICMS|vBCFCP|pFCP|vFCP|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCPST|pFCPST|vFCPST|vICMSDeson|motDesICMS|indDeduzDeson|vICMSSTDeson|motDesICMSST|
      * @param stdClass $std
      * @return void
      */
@@ -1096,6 +1217,8 @@ class Parser
     /**
      * Create tag ICMSPart [N10a]
      * N10a|orig|CST|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pBCOp|UFST|
+     * NOTE: adjusted for NT2025_002_v1.21
+     * N10a|orig|CST|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pBCOp|UFST|vBCFCPST|pFCPST|vFCPST|
      * @param stdClass $std
      * @return void
      */
@@ -1455,6 +1578,7 @@ class Parser
         $this->stdPISST->vPIS = null;
         $this->stdPISST->qBCProd = null;
         $this->stdPISST->vAliqProd = null;
+        $this->stdPISST->indSomaPISST = null;
     }
 
     /**
@@ -1485,8 +1609,20 @@ class Parser
     }
 
     /**
+     * Load fields for tag PISST [R05], belongs to [R]
+     * R05|indSomaPISST|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function r05Entity($std)
+    {
+        $this->stdPISST->indSomaPISST = $std->indSomaPISST;
+        $this->buildREntity();
+    }
+
+    /**
      * Create tag PISST
-     * Rxx|vBC|pPIS|qBCProd|vAliqProd|vPIS|
+     * Rxx|vBC|pPIS|qBCProd|vAliqProd|vPIS|indSomaPISST|
      * @return void
      */
     protected function buildREntity()
@@ -1683,6 +1819,191 @@ class Parser
     }
 
     /**
+     * create tag IS
+     * NOTE: 2025_002_v1.21
+     * UB|CSTIS|cClassTribIS|vBCIS|pIS|pISEspec|uTrib|qTrib|vIS|
+     */
+    protected function ubEntity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagIS($std);
+
+    }
+    /**
+     * creat tag IBSCBS [UC]
+     * NOTE: 2025_002_v1.21
+     * UC|CST|cClassTrib|gIBSCBS|gIBSCBSMono|gTransfCred|gCredPresIBSZFM|
+     */
+
+    protected function ucEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagIBSCBS($std);
+    }
+
+     /**
+     * create tag gIBSCBS [UC01]
+     * NOTE: 2025_002_v1.21
+     * UC01|vBC|vIBS|
+     */
+
+    protected function uc01aEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGIBSCBS($std);
+    }
+
+    /**
+     * create tag gIBSUF [UC01A]
+     * NOTE: 2025_002_v1.21
+     * UC01A|pIBSUF|gDif|gDevTrib|gRed|vIBSUF|
+     */
+
+    protected function uc01bEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGIBSUF($std);
+    }
+
+    /**
+     * create tag gIBSMun [UC01B]
+     * UC01B|pIBSMun|gDif|gDevTrib|gRed|vIBSMun|
+     */
+
+    protected function uc01cEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGIBSMun($std);
+    }
+
+    /**
+     * create tag gCBS [UC01C]
+     * UC01C|pCBS|gDif|gDevTrib|gRed|vCBS|
+     */
+
+    protected function uc01cEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGCBS($std);
+    }
+
+    /**
+     * create tag gTribRegular [UC01D]
+     * UC01D|CSTReg|cClassTribReg|pAliqEfetRegIBSUF|vTribRegIBSUF|pAliqEfetRegIBSMun|vTribRegIBSMun|pAliqEfetRegCBS|vTribRegCBS|
+     */
+
+    protected function uc01dEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGTribRegular($std);
+    }
+
+    /**
+     * create tag gIBSCredPres [UC01E]
+     * UC01E|cCredPres|pCredPres|vCredPres|vCredPresCondSus|
+     */
+
+    protected function uc01eEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGIBSCredPres($std);
+    }
+
+    /**
+     * create tag gCBSCredPres [UC01F]
+     * UC01F|cCredPres|pCredPres|vCredPres|vCredPresCondSus|
+     */
+
+    protected function uc01fEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGCBSCredPres($std);
+    }
+
+    /**
+     * create tag gTribCompraGov [UC01G]
+     * UC01G|pAliqIBSUF|vTribIBSUF|pAliqIBSMun|vTribIBSMun|pAliqCBS|vTribCBS|
+     */
+
+    protected function uc01gEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGTribCompraGov($std);
+    }
+
+    /**
+     * create tag gIBSCBSMono[UC02]
+     * UC02|vTotIBSMonoItem|vTotCBSMonoItem
+    */
+    protected function uc02Entity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGIBSCBSMono($std);
+    }
+
+    /**
+     * create tag gMonoPadrao [UC02A]
+     * UC02A|qBCMono|adRemIBS|adRemCBS|vIBSMono|vCBSMono
+    */
+
+    protected function uc02aEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGMonoPadrao($std);
+    }
+
+    /**
+     * create tag gMonoReten [UC02B]
+     * UC02B|qBCMonoReten|adRemIBSReten|vIBSMonoReten|adRemCBSReten|vCBSMonoReten|
+     */
+    protected function uc02bEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGMonoReten($std);
+    }
+
+    /**
+     * create tag gMonoRet[UC02C]
+     * UC02C|qBCMonoRet|adRemIBSRet|vIBSMonoRet|adRemCBSRet|vCBSMonoRet|
+     */
+    protected function uc02cEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGMonoRet($std);
+    }
+
+    /**
+     * create tag gMonoDif[UC02D]
+     * UC02D|pDifIBS|vIBSMonoDif|pDifCBS|vCBSMonoDif|
+     */
+    protected function uc02dEntity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGMonoDif($std);
+    }
+
+   /**
+    * create tag gTransfCred[UC03]
+    * UC03||vIBS|vCBS
+    */
+    protected function uc03Entity($std){
+          $std->item = $this->item;
+    
+          $this->make->tagGTransfCred($std);
+    }
+
+    /**
+     * create tag gCredPresIBSZFM[UC04]
+     * UC04|pCredPresZFM|vCredPresZFM
+     */
+    protected function uc04Entity($std){
+        $std->item = $this->item;
+
+        $this->make->tagGCredPresIBSZFM($std);
+    }
+
+    /**
      * Linha W [W]
      * W|
      * @param stdClass $std
@@ -1798,6 +2119,109 @@ class Parser
     {
         $this->stdICMSTot = $this->mergeObject( $this->stdICMSTot , $std);
 
+    }
+
+    /**
+     * create tagISTot [W24], belongs to [W]
+     * W24|vIS
+     */
+    protected function w24Entity($std){
+
+        $this->stdTotISIBSCBS->ISTot = new \stdClass();
+
+        $this->stdTotISIBSCBS->ISTot = $this->mergeObject( $this->stdTotISIBSCBS->ISTot  , $std);
+
+    }
+
+    /**
+     * create tagIBSCBSTot [W25], belongs to [W]
+     * W25|vBCIBSCBS
+     */
+    protected function w25Entity($std){
+
+        $this->stdTotISIBSCBS->IBSCBSTot = new \stdClass();
+
+        $this->stdTotISIBSCBS->IBSCBSTot = $this->mergeObject( $this->stdTotISIBSCBS->IBSCBSTot  , $std);
+
+    }
+    /**
+     * create tag IBSCBSTOT->gIBS [W25A]
+     * W25A|vIBS|vCredPres|vCredPresCondSus
+     */
+
+    protected function w25aEntity($std){
+
+        if (!isset($this->stdTotISIBSCBS->IBSCBSTot)){
+            $this->stdTotISIBSCBS->IBSCBSTot->gIBS = new \stdClass();
+        }
+
+        $this->stdTotISIBSCBS->IBSCBSTot->gIBS = $this->mergeObject( $this->stdTotISIBSCBS->IBSCBSTot->gIBS  , $std);
+    }
+
+    /**
+     * create tag IBSCBSTOT->gIBSUF [W25A1]
+     * W25A1|vDif|vDevTrib|vIBSUF|
+     */
+
+    protected function w25a1Entity($std){
+
+        if (!isset($this->stdTotISIBSCBS->IBSCBSTot->gIBS)){
+            $this->stdTotISIBSCBS->IBSCBSTot->gIBS = new \stdClass();
+        }
+
+        $this->stdTotISIBSCBS->IBSCBSTot->gIBS->gIBSUF = $this->mergeObject( $this->stdTotISIBSCBS->IBSCBSTot->gIBS->gIBSUF  , $std);
+    }
+
+     /**
+     * create tag IBSCBSTOT->gIBSMun [W25A2]
+     * W25A2|vDif|vDevTrib|vIBSMun|
+     */
+
+    protected function w25a2Entity($std){
+
+        if (!isset($this->stdTotISIBSCBS->IBSCBSTot->gIBS)){
+            $this->stdTotISIBSCBS->IBSCBSTot->gIBS = new \stdClass();
+        }
+
+        $this->stdTotISIBSCBS->IBSCBSTot->gIBS->gIBSMun = $this->mergeObject( $this->stdTotISIBSCBS->IBSCBSTot->gIBS->gIBSMun  , $std);
+    }
+
+    /**
+     * create tag IBSCBSTOT->gCBS [W25B]
+     * W25B|vDif|vDevTrib|vCBS|vCredPres|vCredPresCondSus|
+     */
+
+    protected function w25bEntity($std){
+
+        if (!isset($this->stdTotISIBSCBS->IBSCBSTot->gCBS)){
+            $this->stdTotISIBSCBS->IBSCBSTot->gCBS = new \stdClass();
+        }
+
+        $this->stdTotISIBSCBS->IBSCBSTot->gCBS = $this->mergeObject( $this->stdTotISIBSCBS->IBSCBSTot->gCBS  , $std);
+    }
+
+    /**
+     * create tag IBSCBSTOT->gMono
+     * W25C|vIBSMono|vCBSMono|vIBSMonoReten|vCBSMonoReten|vIBSMonoRet|vCBSMonoRet|
+     */
+
+    protected function w25cEntity($std){
+
+        if (!isset($this->stdTotISIBSCBS->IBSCBSTot->gMono)){
+            $this->stdTotISIBSCBS->IBSCBSTot->gMono = new \stdClass();
+        }
+
+        $this->stdTotISIBSCBS->IBSCBSTot->gMono = $this->mergeObject( $this->stdTotISIBSCBS->IBSCBSTot->gMono  , $std);
+    }
+
+    /**
+     * create tag IBSCBSTOT->vNFTot
+     * W26|vNFTot
+    */
+
+    protected function w25cEntity($std){
+
+        $this->stdTotISIBSCBS = $this->mergeObject( $this->stdTotISIBSCBS  , $std);
     }
 
     /**

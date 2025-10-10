@@ -68,10 +68,21 @@ class Make
      * @var DOMElement
      */
     protected $ide;
+
+    /**
+     * @var DOMElement
+     */
+    protected $gCompraGov;
+
     /**
      * @var DOMElement
      */
     protected $emit;
+
+       /**
+     * @var DOMElement
+     */
+    protected $avulsa;
     /**
      * @var DOMElement
      */
@@ -132,6 +143,12 @@ class Make
      * @var array of DOMElements
      */
     protected $aNFref = [];
+
+    /**
+     * @var DOMElement
+     */
+    protected $gPagAntecipado;
+
     /**
      * @var array of DOMElements
      */
@@ -168,6 +185,19 @@ class Make
      * @var array of DOMElements
      */
     protected $aRastro = [];
+
+    /**
+     * @var array of DOMElements
+     */
+
+    protected $aInfProdNFF = [];
+
+    /**
+     * @var array of DOMElements
+     */
+
+    protected $aInfProdEmb = [];
+
     /**
      * @var array of DOMElements
      */
@@ -176,6 +206,7 @@ class Make
      * @var array of DOMElements
      */
     protected $aCest = [];
+    
     /**
      * @var array of DOMElements
      */
@@ -256,6 +287,18 @@ class Make
      * @var array of DOMElements
      */
     protected $aCOFINSST = [];
+
+    /**
+     * @var array of DOMElements
+     */
+
+    protected $aIS = [];
+    
+    /**
+     * @var array of DOMElements
+     */
+    protected $aIBSCBS = [];
+
     /**
      * @var array of DOMElements
      */
@@ -394,12 +437,26 @@ class Make
         foreach ($this->aNFref as $nfeRef) {
             $this->dom->appChild($this->ide, $nfeRef, 'Falta tag "ide"');
         }
+
+        if ($this->gCompraGov) {
+            $this->dom->appChild($this->ide, $this->gCompraGov, 'Falta tag "ide"');
+        }
+
+        if ($this->gPagAntecipado) {
+            $this->dom->appChild($this->ide, $this->gPagAntecipado, 'Falta tag "ide"');
+        }
+
         //monta as tags det com os detalhes dos produtos
         $this->buildDet();
         //[2] tag ide (5 B01)
         $this->dom->appChild($this->infNFe, $this->ide, 'Falta tag "infNFe"');
         //[8] tag emit (30 C01)
         $this->dom->appChild($this->infNFe, $this->emit, 'Falta tag "infNFe"');
+
+        if ($this->avulsa) {
+            $this->dom->appChild($this->infNFe, $this->avulsa, 'Falta tag "emit"');
+        }
+
         //[10] tag dest (62 E01)
         $this->dom->appChild($this->infNFe, $this->dest, 'Falta tag "infNFe"');
         //[12] tag retirada (80 F01)
@@ -512,6 +569,9 @@ class Make
             'dhCont',
             'xJust',
             'indIntermed',
+            'cMunFGIBS',
+            'tpNFDebito',
+            'tpNFCredito',
         ];
         $std = $this->equilizeParameters($std, $possible);
         if (empty($std->cNF)) {
@@ -530,13 +590,13 @@ class Make
 
         $dateTxtSaida = new \DateTime($std->dhSaiEnt);
 
-        if ($dateNow < $dateTxt){
+        // if ($dateNow < $dateTxt){
                 
-            $std->dhEmi = date('c');
+        //     $std->dhEmi = date('c');
             
-            $std->dhSaiEnt =  date('c');
+        //     $std->dhSaiEnt =  date('c');
 
-        }
+        // }
 
         if ($dateTxt > $dateTxtSaida){
 
@@ -567,16 +627,6 @@ class Make
             true,
             $identificador . "Descrição da Natureza da Operação"
         );
-        //removido desta posição no layout 4.00
-        if ($this->version == '3.10') {
-            $this->dom->addChild(
-                $ide,
-                "indPag",
-                $std->indPag,
-                true,
-                $identificador . "Indicador da forma de pagamento"
-            );
-        }
 
         $this->dom->addChild(
             $ide,
@@ -636,6 +686,15 @@ class Make
             true,
             $identificador . "Código do Município de Ocorrência do Fato Gerador"
         );
+
+        $this->dom->addChild(
+            $ide,
+            "cMunFGIBS",
+            $std->cMunFGIBS,
+            false,
+            $identificador . "Código do Município de Ocorrência do Fato Gerador (IBS)"
+        );
+
         $this->dom->addChild(
             $ide,
             "tpImp",
@@ -671,6 +730,23 @@ class Make
             true,
             $identificador . "Finalidade de emissão da NF-e"
         );
+
+        $this->dom->addChild(
+            $ide,
+            'tpNFDebito',
+            $std->tpNFDebito,
+            true,
+            $identificador . "Tipo de NF-e Débito"
+        );
+
+        $this->dom->addChild(
+            $ide,
+            'tpNFCredito',
+            $std->tpNFCredito,
+            true,
+            $identificador . "Tipo de NF-e Crédito"
+        );
+
         $this->dom->addChild(
             $ide,
             "indFinal",
@@ -981,6 +1057,84 @@ class Make
     }
 
     /**
+     * Cria a tag gCompraGov
+     * @param  stdClass $std
+     * @return DOMElement
+     */
+    public function tagCompraGov(stdClass $std)
+    {
+        $possible = [
+            'tpEnteGov',
+            'pRedutor',
+            'tpOperGov'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);  
+
+        $identificador = 'BB <gCompraGov> - ';
+
+        $gCompraGov = $this->dom->createElement("gCompraGov");
+
+        $this->dom->addChild(
+            $gCompraGov,
+            "tpEnteGov",
+            $std->tpEnteGov,
+            true,
+            $identificador . "Tipo do ente governamental"
+        );
+        $this->dom->addChild(
+            $gCompraGov,
+            "pRedutor",
+            $std->pRedutor,
+            true,
+            $identificador . "Percentual redutor"
+        );
+        $this->dom->addChild(
+            $gCompraGov,
+            "tpOperGov",
+            $std->tpOperGov,
+            true,
+            $identificador . "Tipo da operação governamental"
+        );
+
+        $this->gCompraGov = $gCompraGov;
+
+        return $gCompraGov;
+
+    }
+
+    /**
+     * Cria a tag gPagAntecipado
+     * @param  Array [ StdClass $std]
+     * @return DOMElement
+     */
+
+    public function tagPagAntecipado(array $aStd){
+
+
+        if (count($aStd) == 0){
+            return null;
+        }
+
+        $identificador = 'BC <gPagAntecipado> - ';
+
+        $gPagAntecipado = $this->dom->createElement("gPagAntecipado");
+
+        foreach ($aStd as $std) {
+            
+            $refNFe = $this->dom->createElement("refNFe", $std->refNFe);
+
+            $refNFe->nodeValue = $std->refNFe;
+
+            $this->dom->appChild($gPagAntecipado, $refNFe);
+        }
+
+        $this->gPagAntecipado = $gPagAntecipado;
+
+        return $gPagAntecipado;
+    }
+
+    /**
      * Identificação do emitente da NF-e C01 pai A01
      * tag NFe/infNFe/emit
      * @param  stdClass $std
@@ -1176,6 +1330,123 @@ class Make
         return $this->enderEmit;
     }
 
+    /** 
+    * Cria tag avulsa
+    * @param stdClass $std
+    * @return DOMElement 
+    */
+   public function tagAvulsa(stdClass $std)
+   {
+
+         $possible = [
+            'CNPJ',
+            'xOrgao',
+            'matr',
+            'xAgente',
+            'fone',
+            'UF',
+            'nDAR',
+            'dEmi',
+            'vDAR',
+            'repEmi',
+            'dPag',
+        ];
+        
+        $std = $this->equilizeParameters($std, $possible);
+
+       $this->avulsa = $this->dom->createElement("avulsa");
+
+       $this->dom->addChild(
+           $this->avulsa,
+           "CNPJ",
+           $std->CNPJ,
+           true,
+           "CNPJ do Órgão emissor"
+       );
+
+         $this->dom->addChild(
+              $this->avulsa,
+              "xOrgao",
+              substr(trim($std->xOrgao), 0, 60),
+              true,
+              "Nome do Órgão emissor"
+         );
+
+        $this->dom->addChild(
+            $this->avulsa,
+            "matr",
+            substr(trim($std->matr), 0, 60),
+            true,
+            "Matrícula do agente da receita responsável pela emissão"
+        );
+
+        $this->dom->addChild(
+            $this->avulsa,
+            "xAgente",
+            substr(trim($std->xAgente), 0, 60),
+            true,
+            "Nome do agente da receita responsável pela emissão"
+        );
+
+        $this->dom->addChild(
+            $this->avulsa,
+            "fone",
+            trim($std->fone),
+            false,
+            "Telefone do agente da receita responsável pela emissão"
+        );
+
+        $this->dom->addChild(
+            $this->avulsa,
+            "UF",
+            strtoupper(trim($std->UF)),
+            true,
+            "Sigla da Unidade da Federação"
+        );
+
+        $this->dom->addChild(
+            $this->avulsa,
+            "nDAR",
+            substr(trim($std->nDAR), 0, 60),
+            false,
+            "Número do Documento de Arrecadação de Receita"
+        );
+
+        $this->dom->addChild(
+            $this->avulsa,
+            "dEmi",
+            $std->dEmi,
+            false,
+            "Data de emissão do DAR"
+        );
+
+        $this->dom->addChild(
+            $this->avulsa,
+            "vDAR",
+            $std->vDAR,
+            false,
+            "Valor total do DAR"
+        );
+
+        $this->dom->addChild(
+            $this->avulsa,
+            "repEmi",
+            $std->repEmi,
+            true,
+            "Repartição Fiscal emitente"
+        );
+
+        $this->dom->addChild(
+            $this->avulsa,
+            "dPag",
+            $std->dPag,
+            false,
+            "Data do pagamento"
+        );
+
+       return $this->avulsa;
+   }
+
     /**
      * Identificação do Destinatário da NF-e E01 pai A01
      * tag NFe/infNFe/dest (opcional para modelo 65)
@@ -1204,6 +1475,7 @@ class Make
         if (!$temIE && $std->indIEDest == 1) {
             $std->indIEDest = 2;
         }
+
         if ($this->mod == '65') {
             $std->indIEDest = 9;
             if ($std->xNome == '') {
@@ -1801,7 +2073,10 @@ class Make
             'indTot',
             'xPed',
             'nItemPed',
-            'nFCI'
+            'nFCI',
+            'cBarra',
+            'cBarraTrib',
+            'indBemMovelUsado',
         ];
         $std = $this->equilizeParameters($std, $possible);
 
@@ -1846,6 +2121,16 @@ class Make
             . "código EAN ou código de barras",
             true
         );
+
+        $this->dom->addChild(
+            $prod,
+            "cBarra",
+            $std->cBarra,
+            false,
+            $identificador . "[item $std->item] Codigo de barras diferente do padrão GTIN",
+            true
+        );
+
         $xProd = $std->xProd;
         if ($this->tpAmb == '2' && $this->mod == '65') {
             $xProd = 'NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL';
@@ -1923,6 +2208,15 @@ class Make
             . "código EAN ou código de barras",
             true
         );
+
+        $this->dom->addChild(
+            $prod,
+            "cBarraTrib",
+            $std->cBarraTrib,
+            false,
+            $identificador . "[item $std->item] Codigo de barras da unidade tributável diferente do padrão GTIN",
+        );
+
         $this->dom->addChild(
             $prod,
             "uTrib",
@@ -1979,6 +2273,15 @@ class Make
             true,
             $identificador . "[item $std->item] Indica se valor do Item (vProd) entra no valor total da NF-e (vProd)"
         );
+
+        $this->dom->addChild(
+            $prod,
+            "indBemMovelUsado",
+            $std->indBemMovelUsado,
+            false,
+            $identificador . "[item $std->item] Indicador de fornecimento de bem móvel usado"
+        );
+
         if (!empty($std->xPed) &&  !empty($std->nItemPed)) {
             $this->dom->addChild(
                 $prod,
@@ -2071,6 +2374,74 @@ class Make
         );
         $this->aCest[$std->item][] = $ctrltST;
         return $ctrltST;
+    }
+
+    
+    /**
+     *Grupo de informações sobre o CréditoPresumido  – gCred
+     * tag NFe/infNFe/det[item]/prod/gCred (opcional)
+     * NOTA: Ajustado para NT2025_002_v1.21
+     * @param  stdClass $std
+     * @return DOMElement
+     */
+    public function tagCred()
+    {
+       $possible = [
+            'item',
+            'cCredPresumido',
+            'pCredPresumido',
+            'vCredPresumido'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $identificador = 'I05d <gCred> - ';
+
+        $gCred = $this->dom->createElement("gCred");
+
+        $this->dom->addChild(
+            $gCred,
+            "cCredPresumido",
+            $std->cCredPresumido,
+            true,
+            "$identificador [item $std->item] Código de Benefício Fiscal de Crédito Presumido na UF aplicado ao item"
+        );
+
+        $this->dom->addChild(
+            $gCred,
+            "pCredPresumido",
+            $std->pCredPresumido,
+            true,
+            "$identificador [item $std->item] Alíquota do benefício fiscal de crédito presumido na UF aplicado ao item"
+        );
+
+        $this->dom->addChild(
+            $gCred,
+            "vCredPresumido",
+            $std->vCredPresumido,
+            true,
+            "$identificador [item $std->item] Valor do crédito presumido na UF aplicado ao item"
+        );
+
+        if (isset( $this->aProd[$std->item])){
+
+            $node = $this->aProd[$std->item]->getElementsByTagName("EXTIPI")->item(0);
+
+            $isNode = $node ? true : false;
+
+            if (!$isNode){
+
+                $node = $this->aProd[$std->item]->getElementsByTagName("CFOP")->item(0);
+
+            }
+
+            if ($node){
+                $this->aProd[$std->item]->insertBefore($gCred, $node);
+            }
+
+        }
+
+        return $gCred;
     }
 
     /**
@@ -2408,6 +2779,92 @@ class Make
         return $rastro;
     }
 
+    public function taginfProdNFF(stdClass $std)
+    {
+        $possible = [
+            'item',
+            'cProdFisco',
+            'cOperNFF'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $infProdNFF = $this->dom->createElement("infProdNFF");
+
+        $identificador = 'I81 <infProdNFF> - ';
+
+        $this->dom->addChild(
+            $infProdNFF,
+            "cProdFisco",
+            $std->cProdFisco,
+            true,
+            "$identificador [item $std->item] Código do produto ou serviço na NF-F"
+        );
+
+        $this->dom->addChild(
+            $infProdNFF,
+            "cOperNFF",
+            $std->cOperNFF,
+            true,
+            "$identificador [item $std->item] Código da operação selecionada na NFF e relacionada ao item"
+        );
+
+        $this->aInfProdNFF[$std->item] = $infProdNFF;
+
+        return $infProdNFF;
+    }
+
+    /**
+     * Cria tag infProdEmb
+     * Informações mais detalhadas do produto (usada na NFF)
+     * tag NFe/infNFe/det[]/prod/infProdEmb (opcional)
+     * 
+     */
+
+    public function taginfProdEmb(stdClass $std){
+
+        $possible = [
+            'item',
+            'xEmb',
+            'qVolEmb',
+            'uEmb',
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $identificador = 'I82 <infProdEmb> - ';
+
+        $infProdEmb = $this->dom->createElement("infProdEmb");
+
+        $this->dom->addChild(
+            $infProdEmb,
+            "xEmb",
+            $std->xEmb,
+            true,
+            "$identificador [item $std->item] Descrição da embalagem"
+        );
+
+        $this->dom->addChild(
+            $infProdEmb,
+            "qVolEmb",
+            $std->qVolEmb,
+            true,
+            "$identificador [item $std->item] Quantidade de volumes da embalagem"
+        );
+
+        $this->dom->addChild(
+            $infProdEmb,
+            "uEmb",
+            $std->uEmb,
+            true,
+            "$identificador [item $std->item] Unidade de medida da embalagem"
+        );
+
+        $this->aInfProdEmb[$std->item] = $infProdEmb;
+
+        return $infProdEmb;
+    }
+
     /**
      * Detalhamento de Veículos novos J01 pai I90
      * tag NFe/infNFe/det[]/prod/veicProd (opcional)
@@ -2659,39 +3116,39 @@ class Make
             "$identificador [item $std->item] Motivo da isenção da ANVISA"
         );
 
+        // //removido no layout 4.00
+        // $this->dom->addChild(
+        //     $med,
+        //     "nLote",
+        //     $std->nLote,
+        //     false,
+        //     "$identificador [item $std->item] Número do Lote de medicamentos ou de matérias-primas farmacêuticas"
+        // );
         //removido no layout 4.00
-        $this->dom->addChild(
-            $med,
-            "nLote",
-            $std->nLote,
-            false,
-            "$identificador [item $std->item] Número do Lote de medicamentos ou de matérias-primas farmacêuticas"
-        );
+        // $this->dom->addChild(
+        //     $med,
+        //     "qLote",
+        //     $std->qLote,
+        //     false,
+        //     "$identificador [item $std->item] Quantidade de produto no Lote de medicamentos "
+        //     . "ou de matérias-primas farmacêuticas"
+        // );
         //removido no layout 4.00
-        $this->dom->addChild(
-            $med,
-            "qLote",
-            $std->qLote,
-            false,
-            "$identificador [item $std->item] Quantidade de produto no Lote de medicamentos "
-            . "ou de matérias-primas farmacêuticas"
-        );
+        // $this->dom->addChild(
+        //     $med,
+        //     "dFab",
+        //     $std->dFab,
+        //     false,
+        //     "$identificador [item $std->item] Data de fabricação"
+        // );
         //removido no layout 4.00
-        $this->dom->addChild(
-            $med,
-            "dFab",
-            $std->dFab,
-            false,
-            "$identificador [item $std->item] Data de fabricação"
-        );
-        //removido no layout 4.00
-        $this->dom->addChild(
-            $med,
-            "dVal",
-            $std->dVal,
-            false,
-            "$identificador [item $std->item] Data de validade"
-        );
+        // $this->dom->addChild(
+        //     $med,
+        //     "dVal",
+        //     $std->dVal,
+        //     false,
+        //     "$identificador [item $std->item] Data de validade"
+        // );
         $this->dom->addChild(
             $med,
             "vPMC",
@@ -2797,15 +3254,7 @@ class Make
             true,
             "$identificador [item $std->item] Código de produto da ANP"
         );
-        //removido do layout 4.00
-        $this->dom->addChild(
-            $comb,
-            "pMixGN",
-            $std->pMixGN,
-            false,
-            "$identificador [item $std->item] Percentual de Gás Natural para o produto GLP (cProdANP=210203001)"
-        );
-        //incluso no layout 4.00
+
         $this->dom->addChild(
             $comb,
             "descANP",
@@ -2815,6 +3264,16 @@ class Make
             . "Sistema de Informações de Movimentação de Produtos - "
             . "SIMP (http://www.anp.gov.br/simp/"
         );
+
+        //removido do layout 4.00
+        // $this->dom->addChild(
+        //     $comb,
+        //     "pMixGN",
+        //     $std->pMixGN,
+        //     false,
+        //     "$identificador [item $std->item] Percentual de Gás Natural para o produto GLP (cProdANP=210203001)"
+        // );
+       
         //incluso no layout 4.00
         $this->dom->addChild(
             $comb,
@@ -3109,6 +3568,12 @@ class Make
             'vICMSMonoRet',
             'motRedAdRem',
             'indDeduzDeson',
+            'cBenefRBC',
+            'pFCPDif',
+            'vFCPDif',
+            'vFCPEfet',
+            'qBCMonoDif',
+            'adRemICMSDif',
         ];
 
         $std = $this->equilizeParameters($std, $possible);
@@ -3125,6 +3590,7 @@ class Make
             $this->stdTot->vFCP += (float) !empty($std->vFCP) ? $std->vFCP : 0;
             $this->stdTot->vFCPST += (float) !empty($std->vFCPST) ? $std->vFCPST : 0;
             $this->stdTot->vFCPSTRet += (float) !empty($std->vFCPSTRet) ? $std->vFCPSTRet : 0;
+
         } catch(\Exception $e){
 
         }
@@ -3386,6 +3852,26 @@ class Make
                     false,
                     "$identificador [item $std->item] Valor do FCP ST"
                 );
+
+                if ($std->vICMSSTDeson != '' && $std->motDesICMSST){
+
+                    $this->dom->addChild(
+                        $icms,
+                        'vICMSSTDeson',
+                        $std->vICMSSTDeson,
+                        true,
+                        "$identificador [item $std->item] Valor do ICMS ST desonerado"
+                    );
+
+                    $this->dom->addChild(
+                        $icms,
+                        'motDesICMSST',
+                        $std->motDesICMSST,
+                        true,
+                        "$identificador [item $std->item] Motivo da desoneração do ICMS ST"
+                    );
+                }
+
                 break;
             case '15':
                 $this->stdTot->qBCMono += (float) !empty($std->qBCMono) ? $std->qBCMono : 0;
@@ -3550,23 +4036,26 @@ class Make
                     false,
                     "$identificador [item $std->item] Valor do FCP"
                 );
-                if($std->vICMSDeson != ''){
+
+                if($std->vICMSDeson != '' &&  $std->motDesICMS){
                     
                     $this->dom->addChild(
                         $icms,
                         'vICMSDeson',
-                        $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
-                        false,
+                        $std->vICMSDeson,
+                        true,
                         "$identificador [item $std->item] Valor do ICMS desonerado"
                     );
+
+                    $this->dom->addChild(
+                        $icms,
+                        'motDesICMS',
+                        $std->motDesICMS,
+                        true,
+                        "$identificador [item $std->item] Motivo da desoneração do ICMS"
+                    );
                 }
-                $this->dom->addChild(
-                    $icms,
-                    'motDesICMS',
-                    $std->motDesICMS,
-                    false,
-                    "$identificador [item $std->item] Motivo da desoneração do ICMS"
-                );
+               
                 $this->dom->addChild(
                     $icms,
                     'indDeduzDeson',
@@ -3574,6 +4063,7 @@ class Make
                     false,
                     "$identificador [item $std->item] Indica se o valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd)."
                 );
+
                 break;
             case '30':
 
@@ -3665,23 +4155,26 @@ class Make
                     false,
                     "$identificador [item $std->item] Valor do FCP ST"
                 );
-                if($std->vICMSDeson != ''){
+                
+                 if($std->vICMSDeson != '' &&  $std->motDesICMS){
                     
                     $this->dom->addChild(
                         $icms,
                         'vICMSDeson',
-                        $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
-                        false,
+                        $std->vICMSDeson,
+                        true,
                         "$identificador [item $std->item] Valor do ICMS desonerado"
                     );
+
+                    $this->dom->addChild(
+                        $icms,
+                        'motDesICMS',
+                        $std->motDesICMS,
+                        true,
+                        "$identificador [item $std->item] Motivo da desoneração do ICMS"
+                    );
                 }
-                $this->dom->addChild(
-                    $icms,
-                    'motDesICMS',
-                    $std->motDesICMS,
-                    false,
-                    "$identificador [item $std->item] Motivo da desoneração do ICMS"
-                );
+               
                 $this->dom->addChild(
                     $icms,
                     'indDeduzDeson',
@@ -3708,23 +4201,26 @@ class Make
                     true,
                     "$identificador [item $std->item] Tributação do ICMS $std->CST"
                 );
-                if($std->vICMSDeson != ''){
+                
+                 if($std->vICMSDeson != '' &&  $std->motDesICMS){
                     
                     $this->dom->addChild(
                         $icms,
                         'vICMSDeson',
-                        $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
-                        false,
+                        $std->vICMSDeson,
+                        true,
                         "$identificador [item $std->item] Valor do ICMS desonerado"
                     );
+
+                    $this->dom->addChild(
+                        $icms,
+                        'motDesICMS',
+                        $std->motDesICMS,
+                        true,
+                        "$identificador [item $std->item] Motivo da desoneração do ICMS"
+                    );
                 }
-                $this->dom->addChild(
-                    $icms,
-                    'motDesICMS',
-                    $std->motDesICMS,
-                    false,
-                    "$identificador [item $std->item] Motivo da desoneração do ICMS"
-                );
+
                 $this->dom->addChild(
                     $icms,
                     'indDeduzDeson',
@@ -3774,6 +4270,15 @@ class Make
                     false,
                     "$identificador [item $std->item] Percentual da Redução de BC"
                 );
+                
+                $this->dom->addChild(
+                    $icms,
+                    'cBenefRBC',
+                    $std->cBenefRBC,
+                    false,
+                    "$identificador [item $std->item]Código de Benefício Fiscal na UF aplicado ao item quando houver RBC."
+                );
+
                 $this->dom->addChild(
                     $icms,
                     'vBC',
@@ -3838,6 +4343,31 @@ class Make
                     false,
                     "$identificador [item $std->item] Valor do FCP"
                 );
+
+                $this->dom->addChild(
+                    $icms,
+                    'pFCPDif',
+                    $std->pFCPDif,
+                    false,
+                    "$identificador [item $std->item] Percentual do diferimento do FCP"
+                );
+
+                $this->dom->addChild(
+                    $icms,
+                    'vFCPDif',
+                    $std->vFCPDif,
+                    false,
+                    "$identificador [item $std->item] Valor do FCP diferido"
+                );
+
+                $this->dom->addChild(
+                    $icms,
+                    'vFCPEfet',
+                    $std->vFCPEfet,
+                    false,
+                    "$identificador [item $std->item] Valor efetivo do ICMS relativo ao Fundo de Combate à Pobreza (FCP)."
+                );
+
                 break;
             case '53':
                 $this->stdTot->qBCMono += (float) !empty($std->qBCMono) ? $std->qBCMono : 0;
@@ -3905,6 +4435,23 @@ class Make
                     false,
                     "$identificador [item $std->item] Valor do ICMS próprio devido"
                 );
+
+                $this->dom->addChild(
+                    $icms,
+                    'qBCMonoDif',
+                    $std->qBCMonoDif,
+                    false,
+                    "$identificador [item $std->item] Quantidade tributada diferida"
+                );
+
+                $this->dom->addChild(
+                    $icms,
+                    'adRemICMSDif',
+                    $std->adRemICMSDif,
+                    false,
+                    "$identificador [item $std->item] Alíquota ad rem do imposto diferido"
+                );
+
                 break;
             case '60':
                 $icms = $this->dom->createElement("ICMS60");
@@ -4194,23 +4741,26 @@ class Make
                     false,
                     "$identificador [item $std->item] Valor do FCP ST"
                 );
-                if($std->vICMSDeson != ''){
+                
+                 if($std->vICMSDeson != '' &&  $std->motDesICMS ){
                     
                     $this->dom->addChild(
                         $icms,
                         'vICMSDeson',
-                        $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
-                        false,
+                        $std->vICMSDeson,
+                        true,
                         "$identificador [item $std->item] Valor do ICMS desonerado"
                     );
+
+                    $this->dom->addChild(
+                        $icms,
+                        'motDesICMS',
+                        $std->motDesICMS,
+                        true,
+                        "$identificador [item $std->item] Motivo da desoneração do ICMS"
+                    );
                 }
-                $this->dom->addChild(
-                    $icms,
-                    'motDesICMS',
-                    $std->motDesICMS,
-                    false,
-                    "$identificador [item $std->item] Motivo da desoneração do ICMS"
-                );
+
                 $this->dom->addChild(
                     $icms,
                     'indDeduzDeson',
@@ -4218,6 +4768,23 @@ class Make
                     false,
                     "$identificador [item $std->item] Indica se o valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd)."
                 );
+
+                $this->dom->addChild(
+                    $icms,
+                    'vICMSSTDeson',
+                    $std->vICMSSTDeson,
+                    false,
+                    "$identificador [item $std->item] Valor do ICMS ST desonerado"  
+                );
+
+                $this->dom->addChild(
+                    $icms,
+                    'motDesICMSST',
+                    $std->motDesICMSST,
+                    false,
+                    "$identificador [item $std->item] Motivo da desoneração do ICMS ST"  
+                );
+
                 break;
             case '90':
 
@@ -4374,23 +4941,26 @@ class Make
                     false,
                     "$identificador [item $std->item] Valor do FCP ST"
                 );
-                if($std->vICMSDeson != ''){
+                
+                 if($std->vICMSDeson != '' &&  $std->motDesICMS){
                     
                     $this->dom->addChild(
                         $icms,
                         'vICMSDeson',
-                        $std->vICMSDeson == 0.00 ? '' : $std->vICMSDeson,
-                        false,
+                        $std->vICMSDeson,
+                        true,
                         "$identificador [item $std->item] Valor do ICMS desonerado"
                     );
+
+                    $this->dom->addChild(
+                        $icms,
+                        'motDesICMS',
+                        $std->motDesICMS,
+                        true,
+                        "$identificador [item $std->item] Motivo da desoneração do ICMS"
+                    );
                 }
-                $this->dom->addChild(
-                    $icms,
-                    'motDesICMS',
-                    $std->motDesICMS,
-                    false,
-                    "$identificador [item $std->item] Motivo da desoneração do ICMS"
-                );
+
                 $this->dom->addChild(
                     $icms,
                     'indDeduzDeson',
@@ -4398,6 +4968,26 @@ class Make
                     false,
                     "$identificador [item $std->item] Indica se o valor do ICMS desonerado (vICMSDeson) deduz do valor do item (vProd)."
                 );
+
+                 if ($std->vICMSSTDeson != '' && $std->motDesICMSST){
+
+                    $this->dom->addChild(
+                        $icms,
+                        'vICMSSTDeson',
+                        $std->vICMSSTDeson,
+                        true,
+                        "$identificador [item $std->item] Valor do ICMS ST desonerado"
+                    );
+
+                    $this->dom->addChild(
+                        $icms,
+                        'motDesICMSST',
+                        $std->motDesICMSST,
+                        true,
+                        "$identificador [item $std->item] Motivo da desoneração do ICMS ST"
+                    );
+                }
+
                 break;
         }
         $tagIcms = $this->dom->createElement('ICMS');
@@ -4432,7 +5022,13 @@ class Make
             'pICMSST',
             'vICMSST',
             'pBCOp',
-            'UFST'
+            'UFST',
+            'vBCFCPST',
+            'pFCPST',
+            'vFCPST',
+            'vBCFCPST',
+            'pFCPST',
+            'vFCPST'
         ];
         $std = $this->equilizeParameters($std, $possible);
 
@@ -4528,6 +5124,31 @@ class Make
             true,
             "[item $std->item] Valor do ICMS ST"
         );
+
+        if ($std->vBCFCPST && $std->pFCPST && $std->vFCPST) {
+            $this->dom->addChild(
+                $icmsPart,
+                'vBCFCPST',
+                $std->vBCFCPST,
+                true,
+                "[item $std->item] Valor da Base de cálculo do FCP retido por substituicao tributaria."
+            );
+            $this->dom->addChild(
+                $icmsPart,
+                'pFCPST',
+                $std->pFCPST,
+                true,
+                "[item $std->item] Percentual de FCP retido por substituição tributária."
+            );
+            $this->dom->addChild(
+                $icmsPart,
+                'vFCPST',
+                $std->vFCPST,
+                true,
+                "[item $std->item] Valor do FCP retido por substituição tributária."
+            );
+        }
+
         $this->dom->addChild(
             $icmsPart,
             'pBCOp',
@@ -5365,14 +5986,8 @@ class Make
         }
 
         $ipi = $this->dom->createElement('IPI');
-        $this->dom->addChild(
-            $ipi,
-            "clEnq",
-            $std->clEnq,
-            false,
-            "[item $std->item] Classe de enquadramento do IPI para Cigarros e Bebidas"
-        );
-        $this->dom->addChild(
+
+         $this->dom->addChild(
             $ipi,
             "CNPJProd",
             $std->CNPJProd,
@@ -5380,13 +5995,24 @@ class Make
             "[item $std->item] CNPJ do produtor da mercadoria, quando diferente do emitente. "
             . "Somente para os casos de exportação direta ou indireta."
         );
-        $this->dom->addChild(
+
+         $this->dom->addChild(
             $ipi,
             "cSelo",
             $std->cSelo,
             false,
             "[item $std->item] Código do selo de controle IPI"
         );
+
+        $this->dom->addChild(
+            $ipi,
+            "clEnq",
+            $std->clEnq,
+            false,
+            "[item $std->item] Classe de enquadramento do IPI para Cigarros e Bebidas"
+        );
+       
+       
         $this->dom->addChild(
             $ipi,
             "qSelo",
@@ -5536,6 +6162,7 @@ class Make
             'qBCProd',
             'vAliqProd'
         ];
+
         $std = $this->equilizeParameters($std, $possible);
 
         //totalizador
@@ -5718,7 +6345,8 @@ class Make
             'vBC',
             'pPIS',
             'qBCProd',
-            'vAliqProd'
+            'vAliqProd',
+            'indSomaPISST'
         ];
         $std = $this->equilizeParameters($std, $possible);
 
@@ -5758,6 +6386,15 @@ class Make
             true,
             "[item $std->item] Valor do PIS"
         );
+
+        $this->dom->addChild(
+            $pisst,
+            'indSomaPISST',
+            $std->indSomaPISST,
+            false,
+            "[item $std->item] Indicador de soma do PIS ST"
+        );
+
         $this->aPISST[$std->item] = $pisst;
         return $pisst;
     }
@@ -5924,6 +6561,8 @@ class Make
         $this->aCOFINSST[$std->item] = $cofinsst;
         return $cofinsst;
     }
+
+
 
     /**
      * Grupo ISSQN U01 pai M01
@@ -6581,6 +7220,308 @@ class Make
         return $retTrib;
     }
 
+    /** 
+     * create tag ISTot [W24] 
+    */
+
+    public function tagISTot(stdClass $std)
+    {
+        $possible = [
+            'vIS'
+        ];
+        $std = $this->equilizeParameters($std, $possible);
+
+        $ISTot = $this->dom->createElement("ISTot");
+
+        $this->dom->addChild(
+            $ISTot,
+            "vIS",
+            $std->vIS,
+            true,
+            "Valor total do imposto sobre serviços de telecomunicações - IST"
+        );
+
+        $this->dom->appChild($this->total, $ISTot, '');
+     
+        return $ISTot;
+    }
+
+    /**
+     * create tag IBSCBSTot [W25]
+     */
+
+    public function tagTotISIBSCBS(stdClass $std){
+
+        $possible = [
+            'vBCIBSCBS'
+        ];
+
+        $std->IBSCBSTot = $this->equilizeParameters($std->IBSCBSTot, $possible);
+        
+        $IBSCBSTot = $this->dom->createElement("IBSCBSTot");
+
+        $this->dom->addChild(
+            $IBSCBSTot,
+            "vBCIBSCBS",
+            $std->vBCIBSCBS,
+            true,
+            "Valor total da base de cálculo do imposto sobre serviços de comunicação - IBSC"
+        );
+
+        if (isset($std->IBSCBSTot->gIBS) and !empty($std->IBSCBSTot->gIBS)) {
+            
+            $possible = [
+                'vIBS',
+                'vCredPres',
+                'vCredPresCondSus'
+            ];
+
+            $std->IBSCBSTot->gIBS = $this->equilizeParameters($std->IBSCBSTot->gIBS, $possible);
+
+            $gIBS = $this->dom->createElement("gIBS");
+
+            if (isset($std->IBSCBSTot->gIBS->gIBSUF) && !empty($std->IBSCBSTot->gIBS->gIBSUF)) {
+
+                $possible = [
+                    'vDif',
+                    'vDevTrib',
+                    'vIBSUF'
+                ];
+
+                $std->IBSCBSTot->gIBS->gIBSUF = $this->equilizeParameters($std->IBSCBSTot->gIBS->gIBSUF, $possible);
+
+                $gIBSUF = $this->dom->createElement("gIBSUF");
+
+                $this->dom->addChild(
+                    $gIBSUF,
+                    "vDif",
+                    $std->IBSCBSTot->gIBS->gIBSUF->vDif,
+                    true,
+                    "Valor total da diferença apurada do imposto sobre serviços de comunicação - IBS"
+                );
+
+                $this->dom->addChild(
+                    $gIBSUF,
+                    "vDevTrib",
+                    $std->IBSCBSTot->gIBS->gIBSUF->vDevTrib,
+                    true,
+                    "Valor total do imposto sobre serviços de comunicação - IBS a recolher"
+                );
+
+                $this->dom->addChild(
+                    $gIBSUF,
+                    "vIBSUF",
+                    $std->IBSCBSTot->gIBS->gIBSUF->vIBSUF,
+                    true,
+                    "Valor total do imposto sobre serviços de comunicação - IBS devido à UF"
+                );
+
+                $gIBS->appendChild($gIBSUF);
+            }
+
+            if (isset($std->IBSCBSTot->gIBS->gIBSMun) && !empty($std->IBSCBSTot->gIBS->gIBSMun)){
+
+                $possible = [
+                    'vDif',
+                    'vDevTrib',
+                    'vIBSMun'
+                ];
+
+                $std->IBSCBSTot->gIBS->gIBSMun = $this->equilizeParameters($std->IBSCBSTot->gIBS->gIBSMun, $possible);
+
+                $gIBSMun = $this->dom->createElement("gIBSMun");
+
+                $this->dom->addChild(
+                    $gIBSMun,
+                    "vDif",
+                    $std->IBSCBSTot->gIBS->gIBSMun->vDif,
+                    true,
+                    "Valor total da diferença apurada do imposto sobre serviços de comunicação - IBS"
+                );
+
+                $this->dom->addChild(
+                    $gIBSMun,
+                    "vDevTrib",
+                    $std->IBSCBSTot->gIBS->gIBSMun->vDevTrib,
+                    true,
+                    "Valor total do imposto sobre serviços de comunicação - IBS a recolher"
+                );
+
+                $this->dom->addChild(
+                    $gIBSMun,
+                    "vIBSMun",
+                    $std->IBSCBSTot->gIBS->gIBSMun->vIBSMun,
+                    true,
+                    "Valor total do imposto sobre serviços de comunicação - IBS devido ao Município"
+                );
+
+                $gIBS->appendChild($gIBSMun);
+            }
+
+            $this->dom->addChild(
+                $gIBS,
+                "vIBS",
+                $std->IBSCBSTot->gIBS->vIBS,
+                true,
+                "Valor total do imposto sobre serviços de comunicação - IBS"
+            );
+
+            $this->dom->addChild(
+                $gIBS,
+                "vCredPres",
+                $std->IBSCBSTot->gIBS->vCredPres,
+                true,
+                "Valor total do crédito presumido do imposto sobre serviços de comunicação - IBS"
+            );
+
+            $this->dom->addChild(
+                $gIBS,
+                "vCredPresCondSus",
+                $std->IBSCBSTot->gIBS->vCredPresCondSus,
+                true,
+                "Valor total do crédito presumido condicionado e suspenso do imposto sobre serviços de comunicação - IBS"
+            );
+
+            $IBSCBSTot->appendChild($gIBS);
+        }
+
+        if (isset($std->IBSCBSTot->gCBS) and !empty($std->IBSCBSTot->gCBS)) {
+
+            $possible = [
+                'vDif',
+                'vDevTrib',
+                'vCBS',
+                'vCredPres',
+                'vCredPresCondSus'
+            ];
+
+            $std->IBSCBSTot->gCBS = $this->equilizeParameters($std->IBSCBSTot->gCBS, $possible);
+
+            $gCBS = $this->dom->createElement("gCBS");
+
+            $this->dom->addChild(
+                $gCBS,
+                "vDif",
+                $std->IBSCBSTot->gCBS->vDif,
+                true,
+                "Valor total da diferença apurada da Contribuição para o Custeio da Iluminação Pública - CBS"
+            );
+
+            $this->dom->addChild(
+                $gCBS,
+                "vDevTrib",
+                $std->IBSCBSTot->gCBS->vDevTrib,
+                true,
+                "Valor total da Contribuição para o Custeio da Iluminação Pública - CBS a recolher"
+            );
+
+            $this->dom->addChild(
+                $gCBS,
+                "vCBS",
+                $std->IBSCBSTot->gCBS->vCBS,
+                true,
+                "Valor total da Contribuição para o Custeio da Iluminação Pública - CBS"
+            );
+
+            $this->dom->addChild(
+                $gCBS,
+                "vCredPres",
+                $std->IBSCBSTot->gCBS->vCredPres,
+                true,
+                "Valor total do crédito presumido da Contribuição para o Custeio da Iluminação Pública - CBS"
+            );
+
+            $this->dom->addChild(
+                $gCBS,
+                "vCredPresCondSus",
+                $std->IBSCBSTot->gCBS->vCredPresCondSus,
+                true,
+                "Valor total do crédito presumido condicionado e suspenso da Contribuição para o Custeio da Iluminação Pública - CBS"
+            );
+
+            $IBSCBSTot->appendChild($gCBS);
+        }
+
+        if (isset($std->IBSCBSTot->gMono) and !empty($std->IBSCBSTot->gMono)) {
+
+            $possible = [
+                'vIBSMono',
+                'vCBSMono',
+                'vIBSMonoReten',
+                'vCBSMonoReten',
+                'vIBSMonoRet',
+                'vCBSMonoRet'
+            ];
+
+            $std->IBSCBSTot->gMono = $this->equilizeParameters($std->IBSCBSTot->gMono, $possible);
+
+            $gMono = $this->dom->createElement("gMono");
+
+            $this->dom->addChild(
+                $gMono,
+                "vIBSMono",
+                $std->IBSCBSTot->gMono->vIBSMono,
+                false,
+                "Valor total do imposto sobre serviços de comunicação - IBS monofásico próprio"
+            );
+
+            $this->dom->addChild(
+                $gMono,
+                "vCBSMono",
+                $std->IBSCBSTot->gMono->vCBSMono,
+                false,
+                "Valor total da Contribuição para o Custeio da Iluminação Pública - CBS monofásico próprio"
+            );
+
+            $this->dom->addChild(
+                $gMono,
+                "vIBSMonoReten",
+                $std->IBSCBSTot->gMono->vIBSMonoReten,
+                false,
+                "Valor total do imposto sobre serviços de comunicação - IBS monofásico sujeito a retenção"
+            );
+
+            $this->dom->addChild(
+                $gMono,
+                "vCBSMonoReten",
+                $std->IBSCBSTot->gMono->vCBSMonoReten,
+                false,
+                "Valor total da Contribuição para o Custeio da Iluminação Pública - CBS monofásico sujeito a retenção"
+            );
+
+            $this->dom->addChild(
+                $gMono,
+                "vIBSMonoRet",
+                $std->IBSCBSTot->gMono->vIBSMonoRet,
+                false,
+                "Valor total do imposto sobre serviços de comunicação - IBS monofásico retido anteriormente"
+            );
+
+            $this->dom->addChild(
+                $gMono,
+                "vCBSMonoRet",
+                $std->IBSCBSTot->gMono->vCBSMonoRet,
+                false,
+                "Valor total da Contribuição para o Custeio da Iluminação Pública - CBS monofásico retido anteriormente"
+            );
+
+            $IBSCBSTot->appendChild($gMono);
+        }
+
+        $this->dom->appendChild($this->total, $IBSCBSTot, 'Valores totais da NF com IBS / CBS');
+
+
+        if (isset($std->vNFTot) and !empty($std->vNFTot)) {
+            $this->dom->addChild(
+                $this->total,
+                "vNFTot",
+                $std->vNFTot,
+                false,
+                "Valor Total da NF considerando os impostos por fora IBS, CBS e IS"
+            );
+        }
+    }
+       
     /**
      * Grupo Informações do Transporte X01 pai A01
      * tag NFe/infNFe/transp (obrigatório)
@@ -7854,6 +8795,12 @@ class Make
             if (!empty($this->aICMSUFDest[$nItem])) {
                 $this->dom->appChild($imposto, $this->aICMSUFDest[$nItem], "Inclusão do node ICMSUFDest");
             }
+            if (!empty($this->aIS[$nItem])) {
+                $this->dom->appChild($imposto, $this->aIS[$nItem], "Inclusão do node IS");
+            }
+            if (!empty($this->aIBSCBS[$nItem])) {
+                $this->dom->appChild($imposto, $this->aIBSCBS[$nItem], "Inclusão do node IBSCBS");
+            }
             $this->aImposto[$nItem] = $imposto;
         }
     }
@@ -7917,6 +8864,1175 @@ class Make
             "Código de Situação Tributária da COFINS"
         );
         return $confinsnt;
+    }
+
+    /**
+     * Create tag IS [UB]
+     * UB|CSTIS|cClassTribIS|vBCIS|pIS|pISEspec|uTrib|qTrib|vIS|
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagIS($std){
+
+        $possible = [
+            'item',
+            'CSTIS',
+            'cClassTribIS',
+            'vBCIS',
+            'pIS',
+            'pISEspec',
+            'uTrib',
+            'qTrib',
+            'vIS'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $is = $this->dom->createElement("IS");
+
+        $this->dom->addChild(
+            $is,
+            "CSTIS",
+            $std->CSTIS,
+            true,
+            "Código de Situação Tributária do IS"
+        );
+
+        $this->dom->addChild(
+            $is,
+            "cClassTribIS",
+            $std->cClassTribIS,
+            true,
+            "Código de Classificação Tributária do IS"
+        );
+
+        $this->dom->addChild(
+            $is,
+            "vBCIS",
+            $std->vBCIS,
+            false,
+            "Valor da Base de Cálculo do IS"
+        );
+
+        $this->dom->addChild(
+            $is,
+            "pIS",
+            $std->pIS,
+            false,
+            "Alíquota do IS (em percentual)"
+        );
+
+        $this->dom->addChild(
+            $is,
+            "pISEspec",
+            $std->pISEspec,
+            false,
+            "Alíquota do IS (em reais)"
+        );
+
+        $this->dom->addChild(
+            $is,
+            "uTrib",
+            $std->uTrib,
+            false,
+            "Unidade Tributável"
+        );
+
+        $this->dom->addChild(
+            $is,
+            "qTrib",
+            $std->qTrib,
+            false,
+            "Quantidade Tributável"
+        );
+
+        $this->dom->addChild(
+            $is,
+            "vIS",
+            $std->vIS,
+            true,
+            "Valor do IS"
+        );
+
+        $this->aIS[$std->item] = $is;
+
+        return $is;
+    }
+
+    /**
+     * Create tag IBSCBS [UC]
+     * UC|CST|cClassTrib|gIBSCBS|gIBSCBSMono|gTransfCred|gCredPresIBSZFM|
+     * @param stdClass $std
+     * @return void
+     */
+
+    public function tagIBSCBS($std){
+
+        $possible = [
+            'item',
+            'CST',
+            'cClassTrib',
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $ibscbs = $this->dom->createElement("IBSCBS");
+
+        $this->dom->addChild(
+            $ibscbs,
+            "CST",
+            $std->CST,
+            true,
+            "Código de Situação Tributária do IBSCBS"
+        );
+
+        $this->dom->addChild(
+            $ibscbs,
+            "cClassTrib",
+            $std->cClassTrib,
+            true,
+            "Código de Classificação Tributária do IBSCBS"
+        );
+
+        $this->aIBSCBS[$std->item] = $ibscbs;
+
+        return $ibscbs;
+    }
+
+    /**
+     * Create tag gIBSCBS [UC01]
+     * tag NFe/infNFe/det[]/imposto/IBSCBS/gIBSCBS
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagGIBSCBS($std)
+    {
+       
+        $possible = [
+            'item',
+            'vBC',
+            'vIBS',
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBS = $this->dom->createElement("gIBSCBS");
+
+        $this->dom->addChild(
+            $gIBSCBS,
+            "vBC",
+            $std->vBC,
+            true,
+            "Valor da Base de Cálculo do gIBSCBS"
+        );
+
+        $this->dom->addChild(
+            $gIBSCBS,
+            "vIBS",
+            $std->vIBS,
+            false,
+            "Valor do IBS"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])){
+            
+            $this->dom->appChild($this->aIBSCBS[$std->item], $gIBSCBS, "Inclusão do node gIBSCBS");
+
+        }
+
+        return $gIBSCBS;
+    }
+
+    /**
+     * create tag gIBSUF pai gIBSCBS
+     */
+
+    public function tagGIBSUF($std)
+    {
+
+        $possible = [
+            'item',
+            'pIBSUF',
+            'gDif',
+            'gDevTrib',
+            'gRed',
+            'vIBSUF',
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $identificador = '<gIBSUF> - Grupo de informações do IBS na UF ';
+
+        $gIBSUF = $this->dom->createElement("gIBSUF");
+
+        $this->dom->addChild(
+            $gIBSUF,
+            "pIBSUF",
+            $std->pIBSUF,
+            true,
+            $identificador . " - Aliquota do IBS de competência das UF"
+        );
+
+        $this->dom->addChild(
+            $gIBSUF,
+            "gDif",
+            $std->gDif,
+            false,
+            $identificador . " - Grupo de campos do Diferimento"
+        );
+
+        $this->dom->addChild(
+            $gIBSUF,
+            "gDevTrib",
+            $std->gDevTrib,
+            false,
+            $identificador . " - Grupo de Informações da devolução de tributos"
+        );
+
+        $this->dom->addChild(
+            $gIBSUF,
+            "gRed",
+            $std->gRed,
+            false,
+            $identificador . " - Grupo de campos da redução de aliquota"
+        );
+
+        $this->dom->addChild(
+            $gIBSUF,
+            "vIBSUF",
+            $std->vIBSUF,
+            true,
+            $identificador . " - Valor do IBS de competência das UF"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])){
+            
+            $gIBSCBS = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBS")->item(0);
+
+            if (!empty($gIBSCBS)) {
+                
+
+                $node = $gIBSCBS->getElementsByTagName("vIBS")->item(0);
+
+                if ($node) {
+                    $gIBSCBS->insertBefore($gIBSUF, $node);
+                } else {
+                    
+                    $this->dom->appChild($gIBSCBS, $gIBSUF, "Inclusão do node gIBSUF");
+                }
+            }
+
+        }
+    }
+
+     /**
+     * create tag gIBSMun pai gIBSCBS
+     */
+
+    public function tagGIBSMun($std)
+    {
+
+        $possible = [
+            'item',
+            'pIBSMun',
+            'gDif',
+            'gDevTrib',
+            'gRed',
+            'vIBSMun',
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $identificador = '<gIBSMun> - Grupo de informações do IBS no Município ';
+
+        $gIBSMun = $this->dom->createElement("gIBSMun");
+
+        $this->dom->addChild(
+            $gIBSMun,
+            "pIBSMun",
+            $std->pIBSMun,
+            true,
+            $identificador . " - Aliquota do IBS de competência das UF"
+        );
+
+        $this->dom->addChild(
+            $gIBSMun,
+            "gDif",
+            $std->gDif,
+            false,
+            $identificador . " - Grupo de campos do Diferimento"
+        );
+
+        $this->dom->addChild(
+            $gIBSMun,
+            "gDevTrib",
+            $std->gDevTrib,
+            false,
+            $identificador . " - Grupo de Informações da devolução de tributos"
+        );
+
+        $this->dom->addChild(
+            $gIBSMun,
+            "gRed",
+            $std->gRed,
+            false,
+            $identificador . " - Grupo de campos da redução de aliquota"
+        );
+
+        $this->dom->addChild(
+            $gIBSMun,
+            "vIBSMun",
+            $std->vIBSMun,
+            true,
+            $identificador . " - Valor do IBS Municipal"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])){
+            
+            $gIBSCBS = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBS")->item(0);
+
+            if (!empty($gIBSCBS)) {
+                
+
+                $node = $gIBSCBS->getElementsByTagName("vIBS")->item(0);
+
+                if ($node) {
+                    $gIBSCBS->insertBefore($gIBSMun, $node);
+                } else {
+
+                    $this->dom->appChild($gIBSCBS, $gIBSMun, "Inclusão do node gIBSMun");
+                }
+            }
+
+        }
+        }
+    /**
+     * create tag gCBS [UC]
+     * tag NFe/infNFe/det[]/imposto/IBSCBS/gCBS
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagGCBS($std)
+    {
+       
+        $possible = [
+           'item',
+           'pCBS',
+           'gDif',
+           'gDevTrib',
+           'gRed',
+           'vCBS'
+       ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gCBS = $this->dom->createElement("gCBS");
+
+        $this->dom->addChild(
+            $gCBS,
+            "pCBS",
+            $std->pCBS,
+            true,
+            "Valor da Base de Cálculo do GCBS"
+        );
+
+        $this->dom->addChild(
+            $gCBS,
+            "gDif",
+            $std->gDif,
+            false,
+            "Grupo de campos do Diferimento"
+        );
+
+        $this->dom->addChild(
+            $gCBS,
+            "gDevTrib",
+            $std->gDevTrib,
+            false,
+            "Grupo de Informações da devolução de tributos"
+        );
+
+        $this->dom->addChild(
+            $gCBS,
+            "gRed",
+            $std->gRed,
+            false,
+            "Grupo de campos da redução de aliquota"
+        );
+
+        $this->dom->addChild(
+            $gCBS,
+            "vCBS",
+            $std->vCBS,
+            true,
+            "Valor do CBS"
+        );
+
+      if (isset($this->aIBSCBS[$std->item])){
+            
+            $gIBSCBS = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBS")->item(0);
+
+            if (!empty($gIBSCBS)) {
+
+                $this->dom->appChild($gIBSCBS, $gCBS, "Inclusão do node gCBS");
+
+            }
+
+        }
+
+        return $gCBS;
+    }
+
+    /**
+     * Create tag gTribRegular [UC01D]
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagGTribRegular($std){
+        
+        $possible = [
+            'item',
+            'CSTReg',
+            'cClassTribReg',
+            'pAliqEfetRegIBSUF',
+            'vTribRegIBSUF',
+            'pAliqEfetRegIBSMun',
+            'vTribRegIBSMun',
+            'pAliqEfetRegCBS',
+            'vTribRegCBS'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gTribRegular = $this->dom->createElement("gTribRegular");
+
+        $this->dom->addChild(
+            $gTribRegular,
+            "CSTReg",
+            $std->CSTReg,
+            true,
+            "Código de Situação Tributária do IBS/CBS na Regularização"
+        );
+
+        $this->dom->addChild(
+            $gTribRegular,
+            "cClassTribReg",
+            $std->cClassTribReg,
+            true,
+            "Informar qual seria o cClassTrib caso não cumprida a condição resolutória/suspensiva"
+        );
+
+        $this->dom->addChild(
+            $gTribRegular,
+            "pAliqEfetRegIBSUF",
+            $std->pAliqEfetRegIBSUF,
+            true,
+            "Alíquota efetiva do IBS de competência das UF na regularização"
+        );
+
+        $this->dom->addChild(
+            $gTribRegular,
+            "vTribRegIBSUF",
+            $std->vTribRegIBSUF,
+            true,
+            "Valor do IBS de competência das UF na regularização"
+        );
+
+        $this->dom->addChild(
+            $gTribRegular,
+            "pAliqEfetRegIBSMun",
+            $std->pAliqEfetRegIBSMun,
+            true,
+            "Alíquota efetiva do IBS Municipal na regularização"
+        );
+
+        $this->dom->addChild(
+            $gTribRegular,
+            "vTribRegIBSMun",
+            $std->vTribRegIBSMun,
+            true,
+            "Valor do IBS Municipal na regularização"
+        );
+
+        $this->dom->addChild(
+            $gTribRegular,
+            "pAliqEfetRegCBS",
+            $std->pAliqEfetRegCBS,
+            true,
+            "Alíquota efetiva do CBS na regularização"
+        );
+
+        $this->dom->addChild(
+            $gTribRegular,
+            "vTribRegCBS",
+            $std->vTribRegCBS,
+            true,
+            "Valor do CBS na regularização"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])){
+            
+            $gIBSCBS = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBS")->item(0);
+
+            if (!empty($gIBSCBS)) {
+
+                $this->dom->appChild($gIBSCBS, $gTribRegular, "Inclusão do node gTribRegular");
+
+            }
+
+        }
+
+        return $gTribRegular;
+    }
+
+    /**
+     * create tag gIBSCredPres [UC01E]
+     * @param stdClass $std
+     * @return void
+    */
+    public function tagGIBSCredPres($std){
+
+        $possible = [
+            'item',
+            'cCredPres',
+            'pCredPres',
+            'vCredPres',
+            'vCredPresCondSus'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCredPres = $this->dom->createElement("gIBSCredPres");
+
+        $this->dom->addChild(
+            $gIBSCredPres,
+            "cCredPres",
+            $std->cCredPres,
+            true,
+            "Código da natureza do crédito presumido de IBS/CBS"
+        );
+
+        $this->dom->addChild(
+            $gIBSCredPres,
+            "pCredPres",
+            $std->pCredPres,
+            true,
+            "Alíquota do crédito presumido de IBS/CBS"
+        );
+
+        $this->dom->addChild(
+            $gIBSCredPres,
+            "vCredPres",
+            $std->vCredPres,
+            true,
+            "Valor do crédito presumido de IBS/CBS"
+        );
+
+        $this->dom->addChild(
+            $gIBSCredPres,
+            "vCredPresCondSus",
+            $std->vCredPresCondSus,
+            false,
+            "Valor do crédito presumido de IBS/CBS relativo a operações com condição resolutória/suspensiva"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])){
+            
+            $gIBSCBS = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBS")->item(0);
+
+            if (!empty($gIBSCBS)) {
+
+                $this->dom->appChild($gIBSCBS, $gIBSCredPres, "Inclusão do node gIBSCredPres");
+
+            }
+
+        }
+
+        return $gIBSCredPres;
+    }
+
+    /**
+     * create tag gIBSCredPres [UC01E]
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagGTransfCred($std){
+
+        $possible = [
+            'item',
+            'cCredPres',
+            'pCredPres',
+            'vCredPres',
+            'vCredPresCondSus'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gCBSCredPres = $this->dom->createElement("gCBSCredPres");
+
+        $this->dom->addChild(
+            $gCBSCredPres,
+            "cCredPres",
+            $std->cCredPres,
+            true,
+            "Código da natureza do crédito presumido de IBS/CBS"
+        );
+
+        $this->dom->addChild(
+            $gCBSCredPres,
+            "pCredPres",
+            $std->pCredPres,
+            true,
+            "Alíquota do crédito presumido de IBS/CBS"
+        );
+
+        $this->dom->addChild(
+            $gCBSCredPres,
+            "vCredPres",
+            $std->vCredPres,
+            true,
+            "Valor do crédito presumido de IBS/CBS"
+        );
+
+        $this->dom->addChild(
+            $gCBSCredPres,
+            "vCredPresCondSus",
+            $std->vCredPresCondSus,
+            false,
+            "Valor do crédito presumido de IBS/CBS relativo a operações com condição resolutória/suspensiva"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])){
+            
+            $gIBSCBS = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBS")->item(0);
+
+            if (!empty($gIBSCBS)) {
+
+                $this->dom->appChild($gIBSCBS, $gCBSCredPres, "Inclusão do node gCBSCredPres");
+
+            }
+
+        }
+
+        return $gCBSCredPres;
+    }
+
+    /**
+     * create tag gTribCompraGov [UC01G]
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagGTribCompraGov($std){
+
+        $possible = [
+            'item',
+            'pAliqIBSUF',
+            'vTribIBSUF',
+            'pAliqIBSMun',
+            'vTribIBSMun',
+            'pAliqCBS',
+            'vTribCBS'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gTribCompraGov = $this->dom->createElement("gTribCompraGov");
+
+        $this->dom->addChild(
+            $gTribCompraGov,
+            "pAliqIBSUF",
+            $std->pAliqIBSUF,
+            true,
+            "Alíquota do IBS de competência das UF na compra por órgão governamental"
+        );
+
+        $this->dom->addChild(
+            $gTribCompraGov,
+            "vTribIBSUF",
+            $std->vTribIBSUF,
+            true,
+            "Valor do IBS de competência das UF na compra por órgão governamental"
+        );
+
+        $this->dom->addChild(
+            $gTribCompraGov,
+            "pAliqIBSMun",
+            $std->pAliqIBSMun,
+            true,
+            "Alíquota do IBS Municipal na compra por órgão governamental"
+        );
+
+        $this->dom->addChild(
+            $gTribCompraGov,
+            "vTribIBSMun",
+            $std->vTribIBSMun,
+            true,
+            "Valor do IBS Municipal na compra por órgão governamental"
+        );
+
+        $this->dom->addChild(
+            $gTribCompraGov,
+            "pAliqCBS",
+            $std->pAliqCBS,
+            true,
+            "Alíquota do CBS na compra por órgão governamental"
+        );
+
+        $this->dom->addChild(
+            $gTribCompraGov,
+            "vTribCBS",
+            $std->vTribCBS,
+            true,
+            "Valor do CBS na compra por órgão governamental"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])){
+            
+            $gIBSCBS = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBS")->item(0);
+
+            if (!empty($gIBSCBS)) {
+
+                $this->dom->appChild($gIBSCBS, $gTribCompraGov, "Inclusão do node gTribCompraGov");
+
+            }
+
+        }
+
+        return $gTribCompraGov;
+    }
+
+    /**
+     * Create tag gIBSCBS [UC02]
+     * tag NFe/infNFe/det[]/imposto/IBSCBS/gIBSCBSMono
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagGIBSCBSMono($std)
+    {
+       
+        $possible = [
+            'item',
+            'vTotIBSMonoItem',
+            'vTotCBSMonoItem'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->dom->createElement("gIBSCBSMono");
+
+        $this->dom->addChild(
+            $gIBSCBSMono,
+            "vTotIBSMonoItem",
+            $std->vTotIBSMonoItem,
+            true,
+            "Valor total do IBS Mono tributado na operação"
+        );
+
+        $this->dom->addChild(
+            $gIBSCBSMono,
+            "vTotCBSMonoItem",
+            $std->vTotCBSMonoItem,
+            true,
+            "Valor total do CBS Mono tributado na operação"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])) {
+
+            $this->dom->appChild($this->aIBSCBS[$std->item], $gIBSCBSMono, "Inclusão do node gIBSCBSMono");
+
+        }
+
+        return $gIBSCBSMono;
+    }
+
+    /**
+     * create tag gMonoPadrao [UC02A]
+     * UC02A|qBCMono|adRemIBS|adRemCBS|vIBSMono|vCBSMono
+    */
+
+    public function tagGMonoPadrao($std){
+
+        $possible = [
+            'item',
+            'qBCMono',
+            'adRemIBS',
+            'adRemCBS',
+            'vIBSMono',
+            'vCBSMono'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gMonoPadrao = $this->dom->createElement("gMonoPadrao");
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "qBCMono",
+            $std->qBCMono,
+            true,
+            "Quantidade tributada na operação"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "adRemIBS",
+            $std->adRemIBS,
+            true,
+            "Adicional do IBS Mono"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "adRemCBS",
+            $std->adRemCBS,
+            true,
+            "Adicional do CBS Mono"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "vIBSMono",
+            $std->vIBSMono,
+            true,
+            "Valor do IBS Mono"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "vCBSMono",
+            $std->vCBSMono,
+            true,
+            "Valor do CBS Mono"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])) {
+
+            $gIBSCBSMono = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBSMono")->item(0);
+
+            if (!empty($gIBSCBSMono)) {
+
+                $node = $gIBSCBSMono->getElementsByTagName("vTotIBSMonoItem")->item(0);
+
+                if($node){
+                
+                    $gIBSCBSMono->insertBefore($gMonoPadrao, $node);
+
+                }
+
+            }
+
+        }
+
+    }
+
+    /**
+     * Create tag gMonoReten [UC02B]
+     * UC02B|qBCMonoReten|adRemIBSReten|vIBSMonoReten|adRemCBSReten|vCBSMonoReten|
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagGMonoReten($std){
+
+        $possible = [
+            'item',
+            'qBCMonoReten',
+            'adRemIBSReten',
+            'vIBSMonoReten',
+            'adRemCBSReten',
+            'vCBSMonoReten'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gMonoReten = $this->dom->createElement("gMonoReten");
+
+        $this->dom->addChild(
+            $gMonoReten,
+            "qBCMonoReten",
+            $std->qBCMonoReten,
+            true,
+            "Quantidade tributada na operação"
+        );
+
+        $this->dom->addChild(
+            $gMonoReten,
+            "adRemIBSReten",
+            $std->adRemIBSReten,
+            true,
+            "Adicional do IBS Mono Retido"
+        );
+
+        $this->dom->addChild(
+            $gMonoReten,
+            "vIBSMonoReten",
+            $std->vIBSMonoReten,
+            true,
+            "Valor do IBS Mono Retido"
+        );
+
+        $this->dom->addChild(
+            $gMonoReten,
+            "adRemCBSReten",
+            $std->adRemCBSReten,
+            true,
+            "Adicional do CBS Mono Retido"
+        );
+
+        $this->dom->addChild(
+            $gMonoReten,
+            "vCBSMonoReten",
+            $std->vCBSMonoReten,
+            true,
+            "Valor do CBS Mono Retido"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])) {
+
+            $gIBSCBSMono = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBSMono")->item(0);
+
+            if (!empty($gIBSCBSMono)) {
+
+                $node = $gIBSCBSMono->getElementsByTagName("vTotCBSMonoItem")->item(0);
+
+                if($node){
+                
+                    $gIBSCBSMono->insertBefore($gMonoReten, $node);
+
+                }
+
+            }
+
+        }
+
+    }
+
+     /**
+     * create tag gMonoRet[UC02C]
+     * UC02C|qBCMonoRet|adRemIBSRet|vIBSMonoRet|adRemCBSRet|vCBSMonoRet|
+     */
+    public function tagGMonoRet($std){
+
+        $possible = [
+            'item',
+            'qBCMonoRet',
+            'adRemIBSRet',
+            'vIBSMonoRet',
+            'adRemCBSRet',
+            'vCBSMonoRet'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gMonoRet = $this->dom->createElement("gMonoRet");
+
+        $this->dom->addChild(
+            $gMonoRet,
+            "qBCMonoRet",
+            $std->qBCMonoRet,
+            true,
+            "Quantidade tributada na operação"
+        );
+
+        $this->dom->addChild(
+            $gMonoRet,
+            "adRemIBSRet",
+            $std->adRemIBSRet,
+            true,
+            "Adicional do IBS Mono Retido"
+        );
+
+        $this->dom->addChild(
+            $gMonoRet,
+            "vIBSMonoRet",
+            $std->vIBSMonoRet,
+            true,
+            "Valor do IBS Mono Retido"
+        );
+
+        $this->dom->addChild(
+            $gMonoRet,
+            "adRemCBSRet",
+            $std->adRemCBSRet,
+            true,
+            "Adicional do CBS Mono Retido"
+        );
+
+        $this->dom->addChild(
+            $gMonoRet,
+            "vCBSMonoRet",
+            $std->vCBSMonoRet,
+            true,
+            "Valor do CBS Mono Retido"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])) {
+
+            $gIBSCBSMono = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBSMono")->item(0);
+
+            if (!empty($gIBSCBSMono)) {
+
+                $node = $gIBSCBSMono->getElementsByTagName("vTotCBSMonoItem")->item(0);
+
+                if($node){
+                
+                    $gIBSCBSMono->insertBefore($gMonoRet, $node);
+
+                }
+
+            }
+
+        }
+    }
+
+    /**
+     * create tag gMonoDif[UC02D]
+     * UC02D|pDifIBS|vIBSMonoDif|pDifCBS|vCBSMonoDif|
+     */
+    public function tagGMonoDif($std){
+
+        $possible = [
+            'item',
+            'pDifIBS',
+            'vIBSMonoDif',
+            'pDifCBS',
+            'vCBSMonoDif'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gMonoDif = $this->dom->createElement("gMonoDif");
+
+        $this->dom->addChild(
+            $gMonoDif,
+            "pDifIBS",
+            $std->pDifIBS,
+            true,
+            "Percentual do Diferimento do IBS Mono"
+        );
+
+        $this->dom->addChild(
+            $gMonoDif,
+            "vIBSMonoDif",
+            $std->vIBSMonoDif,
+            true,
+            "Valor do Diferimento do IBS Mono"
+        );
+
+        $this->dom->addChild(
+            $gMonoDif,
+            "pDifCBS",
+            $std->pDifCBS,
+            true,
+            "Percentual do Diferimento do CBS Mono"
+        );
+
+        $this->dom->addChild(
+            $gMonoDif,
+            "vCBSMonoDif",
+            $std->vCBSMonoDif,
+            true,
+            "Valor do Diferimento do CBS Mono"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])) {
+
+            $gIBSCBSMono = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBSMono")->item(0);
+
+            if (!empty($gIBSCBSMono)) {
+
+                $node = $gIBSCBSMono->getElementsByTagName("vTotCBSMonoItem")->item(0);
+
+                if($node){
+                
+                    $gIBSCBSMono->insertBefore($gMonoDif, $node);
+
+                }
+
+            }
+
+        }
+    }
+
+    /**
+    * create tag gTransfCred[UC03]
+    * UC03||vIBS|vCBS
+    */
+    public function tagGTransfCredUC03($std){
+
+        $possible = [
+            'item',
+            'vIBS',
+            'vCBS'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gTransfCred = $this->dom->createElement("gTransfCred");
+
+        $this->dom->addChild(
+            $gTransfCred,
+            "vIBS",
+            $std->vIBS,
+            true,
+            "Valor do IBS a ser transferido como crédito"
+        );
+
+        $this->dom->addChild(
+            $gTransfCred,
+            "vCBS",
+            $std->vCBS,
+            true,
+            "Valor do CBS a ser transferido como crédito"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])) {
+
+            $this->dom->appChild($this->aIBSCBS[$std->item], $gTransfCred, "Inclusão do node gTransfCred");
+
+        }
+
+        return $gTransfCred;
+    }
+
+    /**
+     * create tag gCredPresIBSZFM[UC04]
+     * UC04|pCredPresZFM|vCredPresZFM
+    */
+    public function tagGCredPresIBSZFM($std){
+
+        $possible = [
+            'item',
+            'pCredPresZFM',
+            'vCredPresZFM'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gCredPresIBSZFM = $this->dom->createElement("gCredPresIBSZFM");
+
+        $this->dom->addChild(
+            $gCredPresIBSZFM,
+            "pCredPresZFM",
+            $std->pCredPresZFM,
+            true,
+            "Alíquota do crédito presumido de IBS/CBS na ZFM"
+        );
+
+        $this->dom->addChild(
+            $gCredPresIBSZFM,
+            "vCredPresZFM",
+            $std->vCredPresZFM,
+            true,
+            "Valor do crédito presumido de IBS/CBS na ZFM"
+        );
+
+        if (isset($this->aIBSCBS[$std->item])) {
+
+            $this->dom->appChild($this->aIBSCBS[$std->item], $gCredPresIBSZFM, "Inclusão do node gCredPresIBSZFM");
+
+        }
+
+        return $gCredPresIBSZFM;
     }
 
     /**
@@ -8084,6 +10200,28 @@ class Make
 
             }
         }
+
+        foreach ( $this->aInfProdNFF as $nItem => $child) {
+
+            $prod = $this->aProd[$nItem];
+
+            $this->dom->appChild($prod, $child, "Inclusão do node infProdNFF");
+            
+            $this->aProd[$nItem] = $prod;
+            
+        }
+
+        //insere infProdEmb
+        foreach ($this->aInfProdEmb as $nItem => $child) {
+
+            $prod = $this->aProd[$nItem];
+
+            $this->dom->appChild($prod, $child, "Inclusão do node infProdEmb");
+
+            $this->aProd[$nItem] = $prod;
+
+        }
+
         //insere veiculo
         foreach ($this->aVeicProd as $nItem => $child) {
             $prod = $this->aProd[$nItem];
