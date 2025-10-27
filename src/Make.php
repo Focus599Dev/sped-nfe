@@ -2128,7 +2128,6 @@ class Make
             $std->cBarra,
             false,
             $identificador . "[item $std->item] Codigo de barras diferente do padrão GTIN",
-            true
         );
 
         $xProd = $std->xProd;
@@ -7256,7 +7255,7 @@ class Make
             'vBCIBSCBS'
         ];
 
-        $std->IBSCBSTot = $this->equilizeParameters($std->IBSCBSTot, $possible);
+        $std = $this->equilizeParameters($std, $possible);
         
         $IBSCBSTot = $this->dom->createElement("IBSCBSTot");
 
@@ -7268,7 +7267,7 @@ class Make
             "Valor total da base de cálculo do imposto sobre serviços de comunicação - IBSC"
         );
 
-        if (isset($std->IBSCBSTot->gIBS) and !empty($std->IBSCBSTot->gIBS)) {
+        if (isset($std->gIBS) and !empty($std->gIBS)) {
             
             $possible = [
                 'vIBS',
@@ -7276,11 +7275,11 @@ class Make
                 'vCredPresCondSus'
             ];
 
-            $std->IBSCBSTot->gIBS = $this->equilizeParameters($std->IBSCBSTot->gIBS, $possible);
+            $std->gIBS = $this->equilizeParameters($std->gIBS, $possible);
 
             $gIBS = $this->dom->createElement("gIBS");
 
-            if (isset($std->IBSCBSTot->gIBS->gIBSUF) && !empty($std->IBSCBSTot->gIBS->gIBSUF)) {
+            if (isset($std->gIBS->gIBSUF) && !empty($std->gIBS->gIBSUF)) {
 
                 $possible = [
                     'vDif',
@@ -7288,14 +7287,14 @@ class Make
                     'vIBSUF'
                 ];
 
-                $std->IBSCBSTot->gIBS->gIBSUF = $this->equilizeParameters($std->IBSCBSTot->gIBS->gIBSUF, $possible);
+                $std->gIBS->gIBSUF = $this->equilizeParameters($std->gIBS->gIBSUF, $possible);
 
                 $gIBSUF = $this->dom->createElement("gIBSUF");
 
                 $this->dom->addChild(
                     $gIBSUF,
                     "vDif",
-                    $std->IBSCBSTot->gIBS->gIBSUF->vDif,
+                    $std->gIBS->gIBSUF->vDif,
                     true,
                     "Valor total da diferença apurada do imposto sobre serviços de comunicação - IBS"
                 );
@@ -7303,7 +7302,7 @@ class Make
                 $this->dom->addChild(
                     $gIBSUF,
                     "vDevTrib",
-                    $std->IBSCBSTot->gIBS->gIBSUF->vDevTrib,
+                    $std->gIBS->gIBSUF->vDevTrib,
                     true,
                     "Valor total do imposto sobre serviços de comunicação - IBS a recolher"
                 );
@@ -7311,7 +7310,7 @@ class Make
                 $this->dom->addChild(
                     $gIBSUF,
                     "vIBSUF",
-                    $std->IBSCBSTot->gIBS->gIBSUF->vIBSUF,
+                    $std->gIBS->gIBSUF->vIBSUF,
                     true,
                     "Valor total do imposto sobre serviços de comunicação - IBS devido à UF"
                 );
@@ -7319,7 +7318,7 @@ class Make
                 $gIBS->appendChild($gIBSUF);
             }
 
-            if (isset($std->IBSCBSTot->gIBS->gIBSMun) && !empty($std->IBSCBSTot->gIBS->gIBSMun)){
+            if (isset($std->gIBS->gIBSMun) && !empty($std->gIBS->gIBSMun)){
 
                 $possible = [
                     'vDif',
@@ -7327,14 +7326,14 @@ class Make
                     'vIBSMun'
                 ];
 
-                $std->IBSCBSTot->gIBS->gIBSMun = $this->equilizeParameters($std->IBSCBSTot->gIBS->gIBSMun, $possible);
+                $std->gIBS->gIBSMun = $this->equilizeParameters($std->gIBS->gIBSMun, $possible);
 
                 $gIBSMun = $this->dom->createElement("gIBSMun");
 
                 $this->dom->addChild(
                     $gIBSMun,
                     "vDif",
-                    $std->IBSCBSTot->gIBS->gIBSMun->vDif,
+                    $std->gIBS->gIBSMun->vDif,
                     true,
                     "Valor total da diferença apurada do imposto sobre serviços de comunicação - IBS"
                 );
@@ -7342,7 +7341,7 @@ class Make
                 $this->dom->addChild(
                     $gIBSMun,
                     "vDevTrib",
-                    $std->IBSCBSTot->gIBS->gIBSMun->vDevTrib,
+                    $std->gIBS->gIBSMun->vDevTrib,
                     true,
                     "Valor total do imposto sobre serviços de comunicação - IBS a recolher"
                 );
@@ -7350,7 +7349,7 @@ class Make
                 $this->dom->addChild(
                     $gIBSMun,
                     "vIBSMun",
-                    $std->IBSCBSTot->gIBS->gIBSMun->vIBSMun,
+                    $std->gIBS->gIBSMun->vIBSMun,
                     true,
                     "Valor total do imposto sobre serviços de comunicação - IBS devido ao Município"
                 );
@@ -7361,7 +7360,7 @@ class Make
             $this->dom->addChild(
                 $gIBS,
                 "vIBS",
-                $std->IBSCBSTot->gIBS->vIBS,
+                $std->gIBS->vIBS,
                 true,
                 "Valor total do imposto sobre serviços de comunicação - IBS"
             );
@@ -7369,7 +7368,7 @@ class Make
             $this->dom->addChild(
                 $gIBS,
                 "vCredPres",
-                $std->IBSCBSTot->gIBS->vCredPres,
+                $std->gIBS->vCredPres,
                 true,
                 "Valor total do crédito presumido do imposto sobre serviços de comunicação - IBS"
             );
@@ -7377,7 +7376,7 @@ class Make
             $this->dom->addChild(
                 $gIBS,
                 "vCredPresCondSus",
-                $std->IBSCBSTot->gIBS->vCredPresCondSus,
+                $std->gIBS->vCredPresCondSus,
                 true,
                 "Valor total do crédito presumido condicionado e suspenso do imposto sobre serviços de comunicação - IBS"
             );
@@ -7385,7 +7384,7 @@ class Make
             $IBSCBSTot->appendChild($gIBS);
         }
 
-        if (isset($std->IBSCBSTot->gCBS) and !empty($std->IBSCBSTot->gCBS)) {
+        if (isset($std->gCBS) and !empty($std->gCBS)) {
 
             $possible = [
                 'vDif',
@@ -7395,14 +7394,14 @@ class Make
                 'vCredPresCondSus'
             ];
 
-            $std->IBSCBSTot->gCBS = $this->equilizeParameters($std->IBSCBSTot->gCBS, $possible);
+            $std->gCBS = $this->equilizeParameters($std->gCBS, $possible);
 
             $gCBS = $this->dom->createElement("gCBS");
 
             $this->dom->addChild(
                 $gCBS,
                 "vDif",
-                $std->IBSCBSTot->gCBS->vDif,
+                $std->gCBS->vDif,
                 true,
                 "Valor total da diferença apurada da Contribuição para o Custeio da Iluminação Pública - CBS"
             );
@@ -7410,7 +7409,7 @@ class Make
             $this->dom->addChild(
                 $gCBS,
                 "vDevTrib",
-                $std->IBSCBSTot->gCBS->vDevTrib,
+                $std->gCBS->vDevTrib,
                 true,
                 "Valor total da Contribuição para o Custeio da Iluminação Pública - CBS a recolher"
             );
@@ -7418,7 +7417,7 @@ class Make
             $this->dom->addChild(
                 $gCBS,
                 "vCBS",
-                $std->IBSCBSTot->gCBS->vCBS,
+                $std->gCBS->vCBS,
                 true,
                 "Valor total da Contribuição para o Custeio da Iluminação Pública - CBS"
             );
@@ -7426,7 +7425,7 @@ class Make
             $this->dom->addChild(
                 $gCBS,
                 "vCredPres",
-                $std->IBSCBSTot->gCBS->vCredPres,
+                $std->gCBS->vCredPres,
                 true,
                 "Valor total do crédito presumido da Contribuição para o Custeio da Iluminação Pública - CBS"
             );
@@ -7434,7 +7433,7 @@ class Make
             $this->dom->addChild(
                 $gCBS,
                 "vCredPresCondSus",
-                $std->IBSCBSTot->gCBS->vCredPresCondSus,
+                $std->gCBS->vCredPresCondSus,
                 true,
                 "Valor total do crédito presumido condicionado e suspenso da Contribuição para o Custeio da Iluminação Pública - CBS"
             );
@@ -7442,7 +7441,7 @@ class Make
             $IBSCBSTot->appendChild($gCBS);
         }
 
-        if (isset($std->IBSCBSTot->gMono) and !empty($std->IBSCBSTot->gMono)) {
+        if (isset($std->gMono) and !empty($std->gMono)) {
 
             $possible = [
                 'vIBSMono',
@@ -7453,14 +7452,14 @@ class Make
                 'vCBSMonoRet'
             ];
 
-            $std->IBSCBSTot->gMono = $this->equilizeParameters($std->IBSCBSTot->gMono, $possible);
+            $std->gMono = $this->equilizeParameters($std->gMono, $possible);
 
             $gMono = $this->dom->createElement("gMono");
 
             $this->dom->addChild(
                 $gMono,
                 "vIBSMono",
-                $std->IBSCBSTot->gMono->vIBSMono,
+                $std->gMono->vIBSMono,
                 false,
                 "Valor total do imposto sobre serviços de comunicação - IBS monofásico próprio"
             );
@@ -7468,7 +7467,7 @@ class Make
             $this->dom->addChild(
                 $gMono,
                 "vCBSMono",
-                $std->IBSCBSTot->gMono->vCBSMono,
+                $std->gMono->vCBSMono,
                 false,
                 "Valor total da Contribuição para o Custeio da Iluminação Pública - CBS monofásico próprio"
             );
@@ -7476,7 +7475,7 @@ class Make
             $this->dom->addChild(
                 $gMono,
                 "vIBSMonoReten",
-                $std->IBSCBSTot->gMono->vIBSMonoReten,
+                $std->gMono->vIBSMonoReten,
                 false,
                 "Valor total do imposto sobre serviços de comunicação - IBS monofásico sujeito a retenção"
             );
@@ -7484,7 +7483,7 @@ class Make
             $this->dom->addChild(
                 $gMono,
                 "vCBSMonoReten",
-                $std->IBSCBSTot->gMono->vCBSMonoReten,
+                $std->gMono->vCBSMonoReten,
                 false,
                 "Valor total da Contribuição para o Custeio da Iluminação Pública - CBS monofásico sujeito a retenção"
             );
@@ -7492,7 +7491,7 @@ class Make
             $this->dom->addChild(
                 $gMono,
                 "vIBSMonoRet",
-                $std->IBSCBSTot->gMono->vIBSMonoRet,
+                $std->gMono->vIBSMonoRet,
                 false,
                 "Valor total do imposto sobre serviços de comunicação - IBS monofásico retido anteriormente"
             );
@@ -7500,7 +7499,7 @@ class Make
             $this->dom->addChild(
                 $gMono,
                 "vCBSMonoRet",
-                $std->IBSCBSTot->gMono->vCBSMonoRet,
+                $std->gMono->vCBSMonoRet,
                 false,
                 "Valor total da Contribuição para o Custeio da Iluminação Pública - CBS monofásico retido anteriormente"
             );
@@ -7508,7 +7507,7 @@ class Make
             $IBSCBSTot->appendChild($gMono);
         }
 
-        $this->dom->appendChild($this->total, $IBSCBSTot, 'Valores totais da NF com IBS / CBS');
+        $this->dom->appChild($this->total, $IBSCBSTot, 'Valores totais da NF com IBS / CBS');
 
 
         if (isset($std->vNFTot) and !empty($std->vNFTot)) {
