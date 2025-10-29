@@ -735,7 +735,7 @@ class Make
             $ide,
             'tpNFDebito',
             $std->tpNFDebito,
-            true,
+            false,
             $identificador . "Tipo de NF-e Débito"
         );
 
@@ -743,7 +743,7 @@ class Make
             $ide,
             'tpNFCredito',
             $std->tpNFCredito,
-            true,
+            false,
             $identificador . "Tipo de NF-e Crédito"
         );
 
