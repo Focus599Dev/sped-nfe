@@ -9054,8 +9054,9 @@ class Make
             'pIBSUF',
             'pDif',
             'vDif',
-            'gDevTrib',
-            'gRed',
+            'vDevTrib',
+            'pRedAliq',
+            'pAliqEfet',
             'vIBSUF',
         ];
 
@@ -9104,21 +9105,42 @@ class Make
             $identificador . " - Grupo de campos do Diferimento"
         );
 
-        $this->dom->addChild(
-            $gIBSUF,
-            "gDevTrib",
-            $std->gDevTrib,
-            false,
-            $identificador . " - Grupo de Informações da devolução de tributos"
-        );
+        if ($std->vDevTrib != '') {
+            $gDevTrib = $this->dom->createElement("gDevTrib");
 
-        $this->dom->addChild(
-            $gIBSUF,
-            "gRed",
-            $std->gRed,
-            false,
-            $identificador . " - Grupo de campos da redução de aliquota"
-        );
+            $this->dom->addChild(
+                $gDevTrib,
+                "vDevTrib",
+                $std->vDevTrib,
+                true,
+                $identificador . " - Valor da Devolução de Tributos"
+            );
+
+            $this->dom->appChild($gIBSUF, $gDevTrib, "Inclusão do node gDevTrib");
+        }
+       
+        if ($std->pRedAliq != '' && $std->pAliqEfet != '') {
+            
+            $gRed = $this->dom->createElement("gRed");
+
+            $this->dom->addChild(
+                $gRed,
+                "pRedAliq",
+                $std->pRedAliq,
+                true,
+                $identificador . " - Percentual de Redução da Alíquota"
+            );
+
+            $this->dom->addChild(
+                $gRed,
+                "pAliqEfet",
+                $std->pAliqEfet,
+                true,
+                $identificador . " - Alíquota Efetiva"
+            );
+
+            $this->dom->appChild($gIBSUF, $gRed, "Inclusão do node gRed");
+        }
 
         $this->dom->addChild(
             $gIBSUF,
@@ -9160,8 +9182,9 @@ class Make
             'pIBSMun',
             'pDif',
             'vDif',
-            'gDevTrib',
-            'gRed',
+            'vDevTrib',
+            'pRedAliq',
+            'pAliqEfet',
             'vIBSMun',
         ];
 
@@ -9202,21 +9225,43 @@ class Make
             $this->dom->appChild($gIBSMun, $gDif, "Inclusão do node gDif");
         }
 
-        $this->dom->addChild(
-            $gIBSMun,
-            "gDevTrib",
-            $std->gDevTrib,
-            false,
-            $identificador . " - Grupo de Informações da devolução de tributos"
-        );
+        if ($std->vDevTrib != '') {
+            
+            $gDevTrib = $this->dom->createElement("gDevTrib");
 
-        $this->dom->addChild(
-            $gIBSMun,
-            "gRed",
-            $std->gRed,
-            false,
-            $identificador . " - Grupo de campos da redução de aliquota"
-        );
+            $this->dom->addChild(
+                $gDevTrib,
+                "vDevTrib",
+                $std->vDevTrib,
+                true,
+                $identificador . " - Valor da Devolução de Tributos"
+            );
+
+            $this->dom->appChild($gIBSMun, $gDevTrib, "Inclusão do node gDevTrib");
+        }
+
+        if ($std->pRedAliq != '' && $std->pAliqEfet != '') {
+            
+            $gRed = $this->dom->createElement("gRed");
+
+            $this->dom->addChild(
+                $gRed,
+                "pRedAliq",
+                $std->pRedAliq,
+                true,
+                $identificador . " - Percentual de Redução da Alíquota"
+            );
+
+            $this->dom->addChild(
+                $gRed,
+                "pAliqEfet",
+                $std->pAliqEfet,
+                true,
+                $identificador . " - Alíquota Efetiva"
+            );
+
+            $this->dom->appChild($gIBSMun, $gRed, "Inclusão do node gRed");
+        }
 
         $this->dom->addChild(
             $gIBSMun,
@@ -9259,8 +9304,9 @@ class Make
            'pCBS',
            'pDif',
            'vDif',
-           'gDevTrib',
-           'gRed',
+           'vDevTrib',
+           'pRedAliq',
+           'pAliqEfet',
            'vCBS'
        ];
 
@@ -9301,21 +9347,42 @@ class Make
             $this->dom->appChild($gCBS, $gDif, "Inclusão do node gDif");
         }
 
-        $this->dom->addChild(
-            $gCBS,
-            "gDevTrib",
-            $std->gDevTrib,
-            false,
-            "Grupo de Informações da devolução de tributos"
-        );
+         if ($std->vDevTrib != '') {
+            $gDevTrib = $this->dom->createElement("gDevTrib");
 
-        $this->dom->addChild(
-            $gCBS,
-            "gRed",
-            $std->gRed,
-            false,
-            "Grupo de campos da redução de aliquota"
-        );
+            $this->dom->addChild(
+                $gDevTrib,
+                "vDevTrib",
+                $std->vDevTrib,
+                true,
+                $identificador . " - Valor da Devolução de Tributos"
+            );
+
+            $this->dom->appChild($gCBS, $gDevTrib, "Inclusão do node gDevTrib");
+        }
+
+       if ($std->pRedAliq != '' && $std->pAliqEfet != '') {
+            
+            $gRed = $this->dom->createElement("gRed");
+
+            $this->dom->addChild(
+                $gRed,
+                "pRedAliq",
+                $std->pRedAliq,
+                true,
+                $identificador . " - Percentual de Redução da Alíquota"
+            );
+
+            $this->dom->addChild(
+                $gRed,
+                "pAliqEfet",
+                $std->pAliqEfet,
+                true,
+                $identificador . " - Alíquota Efetiva"
+            );
+
+            $this->dom->appChild($gCBS, $gRed, "Inclusão do node gRed");
+        }
 
         $this->dom->addChild(
             $gCBS,
