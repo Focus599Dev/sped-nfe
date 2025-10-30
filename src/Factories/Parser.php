@@ -1859,7 +1859,7 @@ class Parser
     /**
      * create tag gIBSUF [UC01A]
      * NOTE: 2025_002_v1.21
-     * UC01A|pIBSUF|gDif|gDevTrib|gRed|vIBSUF|
+     * UC01A|pIBSUF|pDif|vDif|gDevTrib|gRed|vIBSUF|
      */
 
     protected function uc01aEntity($std){
@@ -1870,7 +1870,7 @@ class Parser
 
     /**
      * create tag gIBSMun [UC01B]
-     * UC01B|pIBSMun|gDif|gDevTrib|gRed|vIBSMun|
+     * UC01B|pIBSMun|pDif|vDif|gDevTrib|gRed|vIBSMun|
      */
 
     protected function uc01bEntity($std){
@@ -1881,7 +1881,7 @@ class Parser
 
     /**
      * create tag gCBS [UC01C]
-     * UC01C|pCBS|gDif|gDevTrib|gRed|vCBS|
+     * UC01C|pCBS|pDif|vDif|gDevTrib|gRed|vCBS|
      */
 
     protected function uc01cEntity($std){

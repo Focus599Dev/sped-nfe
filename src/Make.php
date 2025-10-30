@@ -9052,7 +9052,8 @@ class Make
         $possible = [
             'item',
             'pIBSUF',
-            'gDif',
+            'pDif',
+            'vDif',
             'gDevTrib',
             'gRed',
             'vIBSUF',
@@ -9071,6 +9072,29 @@ class Make
             true,
             $identificador . " - Aliquota do IBS de competência das UF"
         );
+
+        if ($std->pDif != '' && $std->vDif != '') {
+            
+            $gDif = $this->dom->createElement("gDif");
+
+            $this->dom->addChild(
+                $gDif,
+                "pDif",
+                $std->pDif,
+                true,
+                $identificador . " - Percentual do Diferimento"
+            );
+
+            $this->dom->addChild(
+                $gDif,
+                "vDif",
+                $std->vDif,
+                true,
+                $identificador . " - Valor do Diferimento"
+            );
+
+            $this->dom->appChild($gIBSUF, $gDif, "Inclusão do node gDif");
+        }
 
         $this->dom->addChild(
             $gIBSUF,
@@ -9134,7 +9158,8 @@ class Make
         $possible = [
             'item',
             'pIBSMun',
-            'gDif',
+            'pDif',
+            'vDif',
             'gDevTrib',
             'gRed',
             'vIBSMun',
@@ -9154,13 +9179,28 @@ class Make
             $identificador . " - Aliquota do IBS de competência das UF"
         );
 
-        $this->dom->addChild(
-            $gIBSMun,
-            "gDif",
-            $std->gDif,
-            false,
-            $identificador . " - Grupo de campos do Diferimento"
-        );
+        if ($std->pDif != '' && $std->vDif != '') {
+            
+            $gDif = $this->dom->createElement("gDif");
+
+            $this->dom->addChild(
+                $gDif,
+                "pDif",
+                $std->pDif,
+                true,
+                $identificador . " - Percentual do Diferimento"
+            );
+
+            $this->dom->addChild(
+                $gDif,
+                "vDif",
+                $std->vDif,
+                true,
+                $identificador . " - Valor do Diferimento"
+            );
+
+            $this->dom->appChild($gIBSMun, $gDif, "Inclusão do node gDif");
+        }
 
         $this->dom->addChild(
             $gIBSMun,
@@ -9217,7 +9257,8 @@ class Make
         $possible = [
            'item',
            'pCBS',
-           'gDif',
+           'pDif',
+           'vDif',
            'gDevTrib',
            'gRed',
            'vCBS'
@@ -9227,6 +9268,8 @@ class Make
 
         $gCBS = $this->dom->createElement("gCBS");
 
+        $identificador = " - Grupo de informações do CBS ";
+
         $this->dom->addChild(
             $gCBS,
             "pCBS",
@@ -9235,13 +9278,28 @@ class Make
             "Valor da Base de Cálculo do GCBS"
         );
 
-        $this->dom->addChild(
-            $gCBS,
-            "gDif",
-            $std->gDif,
-            false,
-            "Grupo de campos do Diferimento"
-        );
+        if ($std->pDif != '' && $std->vDif != '') {
+            
+            $gDif = $this->dom->createElement("gDif");
+
+            $this->dom->addChild(
+                $gDif,
+                "pDif",
+                $std->pDif,
+                true,
+                $identificador . " - Percentual do Diferimento"
+            );
+
+            $this->dom->addChild(
+                $gDif,
+                "vDif",
+                $std->vDif,
+                true,
+                $identificador . " - Valor do Diferimento"
+            );
+
+            $this->dom->appChild($gCBS, $gDif, "Inclusão do node gDif");
+        }
 
         $this->dom->addChild(
             $gCBS,
