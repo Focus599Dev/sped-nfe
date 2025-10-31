@@ -2148,6 +2148,7 @@ class Parser
         if (!isset($this->stdTotISIBSCBS)){
             $this->stdTotISIBSCBS = new \stdClass();
         }
+
         $this->stdTotISIBSCBS->IBSCBSTot = new \stdClass();
 
         $this->stdTotISIBSCBS->IBSCBSTot = $this->mergeObject( $this->stdTotISIBSCBS->IBSCBSTot  , $std);
@@ -2178,6 +2179,10 @@ class Parser
 
     protected function w25a1Entity($std){
 
+         if (!isset($this->stdTotISIBSCBS->IBSCBSTot)){
+            $this->stdTotISIBSCBS->IBSCBSTot = new \stdClass();
+        }
+
         if (!isset($this->stdTotISIBSCBS->IBSCBSTot->gIBS)){
             $this->stdTotISIBSCBS->IBSCBSTot->gIBS = new \stdClass();
         }
@@ -2196,6 +2201,10 @@ class Parser
 
     protected function w25a2Entity($std){
 
+        if (!isset($this->stdTotISIBSCBS->IBSCBSTot)){
+            $this->stdTotISIBSCBS->IBSCBSTot = new \stdClass();
+        }
+
         if (!isset($this->stdTotISIBSCBS->IBSCBSTot->gIBS)){
             $this->stdTotISIBSCBS->IBSCBSTot->gIBS = new \stdClass();
         }
@@ -2213,6 +2222,10 @@ class Parser
      */
 
     protected function w25bEntity($std){
+
+        if (!isset($this->stdTotISIBSCBS->IBSCBSTot)){
+            $this->stdTotISIBSCBS->IBSCBSTot = new \stdClass();
+        }
 
         if (!isset($this->stdTotISIBSCBS->IBSCBSTot->gCBS)){
             $this->stdTotISIBSCBS->IBSCBSTot->gCBS = new \stdClass();
