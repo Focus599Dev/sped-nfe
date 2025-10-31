@@ -9097,14 +9097,6 @@ class Make
             $this->dom->appChild($gIBSUF, $gDif, "Inclusão do node gDif");
         }
 
-        $this->dom->addChild(
-            $gIBSUF,
-            "gDif",
-            $std->gDif,
-            false,
-            $identificador . " - Grupo de campos do Diferimento"
-        );
-
         if ($std->vDevTrib != '') {
             $gDevTrib = $this->dom->createElement("gDevTrib");
 
@@ -9289,7 +9281,7 @@ class Make
             }
 
         }
-        }
+    }
     /**
      * create tag gCBS [UC]
      * tag NFe/infNFe/det[]/imposto/IBSCBS/gCBS
