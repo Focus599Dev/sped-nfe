@@ -54,7 +54,7 @@ class Tools extends ToolsCommon
         }
         $servico = 'NfeAutorizacao';
         $this->checkContingencyForWebServices($servico);
-        
+
         if (count($aXml) > 1) {
             $indSinc = 0;
         }
@@ -80,9 +80,9 @@ class Tools extends ToolsCommon
             $this->config->siglaUF,
             $this->tpAmb
         );
-        
+
         $this->lastRequest = $sxml;
-        
+
         $request = "<enviNFe xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
             . "<idLote>$idLote</idLote>"
             . "<indSinc>$indSinc</indSinc>"
@@ -104,7 +104,7 @@ class Tools extends ToolsCommon
         var_dump($this->lastResponse);
 
         var_dump($request);
-        
+
         return $this->lastResponse;
     }
 
@@ -384,9 +384,9 @@ class Tools extends ToolsCommon
         }
         //monta a consulta
         $consulta = "<distDFeInt xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
-            . "<tpAmb>".$this->tpAmb."</tpAmb>"
+            . "<tpAmb>" . $this->tpAmb . "</tpAmb>"
             . "<cUFAutor>$cUF</cUFAutor>"
-            . "<CNPJ>".$this->config->cnpj."</CNPJ>$tagNSU</distDFeInt>";
+            . "<CNPJ>" . $this->config->cnpj . "</CNPJ>$tagNSU</distDFeInt>";
         //valida o xml da requisição
         $this->isValid($this->urlVersion, $consulta, 'distDFeInt');
         $this->lastRequest = $consulta;
@@ -470,7 +470,7 @@ class Tools extends ToolsCommon
                 . $item[0]
                 . "\"><qtdeItem>"
                 . $item[1]
-                ."</qtdeItem></itemPedido>";
+                . "</qtdeItem></itemPedido>";
         }
         return $this->sefazEvento(
             $uf,
@@ -508,9 +508,9 @@ class Tools extends ToolsCommon
         $sSeqEvento = str_pad($nSeqEvento, 2, "0", STR_PAD_LEFT);
         $idPedidoCancelado = "ID$origEvent$chave$sSeqEvento";
         $tagAdic = "<idPedidoCancelado>"
-                . "$idPedidoCancelado"
-                . "</idPedidoCancelado>"
-                . "<nProt>$nProt</nProt>";
+            . "$idPedidoCancelado"
+            . "</idPedidoCancelado>"
+            . "<nProt>$nProt</nProt>";
         return $this->sefazEvento(
             $uf,
             $chave,
@@ -579,7 +579,7 @@ class Tools extends ToolsCommon
             $tagAdic
         );
     }
-    
+
     /**
      * Request the registration of the manifestation of recipient in batch
      * @param \stdClass $std
@@ -621,7 +621,7 @@ class Tools extends ToolsCommon
         }
         return $this->sefazEventoLote('AN', $evt);
     }
-    
+
     /**
      * Send event to SEFAZ in batch
      * @param string $uf
@@ -657,7 +657,7 @@ class Tools extends ToolsCommon
             $dt = new \DateTime();
             $dhEvento = $dt->format('Y-m-d\TH:i:sP');
             $sSeqEvento = str_pad($evt->nSeqEvento, 2, "0", STR_PAD_LEFT);
-            $eventId = "ID".$evt->tpEvento.$evt->chave.$sSeqEvento;
+            $eventId = "ID" . $evt->tpEvento . $evt->chave . $sSeqEvento;
             $cOrgao = UFList::getCodeByUF($uf);
             $request = "<evento xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
                 . "<infEvento Id=\"$eventId\">"
@@ -675,7 +675,7 @@ class Tools extends ToolsCommon
                 . "</detEvento>"
                 . "</infEvento>"
                 . "</evento>";
-        
+
             //assinatura dos dados
             $request = Signer::sign(
                 $this->certificate,
@@ -687,7 +687,7 @@ class Tools extends ToolsCommon
             );
             $batchRequest .= Strings::clearXmlString($request, true);
         }
-        $lote = $dt->format('YmdHis').rand(0, 9);
+        $lote = $dt->format('YmdHis') . rand(0, 9);
         $request = "<envEvento xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
             . "<idLote>$lote</idLote>"
             . $batchRequest
@@ -735,7 +735,7 @@ class Tools extends ToolsCommon
         $vICMS = $total->getElementsByTagName('vICMS')->item(0)->nodeValue;
         $vST = $total->getElementsByTagName('vST')->item(0)->nodeValue;
         $dID = !empty($dest->getElementsByTagName('CNPJ')->item(0)) ?
-                $dest->getElementsByTagName('CNPJ')->item(0)->nodeValue : null;
+            $dest->getElementsByTagName('CNPJ')->item(0)->nodeValue : null;
         if (!empty($dID)) {
             $destID = "<CNPJ>$dID</CNPJ>";
         } else {
@@ -750,7 +750,7 @@ class Tools extends ToolsCommon
             }
         }
         $dIE = !empty($dest->getElementsByTagName('IE')->item(0)->nodeValue) ?
-                $dest->getElementsByTagName('IE')->item(0)->nodeValue : '';
+            $dest->getElementsByTagName('IE')->item(0)->nodeValue : '';
         $destIE = '';
         if (!empty($dIE)) {
             $destIE = "<IE>$dIE</IE>";
@@ -813,7 +813,7 @@ class Tools extends ToolsCommon
         $dt = new \DateTime();
         $dhEvento = $dt->format('Y-m-d\TH:i:sP');
         $sSeqEvento = str_pad($nSeqEvento, 2, "0", STR_PAD_LEFT);
-        $eventId = "ID".$tpEvento.$chave.$sSeqEvento;
+        $eventId = "ID" . $tpEvento . $chave . $sSeqEvento;
         $cOrgao = UFList::getCodeByUF($uf);
         $request = "<evento xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
             . "<infEvento Id=\"$eventId\">"
@@ -841,7 +841,7 @@ class Tools extends ToolsCommon
             $this->canonical
         );
         $request = Strings::clearXmlString($request, true);
-        $lote = $dt->format('YmdHis').rand(0, 9);
+        $lote = $dt->format('YmdHis') . rand(0, 9);
         $request = "<envEvento xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
             . "<idLote>$lote</idLote>"
             . $request
@@ -853,6 +853,44 @@ class Tools extends ToolsCommon
 
         $this->lastResponse = $this->sendRequest($body, $parameters);
         return $this->lastResponse;
+    }
+
+    public function sefazEvento112130(
+        $uf,
+        $chave,
+        $tpEvento,
+        $nSeqEvento = 1,
+        $cOrgaoAutor,
+        $tpAutor,
+        $verAplic,
+        $parecimento,
+        $qPerecimento,
+        $uPerecimento,
+        $vIBS,
+        $vCBS
+    ) {
+
+        $tagAdig = '';
+        $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
+        $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
+        $tagAdig .= "<verAplic>$verAplic</verAplic>";
+        $tagAdig .= "<gPerecimento>";
+
+        if (is_array($parecimento)) {
+            foreach ($parecimento as $gPerecimento) {
+                $tagAdig .= "<nItem>{$gPerecimento['nItem']}</nItem>";
+                $tagAdig .= "<vIBS>{$gPerecimento['vIBS']}</vIBS>";
+                $tagAdig .= "<vCBS>{$gPerecimento['vCBS']}</vCBS>";
+            }
+        }
+
+        $tagAdig .= "</gPerecimento>";
+        $tagAdig .= "<qPerecimento>$qPerecimento</qPerecimento>";
+        $tagAdig .= "<uPerecimento>$uPerecimento</uPerecimento>";
+        $tagAdig .= "<vIBS>$vIBS</vIBS>";
+        $tagAdig .= "<vCBS>$vCBS</vCBS>";
+
+        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig);
     }
 
     /**
@@ -880,9 +918,9 @@ class Tools extends ToolsCommon
         $tagChave = "<consChNFe><chNFe>$chave</chNFe></consChNFe>";
         //monta a consulta
         $consulta = "<distDFeInt xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
-            . "<tpAmb>".$this->tpAmb."</tpAmb>"
+            . "<tpAmb>" . $this->tpAmb . "</tpAmb>"
             . "<cUFAutor>$cUF</cUFAutor>"
-            . "<CNPJ>".$this->config->cnpj."</CNPJ>$tagChave</distDFeInt>";
+            . "<CNPJ>" . $this->config->cnpj . "</CNPJ>$tagChave</distDFeInt>";
         //valida o xml da requisição
         $this->isValid($this->urlVersion, $consulta, 'distDFeInt');
         $this->lastRequest = $consulta;
@@ -897,7 +935,7 @@ class Tools extends ToolsCommon
         $this->lastResponse = $this->sendRequest($body, $parameters);
         return $this->lastResponse;
     }
-    
+
     /**
      * Request emit event of saída de mercadoria
      * using new service in RegistrarSaida2
@@ -905,13 +943,14 @@ class Tools extends ToolsCommon
      * @param  string $date
      * @return string
      */
-    public function sefazEnviaSaidaDeMercadoria($chave, $data, $seq){
+    public function sefazEnviaSaidaDeMercadoria($chave, $data, $seq)
+    {
 
         if (empty($chave) || empty($data)) {
             throw new RuntimeException('Não foram passados todos os dados necessários.');
         }
 
-        if (substr($chave, 0, 2) != '31'){
+        if (substr($chave, 0, 2) != '31') {
             throw new RuntimeException('Evento permitido apenas para MG');
         }
 
@@ -920,7 +959,7 @@ class Tools extends ToolsCommon
         $this->version('1.00');
 
         $this->checkContingencyForWebServices($servico);
-        
+
         $this->servico(
             $servico,
             'MG',
@@ -930,17 +969,17 @@ class Tools extends ToolsCommon
 
         $dt = new \DateTime();
 
-        $lote = $dt->format('YmdHis').rand(0, 9);
+        $lote = $dt->format('YmdHis') . rand(0, 9);
 
         $request = "<envRegSaida xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
-                . "<idLote>" . $lote . "</idLote>"   
-                . "<regSaida versao=\"$this->urlVersion\" Id=\"" . $chave . "\">"
-                .   "<tpAmb>" . $this->tpAmb . "</tpAmb>"
-                .   "<chNFe>" . $chave . "</chNFe>"
-                .   "<nSeqRegSaida>" . $seq . "</nSeqRegSaida>"
-                .   "<dtHrRegSaida>" . $data . "</dtHrRegSaida>"
-                . "</regSaida>"
-                . "</envRegSaida>";
+            . "<idLote>" . $lote . "</idLote>"
+            . "<regSaida versao=\"$this->urlVersion\" Id=\"" . $chave . "\">"
+            .   "<tpAmb>" . $this->tpAmb . "</tpAmb>"
+            .   "<chNFe>" . $chave . "</chNFe>"
+            .   "<nSeqRegSaida>" . $seq . "</nSeqRegSaida>"
+            .   "<dtHrRegSaida>" . $data . "</dtHrRegSaida>"
+            . "</regSaida>"
+            . "</envRegSaida>";
 
         $request = Signer::sign(
             $this->certificate,
@@ -963,7 +1002,6 @@ class Tools extends ToolsCommon
         $this->lastResponse = $this->sendRequest($body, $parameters);
 
         return $this->lastResponse;
-
     }
 
 
@@ -977,13 +1015,14 @@ class Tools extends ToolsCommon
      * @param  string $nProt
      * @return string
      */
-    public function sefazCancelSaidaDeMercadoria($chave, $seq = 1, $just, $nProt){
+    public function sefazCancelSaidaDeMercadoria($chave, $seq = 1, $just, $nProt)
+    {
 
         if (empty($chave) || empty($just) || empty($nProt)) {
             throw new RuntimeException('Não foram passados todos os dados necessários.');
         }
 
-        if (substr($chave, 0, 2) != '31'){
+        if (substr($chave, 0, 2) != '31') {
             throw new RuntimeException('Evento permitido apenas para MG');
         }
 
@@ -992,7 +1031,7 @@ class Tools extends ToolsCommon
         $this->version('1.00');
 
         $this->checkContingencyForWebServices($servico);
-        
+
         $this->servico(
             $servico,
             'MG',
@@ -1001,13 +1040,13 @@ class Tools extends ToolsCommon
         );
 
         $request = "<cancRegSaida xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
-                . "<infCanc Id=\"" . $chave . "\">"
-                .   "<tpAmb>" . $this->tpAmb . "</tpAmb>"
-                .   "<chNFe>" . $chave . "</chNFe>"
-                .   "<nProt>" . $nProt . "</nProt>"
-                .   "<xJust>" .  \NFePHP\Common\Strings::replaceSpecialsChars($just) . "</xJust>"
-                . "</infCanc>"
-                . "</cancRegSaida>";
+            . "<infCanc Id=\"" . $chave . "\">"
+            .   "<tpAmb>" . $this->tpAmb . "</tpAmb>"
+            .   "<chNFe>" . $chave . "</chNFe>"
+            .   "<nProt>" . $nProt . "</nProt>"
+            .   "<xJust>" .  \NFePHP\Common\Strings::replaceSpecialsChars($just) . "</xJust>"
+            . "</infCanc>"
+            . "</cancRegSaida>";
 
         $request = Signer::sign(
             $this->certificate,
@@ -1027,9 +1066,8 @@ class Tools extends ToolsCommon
         $body = "<nfeDadosMsg xmlns=\"$this->urlNamespace\">$request</nfeDadosMsg>";
 
         $this->lastResponse = $this->sendRequest($body, $parameters);
-        
-        return $this->lastResponse;
 
+        return $this->lastResponse;
     }
     /**
      * Request emit event of saída de mercadoria with lote
@@ -1038,7 +1076,8 @@ class Tools extends ToolsCommon
      * @param  string $date
      * @return string
      */
-    public function sefazEnviaSaidaDeMercadoriaLote($lote, $date){
+    public function sefazEnviaSaidaDeMercadoriaLote($lote, $date)
+    {
 
         if (empty($lote) || empty($date)) {
             throw new RuntimeException('Não foram passados todos os dados necessários.');
@@ -1049,7 +1088,7 @@ class Tools extends ToolsCommon
         $this->version('1.00');
 
         $this->checkContingencyForWebServices($servico);
-        
+
         $this->servico(
             $servico,
             'MG',
@@ -1059,18 +1098,18 @@ class Tools extends ToolsCommon
 
         $dt = new \DateTime();
 
-        $loteID = $dt->format('YmdHis').rand(0, 9);
+        $loteID = $dt->format('YmdHis') . rand(0, 9);
 
         $request = "<envRegSaida xmlns=\"$this->urlPortal\" versao=\"$this->urlVersion\">"
-                . "<idLote>" . $loteID . "</idLote>";
-                
-        foreach($lote as $event){
+            . "<idLote>" . $loteID . "</idLote>";
+
+        foreach ($lote as $event) {
             $regSaida =  "<regSaida versao=\"$this->urlVersion\" Id=\"" . $event['chave'] . "\">"
-                        .   "<tpAmb>" . $this->tpAmb . "</tpAmb>"
-                        .   "<chNFe>" . $event['chave'] . "</chNFe>"
-                        .   "<nSeqRegSaida>" .$event['seq'] . "</nSeqRegSaida>"
-                        .   "<dtHrRegSaida>" . $date . "</dtHrRegSaida>"
-                        . "</regSaida>";
+                .   "<tpAmb>" . $this->tpAmb . "</tpAmb>"
+                .   "<chNFe>" . $event['chave'] . "</chNFe>"
+                .   "<nSeqRegSaida>" . $event['seq'] . "</nSeqRegSaida>"
+                .   "<dtHrRegSaida>" . $date . "</dtHrRegSaida>"
+                . "</regSaida>";
 
             $regSaida = Signer::sign(
                 $this->certificate,
@@ -1098,7 +1137,6 @@ class Tools extends ToolsCommon
         $this->lastResponse = $this->sendRequest($body, $parameters);
 
         return $this->lastResponse;
-
     }
 
     /**
@@ -1117,7 +1155,7 @@ class Tools extends ToolsCommon
         if ($this->modelo != 65) {
             throw new RuntimeException(
                 "Esta operação é exclusiva de NFCe modelo [65], "
-                . "você está usando modelo [55]."
+                    . "você está usando modelo [55]."
             );
         }
         $raizCNPJ = substr($this->config->cnpj, 0, -6);
@@ -1136,14 +1174,14 @@ class Tools extends ToolsCommon
             . "</admCscNFCe>";
         if ($indOp == 3) {
             $request = "<admCscNFCe versao=\"$this->urlVersion\" xmlns=\"$this->urlPortal\">"
-            . "<tpAmb>$this->tpAmb</tpAmb>"
-            . "<indOp>$indOp</indOp>"
-            . "<raizCNPJ>$raizCNPJ</raizCNPJ>"
-            . "<dadosCsc>"
-            . "<idCsc>".$this->config->CSCid."</idCsc>"
-            . "<codigoCsc>".$this->config->CSC."</codigoCsc>"
-            . "</dadosCsc>"
-            . "</admCscNFCe>";
+                . "<tpAmb>$this->tpAmb</tpAmb>"
+                . "<indOp>$indOp</indOp>"
+                . "<raizCNPJ>$raizCNPJ</raizCNPJ>"
+                . "<dadosCsc>"
+                . "<idCsc>" . $this->config->CSCid . "</idCsc>"
+                . "<codigoCsc>" . $this->config->CSC . "</codigoCsc>"
+                . "</dadosCsc>"
+                . "</admCscNFCe>";
         }
         //o xsd não está disponivel
         //$this->isValid($this->urlVersion, $request, 'cscNFCe');
@@ -1203,7 +1241,8 @@ class Tools extends ToolsCommon
         }
         $chProt = $infProt->getElementsByTagName("chNFe")->item(0)->nodeValue;
         $nProt = $infProt->getElementsByTagName("nProt")->item(0)->nodeValue;
-        if ($protocol == $nProt
+        if (
+            $protocol == $nProt
             && $digval == $digProt
             && $chNFe == $chProt
         ) {
@@ -1275,9 +1314,58 @@ class Tools extends ToolsCommon
                 $std->alias = 'EvNaoRealizada';
                 $std->desc = 'Operacao nao Realizada';
                 break;
+            case 112130:
+                $std->alias = 'envEvento';
+                $std->desc = 'Perecimento, perda, roubo ou furto durante o transporte contratado pelo fornecedor';
+                break;
+            case 112140:
+                $std->alias = 'envEvento';
+                $std->desc = 'Fornecimento não realizado com pagamento antecipado';
+                break;
+            case 112150:
+                $std->alias = 'envEvento';
+                $std->desc = 'Atualização da Data de Previsão de Entrega';
+                break;
+            case 211124:
+                $std->alias = 'envEvento';
+                $std->desc = 'Perecimento, perda, roubo ou furto durante o transporte contratado pelo adquirente';
+                break;
+            case 211110:
+                $std->alias = 'envEvento';
+                $std->desc = 'Solicitação de Apropriação de crédito presumido';
+                break;
+            case 211120:
+                $std->alias = 'envEvento';
+                $std->desc = 'Destinação de item para consumo pessoal';
+                break;
+            case 211128:
+                $std->alias = 'envEvento';
+                $std->desc = 'Aceite de débito na apuração por emissão de nota de crédito';
+                break;
+            case 211130:
+                $std->alias = 'envEvento';
+                $std->desc = 'Imobilização de Item';
+                break;
+            case 211140:
+                $std->alias = 'envEvento';
+                $std->desc = 'Solicitação de Apropriação de Crédito de Combustível';
+                break;
+            case 211150:
+                $std->alias = 'envEvento';
+                $std->desc = 'Solicitação de Apropriação de Crédito para bens e serviços que dependem de '
+                    . 'atividade do adquirente';
+                break;
+            case 212110:
+                $std->alias = 'envEvento';
+                $std->desc = 'Manifestação sobre Pedido de Transferência de Crédito de IBS em Operação de Sucessão';
+                break;
+            case 212120:
+                $std->alias = 'envEvento';
+                $std->desc = 'Manifestação sobre Pedido de Transferência de Crédito de CBS em Operação de Sucessão';
+                break;
             default:
                 $msg = "O código do tipo de evento informado não corresponde a "
-                . "nenhum evento estabelecido.";
+                    . "nenhum evento estabelecido.";
                 throw new RuntimeException($msg);
         }
         return $std;

@@ -2127,7 +2127,7 @@ class Make
             "cBarra",
             $std->cBarra,
             false,
-            $identificador . "[item $std->item] Codigo de barras diferente do padrão GTIN",
+            $identificador . "[item $std->item] Codigo de barras diferente do padrão GTIN"
         );
 
         $xProd = $std->xProd;
@@ -2213,7 +2213,7 @@ class Make
             "cBarraTrib",
             $std->cBarraTrib,
             false,
-            $identificador . "[item $std->item] Codigo de barras da unidade tributável diferente do padrão GTIN",
+            $identificador . "[item $std->item] Codigo de barras da unidade tributável diferente do padrão GTIN"
         );
 
         $this->dom->addChild(
