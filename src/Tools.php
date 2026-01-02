@@ -199,9 +199,19 @@ class Tools extends ToolsCommon
         $xJust,
         $tpAmb = null
     ) {
+
+         // server buckman poe uns espaços
+        $nSerie = trim($nSerie);
+        $nIni = trim($nIni);
+        $nFin = trim($nFin);
+        $xJust = trim($xJust);
+        $tpAmb = trim($tpAmb);
+        
         if (!isset($nSerie) || empty($nIni) || empty($nFin) || empty($xJust)) {
             throw new RuntimeException('Não foram passados todos os dados necessários.');
         }
+       
+        
         if (empty($tpAmb)) {
             $tpAmb = $this->tpAmb;
         }
@@ -255,6 +265,7 @@ class Tools extends ToolsCommon
         $request = Strings::clearXmlString($request, true);
         $this->isValid($this->urlVersion, $request, 'inutNFe');
         $this->lastRequest = $request;
+
         $parameters = ['nfeDadosMsg' => $request];
         $body = "<nfeDadosMsg xmlns=\"$this->urlNamespace\">$request</nfeDadosMsg>";
         $this->lastResponse = $this->sendRequest($body, $parameters);
@@ -525,6 +536,13 @@ class Tools extends ToolsCommon
      */
     public function sefazCancela($chave, $xJust, $nProt)
     {
+        // remoção espaços por causa da buckman
+        $chave = trim($chave);
+
+        $xJust = trim($xJust);
+
+        $nProt = trim($nProt);
+
         if (empty($chave) || empty($xJust) || empty($nProt)) {
             throw new RuntimeException('Não foram passados todos os dados necessários.');
         }
