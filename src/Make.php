@@ -589,14 +589,14 @@ class Make
         $dateTxt = new \DateTime($std->dhEmi);
 
         $dateTxtSaida = new \DateTime($std->dhSaiEnt);
-
-        // if ($dateNow < $dateTxt){
+        //mudança privalia
+        if ($dateNow < $dateTxt){
                 
-        //     $std->dhEmi = date('c');
+             $std->dhEmi = date('c');
             
-        //     $std->dhSaiEnt =  date('c');
+             $std->dhSaiEnt =  date('c');
 
-        // }
+        }
 
         if ($dateTxt > $dateTxtSaida){
 
