@@ -1864,13 +1864,17 @@ class Make
 
         $identificador = 'G01 <entrega> - ';
         $this->entrega = $this->dom->createElement("entrega");
-        $this->dom->addChild(
-            $this->entrega,
-            "CNPJ",
-            $std->CNPJ,
-            false,
-            $identificador . "CNPJ do Cliente da Entrega"
-        );
+
+        if (empty($std->CPF)){
+            $this->dom->addChild(
+                $this->entrega,
+                "CNPJ",
+                $std->CNPJ,
+                true,
+                $identificador . "CNPJ do Cliente da Entrega"
+            );
+        }
+        
         $this->dom->addChild(
             $this->entrega,
             "CPF",
