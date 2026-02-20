@@ -1367,51 +1367,51 @@
 		"desc": "Valor estimado total de impostos federais, estaduais e municipais",
 		"code": "AIF"
 	},
-	"infNFe.det.imposto.gIBSCBS.vBC": {
+	"infNFe.det.imposto.IBSCBS.gIBSCBS.vBC": {
 		"patternOb": "TDec_1302",
-		"message": "O campo infNFe.det.imposto.gIBSCBS.vBC deve conter um valor decimal com 2 casas",
+		"message": "O campo infNFe.det.imposto.IBSCBS.gIBSCBS.vBC deve conter um valor decimal com 2 casas",
 		"desc": "Valor da Base de Cálculo do IBS/CBS",
 		"code": "AI01"
 	},
-	"infNFe.det.imposto.gIBSCBS.gIBSUF.pIBSUF": {
+	"infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.pIBSUF": {
 		"patternOb": "TDec_0302a04",
-		"message": "O campo infNFe.det.imposto.gIBSCBS.gIBSUF.pIBSUF deve conter a alíquota com até 4 casas decimais",
+		"message": "O campo infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.pIBSUF deve conter a alíquota com até 4 casas decimais",
 		"desc": "Alíquota do IBS do Estado",
 		"code": "AI02"
 	},
-	"infNFe.det.imposto.gIBSCBS.gIBSUF.vIBSUF": {
+	"infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.vIBSUF": {
 		"patternOb": "TDec_1302",
-		"message": "O campo infNFe.det.imposto.gIBSCBS.gIBSUF.vIBSUF deve conter valor com 2 casas decimais",
+		"message": "O campo infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSUF.vIBSUF deve conter valor com 2 casas decimais",
 		"desc": "Valor do IBS do Estado",
 		"code": "AI03"
 	},
-	"infNFe.det.imposto.gIBSCBS.gIBSMun.pIBSMun": {
+	"infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.pIBSMun": {
 		"patternOb": "TDec_0302a04",
-		"message": "O campo infNFe.det.imposto.gIBSCBS.gIBSMun.pIBSMun deve conter a alíquota com até 4 casas decimais",
+		"message": "O campo infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.pIBSMun deve conter a alíquota com até 4 casas decimais",
 		"desc": "Alíquota do IBS do Município",
 		"code": "AI04"
 	},
-	"infNFe.det.imposto.gIBSCBS.gIBSMun.vIBSMun": {
+	"infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.vIBSMun": {
 		"patternOb": "TDec_1302",
-		"message": "O campo infNFe.det.imposto.gIBSCBS.gIBSMun.vIBSMun deve conter valor com 2 casas decimais",
+		"message": "O campo infNFe.det.imposto.IBSCBS.gIBSCBS.gIBSMun.vIBSMun deve conter valor com 2 casas decimais",
 		"desc": "Valor do IBS do Município",
 		"code": "AI05"
 	},
-	"infNFe.det.imposto.gIBSCBS.vIBS": {
+	"infNFe.det.imposto.IBSCBS.gIBSCBS.vIBS": {
 		"patternOb": "TDec_1302",
-		"message": "O campo infNFe.det.imposto.gIBSCBS.vIBS deve conter valor com 2 casas decimais",
+		"message": "O campo infNFe.det.imposto.IBSCBS.gIBSCBS.vIBS deve conter valor com 2 casas decimais",
 		"desc": "Valor Total do IBS",
 		"code": "AI06"
 	},
-	"infNFe.det.imposto.gIBSCBS.gCBS.pCBS": {
+	"infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.pCBS": {
 		"patternOb": "TDec_0302a04",
-		"message": "O campo infNFe.det.imposto.gIBSCBS.gCBS.pCBS deve conter a alíquota com até 4 casas decimais",
+		"message": "O campo infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.pCBS deve conter a alíquota com até 4 casas decimais",
 		"desc": "Alíquota da CBS",
 		"code": "AI07"
 	},
-	"infNFe.det.imposto.gIBSCBS.gCBS.vCBS": {
+	"infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.vCBS": {
 		"patternOb": "TDec_1302",
-		"message": "O campo infNFe.det.imposto.gIBSCBS.gCBS.vCBS deve conter valor com 2 casas decimais",
+		"message": "O campo infNFe.det.imposto.IBSCBS.gIBSCBS.gCBS.vCBS deve conter valor com 2 casas decimais",
 		"desc": "Valor da CBS",
 		"code": "AI08"
 	},
