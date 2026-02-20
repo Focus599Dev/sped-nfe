@@ -672,7 +672,7 @@
 		"code": "AA9"
 	},
 	"infNFe.entrega.CNPJ": {
-		"patternOb": "TCnpj",
+		"patternOb": "TCnpjOpc",
 		"message": "O campo infNFe.entrega.CNPJ deve conter um numerico com 14 dígitos",
 		"desc": "CNPJ do responsavel pela entrega",
 		"code": "AAA"
