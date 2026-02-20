@@ -414,11 +414,11 @@ class Tools
                     ),
                     true
                 );
-
+                
         $error = array();
 
         $this->readXML($body, $json, $error);
-        
+        var_dump($error);
         return $error;
     }
 
@@ -432,7 +432,9 @@ class Tools
      * @param string $keyC
      * @return boolean
     */
-    private function readXML($xml, $json, &$error, $keyC = ''){
+    private function readXML($xml, $json, &$error, $keyC = '', $detNumber = null){
+
+        $keygetItem = 'infNFe.det';
 
         foreach ($xml as $key => $xmlTag) {
 
@@ -443,12 +445,19 @@ class Tools
                 else
                     $keyC = $keyC . '.' . $key;
 
-                $this->readXML($xmlTag, $json, $error, $keyC);
+
+                if ($keyC == $keygetItem){
+
+                    $detNumber = (String)$xmlTag['nItem'];
+
+                }
+
+                $this->readXML($xmlTag, $json, $error, $keyC, $detNumber);
 
                 $keyC = substr($keyC, 0, strrpos($keyC, '.'));
 
             } else {
-                                
+
                 if (isset($json[$keyC . '.' . $key])){
 
                     if (isset($json[$keyC . '.' . $key]['patternOb'])){
@@ -459,7 +468,13 @@ class Tools
                             
                             $json[$keyC . '.' . $key]['tag'] = $keyC . '.' . $key;
 
-                            $error[] = $json[$keyC . '.' . $key];
+                            $auxJson = $json[$keyC . '.' . $key];
+
+                            if (preg_match('/' . $keygetItem . '/', $keyC . '.' . $key)){
+                                $auxJson['item'] = $detNumber;
+                            }
+
+                            $error[] = $auxJson;
 
                         }
 
@@ -471,13 +486,21 @@ class Tools
                             
                             $json[$keyC . '.' . $key]['tag'] = $keyC . '.' . $key;
 
-                            $error[] = $json[$keyC . '.' . $key];
+                            $auxJson = $json[$keyC . '.' . $key];
+
+                            if (preg_match('/' . $keygetItem . '/', $keyC . '.' . $key)){
+                                $auxJson['item'] = $detNumber;
+                            }
+
+                            $error[] = $auxJson;
 
                         }
                     } 
                 }
             }
         }
+
+
     }
     
     /**
