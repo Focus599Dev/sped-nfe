@@ -585,6 +585,7 @@ class Tools
         $ambiente = $tpAmb == 1 ? "producao" : "homologacao";
         $webs = new Webservices($this->getXmlUrlPath());
         $sigla = $uf;
+
         if (!$ignoreContingency) {
             $contType = $this->contingency->type;
 
@@ -596,6 +597,7 @@ class Tools
         }
        
         $stdServ = $webs->get($sigla, $ambiente, $this->modelo);
+
         if ($stdServ === false) {
             throw new \RuntimeException(
                 "Nenhum serviço foi localizado para esta unidade "
@@ -610,8 +612,10 @@ class Tools
                 ."]."
             );
         }
+
         //recuperação do cUF
         $this->urlcUF = $this->getcUF($uf);
+
         if ($this->urlcUF > 91) {
             //foi solicitado dado de SVCRS ou SVCAN
             $this->urlcUF = $this->getcUF($this->config->siglaUF);
@@ -641,6 +645,7 @@ class Tools
             . "/"
             . $this->urlMethod
             . "\"";
+
         //montagem do SOAP Header
         //para versões posteriores a 3.10 não incluir o SoapHeader !!!!
         if (floatval($this->versao) < 4.00) {

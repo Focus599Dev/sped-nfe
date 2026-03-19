@@ -807,7 +807,8 @@ class Tools extends ToolsCommon
         $chave,
         $tpEvento,
         $nSeqEvento = 1,
-        $tagAdic = ''
+        $tagAdic = '',
+        $ufService = ''
     ) {
         $ignore = false;
         if ($tpEvento == 110140) {
@@ -815,9 +816,13 @@ class Tools extends ToolsCommon
         }
         $servico = 'RecepcaoEvento';
         $this->checkContingencyForWebServices($servico);
+
+        if (!$ufService)
+            $ufService = $uf;
+
         $this->servico(
             $servico,
-            $uf,
+            $ufService,
             $this->tpAmb,
             $ignore
         );
@@ -845,6 +850,7 @@ class Tools extends ToolsCommon
             . "</detEvento>"
             . "</infEvento>"
             . "</evento>";
+
         //assinatura dos dados
         $request = Signer::sign(
             $this->certificate,
@@ -865,9 +871,69 @@ class Tools extends ToolsCommon
 
         $parameters = ['nfeDadosMsg' => $request];
         $body = "<nfeDadosMsg xmlns=\"$this->urlNamespace\">$request</nfeDadosMsg>";
-
         $this->lastResponse = $this->sendRequest($body, $parameters);
+
         return $this->lastResponse;
+    }
+
+    public function sefazEvento110001(
+        $uf,
+        $chave,
+        $tpEvento,
+        $nSeqEvento = 1,
+        $cOrgaoAutor,
+        $verAplic,
+        $nProtEvento,
+        $tpEventoAut
+    ) {
+
+        $tagAdig = '';
+        $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
+        $tagAdig .= "<verAplic>$verAplic</verAplic>";
+        $tagAdig .= "<nProtEvento>$nProtEvento</nProtEvento>";
+        $tagAdig .= "<tpEventoAut>$tpEventoAut</tpEventoAut>";
+
+        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
+    }
+
+    public function sefazEvento112110(
+        $uf,
+        $chave,
+        $tpEvento,
+        $nSeqEvento = 1,
+        $cOrgaoAutor,
+        $tpAutor,
+        $verAplic,
+        $indQuitacao
+    ) {
+
+        $tagAdig = '';
+        $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
+        $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
+        $tagAdig .= "<verAplic>$verAplic</verAplic>";
+        $tagAdig .= "<indQuitacao>$indQuitacao</indQuitacao>";
+
+        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
+    }
+
+    public function sefazEvento211128(
+        $uf,
+        $chave,
+        $tpEvento,
+        $nSeqEvento = 1,
+        $cOrgaoAutor,
+        $tpAutor,
+        $verAplic,
+        $indAceitacao
+    ) {
+
+        $tagAdig = '';
+        $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
+        $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
+        $tagAdig .= "<verAplic>$verAplic</verAplic>";
+        $tagAdig .= "<indAceitacao>$indAceitacao</indAceitacao>";
+
+        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
     }
 
     public function sefazEvento112130(
@@ -878,34 +944,33 @@ class Tools extends ToolsCommon
         $cOrgaoAutor,
         $tpAutor,
         $verAplic,
-        $parecimento,
-        $qPerecimento,
-        $uPerecimento,
-        $vIBS,
-        $vCBS
+        $parecimentos
     ) {
 
         $tagAdig = '';
         $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
         $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
         $tagAdig .= "<verAplic>$verAplic</verAplic>";
-        $tagAdig .= "<gPerecimento>";
+       
+        if (is_array($parecimentos)) {
+            foreach ($parecimentos as $gPerecimento) {
+                $tagAdig .= "<gPerecimento nItem=\"{$gPerecimento['nItem']}\">";
+                    $tagAdig .= "<vIBS>{$gPerecimento['vIBS']}</vIBS>";
+                    $tagAdig .= "<vCBS>{$gPerecimento['vCBS']}</vCBS>";
 
-        if (is_array($parecimento)) {
-            foreach ($parecimento as $gPerecimento) {
-                $tagAdig .= "<nItem>{$gPerecimento['nItem']}</nItem>";
-                $tagAdig .= "<vIBS>{$gPerecimento['vIBS']}</vIBS>";
-                $tagAdig .= "<vCBS>{$gPerecimento['vCBS']}</vCBS>";
+                    $tagAdig .= "<gControleEstoque>";
+                        $tagAdig .= "<qPerecimento>{$gPerecimento['qPerecimento']}</qPerecimento>";
+                        $tagAdig .= "<uPerecimento>{$gPerecimento['uPerecimento']}</uPerecimento>";
+                        $tagAdig .= "<vIBS>{$gPerecimento['vIBS_est']}</vIBS>";
+                        $tagAdig .= "<vCBS>{$gPerecimento['vCBS_est']}</vCBS>";
+                    $tagAdig .= "</gControleEstoque>";
+
+                $tagAdig .= "</gPerecimento>";
+
             }
         }
 
-        $tagAdig .= "</gPerecimento>";
-        $tagAdig .= "<qPerecimento>$qPerecimento</qPerecimento>";
-        $tagAdig .= "<uPerecimento>$uPerecimento</uPerecimento>";
-        $tagAdig .= "<vIBS>$vIBS</vIBS>";
-        $tagAdig .= "<vCBS>$vCBS</vCBS>";
-
-        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig);
+        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
     }
 
     public function sefazEvento112140(
@@ -916,30 +981,64 @@ class Tools extends ToolsCommon
         $cOrgaoAutor,
         $tpAutor,
         $verAplic,
-        $gItemNaoFornecido,
-        $qNaoFornecida,
-        $uNaoFornecida
+        $gItemNaoFornecidos
     ) {
 
         $tagAdig = '';
         $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
         $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
         $tagAdig .= "<verAplic>$verAplic</verAplic>";
-        $tagAdig .= "<gItemNaoFornecido>";
 
-        if (is_array($gItemNaoFornecido)) {
-            foreach ($gItemNaoFornecido as $gItemNaoFornecido) {
-                $tagAdig .= "<nItem>{$gItemNaoFornecido['nItem']}</nItem>";
-                $tagAdig .= "<vIBS>{$gItemNaoFornecido['vIBS']}</vIBS>";
-                $tagAdig .= "<vCBS>{$gItemNaoFornecido['vCBS']}</vCBS>";
+        if (is_array($gItemNaoFornecidos)) {
+            foreach ($gItemNaoFornecidos as $gItemNaoFornecido) {
+            
+                $tagAdig .= "<gItemNaoFornecido nItem=\"{$gItemNaoFornecido['nItem']}\">";
+
+                    $tagAdig .= "<vIBS>{$gItemNaoFornecido['vIBS']}</vIBS>";
+                    $tagAdig .= "<vCBS>{$gItemNaoFornecido['vCBS']}</vCBS>";
+                    
+                    $tagAdig .= "<gControleEstoque>";
+
+                        $tagAdig .= "<qNaoFornecida>{$gItemNaoFornecido['qNaoFornecida']}</qNaoFornecida>";
+                        $tagAdig .= "<uNaoFornecida>{$gItemNaoFornecido['uNaoFornecida']}</uNaoFornecida>";
+                    $tagAdig .= "</gControleEstoque>";
+                $tagAdig .= "</gItemNaoFornecido>";
+                
             }
         }
 
-        $tagAdig .= "</gItemNaoFornecido>";
-        $tagAdig .= "<qNaoFornecida>$qNaoFornecida</qNaoFornecida>";
-        $tagAdig .= "<uNaoFornecida>$uNaoFornecida</uNaoFornecida>";
+     
 
-        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig);
+        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
+    }
+
+    public function sefazEvento211150(
+        $uf,
+        $chave,
+        $tpEvento,
+        $nSeqEvento = 1,
+        $cOrgaoAutor,
+        $tpAutor,
+        $verAplic,
+        $consumos
+    ) {
+
+        $tagAdig = '';
+        $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
+        $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
+        $tagAdig .= "<verAplic>$verAplic</verAplic>";
+       
+        if (is_array($consumos)) {
+            foreach ($consumos as $gConsumo) {
+                $tagAdig .= "<gCredito nItem=\"{$gConsumo['nItem']}\">";
+                    $tagAdig .= "<vCredIBS>{$gConsumo['vIBS']}</vCredIBS>";
+                    $tagAdig .= "<vCredCBS>{$gConsumo['vCBS']}</vCredCBS>";
+                $tagAdig .= "</gCredito>";
+
+            }
+        }
+
+        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
     }
 
     public function sefazEvento112150(
@@ -958,7 +1057,85 @@ class Tools extends ToolsCommon
         $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
         $tagAdig .= "<verAplic>$verAplic</verAplic>";
         $tagAdig .= "<dPrevEntrega>$dPrevEntrega</dPrevEntrega>";
-        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig);
+        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
+    }
+
+    public function sefazEvento211124(
+        $uf,
+        $chave,
+        $tpEvento,
+        $nSeqEvento = 1,
+        $cOrgaoAutor,
+        $tpAutor,
+        $verAplic,
+        $parecimento
+    ) {
+
+        $tagAdig = '';
+        $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
+        $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
+        $tagAdig .= "<verAplic>$verAplic</verAplic>";
+
+        if (is_array($parecimento)) {
+
+            foreach ($parecimento as $gPerecimento) {
+                $tagAdig .= "<gPerecimento nItem=\"{$gPerecimento['nItem']}\">";
+
+                    $tagAdig .= "<vIBS>{$gPerecimento['vIBS']}</vIBS>";
+                    $tagAdig .= "<vCBS>{$gPerecimento['vCBS']}</vCBS>";
+                    $tagAdig .= "<gControleEstoque>";
+                        
+                        $tagAdig .= "<qPerecimento>{$gPerecimento['qPerecimento']}</qPerecimento>";
+                        $tagAdig .= "<uPerecimento>{$gPerecimento['uPerecimento']}</uPerecimento>";
+
+                    $tagAdig .= "</gControleEstoque>";
+
+                $tagAdig .= "</gPerecimento>";
+                
+            }
+
+        }
+
+        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
+    }
+
+    public function sefazEvento211130(
+        $uf,
+        $chave,
+        $tpEvento,
+        $nSeqEvento = 1,
+        $cOrgaoAutor,
+        $tpAutor,
+        $verAplic,
+        $imobilizado
+    ) {
+
+        $tagAdig = '';
+        $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
+        $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
+        $tagAdig .= "<verAplic>$verAplic</verAplic>";
+
+        if (is_array($imobilizado)) {
+
+            foreach ($imobilizado as $gImobilizado) {
+                $tagAdig .= "<gImobilizacao nItem=\"{$gImobilizado['nItem']}\">";
+
+                    $tagAdig .= "<vIBS>{$gImobilizado['vIBS']}</vIBS>";
+                    $tagAdig .= "<vCBS>{$gImobilizado['vCBS']}</vCBS>";
+                    $tagAdig .= "<gControleEstoque>";
+                        
+                        $tagAdig .= "<qImobilizado>{$gImobilizado['qImobilizado']}</qImobilizado>";
+                        $tagAdig .= "<uImobilizado>{$gImobilizado['uImobilizado']}</uImobilizado>";
+
+                    $tagAdig .= "</gControleEstoque>";
+
+                $tagAdig .= "</gImobilizacao>";
+                
+            }
+
+        }
+
+        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
     }
 
      public function sefazEvento211120(
@@ -969,34 +1146,40 @@ class Tools extends ToolsCommon
         $cOrgaoAutor,
         $tpAutor,
         $verAplic,
-        $gConsumo,
-        $qPerecimento,
-        $uPerecimento,
-        $chaveAcesso,
-        $nItem
+        $gConsumoA
     ) {
 
+        
         $tagAdig = '';
         $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
         $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
         $tagAdig .= "<verAplic>$verAplic</verAplic>";
-        $tagAdig .= "<gConsumo>";
 
-        if (is_array($gConsumo)) {
-            foreach ($gConsumo as $gConsumoItem) {
-                $tagAdig .= "<nItem>{$gConsumoItem['nItem']}</nItem>";
-                $tagAdig .= "<vIBS>{$gConsumoItem['vIBS']}</vIBS>";
-                $tagAdig .= "<vCBS>{$gConsumoItem['vCBS']}</vCBS>";
+        if (is_array($gConsumoA)) {
+
+            foreach ($gConsumoA as $gConsumo) {
+                $tagAdig .= "<gConsumo nItem=\"{$gConsumo['nItem']}\">";
+
+                    $tagAdig .= "<vIBS>{$gConsumo['vIBS']}</vIBS>";
+                    $tagAdig .= "<vCBS>{$gConsumo['vCBS']}</vCBS>";
+                    $tagAdig .= "<gControleEstoque>";
+                        
+                        $tagAdig .= "<qConsumo>{$gConsumo['qConsumo']}</qConsumo>";
+                        $tagAdig .= "<uConsumo>{$gConsumo['uConsumo']}</uConsumo>";
+
+                    $tagAdig .= "</gControleEstoque>";
+                    $tagAdig .= "<DFeReferenciado>";
+                        $tagAdig .= "<chaveAcesso>{$gConsumo['chaveAcesso']}</chaveAcesso>";
+                        $tagAdig .= "<nItem>{$gConsumo['nItemDFe']}</nItem>";
+                    $tagAdig .= "</DFeReferenciado>";
+
+                $tagAdig .= "</gConsumo>";
+                
             }
+
         }
 
-        $tagAdig .= "</gConsumo>";
-        $tagAdig .= "<qPerecimento>$qPerecimento</qPerecimento>";
-        $tagAdig .= "<uPerecimento>$uPerecimento</uPerecimento>";
-        $tagAdig .= "<chaveAcesso>$chaveAcesso</chaveAcesso>";
-        $tagAdig .= "<nItem>$nItem</nItem>";
-
-        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig);
+        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
     }
 
     /**
@@ -1469,6 +1652,14 @@ class Tools extends ToolsCommon
                 $std->alias = 'envEvento';
                 $std->desc = 'Manifestação sobre Pedido de Transferência de Crédito de CBS em Operação de Sucessão';
                 break;
+            case 112110:
+                $std->alias = 'envEvento';
+                $std->desc = 'Informação de efetivo pagamento integral para liberar crédito presumido do adquirente';
+            break;
+            case 110001:
+                $std->alias = 'envEvento';
+                $std->desc = 'Cancelamento de Evento';
+            break;
             default:
                 $msg = "O código do tipo de evento informado não corresponde a "
                     . "nenhum evento estabelecido.";
