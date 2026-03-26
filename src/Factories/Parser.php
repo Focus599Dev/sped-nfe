@@ -2582,7 +2582,7 @@ class Parser
 
     /**
      * Create tag infRespTec [ZD01]
-     * ZD|CNPJ|xContato|email|fone|CSRT|idCSRT
+     * ZD|CNPJ|xContato|email|fone|CSRT|idCSRT|hashCSRT
      * @param stdClass $std
      * @return void
      */
