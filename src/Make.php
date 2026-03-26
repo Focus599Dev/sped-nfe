@@ -8676,7 +8676,8 @@ class Make
             'email',
             'fone',
             'CSRT',
-            'idCSRT'
+            'idCSRT',
+            'hashCSRT'
         ];
         
         $std = $this->equilizeParameters($std, $possible);
@@ -8713,8 +8714,9 @@ class Make
             "Informar o telefone da pessoa a ser contatada na empresa "
             . "desenvolvedora do sistema."
         );
-        if (!empty($std->CSRT) && !empty($std->idCSRT)) {
-            $this->csrt = $std->CSRT;
+
+        if (!empty($std->idCSRT)) {
+            
             $this->dom->addChild(
                 $infRespTec,
                 "idCSRT",
@@ -8722,6 +8724,12 @@ class Make
                 true,
                 "Identificador do CSRT utilizado para montar o hash do CSRT"
             );
+        }
+
+        if (!empty($std->CSRT)) {
+
+            $this->csrt = $std->CSRT;
+
             $this->dom->addChild(
                 $infRespTec,
                 "hashCSRT",
@@ -8729,8 +8737,18 @@ class Make
                 true,
                 "hash do CSRT"
             );
+        } else if (!empty($std->hashCSRT)) {
+            $this->dom->addChild(
+                $infRespTec,
+                "hashCSRT",
+                $std->hashCSRT,
+                true,
+                "hash do CSRT"
+            );
         }
+        
         $this->infRespTec = $infRespTec;
+        
         return $infRespTec;
     }
 
