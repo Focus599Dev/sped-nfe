@@ -2061,17 +2061,10 @@ class Make
 
         $vItem = $this->dom->createElement("vItem");
 
-        $identificador = 'H01 <vItem> - ';
-
-        $this->dom->addChild(
-            $vItem,
-            "vItem",
-            $std->vItem,
-            false,
-            $identificador . "Valor do Item"
-        );
+        $vItem->nodeValue = $std->vItem;
 
         $this->aVItem[$std->item] = $vItem;
+        
         return $vItem;
     }
 
