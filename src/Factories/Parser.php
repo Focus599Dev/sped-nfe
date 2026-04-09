@@ -691,7 +691,7 @@ class Parser
 
     /**
      * Create tag det/infAdProd [H]
-     * H|item|infAdProd|
+     * H|item|infAdProd|vItem|
      * @param stdClass $std
      */
     protected function hEntity($std)
@@ -699,6 +699,11 @@ class Parser
         if (!empty($std->infAdProd)) {
             $this->make->taginfAdProd($std);
         }
+
+        if (!empty($std->vItem)) {
+            $this->make->tagvItem($std);
+        }
+        
         $this->item = (integer) $std->item;
     }
 

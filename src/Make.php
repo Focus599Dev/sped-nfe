@@ -307,6 +307,10 @@ class Make
      * @var array of DOMElements
      */
     protected $aInfAdProd = [];
+     /**
+     * @var array of DOMElements
+     */
+    protected $aVItem = [];
     /**
      * @var array of DOMElements
      */
@@ -2042,6 +2046,33 @@ class Make
         );
         $this->aInfAdProd[$std->item] = $infAdProd;
         return $infAdProd;
+    }
+
+    /**
+     * Create tag vItem [H01]
+     * H|item|infAdProd|vItem|
+     * @param stdClass $std
+     * @return DOMElement
+     */
+    public function tagvItem(stdClass $std)
+    {
+        $possible = ['item', 'vItem'];
+        $std = $this->equilizeParameters($std, $possible);
+
+        $vItem = $this->dom->createElement("vItem");
+
+        $identificador = 'H01 <vItem> - ';
+
+        $this->dom->addChild(
+            $vItem,
+            "vItem",
+            $std->vItem,
+            false,
+            $identificador . "Valor do Item"
+        );
+
+        $this->aVItem[$std->item] = $vItem;
+        return $vItem;
     }
 
     /**
@@ -8714,7 +8745,6 @@ class Make
             "Informar o telefone da pessoa a ser contatada na empresa "
             . "desenvolvedora do sistema."
         );
-
         if (!empty($std->idCSRT)) {
             
             $this->dom->addChild(
@@ -8729,7 +8759,7 @@ class Make
         if (!empty($std->CSRT)) {
 
             $this->csrt = $std->CSRT;
-
+            
             $this->dom->addChild(
                 $infRespTec,
                 "hashCSRT",
@@ -8746,9 +8776,8 @@ class Make
                 "hash do CSRT"
             );
         }
-        
+
         $this->infRespTec = $infRespTec;
-        
         return $infRespTec;
     }
 
@@ -10443,7 +10472,6 @@ class Make
                 $this->dom->appChild($det, $child, "Inclusão do node imposto");
             }
             //insere impostoDevol
-
             if (!empty($this->aImpostoDevol[$nItem])) {
                 $child = $this->aImpostoDevol[$nItem];
                 $this->dom->appChild($det, $child, "Inclusão do node impostoDevol");
@@ -10452,6 +10480,11 @@ class Make
             if (!empty($this->aInfAdProd[$nItem])) {
                 $child = $this->aInfAdProd[$nItem];
                 $this->dom->appChild($det, $child, "Inclusão do node infAdProd");
+            }
+            //insere vItem
+            if (!empty($this->aVItem[$nItem])) {
+                $child = $this->aVItem[$nItem];
+                $this->dom->appChild($det, $child, "Inclusão do node vItem");
             }
             $this->aDet[] = $det;
             $det = null;
