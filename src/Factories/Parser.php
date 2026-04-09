@@ -2419,18 +2419,18 @@ class Parser
 
     /**
      * Creates tag detPag and card [YA]
-     * YA|indPag|tPag|vPag|CNPJ|tBand|cAut|tpIntegra|
+     * YA|indPag
      * @param stdClass $std
      * @return void
      */
     protected function yaEntity($std)
     {
-        // $this->make->tagdetPag($std);
+        
     }
 
     /**
      * Creates tag detPag and card [YA01A]
-     * YA01A|tPag|vPag|xPag|dPag|CNPJPag|UFPag|
+     * YA01A|tPag|vPag|xPag|dPag|CNPJPag|UFPag|indPag|
      * @param stdClass $std
      * @return void
      */
