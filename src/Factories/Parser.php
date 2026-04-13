@@ -134,7 +134,9 @@ class Parser
      */
     public function toXml($nota)
     {
+
         $this->array2xml($nota);
+
         if ($this->make->monta()) {
             return $this->make->getXML();
         }
@@ -155,12 +157,14 @@ class Parser
             if (empty($fields)) {
                 continue;
             }
+
             $metodo = strtolower(str_replace(' ', '', $fields[0])).'Entity';
 
             if (!method_exists(__CLASS__, $metodo)) {
                 //campo não definido
                 throw DocumentsException::wrongDocument(16, $lin);
             }
+
             $struct = $this->structure[strtoupper($fields[0])];
 
             $std = $this->fieldsToStd($fields, $struct);
@@ -2260,7 +2264,16 @@ class Parser
 
     protected function w26Entity($std){
 
-        $this->stdTotISIBSCBS = $this->mergeObject( $this->stdTotISIBSCBS  , $std);
+        if (!isset($this->stdTotISIBSCBS)){
+            $this->stdTotISIBSCBS = new \stdClass();
+        }
+
+        if (!isset($this->stdTotISIBSCBS->IBSCBSTot)){
+            $this->stdTotISIBSCBS->IBSCBSTot = new \stdClass();
+        }
+
+        $this->stdTotISIBSCBS->IBSCBSTot = $this->mergeObject( $this->stdTotISIBSCBS->IBSCBSTot  , $std);
+
     }
 
     /**

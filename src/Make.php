@@ -7283,9 +7283,15 @@ class Make
             'vBCIBSCBS'
         ];
 
+        $isIBSTot = false;
+
         $std = $this->equilizeParameters($std, $possible);
-        
+
         $IBSCBSTot = $this->dom->createElement("IBSCBSTot");
+
+        if ($std->vBCIBSCBS) {
+            $isIBSTot = true;
+        }
 
         $this->dom->addChild(
             $IBSCBSTot,
@@ -7297,6 +7303,8 @@ class Make
 
         if (isset($std->gIBS) and !empty($std->gIBS)) {
             
+            $isIBSTot = true;
+
             $possible = [
                 'vIBS',
                 'vCredPres',
@@ -7347,6 +7355,8 @@ class Make
             }
 
             if (isset($std->gIBS->gIBSMun) && !empty($std->gIBS->gIBSMun)){
+
+                $isIBSTot = true;
 
                 $possible = [
                     'vDif',
@@ -7414,6 +7424,8 @@ class Make
 
         if (isset($std->gCBS) and !empty($std->gCBS)) {
 
+            $isIBSTot = true;
+
             $possible = [
                 'vDif',
                 'vDevTrib',
@@ -7470,6 +7482,8 @@ class Make
         }
 
         if (isset($std->gMono) and !empty($std->gMono)) {
+
+            $isIBSTot = true;
 
             $possible = [
                 'vIBSMono',
@@ -7535,8 +7549,8 @@ class Make
             $IBSCBSTot->appendChild($gMono);
         }
 
-        $this->dom->appChild($this->total, $IBSCBSTot, 'Valores totais da NF com IBS / CBS');
-
+        if ($isIBSTot) 
+            $this->dom->appChild($this->total, $IBSCBSTot, 'Valores totais da NF com IBS / CBS');
 
         if (isset($std->vNFTot) and !empty($std->vNFTot)) {
             $this->dom->addChild(
@@ -7988,16 +8002,19 @@ class Make
 
         $std = $this->equilizeParameters($std, $possible);
 
+        var_dump( !is_null($std->indPag) ? $std->indPag : null);
         //padrão para layout 4.00
         $detPag = $this->dom->createElement("detPag");
-
-        $this->dom->addChild(
-            $detPag,
-            "indPag",
-            !is_null($std->indPag) ? $std->indPag : null,
-            false,
-            "Indicador da Forma de Pagamento"
-        );
+        if ($std->indPag != '') {
+            $this->dom->addChild(
+                $detPag,
+                "indPag",
+                $std->indPag,
+                true,
+                "Indicador da Forma de Pagamento"
+            );
+        }
+        
         $this->dom->addChild(
             $detPag,
             "tPag",
