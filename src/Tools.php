@@ -20,11 +20,14 @@ use NFePHP\Common\Strings;
 use NFePHP\Common\Signer;
 use NFePHP\Common\UFList;
 use NFePHP\NFe\Common\Tools as ToolsCommon;
+use NFePHP\NFe\Traits\FormatDecimalTrait;
 use RuntimeException;
 use InvalidArgumentException;
 
 class Tools extends ToolsCommon
 {
+    use FormatDecimalTrait;
+
     const EVT_CONFIRMACAO = 210200; //only one per nfe seq=n
     const EVT_CIENCIA = 210210; //only one per nfe seq=1
     const EVT_DESCONHECIMENTO = 210220; //only one per nfe seq=n
@@ -876,13 +879,7 @@ class Tools extends ToolsCommon
         return $this->lastResponse;
     }
 
-    protected function formatDecimal($value)
-    {
-        if ($value === null || $value === '') {
-            return '';
-        }
-        return number_format((float) $value, 2, '.', '');
-    }
+
 
     public function sefazEvento110001(
         $uf,
