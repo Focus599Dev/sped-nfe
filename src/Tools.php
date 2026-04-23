@@ -876,6 +876,14 @@ class Tools extends ToolsCommon
         return $this->lastResponse;
     }
 
+    protected function formatDecimal($value)
+    {
+        if ($value === null || $value === '') {
+            return '';
+        }
+        return number_format((float) $value, 2, '.', '');
+    }
+
     public function sefazEvento110001(
         $uf,
         $chave,
@@ -955,14 +963,14 @@ class Tools extends ToolsCommon
         if (is_array($parecimentos)) {
             foreach ($parecimentos as $gPerecimento) {
                 $tagAdig .= "<gPerecimento nItem=\"{$gPerecimento['nItem']}\">";
-                    $tagAdig .= "<vIBS>{$gPerecimento['vIBS']}</vIBS>";
-                    $tagAdig .= "<vCBS>{$gPerecimento['vCBS']}</vCBS>";
+                    $tagAdig .= "<vIBS>" . $this->formatDecimal($gPerecimento['vIBS']) . "</vIBS>";
+                    $tagAdig .= "<vCBS>" . $this->formatDecimal($gPerecimento['vCBS']) . "</vCBS>";
 
                     $tagAdig .= "<gControleEstoque>";
                         $tagAdig .= "<qPerecimento>{$gPerecimento['qPerecimento']}</qPerecimento>";
                         $tagAdig .= "<uPerecimento>{$gPerecimento['uPerecimento']}</uPerecimento>";
-                        $tagAdig .= "<vIBS>{$gPerecimento['vIBS_est']}</vIBS>";
-                        $tagAdig .= "<vCBS>{$gPerecimento['vCBS_est']}</vCBS>";
+                        $tagAdig .= "<vIBS>" . $this->formatDecimal($gPerecimento['vIBS_est']) . "</vIBS>";
+                        $tagAdig .= "<vCBS>" . $this->formatDecimal($gPerecimento['vCBS_est']) . "</vCBS>";
                     $tagAdig .= "</gControleEstoque>";
 
                 $tagAdig .= "</gPerecimento>";
@@ -994,8 +1002,8 @@ class Tools extends ToolsCommon
             
                 $tagAdig .= "<gItemNaoFornecido nItem=\"{$gItemNaoFornecido['nItem']}\">";
 
-                    $tagAdig .= "<vIBS>{$gItemNaoFornecido['vIBS']}</vIBS>";
-                    $tagAdig .= "<vCBS>{$gItemNaoFornecido['vCBS']}</vCBS>";
+                    $tagAdig .= "<vIBS>" . $this->formatDecimal($gItemNaoFornecido['vIBS']) . "</vIBS>";
+                    $tagAdig .= "<vCBS>" . $this->formatDecimal($gItemNaoFornecido['vCBS']) . "</vCBS>";
                     
                     $tagAdig .= "<gControleEstoque>";
 
@@ -1031,8 +1039,8 @@ class Tools extends ToolsCommon
         if (is_array($consumos)) {
             foreach ($consumos as $gConsumo) {
                 $tagAdig .= "<gCredito nItem=\"{$gConsumo['nItem']}\">";
-                    $tagAdig .= "<vCredIBS>{$gConsumo['vIBS']}</vCredIBS>";
-                    $tagAdig .= "<vCredCBS>{$gConsumo['vCBS']}</vCredCBS>";
+                    $tagAdig .= "<vCredIBS>" . $this->formatDecimal($gConsumo['vIBS']) . "</vCredIBS>";
+                    $tagAdig .= "<vCredCBS>" . $this->formatDecimal($gConsumo['vCBS']) . "</vCredCBS>";
                 $tagAdig .= "</gCredito>";
 
             }
@@ -1081,8 +1089,8 @@ class Tools extends ToolsCommon
             foreach ($parecimento as $gPerecimento) {
                 $tagAdig .= "<gPerecimento nItem=\"{$gPerecimento['nItem']}\">";
 
-                    $tagAdig .= "<vIBS>{$gPerecimento['vIBS']}</vIBS>";
-                    $tagAdig .= "<vCBS>{$gPerecimento['vCBS']}</vCBS>";
+                    $tagAdig .= "<vIBS>" . $this->formatDecimal($gPerecimento['vIBS']) . "</vIBS>";
+                    $tagAdig .= "<vCBS>" . $this->formatDecimal($gPerecimento['vCBS']) . "</vCBS>";
                     $tagAdig .= "<gControleEstoque>";
                         
                         $tagAdig .= "<qPerecimento>{$gPerecimento['qPerecimento']}</qPerecimento>";
@@ -1120,8 +1128,8 @@ class Tools extends ToolsCommon
             foreach ($imobilizado as $gImobilizado) {
                 $tagAdig .= "<gImobilizacao nItem=\"{$gImobilizado['nItem']}\">";
 
-                    $tagAdig .= "<vIBS>{$gImobilizado['vIBS']}</vIBS>";
-                    $tagAdig .= "<vCBS>{$gImobilizado['vCBS']}</vCBS>";
+                    $tagAdig .= "<vIBS>" . $this->formatDecimal($gImobilizado['vIBS']) . "</vIBS>";
+                    $tagAdig .= "<vCBS>" . $this->formatDecimal($gImobilizado['vCBS']) . "</vCBS>";
                     $tagAdig .= "<gControleEstoque>";
                         
                         $tagAdig .= "<qImobilizado>{$gImobilizado['qImobilizado']}</qImobilizado>";
@@ -1160,8 +1168,8 @@ class Tools extends ToolsCommon
             foreach ($gConsumoA as $gConsumo) {
                 $tagAdig .= "<gConsumo nItem=\"{$gConsumo['nItem']}\">";
 
-                    $tagAdig .= "<vIBS>{$gConsumo['vIBS']}</vIBS>";
-                    $tagAdig .= "<vCBS>{$gConsumo['vCBS']}</vCBS>";
+                    $tagAdig .= "<vIBS>" . $this->formatDecimal($gConsumo['vIBS']) . "</vIBS>";
+                    $tagAdig .= "<vCBS>" . $this->formatDecimal($gConsumo['vCBS']) . "</vCBS>";
                     $tagAdig .= "<gControleEstoque>";
                         
                         $tagAdig .= "<qConsumo>{$gConsumo['qConsumo']}</qConsumo>";
