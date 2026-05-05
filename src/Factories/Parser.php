@@ -2637,6 +2637,10 @@ class Parser
         // identificação user nota
     }
 
+    protected function z_logoEntity($std){
+        // identificação logo nota tracan
+    }
+
     protected function mergeObject($std1, $std2){
 
 
