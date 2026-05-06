@@ -895,8 +895,8 @@ class Tools extends ToolsCommon
         $tagAdig = '';
         $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
         $tagAdig .= "<verAplic>$verAplic</verAplic>";
-        $tagAdig .= "<nProtEvento>$nProtEvento</nProtEvento>";
         $tagAdig .= "<tpEventoAut>$tpEventoAut</tpEventoAut>";
+        $tagAdig .= "<nProtEvento>$nProtEvento</nProtEvento>";
 
         return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
     }

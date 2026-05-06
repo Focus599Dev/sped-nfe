@@ -8955,6 +8955,7 @@ class Make
             'item',
             'CST',
             'cClassTrib',
+            'indDoacao'
         ];
 
         $std = $this->equilizeParameters($std, $possible);
@@ -8975,6 +8976,14 @@ class Make
             $std->cClassTrib,
             true,
             "Código de Classificação Tributária do IBSCBS"
+        );
+
+        $this->dom->addChild(
+            $ibscbs,
+            "indDoacao",
+            $std->indDoacao,
+            false,
+            "Indica a natureza da operação de doação, orientando a apuração e a geração de débitos ou estornos conforme o cenário"
         );
 
         $this->aIBSCBS[$std->item] = $ibscbs;

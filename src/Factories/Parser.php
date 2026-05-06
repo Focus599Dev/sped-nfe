@@ -1844,7 +1844,7 @@ class Parser
     /**
      * creat tag IBSCBS [UC]
      * NOTE: 2025_002_v1.21
-     * UC|CST|cClassTrib|gIBSCBS|gIBSCBSMono|gTransfCred|gCredPresIBSZFM|
+     * UC|CST|cClassTrib|indDoacao
      */
 
     protected function ucEntity($std){

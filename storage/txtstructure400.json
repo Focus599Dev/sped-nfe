@@ -109,7 +109,7 @@
     "U": "U|vBC|vAliq|vISSQN|cMunFG|cListServ|vDeducao|vOutro|vDescIncond|vDescCond|vISSRet|indISS|cServico|cMun|cPais|nProcesso|indIncentivo|",
     "UA": "UA|pDevol|vIPIDevol|",
     "UB": "UB|CSTIS|cClassTribIS|vBCIS|pIS|pISEspec|uTrib|qTrib|vIS|",
-    "UC": "UC|CST|cClassTrib|",
+    "UC": "UC|CST|cClassTrib|indDoacao|",
     "UC01": "UC01|vBC|vIBS|",
     "UC01A": "UC01A|pIBSUF|pDif|vDif|vDevTrib|pRedAliq|pAliqEfet|vIBSUF|",
     "UC01B": "UC01B|pIBSMun|pDif|vDif|vDevTrib|pRedAliq|pAliqEfet|vIBSMun|",
@@ -176,5 +176,5 @@
     "ZPDF": "ZPDF|bin|",
     "ZPDF_END": "ZPDF_END|",
     "Z_USER": "Z_USER|User",
-    "Z_LOGO":"Z_LOGO|Logo"
+    "Z_LOGO": "Z_LOGO|Logo"
 }
