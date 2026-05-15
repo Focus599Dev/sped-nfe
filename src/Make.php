@@ -1497,7 +1497,7 @@ class Make
             $this->dom->addChild(
                 $this->dest,
                 "CNPJ",
-                Strings::onlyNumbers($std->CNPJ),
+                $std->CNPJ,
                 true,
                 $identificador . "CNPJ do destinatário"
             );
@@ -1506,7 +1506,7 @@ class Make
             $this->dom->addChild(
                 $this->dest,
                 "CPF",
-                Strings::onlyNumbers($std->CPF),
+                $std->CPF,
                 true,
                 $identificador . "CPF do destinatário"
             );
