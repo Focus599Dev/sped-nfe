@@ -25,7 +25,7 @@ class Complements
             //wrong document, this document is not able to recieve a protocol
             throw DocumentsException::wrongDocument(0, $key);
         }
-        $func = "add".$key."Protocol";
+        $func = "add" . $key . "Protocol";
         return self::$func($request, $response);
     }
 
@@ -72,7 +72,7 @@ class Complements
         $node2 = $procb2b->importNode($nodeb2b, true);
         $nfeProcB2B->appendChild($node2);
         $nfeb2bXML = $procb2b->saveXML();
-        $nfeb2bXMLString = str_replace(array("\n","\r","\s"), '', $nfeb2bXML);
+        $nfeb2bXMLString = str_replace(array("\n", "\r", "\s"), '', $nfeb2bXML);
         return (string) $nfeb2bXMLString;
     }
 
@@ -121,7 +121,8 @@ class Complements
             $tpEvento = $infEvento->getElementsByTagName('tpEvento')
                 ->item(0)
                 ->nodeValue;
-            if (in_array($cStat, ['135', '136', '155'])
+            if (
+                in_array($cStat, ['135', '136', '155'])
                 && $tpEvento == '110111'
                 && $chaveEvento == $chaveNFe
             ) {
@@ -191,7 +192,8 @@ class Complements
         $retserie = $retInfInut->getElementsByTagName('serie')->item(0)->nodeValue;
         $retnNFIni = $retInfInut->getElementsByTagName('nNFIni')->item(0)->nodeValue;
         $retnNFFin = $retInfInut->getElementsByTagName('nNFFin')->item(0)->nodeValue;
-        if ($versao != $retversao ||
+        if (
+            $versao != $retversao ||
             $tpAmb != $rettpAmb ||
             $cUF != $retcUF ||
             $ano != $retano ||
@@ -238,11 +240,15 @@ class Complements
         $ret->formatOutput = false;
         $ret->loadXML($response);
         $retProt = $ret->getElementsByTagName('protNFe');
+
         if (!isset($retProt)) {
             throw DocumentsException::wrongDocument(3, "&lt;protNFe&gt;");
         }
         $digProt = '000';
         foreach ($retProt as $rp) {
+            if ($rp instanceof \DOMElement && !$rp->hasAttribute('xmlns')) {
+                $rp->setAttribute('xmlns', 'http://www.portalfiscal.inf.br/nfe');
+            }
             $infProt = $rp->getElementsByTagName('infProt')->item(0);
             $cStat  = $infProt->getElementsByTagName('cStat')->item(0)->nodeValue;
             $xMotivo = $infProt->getElementsByTagName('xMotivo')->item(0)->nodeValue;
@@ -257,7 +263,7 @@ class Complements
                     //205 NFe Denegada
                     //301 Uso denegado por irregularidade fiscal do emitente
                     //302 Uso denegado por irregularidade fiscal do destinatário
-                    $cstatpermit = ['100', '150', '110', '205', '301','302'];
+                    $cstatpermit = ['100', '150', '110', '205', '301', '302'];
                     if (!in_array($cStat, $cstatpermit)) {
                         throw DocumentsException::wrongDocument(4, "[$cStat] $xMotivo");
                     }
@@ -270,6 +276,7 @@ class Complements
                 }
             }
         }
+
         if ($digNFe !== $digProt) {
             throw DocumentsException::wrongDocument(5, "Os digest são diferentes");
         }
@@ -303,6 +310,11 @@ class Complements
         $resLote = $ret->getElementsByTagName('idLote')->item(0)->nodeValue;
         //extrai a rag retEvento da resposta (retorno da SEFAZ)
         $retEv = $ret->getElementsByTagName('retEvento')->item(0);
+
+        if ($retEv instanceof \DOMElement && !$retEv->hasAttribute('xmlns')) {
+            $retEv->setAttribute('xmlns', 'http://www.portalfiscal.inf.br/nfe');
+        }
+
         $cStat  = $retEv->getElementsByTagName('cStat')->item(0)->nodeValue;
         $xMotivo = $retEv->getElementsByTagName('xMotivo')->item(0)->nodeValue;
         $tpEvento = $retEv->getElementsByTagName('tpEvento')->item(0)->nodeValue;
@@ -338,8 +350,8 @@ class Complements
     protected static function join($first, $second, $nodename, $versao)
     {
         $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-                . "<$nodename versao=\"$versao\" "
-                . "xmlns=\"".self::$urlPortal."\">";
+            . "<$nodename "
+            . "versao=\"$versao\"  xmlns=\"" . self::$urlPortal . "\">";
         $xml .= $first;
         $xml .= $second;
         $xml .= "</$nodename>";
