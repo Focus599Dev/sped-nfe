@@ -6833,28 +6833,38 @@ class Make
             true,
             "Valor Total do ICMS desonerado"
         );
-        $this->dom->addChild(
-            $ICMSTot,
-            "vFCPUFDest",
-            $vFCPUFDest,
-            false,
-            "Valor total do ICMS relativo ao Fundo de Combate à Pobreza(FCP) "
-                . "para a UF de destino"
-        );
-        $this->dom->addChild(
-            $ICMSTot,
-            "vICMSUFDest",
-            $vICMSUFDest,
-            false,
-            "Valor total do ICMS de partilha para a UF do destinatário"
-        );
-        $this->dom->addChild(
-            $ICMSTot,
-            "vICMSUFRemet",
-            $vICMSUFRemet,
-            false,
-            "Valor total do ICMS de partilha para a UF do remetente"
-        );
+
+        if (!empty($vFCPUFDest)){
+            $this->dom->addChild(
+                $ICMSTot,
+                "vFCPUFDest",
+                $vFCPUFDest,
+                true,
+                "Valor total do ICMS relativo ao Fundo de Combate à Pobreza(FCP) "
+                    . "para a UF de destino"
+            );
+        }
+        
+        if (!empty($vICMSUFDest)){
+            $this->dom->addChild(
+                $ICMSTot,
+                "vICMSUFDest",
+                $vICMSUFDest,
+                true,
+                "Valor total do ICMS de partilha para a UF do destinatário"
+            );
+        }
+
+        if (!empty($vICMSUFRemet)){
+            $this->dom->addChild(
+                $ICMSTot,
+                "vICMSUFRemet",
+                $vICMSUFRemet,
+                true,
+                "Valor total do ICMS de partilha para a UF do remetente"
+            );
+        }
+
         //incluso no layout 4.00
         $this->dom->addChild(
             $ICMSTot,
@@ -7973,7 +7983,6 @@ class Make
 
         $std = $this->equilizeParameters($std, $possible);
 
-        var_dump(!is_null($std->indPag) ? $std->indPag : null);
         //padrão para layout 4.00
         $detPag = $this->dom->createElement("detPag");
         if ($std->indPag != '') {
@@ -8659,7 +8668,7 @@ class Make
                 "Identificador do CSRT utilizado para montar o hash do CSRT"
             );
         }
-        var_dump($std);
+        
         if (!empty($std->CSRT)) {
 
             $this->csrt = $std->CSRT;
