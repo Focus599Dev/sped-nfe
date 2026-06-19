@@ -526,11 +526,12 @@ class Make
 
         $chave = preg_replace('/[^0-9]/', '', $std->Id);
         $this->infNFe = $this->dom->createElement("infNFe");
-        $this->infNFe->setAttribute("Id", 'NFe' . $chave);
         $this->infNFe->setAttribute(
             "versao",
             $std->versao
         );
+        $this->infNFe->setAttribute("Id", 'NFe' . $chave);
+        
         $this->version = $std->versao;
         if (!empty($std->pk_nItem)) {
             $this->infNFe->setAttribute("pk_nItem", $std->pk_nItem);
@@ -6833,33 +6834,33 @@ class Make
             true,
             "Valor Total do ICMS desonerado"
         );
-
+        
         if (!empty($vFCPUFDest)){
             $this->dom->addChild(
                 $ICMSTot,
                 "vFCPUFDest",
-                $vFCPUFDest,
+                $std->vFCPUFDest,
                 true,
                 "Valor total do ICMS relativo ao Fundo de Combate à Pobreza(FCP) "
                     . "para a UF de destino"
             );
         }
         
-        if (!empty($vICMSUFDest)){
+        if (!empty($std->vICMSUFDest)){
             $this->dom->addChild(
                 $ICMSTot,
                 "vICMSUFDest",
-                $vICMSUFDest,
+                $std->vICMSUFDest,
                 true,
                 "Valor total do ICMS de partilha para a UF do destinatário"
             );
         }
 
-        if (!empty($vICMSUFRemet)){
+        if (!empty($std->vICMSUFRemet)){
             $this->dom->addChild(
                 $ICMSTot,
                 "vICMSUFRemet",
-                $vICMSUFRemet,
+                $std->vICMSUFRemet,
                 true,
                 "Valor total do ICMS de partilha para a UF do remetente"
             );

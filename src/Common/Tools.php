@@ -418,7 +418,7 @@ class Tools
         $error = array();
 
         $this->readXML($body, $json, $error);
-        var_dump($error);
+
         return $error;
     }
 
