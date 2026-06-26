@@ -302,6 +302,12 @@ class Make
     /**
      * @var array of DOMElements
      */
+    protected $aDFeReferenciado = [];
+
+
+    /**
+     * @var array of DOMElements
+     */
     protected $aImpostoDevol = [];
     /**
      * @var array of DOMElements
@@ -6835,7 +6841,7 @@ class Make
             "Valor Total do ICMS desonerado"
         );
         
-        if (!empty($vFCPUFDest)){
+        if (!empty($std->vFCPUFDest)){
             $this->dom->addChild(
                 $ICMSTot,
                 "vFCPUFDest",
@@ -10108,6 +10114,46 @@ class Make
     }
 
     /**
+     * Create tag DFeReferenciado[VC]
+     * VC|chaveAcesso|nItem|
+     */
+    public function tagDFeReferenciado($std){
+
+        $possible = [
+            'item',
+            'chaveAcesso',
+            'nItem'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $DFeReferenciado = $this->dom->createElement("DFeReferenciado");
+
+        $this->dom->addChild(
+            $DFeReferenciado,
+            "chaveAcesso",
+            $std->chaveAcesso,
+            true,
+            "Chave de Acesso do DFe referenciado"
+        );
+
+        $this->dom->addChild(
+            $DFeReferenciado,
+            "nItem",
+            $std->nItem,
+            false,
+            "Número do item do
+			documento referenciado. Corresponde ao
+			atributo nItem do elemento det do
+			documento original."
+        );
+
+        $this->aDFeReferenciado[$std->item] = $DFeReferenciado;
+
+        return $DFeReferenciado;
+    }
+
+    /**
      * Grupo COFINS Outras Operações S05 pai S01
      * tag NFe/infNFe/det[]/imposto/COFINS/COFINSoutr (opcional)
      * Função chamada pelo método [ tagCOFINS ]
@@ -10381,6 +10427,11 @@ class Make
             if (!empty($this->aVItem[$nItem])) {
                 $child = $this->aVItem[$nItem];
                 $this->dom->appChild($det, $child, "Inclusão do node vItem");
+            }
+            //insere DFeReferenciado
+            if (!empty($this->aDFeReferenciado[$nItem])) {
+                $child = $this->aDFeReferenciado[$nItem];
+                $this->dom->appChild($det, $child, "Inclusão do node DFeReferenciado");
             }
             $this->aDet[] = $det;
             $det = null;

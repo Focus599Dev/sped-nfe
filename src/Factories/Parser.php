@@ -2015,6 +2015,16 @@ class Parser
     }
 
     /**
+     * Create tag DFeReferenciado[VC]
+     * VC|chaveAcesso|nItem|
+     */
+    protected function vcEntity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagDFeReferenciado($std);
+    }
+    /**
      * Linha W [W]
      * W|
      * @param stdClass $std

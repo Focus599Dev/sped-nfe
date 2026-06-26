@@ -55,7 +55,7 @@
 		<xs:restriction base="xs:string">
 			<xs:whiteSpace value="preserve" />
 			<xs:maxLength value="44" />
-			<xs:pattern value="[0-9]{44}" />
+			<xs:pattern value="[0-9]{6}[0-9A-Z]{12}[0-9]{26}" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TProt">
