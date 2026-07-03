@@ -537,7 +537,7 @@ class Make
             $std->versao
         );
         $this->infNFe->setAttribute("Id", 'NFe' . $chave);
-        
+
         $this->version = $std->versao;
         if (!empty($std->pk_nItem)) {
             $this->infNFe->setAttribute("pk_nItem", $std->pk_nItem);
@@ -2321,7 +2321,7 @@ class Make
             false,
             $identificador . "[item $std->item] Número do Pedido de Compra"
         );
-        
+
         $this->dom->addChild(
             $prod,
             "nItemPed",
@@ -2329,7 +2329,7 @@ class Make
             false,
             $identificador . "[item $std->item] Item do Pedido de Compra"
         );
-        
+
         $this->dom->addChild(
             $prod,
             "nFCI",
@@ -6840,8 +6840,8 @@ class Make
             true,
             "Valor Total do ICMS desonerado"
         );
-        
-        if (!empty($std->vFCPUFDest)){
+
+        if (!empty($std->vFCPUFDest)) {
             $this->dom->addChild(
                 $ICMSTot,
                 "vFCPUFDest",
@@ -6851,8 +6851,8 @@ class Make
                     . "para a UF de destino"
             );
         }
-        
-        if (!empty($std->vICMSUFDest)){
+
+        if (!empty($std->vICMSUFDest)) {
             $this->dom->addChild(
                 $ICMSTot,
                 "vICMSUFDest",
@@ -6862,7 +6862,7 @@ class Make
             );
         }
 
-        if (!empty($std->vICMSUFRemet)){
+        if (!empty($std->vICMSUFRemet)) {
             $this->dom->addChild(
                 $ICMSTot,
                 "vICMSUFRemet",
@@ -8675,7 +8675,7 @@ class Make
                 "Identificador do CSRT utilizado para montar o hash do CSRT"
             );
         }
-        
+
         if (!empty($std->CSRT)) {
 
             $this->csrt = $std->CSRT;
@@ -9733,6 +9733,38 @@ class Make
         return $gIBSCBSMono;
     }
 
+    private function fixtagGIBSCBSMono($gIBSCBSMono)
+    {
+
+        $vTotCBSMonoItem = $gIBSCBSMono->getElementsByTagName("vTotCBSMonoItem")->item(0);
+
+        $vTotIBSMonoItem = $gIBSCBSMono->getElementsByTagName("vTotIBSMonoItem")->item(0);
+
+        if ($vTotCBSMonoItem) {
+            $vTotCBSMonoItem->parentNode->removeChild($vTotCBSMonoItem);
+
+            $this->dom->addChild(
+                $gIBSCBSMono,
+                "vTotIBSMonoItem",
+                $vTotCBSMonoItem->nodeValue,
+                true,
+                "Valor total do IBS Mono tributado na operação"
+            );
+        }
+        if ($vTotIBSMonoItem) {
+
+            $vTotIBSMonoItem->parentNode->removeChild($vTotIBSMonoItem);
+
+            $this->dom->addChild(
+                $gIBSCBSMono,
+                "vTotCBSMonoItem",
+                $vTotCBSMonoItem->nodeValue,
+                true,
+                "Valor total do CBS Mono tributado na operação"
+            );
+        }
+    }
+
     /**
      * create tag gMonoPadrao [UC02A]
      * UC02A|qBCMono|adRemIBS|adRemCBS|vIBSMono|vCBSMono
@@ -9800,12 +9832,9 @@ class Make
 
             if (!empty($gIBSCBSMono)) {
 
-                $node = $gIBSCBSMono->getElementsByTagName("vTotIBSMonoItem")->item(0);
+                $this->dom->appChild($gIBSCBSMono, $gMonoPadrao, "Inclusão do node gMonoPadrao");
 
-                if ($node) {
-
-                    $gIBSCBSMono->insertBefore($gMonoPadrao, $node);
-                }
+                $this->fixtagGIBSCBSMono($gIBSCBSMono);
             }
         }
     }
@@ -9878,12 +9907,9 @@ class Make
 
             if (!empty($gIBSCBSMono)) {
 
-                $node = $gIBSCBSMono->getElementsByTagName("vTotCBSMonoItem")->item(0);
+                $this->dom->appChild($gIBSCBSMono, $gMonoReten, "Inclusão do node gMonoReten");
 
-                if ($node) {
-
-                    $gIBSCBSMono->insertBefore($gMonoReten, $node);
-                }
+                $this->fixtagGIBSCBSMono($gIBSCBSMono);
             }
         }
     }
@@ -9954,12 +9980,9 @@ class Make
 
             if (!empty($gIBSCBSMono)) {
 
-                $node = $gIBSCBSMono->getElementsByTagName("vTotCBSMonoItem")->item(0);
+                $this->dom->appChild($gIBSCBSMono, $gMonoRet, "Inclusão do node gMonoRet");
 
-                if ($node) {
-
-                    $gIBSCBSMono->insertBefore($gMonoRet, $node);
-                }
+                $this->fixtagGIBSCBSMono($gIBSCBSMono);
             }
         }
     }
@@ -10021,12 +10044,9 @@ class Make
 
             if (!empty($gIBSCBSMono)) {
 
-                $node = $gIBSCBSMono->getElementsByTagName("vTotCBSMonoItem")->item(0);
+                $this->dom->appChild($gIBSCBSMono, $gMonoDif, "Inclusão do node gMonoDif");
 
-                if ($node) {
-
-                    $gIBSCBSMono->insertBefore($gMonoDif, $node);
-                }
+                $this->fixtagGIBSCBSMono($gIBSCBSMono);
             }
         }
     }
@@ -10117,7 +10137,8 @@ class Make
      * Create tag DFeReferenciado[VC]
      * VC|chaveAcesso|nItem|
      */
-    public function tagDFeReferenciado($std){
+    public function tagDFeReferenciado($std)
+    {
 
         $possible = [
             'item',
