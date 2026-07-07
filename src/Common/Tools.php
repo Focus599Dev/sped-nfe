@@ -98,7 +98,7 @@ class Tools
      * Canonical conversion options
      * @var array
      */
-    protected $canonical = [true,false,null,null];
+    protected $canonical = [true, false, null, null];
     /**
      * Model of NFe 55 or 65
      * @var int
@@ -168,10 +168,10 @@ class Tools
      */
     protected $availableVersions = [
         '3.10' => 'PL_008i2',
-        '4.00' => 'PL_010b_NT2025_002_v1.21',
+        '4.00' => 'PL_010e_NT2025_002_v1.50',
         '1.00' => 'PL_100d'
     ];
-    
+
     /**
      * Constructor
      * load configurations,
@@ -186,21 +186,21 @@ class Tools
     {
         $this->pathwsfiles = realpath(
             __DIR__ . '/../../storage'
-        ).'/';
+        ) . '/';
         //valid config json string
         $this->config = Config::validate($configJson);
-        
+
         $this->version($this->config->versao);
         $this->setEnvironmentTimeZone($this->config->siglaUF);
         $this->certificate = $certificate;
         $this->setEnvironment($this->config->tpAmb);
         $this->contingency = new Contingency();
         $this->soap = new SoapCurl($certificate);
-        if ($this->config->proxy){
+        if ($this->config->proxy) {
             $this->soap->proxy($this->config->proxy, $this->config->proxyPort, $this->config->proxyUser, $this->config->proxyPass);
         }
     }
-    
+
     /**
      * Sets environment time zone
      * @param string $acronym (ou seja a sigla do estado)
@@ -210,7 +210,7 @@ class Tools
     {
         date_default_timezone_set(TimeZoneByUF::get($acronym));
     }
-    
+
     /**
      * Set application version
      * @param string $ver
@@ -232,7 +232,7 @@ class Tools
         $this->soap = $soap;
         $this->soap->loadCertificate($this->certificate);
     }
-    
+
     /**
      * Set OPENSSL Algorithm using OPENSSL constants
      * @param int $algorithm
@@ -255,7 +255,7 @@ class Tools
         }
         return $this->modelo;
     }
-    
+
     /**
      * Set or get parameter layout version
      * @param string $version
@@ -272,16 +272,16 @@ class Tools
         if (false === isset($this->availableVersions[$version])) {
             throw new \InvalidArgumentException('Essa versão de layout não está disponível');
         }
-        
+
         $this->versao = $version;
         $this->config->schemes = $this->availableVersions[$version];
         $this->pathschemes = realpath(
-            __DIR__ . '/../../schemes/'. $this->config->schemes
-        ).'/';
-        
+            __DIR__ . '/../../schemes/' . $this->config->schemes
+        ) . '/';
+
         return $this->versao;
     }
-    
+
     /**
      * Recover cUF number from state acronym
      * @param string $acronym Sigla do estado
@@ -291,7 +291,7 @@ class Tools
     {
         return UFlist::getCodeByUF($acronym);
     }
-    
+
     /**
      * Recover state acronym from cUF number
      * @param int $cUF
@@ -301,7 +301,7 @@ class Tools
     {
         return UFlist::getUFByCode($cUF);
     }
-    
+
     /**
      * Validate cUF from the key content and returns the state acronym
      * @param string $chave
@@ -318,7 +318,7 @@ class Tools
         }
         return $uf;
     }
-    
+
     /**
      * Sign NFe or NFCe
      * @param  string  $xml NFe xml content
@@ -354,10 +354,10 @@ class Tools
         }
         //exception will be throw if NFe is not valid
         $this->isValid($this->versao, $xml, 'nfe');
-        
+
         return $xml;
     }
-    
+
     /**
      * Corret NFe fields when in contingency mode is set
      * @param string $xml NFe xml content
@@ -382,7 +382,7 @@ class Tools
      */
     protected function isValid($version, $body, $method)
     {
-        $schema = $this->pathschemes.$method."_v$version.xsd";
+        $schema = $this->pathschemes . $method . "_v$version.xsd";
         if (!is_file($schema)) {
             return true;
         }
@@ -391,30 +391,30 @@ class Tools
             $schema
         );
     }
-    
-     /**
+
+    /**
      * get xml validation with its respective
      * JSON structure definition document
      * NOTE: if dont exists the JSON file will return array
      * @param string $version layout version
      * @param string $body
      * @return boolean
-    */
+     */
     public function isValidByJson($version, $body)
     {
-        $jsonFile = $this->pathwsfiles."jsonschemaValidade_$version.json";
+        $jsonFile = $this->pathwsfiles . "jsonschemaValidade_$version.json";
 
         if (!is_file($jsonFile)) {
             return array();
         }
-        
+
         $json = json_decode(
-                    file_get_contents(
-                        $jsonFile
-                    ),
-                    true
-                );
-                
+            file_get_contents(
+                $jsonFile
+            ),
+            true
+        );
+
         $error = array();
 
         $this->readXML($body, $json, $error);
@@ -431,78 +431,72 @@ class Tools
      * @param array $error
      * @param string $keyC
      * @return boolean
-    */
-    private function readXML($xml, $json, &$error, $keyC = '', $detNumber = null){
+     */
+    private function readXML($xml, $json, &$error, $keyC = '', $detNumber = null)
+    {
 
         $keygetItem = 'infNFe.det';
 
         foreach ($xml as $key => $xmlTag) {
 
-            if ( $xmlTag->count()){
+            if ($xmlTag->count()) {
 
-                 if (!$keyC)
+                if (!$keyC)
                     $keyC = $key;
                 else
                     $keyC = $keyC . '.' . $key;
 
 
-                if ($keyC == $keygetItem){
+                if ($keyC == $keygetItem) {
 
-                    $detNumber = (String)$xmlTag['nItem'];
-
+                    $detNumber = (string)$xmlTag['nItem'];
                 }
 
                 $this->readXML($xmlTag, $json, $error, $keyC, $detNumber);
 
                 $keyC = substr($keyC, 0, strrpos($keyC, '.'));
-
             } else {
 
-                if (isset($json[$keyC . '.' . $key])){
+                if (isset($json[$keyC . '.' . $key])) {
 
-                    if (isset($json[$keyC . '.' . $key]['patternOb'])){
+                    if (isset($json[$keyC . '.' . $key]['patternOb'])) {
 
-                        if (!preg_match('/^' . $json['patterns'][$json[$keyC . '.' . $key]['patternOb']] . '$/', (String) $xmlTag )){
+                        if (!preg_match('/^' . $json['patterns'][$json[$keyC . '.' . $key]['patternOb']] . '$/', (string) $xmlTag)) {
 
-                            $json[$keyC . '.' . $key]['value'] = (String) $xmlTag;
-                            
+                            $json[$keyC . '.' . $key]['value'] = (string) $xmlTag;
+
                             $json[$keyC . '.' . $key]['tag'] = $keyC . '.' . $key;
 
                             $auxJson = $json[$keyC . '.' . $key];
 
-                            if (preg_match('/' . $keygetItem . '/', $keyC . '.' . $key)){
+                            if (preg_match('/' . $keygetItem . '/', $keyC . '.' . $key)) {
                                 $auxJson['item'] = $detNumber;
                             }
 
                             $error[] = $auxJson;
-
                         }
+                    } else if (isset($json[$keyC . '.' . $key]['pattern'])) {
 
-                    } else if (isset($json[$keyC . '.' . $key]['pattern'])){
+                        if (!preg_match('/^' . $json[$keyC . '.' . $key]['pattern'] . '$/', (string) $xmlTag)) {
 
-                        if (!preg_match('/^' . $json[$keyC . '.' . $key]['pattern'] . '$/', (String) $xmlTag )){
+                            $json[$keyC . '.' . $key]['value'] = (string) $xmlTag;
 
-                            $json[$keyC . '.' . $key]['value'] = (String) $xmlTag;
-                            
                             $json[$keyC . '.' . $key]['tag'] = $keyC . '.' . $key;
 
                             $auxJson = $json[$keyC . '.' . $key];
 
-                            if (preg_match('/' . $keygetItem . '/', $keyC . '.' . $key)){
+                            if (preg_match('/' . $keygetItem . '/', $keyC . '.' . $key)) {
                                 $auxJson['item'] = $detNumber;
                             }
 
                             $error[] = $auxJson;
-
                         }
-                    } 
+                    }
                 }
             }
         }
-
-
     }
-    
+
     /**
      * Verifies the existence of the service
      * @param string $service
@@ -514,33 +508,34 @@ class Tools
             55 => ['SVCAN', 'SVCRS', 'EPEC', 'FSDA'],
             65 => ['FSDA', 'EPEC', 'OFFLINE']
         ];
-        
+
         $type = $this->contingency->type;
         $mod = $this->modelo;
         if (!empty($type)) {
             if (array_search($type, $permit[$mod]) === false) {
                 throw new RuntimeException(
                     "Esse modo de contingência [$type] não é aceito "
-                    . "para o modelo [$mod]"
+                        . "para o modelo [$mod]"
                 );
             }
         }
-        
+
         //se a contingencia é OFFLINE ou FSDA nenhum servidor está disponivel
         //se a contigencia EPEC está ativa apenas o envio de Lote está ativo,
         //então gerar um RunTimeException
-        if ($type == 'FSDA'
+        if (
+            $type == 'FSDA'
             || $type == 'OFFLINE'
             || ($type == 'EPEC' && $service != 'RecepcaoEvento')
         ) {
             throw new RuntimeException(
                 "Quando operando em modo de contingência ["
-                . $this->contingency->type
-                . "], este serviço [$service] não está disponível."
+                    . $this->contingency->type
+                    . "], este serviço [$service] não está disponível."
             );
         }
     }
-    
+
     /**
      * Alter environment from "homologacao" to "producao" and vice-versa
      * @param int $tpAmb
@@ -553,20 +548,20 @@ class Tools
             $this->ambiente = ($tpAmb == 1) ? 'producao' : 'homologacao';
         }
     }
-    
+
     /**
      * Set option for canonical transformation see C14n
      * @param array $opt
      * @return array
      */
-    public function canonicalOptions($opt = [true,false,null,null])
+    public function canonicalOptions($opt = [true, false, null, null])
     {
         if (!empty($opt) && is_array($opt)) {
             $this->canonical = $opt;
         }
         return $this->canonical;
     }
-    
+
     /**
      * Assembles all the necessary parameters for soap communication
      * @param string $service
@@ -589,27 +584,28 @@ class Tools
         if (!$ignoreContingency) {
             $contType = $this->contingency->type;
 
-            if (!empty($contType)
+            if (
+                !empty($contType)
                 && ($contType == 'SVCRS' || $contType == 'SVCAN')
             ) {
                 $sigla = $contType;
             }
         }
-       
+
         $stdServ = $webs->get($sigla, $ambiente, $this->modelo);
 
         if ($stdServ === false) {
             throw new \RuntimeException(
                 "Nenhum serviço foi localizado para esta unidade "
-                . "da federação [$sigla], com o modelo [$this->modelo]."
+                    . "da federação [$sigla], com o modelo [$this->modelo]."
             );
         }
         if (empty($stdServ->$service->url)) {
             throw new \RuntimeException(
                 "Este serviço [$service] não está disponivel para esta "
-                . "unidade da federação [$uf] ou para este modelo de Nota ["
-                . $this->modelo
-                ."]."
+                    . "unidade da federação [$uf] ou para este modelo de Nota ["
+                    . $this->modelo
+                    . "]."
             );
         }
 
@@ -656,7 +652,7 @@ class Tools
             );
         }
     }
-    
+
     /**
      * Send request message to webservice
      * @param array $parameters
@@ -678,7 +674,7 @@ class Tools
             $this->objHeader
         );
     }
-    
+
     /**
      * Recover path to xml data base with list of soap services
      * @return string
@@ -686,7 +682,7 @@ class Tools
     protected function getXmlUrlPath()
     {
         $file = $this->pathwsfiles
-            . "wsnfe_".$this->versao."_mod55.xml";
+            . "wsnfe_" . $this->versao . "_mod55.xml";
         if ($this->modelo == 65) {
             $file = str_replace('55', '65', $file);
         }
@@ -695,7 +691,7 @@ class Tools
         }
         return file_get_contents($file);
     }
-    
+
     /**
      * Add QRCode Tag to signed XML from a NFCe
      * @param DOMDocument $dom
@@ -745,14 +741,14 @@ class Tools
         //os URI estão em storage/uri_consulta_nfce.json
         $arr = json_decode(
             file_get_contents(
-                $this->pathwsfiles.'uri_consulta_nfce.json'
+                $this->pathwsfiles . 'uri_consulta_nfce.json'
             ),
             true
         );
         $std = json_decode(json_encode($arr[$this->tpAmb]));
         return $std->$uf;
     }
-    
+
     /**
      * Verify if SOAP class is loaded, if not, force load SoapCurl
      */
@@ -760,7 +756,7 @@ class Tools
     {
         if (empty($this->soap)) {
             $this->soap = new SoapCurl($this->certificate);
-            
+
             // set TLS 1.3
             //$this->soap->protocol(7);
         }
