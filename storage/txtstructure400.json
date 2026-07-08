@@ -149,6 +149,7 @@
     "W25A2": "W25A2|vDif|vDevTrib|vIBSMun|",
     "W25B": "W25B|vDif|vDevTrib|vCBS|vCredPres|vCredPresCondSus|",
     "W25C": "W25C|vIBSMono|vCBSMono|vIBSMonoReten|vCBSMonoReten|vIBSMonoRet|vCBSMonoRet|",
+    "W25D": "W25D|vIBSEstCred|vCBSEstCred",
     "W26": "W26|vNFTot|",
     "X": "X|modFrete|",
     "X03": "X03|xNome|IE|xEnder|xMun|UF|",

@@ -2345,6 +2345,19 @@ class Parser
     }
 
     /**
+     * create tag IBSCBSTOT->gEstornoCred 
+     * W25D|vIBSEstCred|vCBSEstCred
+     */
+    protected function w25dEntity($std)
+    {
+        if (!isset($this->stdTotISIBSCBS->IBSCBSTot->gEstornoCred)) {
+            $this->stdTotISIBSCBS->IBSCBSTot->gEstornoCred = new \stdClass();
+        }
+
+        $this->stdTotISIBSCBS->IBSCBSTot->gEstornoCred = $this->mergeObject($this->stdTotISIBSCBS->IBSCBSTot->gEstornoCred, $std);
+    }
+
+    /**
      * create tag IBSCBSTOT->vNFTot
      * W26|vNFTot
      */

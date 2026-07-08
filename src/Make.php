@@ -7615,6 +7615,38 @@ class Make
             $IBSCBSTot->appendChild($gMono);
         }
 
+        if (isset($std->gEstornoCred) and !empty($std->gEstornoCred)) {
+
+            $isIBSTot = true;
+
+            $possible = [
+                'vIBSEstCred',
+                'vCBSEstCred',
+            ];
+
+            $std->gEstornoCred = $this->equilizeParameters($std->gEstornoCred, $possible);
+
+            $gEstornoCred = $this->dom->createElement("gEstornoCred");
+
+            $this->dom->addChild(
+                $gEstornoCred,
+                "vIBSEstCred",
+                $std->gEstornoCred->vIBSEstCred,
+                true,
+                "Valor total do IBS estornado"
+            );
+
+            $this->dom->addChild(
+                $gEstornoCred,
+                "vCBSEstCred",
+                $std->gEstornoCred->vCBSEstCred,
+                true,
+                "Valor total da CBS estornada"
+            );
+
+            $IBSCBSTot->appendChild($gEstornoCred);
+        }
+
         if ($isIBSTot)
             $this->dom->appChild($this->total, $IBSCBSTot, 'Valores totais da NF com IBS / CBS');
 
