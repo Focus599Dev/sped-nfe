@@ -616,9 +616,9 @@ class Make
 
              if ($dateNow < $dateTxtDhSaint){
 
-                $std->dhSaiEnt =  $dateTxt->format('c');
+                $std->dhSaiEnt =  date('c');
              } else if ($dateTxtDhSaint < $dateTxtDhEMi){
-                $std->dhSaiEnt =  $dateTxt->format('c');
+                $std->dhSaiEnt =   date('c');
              }
              
         }
