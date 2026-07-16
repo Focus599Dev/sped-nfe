@@ -597,25 +597,29 @@ class Make
         $this->mod = $std->mod;
         $identificador = 'B01 <ide> - ';
 
-        // $dateNow = new \DateTime();
+        $dateNow = new \DateTime();
 
-        // $dateTxt = new \DateTime($std->dhEmi);
+        $dateTxtDhEMi = new \DateTime($std->dhEmi);
 
-        // $dateTxtSaida = new \DateTime($std->dhSaiEnt);
         //mudança privalia
-        // if ($dateNow < $dateTxt){
+        if ($dateNow < $dateTxt){
 
-        //      $std->dhEmi = date('c');
+              $std->dhEmi = date('c');
 
         //      $std->dhSaiEnt =  date('c');
 
-        // }
+        }
 
-        // if ($dateTxt > $dateTxtSaida){
+        if ( $std->dhSaiEnt ){
 
-        //     $std->dhSaiEnt =  $dateTxt->format('c');
+             $dateTxtDhSaint = new \DateTime($std->dhSaiEnt);
 
-        // }
+             if ($dateNow < $dateTxtDhSaint){
+
+                $std->dhSaiEnt =  $dateTxt->format('c');
+             }
+             
+        }
 
         $ide = $this->dom->createElement("ide");
 
