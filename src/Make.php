@@ -602,7 +602,7 @@ class Make
         $dateTxtDhEMi = new \DateTime($std->dhEmi);
 
         //mudança privalia
-        if ($dateNow < dateTxtDhEMi){
+        if ($dateNow < $dateTxtDhEMi){
 
               $std->dhEmi = date('c');
 
