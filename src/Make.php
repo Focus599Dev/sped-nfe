@@ -7854,7 +7854,7 @@ class Make
             $veicTransp,
             "UF",
             $std->UF,
-            true,
+            false,
             "Sigla da UF do Veículo"
         );
         $this->dom->addChild(
