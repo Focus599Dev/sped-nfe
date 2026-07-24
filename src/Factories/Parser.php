@@ -2742,6 +2742,11 @@ class Parser
         // identificação logo nota tracan
     }
 
+    protected function ztransporteEntity($std)
+    {
+        // identificação placa transport para ecanhto
+    }
+
     protected function mergeObject($std1, $std2)
     {
 
