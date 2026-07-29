@@ -203,18 +203,18 @@ class Tools extends ToolsCommon
         $tpAmb = null
     ) {
 
-         // server buckman poe uns espaços
+        // server buckman poe uns espaços
         $nSerie = trim($nSerie);
         $nIni = trim($nIni);
         $nFin = trim($nFin);
         $xJust = trim($xJust);
         $tpAmb = trim($tpAmb);
-        
+
         if (!isset($nSerie) || empty($nIni) || empty($nFin) || empty($xJust)) {
             throw new RuntimeException('Não foram passados todos os dados necessários.');
         }
-       
-        
+
+
         if (empty($tpAmb)) {
             $tpAmb = $this->tpAmb;
         }
@@ -871,11 +871,9 @@ class Tools extends ToolsCommon
             . "</envEvento>";
         $this->isValid($this->urlVersion, $request, 'envEvento');
         $this->lastRequest = $request;
-
         $parameters = ['nfeDadosMsg' => $request];
         $body = "<nfeDadosMsg xmlns=\"$this->urlNamespace\">$request</nfeDadosMsg>";
         $this->lastResponse = $this->sendRequest($body, $parameters);
-
         return $this->lastResponse;
     }
 
@@ -899,6 +897,72 @@ class Tools extends ToolsCommon
         $tagAdig .= "<nProtEvento>$nProtEvento</nProtEvento>";
 
         return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
+    }
+
+    public function sefazEvento110130(
+        $uf,
+        $chave,
+        $tpEvento = '110130',
+        $nSeqEvento = 1,
+        $cOrgaoAutor = null,
+        $tpAutor = 1,
+        $verAplic = null,
+        $dhEntrega = null,
+        $nDoc = null,
+        $xNome = null,
+        $latGPS = null,
+        $longGPS = null,
+        $hashComprovante = null,
+        $dhHashComprovante = null
+    ) {
+        $cOrgaoAutor = !empty($cOrgaoAutor) ? $cOrgaoAutor : \NFePHP\Common\UFList::getCodeByUF($uf);
+        $verAplic = !empty($verAplic) ? $verAplic : $this->verAplic;
+        $tpAutor = !empty($tpAutor) ? $tpAutor : 1;
+
+        if (!empty($dhEntrega) && strpos($dhEntrega, 'T') === false) {
+            $ts = strtotime($dhEntrega);
+            if ($ts !== false) {
+                $dhEntrega = date('Y-m-d\TH:i:sP', $ts);
+            }
+        }
+
+        if (!empty($dhHashComprovante) && strpos($dhHashComprovante, 'T') === false) {
+            $ts = strtotime($dhHashComprovante);
+            if ($ts !== false) {
+                $dhHashComprovante = date('Y-m-d\TH:i:sP', $ts);
+            }
+        }
+
+        if (!empty($latGPS) && is_numeric($latGPS)) {
+            $latGPS = number_format((float) $latGPS, 6, '.', '');
+        }
+
+        if (!empty($longGPS) && is_numeric($longGPS)) {
+            $longGPS = number_format((float) $longGPS, 6, '.', '');
+        }
+
+        $tagAdig = '';
+        $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
+        $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
+        $tagAdig .= "<verAplic>" . htmlspecialchars($verAplic, ENT_XML1) . "</verAplic>";
+        $tagAdig .= "<dhEntrega>" . htmlspecialchars($dhEntrega, ENT_XML1) . "</dhEntrega>";
+        $tagAdig .= "<nDoc>" . htmlspecialchars($nDoc, ENT_XML1) . "</nDoc>";
+        $tagAdig .= "<xNome>" . htmlspecialchars($xNome, ENT_XML1) . "</xNome>";
+
+        if (!empty($latGPS)) {
+            $tagAdig .= "<latGPS>$latGPS</latGPS>";
+        }
+        if (!empty($longGPS)) {
+            $tagAdig .= "<longGPS>$longGPS</longGPS>";
+        }
+
+        $tagAdig .= "<hashComprovante>" . htmlspecialchars($hashComprovante, ENT_XML1) . "</hashComprovante>";
+
+        if (!empty($dhHashComprovante)) {
+            $tagAdig .= "<dhHashComprovante>" . htmlspecialchars($dhHashComprovante, ENT_XML1) . "</dhHashComprovante>";
+        }
+
+        return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'AN');
     }
 
     public function sefazEvento112110(
@@ -956,22 +1020,21 @@ class Tools extends ToolsCommon
         $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
         $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
         $tagAdig .= "<verAplic>$verAplic</verAplic>";
-       
+
         if (is_array($parecimentos)) {
             foreach ($parecimentos as $gPerecimento) {
                 $tagAdig .= "<gPerecimento nItem=\"{$gPerecimento['nItem']}\">";
-                    $tagAdig .= "<vIBS>" . $this->formatDecimal($gPerecimento['vIBS']) . "</vIBS>";
-                    $tagAdig .= "<vCBS>" . $this->formatDecimal($gPerecimento['vCBS']) . "</vCBS>";
+                $tagAdig .= "<vIBS>" . $this->formatDecimal($gPerecimento['vIBS']) . "</vIBS>";
+                $tagAdig .= "<vCBS>" . $this->formatDecimal($gPerecimento['vCBS']) . "</vCBS>";
 
-                    $tagAdig .= "<gControleEstoque>";
-                        $tagAdig .= "<qPerecimento>{$gPerecimento['qPerecimento']}</qPerecimento>";
-                        $tagAdig .= "<uPerecimento>{$gPerecimento['uPerecimento']}</uPerecimento>";
-                        $tagAdig .= "<vIBS>" . $this->formatDecimal($gPerecimento['vIBS_est']) . "</vIBS>";
-                        $tagAdig .= "<vCBS>" . $this->formatDecimal($gPerecimento['vCBS_est']) . "</vCBS>";
-                    $tagAdig .= "</gControleEstoque>";
+                $tagAdig .= "<gControleEstoque>";
+                $tagAdig .= "<qPerecimento>{$gPerecimento['qPerecimento']}</qPerecimento>";
+                $tagAdig .= "<uPerecimento>{$gPerecimento['uPerecimento']}</uPerecimento>";
+                $tagAdig .= "<vIBS>" . $this->formatDecimal($gPerecimento['vIBS_est']) . "</vIBS>";
+                $tagAdig .= "<vCBS>" . $this->formatDecimal($gPerecimento['vCBS_est']) . "</vCBS>";
+                $tagAdig .= "</gControleEstoque>";
 
                 $tagAdig .= "</gPerecimento>";
-
             }
         }
 
@@ -996,23 +1059,22 @@ class Tools extends ToolsCommon
 
         if (is_array($gItemNaoFornecidos)) {
             foreach ($gItemNaoFornecidos as $gItemNaoFornecido) {
-            
+
                 $tagAdig .= "<gItemNaoFornecido nItem=\"{$gItemNaoFornecido['nItem']}\">";
 
-                    $tagAdig .= "<vIBS>" . $this->formatDecimal($gItemNaoFornecido['vIBS']) . "</vIBS>";
-                    $tagAdig .= "<vCBS>" . $this->formatDecimal($gItemNaoFornecido['vCBS']) . "</vCBS>";
-                    
-                    $tagAdig .= "<gControleEstoque>";
+                $tagAdig .= "<vIBS>" . $this->formatDecimal($gItemNaoFornecido['vIBS']) . "</vIBS>";
+                $tagAdig .= "<vCBS>" . $this->formatDecimal($gItemNaoFornecido['vCBS']) . "</vCBS>";
 
-                        $tagAdig .= "<qNaoFornecida>{$gItemNaoFornecido['qNaoFornecida']}</qNaoFornecida>";
-                        $tagAdig .= "<uNaoFornecida>{$gItemNaoFornecido['uNaoFornecida']}</uNaoFornecida>";
-                    $tagAdig .= "</gControleEstoque>";
+                $tagAdig .= "<gControleEstoque>";
+
+                $tagAdig .= "<qNaoFornecida>{$gItemNaoFornecido['qNaoFornecida']}</qNaoFornecida>";
+                $tagAdig .= "<uNaoFornecida>{$gItemNaoFornecido['uNaoFornecida']}</uNaoFornecida>";
+                $tagAdig .= "</gControleEstoque>";
                 $tagAdig .= "</gItemNaoFornecido>";
-                
             }
         }
 
-     
+
 
         return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
     }
@@ -1032,14 +1094,13 @@ class Tools extends ToolsCommon
         $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
         $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
         $tagAdig .= "<verAplic>$verAplic</verAplic>";
-       
+
         if (is_array($consumos)) {
             foreach ($consumos as $gConsumo) {
                 $tagAdig .= "<gCredito nItem=\"{$gConsumo['nItem']}\">";
-                    $tagAdig .= "<vCredIBS>" . $this->formatDecimal($gConsumo['vIBS']) . "</vCredIBS>";
-                    $tagAdig .= "<vCredCBS>" . $this->formatDecimal($gConsumo['vCBS']) . "</vCredCBS>";
+                $tagAdig .= "<vCredIBS>" . $this->formatDecimal($gConsumo['vIBS']) . "</vCredIBS>";
+                $tagAdig .= "<vCredCBS>" . $this->formatDecimal($gConsumo['vCBS']) . "</vCredCBS>";
                 $tagAdig .= "</gCredito>";
-
             }
         }
 
@@ -1086,19 +1147,17 @@ class Tools extends ToolsCommon
             foreach ($parecimento as $gPerecimento) {
                 $tagAdig .= "<gPerecimento nItem=\"{$gPerecimento['nItem']}\">";
 
-                    $tagAdig .= "<vIBS>" . $this->formatDecimal($gPerecimento['vIBS']) . "</vIBS>";
-                    $tagAdig .= "<vCBS>" . $this->formatDecimal($gPerecimento['vCBS']) . "</vCBS>";
-                    $tagAdig .= "<gControleEstoque>";
-                        
-                        $tagAdig .= "<qPerecimento>{$gPerecimento['qPerecimento']}</qPerecimento>";
-                        $tagAdig .= "<uPerecimento>{$gPerecimento['uPerecimento']}</uPerecimento>";
+                $tagAdig .= "<vIBS>" . $this->formatDecimal($gPerecimento['vIBS']) . "</vIBS>";
+                $tagAdig .= "<vCBS>" . $this->formatDecimal($gPerecimento['vCBS']) . "</vCBS>";
+                $tagAdig .= "<gControleEstoque>";
 
-                    $tagAdig .= "</gControleEstoque>";
+                $tagAdig .= "<qPerecimento>{$gPerecimento['qPerecimento']}</qPerecimento>";
+                $tagAdig .= "<uPerecimento>{$gPerecimento['uPerecimento']}</uPerecimento>";
+
+                $tagAdig .= "</gControleEstoque>";
 
                 $tagAdig .= "</gPerecimento>";
-                
             }
-
         }
 
         return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
@@ -1125,25 +1184,23 @@ class Tools extends ToolsCommon
             foreach ($imobilizado as $gImobilizado) {
                 $tagAdig .= "<gImobilizacao nItem=\"{$gImobilizado['nItem']}\">";
 
-                    $tagAdig .= "<vIBS>" . $this->formatDecimal($gImobilizado['vIBS']) . "</vIBS>";
-                    $tagAdig .= "<vCBS>" . $this->formatDecimal($gImobilizado['vCBS']) . "</vCBS>";
-                    $tagAdig .= "<gControleEstoque>";
-                        
-                        $tagAdig .= "<qImobilizado>{$gImobilizado['qImobilizado']}</qImobilizado>";
-                        $tagAdig .= "<uImobilizado>{$gImobilizado['uImobilizado']}</uImobilizado>";
+                $tagAdig .= "<vIBS>" . $this->formatDecimal($gImobilizado['vIBS']) . "</vIBS>";
+                $tagAdig .= "<vCBS>" . $this->formatDecimal($gImobilizado['vCBS']) . "</vCBS>";
+                $tagAdig .= "<gControleEstoque>";
 
-                    $tagAdig .= "</gControleEstoque>";
+                $tagAdig .= "<qImobilizado>{$gImobilizado['qImobilizado']}</qImobilizado>";
+                $tagAdig .= "<uImobilizado>{$gImobilizado['uImobilizado']}</uImobilizado>";
+
+                $tagAdig .= "</gControleEstoque>";
 
                 $tagAdig .= "</gImobilizacao>";
-                
             }
-
         }
 
         return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
     }
 
-     public function sefazEvento211120(
+    public function sefazEvento211120(
         $uf,
         $chave,
         $tpEvento,
@@ -1154,7 +1211,7 @@ class Tools extends ToolsCommon
         $gConsumoA
     ) {
 
-        
+
         $tagAdig = '';
         $tagAdig .= "<cOrgaoAutor>$cOrgaoAutor</cOrgaoAutor>";
         $tagAdig .= "<tpAutor>$tpAutor</tpAutor>";
@@ -1165,23 +1222,21 @@ class Tools extends ToolsCommon
             foreach ($gConsumoA as $gConsumo) {
                 $tagAdig .= "<gConsumo nItem=\"{$gConsumo['nItem']}\">";
 
-                    $tagAdig .= "<vIBS>" . $this->formatDecimal($gConsumo['vIBS']) . "</vIBS>";
-                    $tagAdig .= "<vCBS>" . $this->formatDecimal($gConsumo['vCBS']) . "</vCBS>";
-                    $tagAdig .= "<gControleEstoque>";
-                        
-                        $tagAdig .= "<qConsumo>{$gConsumo['qConsumo']}</qConsumo>";
-                        $tagAdig .= "<uConsumo>{$gConsumo['uConsumo']}</uConsumo>";
+                $tagAdig .= "<vIBS>" . $this->formatDecimal($gConsumo['vIBS']) . "</vIBS>";
+                $tagAdig .= "<vCBS>" . $this->formatDecimal($gConsumo['vCBS']) . "</vCBS>";
+                $tagAdig .= "<gControleEstoque>";
 
-                    $tagAdig .= "</gControleEstoque>";
-                    $tagAdig .= "<DFeReferenciado>";
-                        $tagAdig .= "<chaveAcesso>{$gConsumo['chaveAcesso']}</chaveAcesso>";
-                        $tagAdig .= "<nItem>{$gConsumo['nItemDFe']}</nItem>";
-                    $tagAdig .= "</DFeReferenciado>";
+                $tagAdig .= "<qConsumo>{$gConsumo['qConsumo']}</qConsumo>";
+                $tagAdig .= "<uConsumo>{$gConsumo['uConsumo']}</uConsumo>";
+
+                $tagAdig .= "</gControleEstoque>";
+                $tagAdig .= "<DFeReferenciado>";
+                $tagAdig .= "<chaveAcesso>{$gConsumo['chaveAcesso']}</chaveAcesso>";
+                $tagAdig .= "<nItem>{$gConsumo['nItemDFe']}</nItem>";
+                $tagAdig .= "</DFeReferenciado>";
 
                 $tagAdig .= "</gConsumo>";
-                
             }
-
         }
 
         return $this->sefazEvento($uf, $chave, $tpEvento, $nSeqEvento, $tagAdig, 'SVCRS');
@@ -1660,11 +1715,19 @@ class Tools extends ToolsCommon
             case 112110:
                 $std->alias = 'envEvento';
                 $std->desc = 'Informação de efetivo pagamento integral para liberar crédito presumido do adquirente';
-            break;
+                break;
             case 110001:
                 $std->alias = 'envEvento';
                 $std->desc = 'Cancelamento de Evento';
-            break;
+                break;
+            case 110130:
+                $std->alias = 'envEvento';
+                $std->desc = 'Comprovante de Entrega da NF-e';
+                break;
+            case 110131:
+                $std->alias = 'envEvento';
+                $std->desc = 'Cancelamento do Comprovante de Entrega da NF-e';
+                break;
             default:
                 $msg = "O código do tipo de evento informado não corresponde a "
                     . "nenhum evento estabelecido.";

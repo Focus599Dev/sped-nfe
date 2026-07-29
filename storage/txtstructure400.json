@@ -182,6 +182,7 @@
     "ZX01": "ZX01|qrcode|urlChave|",
     "ZPDF": "ZPDF|bin|",
     "ZPDF_END": "ZPDF_END|",
-    "Z_USER": "Z_USER|User",
-    "Z_LOGO": "Z_LOGO|Logo"
+    "Z_USER": "Z_USER|User|",
+    "Z_LOGO": "Z_LOGO|Logo|",
+    "ZTRANSPORTE": "ZTRANSPORTE|PLACA|"
 }
