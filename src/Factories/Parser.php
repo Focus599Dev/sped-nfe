@@ -741,6 +741,18 @@ class Parser
     }
 
     /**
+     * Create tag prod/vUnComLiq and vProdLiq [I11a]
+     * I11a|vUnComLiq|vProdLiq|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function i11aEntity($std)
+    {
+        $std->item = $this->item;
+        $this->make->tagProdLiq($std);
+    }
+
+    /**
      * Create tag NVE [I05A]
      * I05A|NVE|
      * @param stdClass $std
@@ -1350,6 +1362,18 @@ class Parser
     {
         $std->item = $this->item;
         $this->make->tagICMSSN($std);
+    }
+
+    /**
+     * Create tag ICMSPrevistoPagtoAntecip [NB01]
+     * NB01|vICMSPrevisto|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function nb01Entity($std)
+    {
+        $std->item = $this->item;
+        $this->make->tagICMSPrevistoPagtoAntecip($std);
     }
 
     /**
@@ -2104,6 +2128,20 @@ class Parser
     }
 
     /**
+     * Cria tag vProdLiqTot [W01a], belongs to [W]
+     * W01a|vProdLiqTot|
+     * @param stdClass $std
+     * @return void
+     */
+    protected function w01aEntity($std)
+    {
+        if (!isset($this->stdICMSTot)) {
+            $this->stdICMSTot = new \stdClass();
+        }
+        $this->stdICMSTot->vProdLiqTot = $std->vProdLiqTot;
+    }
+
+    /**
      * Cria tag ICMSTot [W02], belongs to [W]
      * W02|vBC|vICMS|vICMSDeson|vBCST|vST|vProd|vFrete|vSeg|vDesc|vII|vIPI|vPIS|vCOFINS|vOutro|vNF|vTotTrib|
      *
@@ -2116,7 +2154,10 @@ class Parser
      */
     protected function w02Entity($std)
     {
-        $this->stdICMSTot = $this->mergeObject($std, (new \stdClass()));
+        if (!isset($this->stdICMSTot)) {
+            $this->stdICMSTot = new \stdClass();
+        }
+        $this->stdICMSTot = $this->mergeObject($std, $this->stdICMSTot);
         // $this->make->tagICMSTot($std);
     }
 

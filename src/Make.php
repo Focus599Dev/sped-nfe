@@ -369,6 +369,7 @@ class Make
         $this->stdTot->vFCPST = 0;
         $this->stdTot->vFCPSTRet = 0;
         $this->stdTot->vProd = 0;
+        $this->stdTot->vProdLiqTot = 0;
         $this->stdTot->vFrete = 0;
         $this->stdTot->vSeg = 0;
         $this->stdTot->vDesc = 0;
@@ -2161,6 +2162,8 @@ class Make
             'qCom',
             'vUnCom',
             'vProd',
+            'vUnComLiq',
+            'vProdLiq',
             'cEANTrib',
             'uTrib',
             'qTrib',
@@ -2304,6 +2307,25 @@ class Make
             true,
             $identificador . "[item $std->item] Valor Total Bruto dos Produtos ou Serviços"
         );
+        if (isset($std->vUnComLiq) || isset($std->vProdLiq)) {
+            $this->dom->addChild(
+                $prod,
+                "vUnComLiq",
+                $std->vUnComLiq,
+                true,
+                $identificador . "[item $std->item] Valor Líquido Unitário do Produto ou Serviço (sem tributos)"
+            );
+            $this->dom->addChild(
+                $prod,
+                "vProdLiq",
+                $this->transformMoney($std->vProdLiq, 2, '.', ''),
+                true,
+                $identificador . "[item $std->item] Valor Líquido do Produto ou Serviço (sem tributos)"
+            );
+            if (!empty($std->vProdLiq)) {
+                $this->stdTot->vProdLiqTot += (float) $std->vProdLiq;
+            }
+        }
         $this->dom->addChild(
             $prod,
             "cEANTrib",
@@ -2550,6 +2572,40 @@ class Make
         }
 
         return $gCred;
+    }
+
+    /**
+     * Sequência XML de Valores Líquidos do Produto I11a pai I01
+     * tag NFe/infNFe/det[item]/prod/vUnComLiq e vProdLiq
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagProdLiq(stdClass $std)
+    {
+        $possible = [
+            'item',
+            'vUnComLiq',
+            'vProdLiq'
+        ];
+        $std = $this->equilizeParameters($std, $possible);
+        if (!empty($std->vProdLiq)) {
+            $this->stdTot->vProdLiqTot += (float) $std->vProdLiq;
+        }
+        if (isset($this->aProd[$std->item])) {
+            $prod = $this->aProd[$std->item];
+            $node = $prod->getElementsByTagName("cEANTrib")->item(0);
+
+            $vUnComLiqNode = $this->dom->createElement("vUnComLiq", $std->vUnComLiq);
+            $vProdLiqNode = $this->dom->createElement("vProdLiq", $this->transformMoney($std->vProdLiq, 2, '.', ''));
+
+            if ($node) {
+                $prod->insertBefore($vUnComLiqNode, $node);
+                $prod->insertBefore($vProdLiqNode, $node);
+            } else {
+                $prod->appendChild($vUnComLiqNode);
+                $prod->appendChild($vProdLiqNode);
+            }
+        }
     }
 
     /**
@@ -5411,6 +5467,37 @@ class Make
     }
 
     /**
+     * Grupo ICMS Previsto no Pagamento Antecipado NB01 pai N01
+     * tag NFe/infNFe/det[]/imposto/ICMS/ICMSPrevistoPagtoAntecip NB01 pai N01
+     * @param stdClass $std
+     * @return DOMElement
+     */
+    public function tagICMSPrevistoPagtoAntecip(stdClass $std)
+    {
+        $possible = [
+            'item',
+            'vICMSPrevisto'
+        ];
+        $std = $this->equilizeParameters($std, $possible);
+        $icmsPrev = $this->dom->createElement("ICMSPrevistoPagtoAntecip");
+        $this->dom->addChild(
+            $icmsPrev,
+            'vICMSPrevisto',
+            $this->transformMoney($std->vICMSPrevisto, 2, '.', ''),
+            true,
+            "[item $std->item] Valor do ICMS Previsto"
+        );
+        if (!empty($this->aICMS[$std->item])) {
+            $tagIcms = $this->aICMS[$std->item];
+        } else {
+            $tagIcms = $this->dom->createElement('ICMS');
+        }
+        $this->dom->appChild($tagIcms, $icmsPrev, "Inserindo ICMSPrevistoPagtoAntecip em ICMS[$std->item]");
+        $this->aICMS[$std->item] = $tagIcms;
+        return $tagIcms;
+    }
+
+    /**
      * Tributação ICMS pelo Simples Nacional N10c pai N01
      * tag NFe/infNFe/det[]/imposto/ICMS/ICMSSN N10c pai N01
      * @param stdClass $std
@@ -6845,6 +6932,16 @@ class Make
     public function tagICMSTot(stdClass $std)
     {
         $this->buildTotal();
+        $vProdLiqTot = !empty($std->vProdLiqTot) ? $std->vProdLiqTot : (!empty($this->stdTot->vProdLiqTot) ? $this->stdTot->vProdLiqTot : null);
+        if (!empty($vProdLiqTot)) {
+            $this->dom->addChild(
+                $this->total,
+                "vProdLiqTot",
+                $this->transformMoney($vProdLiqTot, 2, '.', ''),
+                false,
+                "Valor Total Líquido dos Produtos ou Serviços (sem tributos)"
+            );
+        }
         $vBC = !empty($std->vBC) ? $std->vBC : $this->stdTot->vBC;
         $vICMS = !empty($std->vICMS) ? $std->vICMS : $this->stdTot->vICMS;
         $vICMSDeson = !empty($std->vICMSDeson) ? $std->vICMSDeson : $this->stdTot->vICMSDeson;
@@ -7658,6 +7755,24 @@ class Make
                 false,
                 "Valor Total da NF considerando os impostos por fora IBS, CBS e IS"
             );
+        }
+    }
+
+    /**
+     * Grupo Totais da NF-e vProdLiqTot W01a pai W01
+     * tag NFe/infNFe/total/vProdLiqTot
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagvProdLiqTot(stdClass $std)
+    {
+        $this->buildTotal();
+        $node = $this->total->getElementsByTagName("ICMSTot")->item(0);
+        $vProdLiqTot = $this->dom->createElement("vProdLiqTot", $this->transformMoney($std->vProdLiqTot, 2, '.', ''));
+        if ($node) {
+            $this->total->insertBefore($vProdLiqTot, $node);
+        } else {
+            $this->total->appendChild($vProdLiqTot);
         }
     }
 
@@ -10857,6 +10972,7 @@ class Make
         $this->stdTot->vFCPST = round($this->stdTot->vFCPST, 2);
         $this->stdTot->vFCPSTRet = round($this->stdTot->vFCPSTRet, 2);
         $this->stdTot->vProd = round($this->stdTot->vProd, 2);
+        $this->stdTot->vProdLiqTot = round($this->stdTot->vProdLiqTot, 2);
         $this->stdTot->vFrete = round($this->stdTot->vFrete, 2);
         $this->stdTot->vSeg = round($this->stdTot->vSeg, 2);
         $this->stdTot->vDesc = round($this->stdTot->vDesc, 2);
