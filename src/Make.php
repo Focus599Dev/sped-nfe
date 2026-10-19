@@ -10027,28 +10027,42 @@ class Make
 
         $std = $this->equilizeParameters($std, $possible);
 
-        $gIBSCBSMono = $this->dom->createElement("gIBSCBSMono");
-
-        $this->dom->addChild(
-            $gIBSCBSMono,
-            "vTotIBSMonoItem",
-            $std->vTotIBSMonoItem,
-            true,
-            "Valor total do IBS Mono tributado na operação"
-        );
-
-        $this->dom->addChild(
-            $gIBSCBSMono,
-            "vTotCBSMonoItem",
-            $std->vTotCBSMonoItem,
-            true,
-            "Valor total do CBS Mono tributado na operação"
-        );
-
-        if (isset($this->aIBSCBS[$std->item])) {
-
-            $this->dom->appChild($this->aIBSCBS[$std->item], $gIBSCBSMono, "Inclusão do node gIBSCBSMono");
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
         }
+
+        if ($std->vTotIBSMonoItem !== null && $std->vTotIBSMonoItem !== '') {
+            $node = $gIBSCBSMono->getElementsByTagName("vTotIBSMonoItem")->item(0);
+            if ($node) {
+                $node->nodeValue = $std->vTotIBSMonoItem;
+            } else {
+                $this->dom->addChild(
+                    $gIBSCBSMono,
+                    "vTotIBSMonoItem",
+                    $std->vTotIBSMonoItem,
+                    true,
+                    "Valor total do IBS Mono tributado na operação"
+                );
+            }
+        }
+
+        if ($std->vTotCBSMonoItem !== null && $std->vTotCBSMonoItem !== '') {
+            $node = $gIBSCBSMono->getElementsByTagName("vTotCBSMonoItem")->item(0);
+            if ($node) {
+                $node->nodeValue = $std->vTotCBSMonoItem;
+            } else {
+                $this->dom->addChild(
+                    $gIBSCBSMono,
+                    "vTotCBSMonoItem",
+                    $std->vTotCBSMonoItem,
+                    true,
+                    "Valor total do CBS Mono tributado na operação"
+                );
+            }
+        }
+
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
 
         return $gIBSCBSMono;
     }
@@ -10057,7 +10071,7 @@ class Make
      * create tag gIBSCBS [UC021]
      * tag NFe/infNFe/det[]/imposto/IBSCBS/gAjusteCompet
      * @param stdClass $std
-     * @return void
+     * @return \DOMElement|null
      */
     public function tagGAjusteCompet($std)
     {
@@ -10109,7 +10123,7 @@ class Make
      * create tag gIBSCBS [UC022]
      * tag NFe/infNFe/det[]/imposto/IBSCBS/gEstornoCred
      * @param stdClass $std
-     * @return void
+     * @return \DOMElement|null
      */
     public function tagGEstornoCred($std)
     {
@@ -10152,7 +10166,7 @@ class Make
      * create tag gIBSCBS [UC023]
      * tag NFe/infNFe/det[]/imposto/IBSCBS/gCredPresOper
      * @param stdClass $std
-     * @return void
+     * @return \DOMElement|null
      */
     public function tagGCredPresOper($std)
     {
@@ -10191,56 +10205,176 @@ class Make
         return $gCredPresOper;
     }
 
-    private function fixtagGIBSCBSMono($gIBSCBSMono)
+    /**
+     * Obtém ou cria o container gIBSCBSMono
+     * @param int|string $item
+     * @return \DOMElement|null
+     */
+    private function getOrCreateGIBSCBSMono($item)
     {
-
-        $vTotCBSMonoItem = $gIBSCBSMono->getElementsByTagName("vTotCBSMonoItem")->item(0);
-
-        $vTotIBSMonoItem = $gIBSCBSMono->getElementsByTagName("vTotIBSMonoItem")->item(0);
-
-        if ($vTotCBSMonoItem) {
-            $vTotCBSMonoItem->parentNode->removeChild($vTotCBSMonoItem);
-
-            $this->dom->addChild(
-                $gIBSCBSMono,
-                "vTotIBSMonoItem",
-                $vTotCBSMonoItem->nodeValue,
-                true,
-                "Valor total do IBS Mono tributado na operação"
-            );
+        if (!isset($this->aIBSCBS[$item])) {
+            return null;
         }
-        if ($vTotIBSMonoItem) {
 
-            $vTotIBSMonoItem->parentNode->removeChild($vTotIBSMonoItem);
+        $gIBSCBSMono = $this->aIBSCBS[$item]->getElementsByTagName("gIBSCBSMono")->item(0);
+        if (empty($gIBSCBSMono)) {
+            $gIBSCBSMono = $this->dom->createElement("gIBSCBSMono");
+            $this->dom->appChild($this->aIBSCBS[$item], $gIBSCBSMono, "Inclusão do node gIBSCBSMono");
+        }
 
-            $this->dom->addChild(
-                $gIBSCBSMono,
-                "vTotCBSMonoItem",
-                $vTotCBSMonoItem->nodeValue,
-                true,
-                "Valor total do CBS Mono tributado na operação"
-            );
+        return $gIBSCBSMono;
+    }
+
+    /**
+     * Obtém ou cria o nó gIBSMonoAdRem
+     * @param \DOMElement $gIBSCBSMono
+     * @return \DOMElement
+     */
+    private function getOrCreateGIBSMonoAdRem($gIBSCBSMono)
+    {
+        $node = $gIBSCBSMono->getElementsByTagName("gIBSMonoAdRem")->item(0);
+        if (empty($node)) {
+            $node = $this->dom->createElement("gIBSMonoAdRem");
+            $gIBSCBSMono->appendChild($node);
+        }
+        return $node;
+    }
+
+    /**
+     * Obtém ou cria o nó gIBSMonoAdValorem
+     * @param \DOMElement $gIBSCBSMono
+     * @return \DOMElement
+     */
+    private function getOrCreateGIBSMonoAdValorem($gIBSCBSMono)
+    {
+        $node = $gIBSCBSMono->getElementsByTagName("gIBSMonoAdValorem")->item(0);
+        if (empty($node)) {
+            $node = $this->dom->createElement("gIBSMonoAdValorem");
+            $gIBSCBSMono->appendChild($node);
+        }
+        return $node;
+    }
+
+    /**
+     * Obtém ou cria o nó gCBSMonoAdRem
+     * @param \DOMElement $gIBSCBSMono
+     * @return \DOMElement
+     */
+    private function getOrCreateGCBSMonoAdRem($gIBSCBSMono)
+    {
+        $node = $gIBSCBSMono->getElementsByTagName("gCBSMonoAdRem")->item(0);
+        if (empty($node)) {
+            $node = $this->dom->createElement("gCBSMonoAdRem");
+            $gIBSCBSMono->appendChild($node);
+        }
+        return $node;
+    }
+
+    /**
+     * Obtém ou cria o nó gCBSMonoAdValorem
+     * @param \DOMElement $gIBSCBSMono
+     * @return \DOMElement
+     */
+    private function getOrCreateGCBSMonoAdValorem($gIBSCBSMono)
+    {
+        $node = $gIBSCBSMono->getElementsByTagName("gCBSMonoAdValorem")->item(0);
+        if (empty($node)) {
+            $node = $this->dom->createElement("gCBSMonoAdValorem");
+            $gIBSCBSMono->appendChild($node);
+        }
+        return $node;
+    }
+
+    /**
+     * Reordena nós filhos de acordo com lista de nomes
+     * @param \DOMElement $parent
+     * @param array $order
+     */
+    private function fixSubGroupOrder($parent, array $order)
+    {
+        $nodes = [];
+        foreach ($order as $name) {
+            foreach ($parent->childNodes as $child) {
+                if ($child->nodeType === XML_ELEMENT_NODE && $child->nodeName === $name) {
+                    $nodes[] = $child;
+                    break;
+                }
+            }
+        }
+        foreach ($nodes as $node) {
+            $parent->appendChild($node);
         }
     }
 
     /**
-     * create tag gMonoPadrao [UC02A]
-     * UC02A|qBCMono|adRemIBS|adRemCBS|vIBSMono|vCBSMono
+     * Garante a ordenação rigorosa exigida pelo XSD TMonofasia
+     * @param \DOMElement $gIBSCBSMono
      */
-
-    public function tagGMonoPadrao($std)
+    private function fixtagGIBSCBSMono($gIBSCBSMono)
     {
+        if (empty($gIBSCBSMono)) {
+            return;
+        }
 
+        // 1. Corrige ordenação interna dos grupos IBS
+        $gIBSMonoAdRem = $gIBSCBSMono->getElementsByTagName("gIBSMonoAdRem")->item(0);
+        if ($gIBSMonoAdRem) {
+            $this->fixSubGroupOrder($gIBSMonoAdRem, ['gMonoPadrao', 'gMonoReten', 'gMonoRet', 'gpBioDiferenca']);
+        }
+        $gIBSMonoAdValorem = $gIBSCBSMono->getElementsByTagName("gIBSMonoAdValorem")->item(0);
+        if ($gIBSMonoAdValorem) {
+            $this->fixSubGroupOrder($gIBSMonoAdValorem, ['gMonoPadrao', 'gMonoReten', 'gMonoRet', 'gpBioDiferenca']);
+        }
+
+        // 2. Corrige ordenação interna dos grupos CBS
+        $gCBSMonoAdRem = $gIBSCBSMono->getElementsByTagName("gCBSMonoAdRem")->item(0);
+        if ($gCBSMonoAdRem) {
+            $this->fixSubGroupOrder($gCBSMonoAdRem, ['gMonoPadrao', 'gMonoReten', 'gMonoRet', 'gpBioDiferenca']);
+        }
+        $gCBSMonoAdValorem = $gIBSCBSMono->getElementsByTagName("gCBSMonoAdValorem")->item(0);
+        if ($gCBSMonoAdValorem) {
+            $this->fixSubGroupOrder($gCBSMonoAdValorem, ['gMonoPadrao', 'gMonoReten', 'gMonoRet', 'gpBioDiferenca']);
+        }
+
+        // 3. Corrige ordenação dos filhos diretos de gIBSCBSMono:
+        //    IBS (AdRem ou AdValorem) -> CBS (AdRem ou AdValorem) -> vTotIBSMonoItem -> vTotCBSMonoItem
+        $monoOrder = [
+            'gIBSMonoAdRem',
+            'gIBSMonoAdValorem',
+            'gCBSMonoAdRem',
+            'gCBSMonoAdValorem',
+            'vTotIBSMonoItem',
+            'vTotCBSMonoItem'
+        ];
+        $this->fixSubGroupOrder($gIBSCBSMono, $monoOrder);
+    }
+
+    /* =========================================================================
+     * IBS MONOFÁSICO AD REM
+     * ========================================================================= */
+
+    /**
+     * Cria tag gMonoPadrao para IBS Ad Rem [UB86]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGIBSMonoAdRemPadrao($std)
+    {
         $possible = [
             'item',
             'qBCMono',
             'adRemIBS',
-            'adRemCBS',
-            'vIBSMono',
-            'vCBSMono'
+            'vIBSMono'
         ];
 
         $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gIBSMonoAdRem = $this->getOrCreateGIBSMonoAdRem($gIBSCBSMono);
 
         $gMonoPadrao = $this->dom->createElement("gMonoPadrao");
 
@@ -10249,7 +10383,7 @@ class Make
             "qBCMono",
             $std->qBCMono,
             true,
-            "Quantidade tributada na operação"
+            "Quantidade tributada na monofasia (IBS Ad Rem)"
         );
 
         $this->dom->addChild(
@@ -10257,15 +10391,7 @@ class Make
             "adRemIBS",
             $std->adRemIBS,
             true,
-            "Adicional do IBS Mono"
-        );
-
-        $this->dom->addChild(
-            $gMonoPadrao,
-            "adRemCBS",
-            $std->adRemCBS,
-            true,
-            "Adicional do CBS Mono"
+            "Alíquota ad rem do IBS"
         );
 
         $this->dom->addChild(
@@ -10273,49 +10399,37 @@ class Make
             "vIBSMono",
             $std->vIBSMono,
             true,
-            "Valor do IBS Mono"
+            "Valor do IBS monofásico"
         );
 
-        $this->dom->addChild(
-            $gMonoPadrao,
-            "vCBSMono",
-            $std->vCBSMono,
-            true,
-            "Valor do CBS Mono"
-        );
+        $this->dom->appChild($gIBSMonoAdRem, $gMonoPadrao, "Inclusão do node gMonoPadrao (IBS Ad Rem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
 
-        if (isset($this->aIBSCBS[$std->item])) {
-
-            $gIBSCBSMono = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBSMono")->item(0);
-
-            if (!empty($gIBSCBSMono)) {
-
-                $this->dom->appChild($gIBSCBSMono, $gMonoPadrao, "Inclusão do node gMonoPadrao");
-
-                $this->fixtagGIBSCBSMono($gIBSCBSMono);
-            }
-        }
+        return $gMonoPadrao;
     }
 
     /**
-     * Create tag gMonoReten [UC02B]
-     * UC02B|qBCMonoReten|adRemIBSReten|vIBSMonoReten|adRemCBSReten|vCBSMonoReten|
+     * Cria tag gMonoReten para IBS Ad Rem [UB87]
      * @param stdClass $std
-     * @return void
+     * @return \DOMElement|null
      */
-    public function tagGMonoReten($std)
+    public function tagGIBSMonoAdRemReten($std)
     {
-
         $possible = [
             'item',
             'qBCMonoReten',
             'adRemIBSReten',
-            'vIBSMonoReten',
-            'adRemCBSReten',
-            'vCBSMonoReten'
+            'vIBSMonoReten'
         ];
 
         $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gIBSMonoAdRem = $this->getOrCreateGIBSMonoAdRem($gIBSCBSMono);
 
         $gMonoReten = $this->dom->createElement("gMonoReten");
 
@@ -10324,7 +10438,7 @@ class Make
             "qBCMonoReten",
             $std->qBCMonoReten,
             true,
-            "Quantidade tributada na operação"
+            "Quantidade tributada sujeita à retenção na monofasia (IBS Ad Rem)"
         );
 
         $this->dom->addChild(
@@ -10332,7 +10446,7 @@ class Make
             "adRemIBSReten",
             $std->adRemIBSReten,
             true,
-            "Adicional do IBS Mono Retido"
+            "Alíquota ad rem do IBS sujeito à retenção"
         );
 
         $this->dom->addChild(
@@ -10340,7 +10454,412 @@ class Make
             "vIBSMonoReten",
             $std->vIBSMonoReten,
             true,
-            "Valor do IBS Mono Retido"
+            "Valor do IBS monofásico sujeito à retenção"
+        );
+
+        $this->dom->appChild($gIBSMonoAdRem, $gMonoReten, "Inclusão do node gMonoReten (IBS Ad Rem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gMonoReten;
+    }
+
+    /**
+     * Cria tag gMonoRet para IBS Ad Rem [UB88]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGIBSMonoAdRemRet($std)
+    {
+        $possible = [
+            'item',
+            'vIBSMonoRet'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gIBSMonoAdRem = $this->getOrCreateGIBSMonoAdRem($gIBSCBSMono);
+
+        $gMonoRet = $this->dom->createElement("gMonoRet");
+
+        $this->dom->addChild(
+            $gMonoRet,
+            "vIBSMonoRet",
+            $std->vIBSMonoRet,
+            true,
+            "Valor do IBS retido anteriormente (IBS Ad Rem)"
+        );
+
+        $this->dom->appChild($gIBSMonoAdRem, $gMonoRet, "Inclusão do node gMonoRet (IBS Ad Rem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gMonoRet;
+    }
+
+    /**
+     * Cria tag gpBioDiferenca para IBS Ad Rem [UB89]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGIBSMonoAdRemBioDiferenca($std)
+    {
+        $possible = [
+            'item',
+            'qBCBioComb',
+            'vIBSDiferenca'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gIBSMonoAdRem = $this->getOrCreateGIBSMonoAdRem($gIBSCBSMono);
+
+        $gpBioDiferenca = $this->dom->createElement("gpBioDiferenca");
+
+        $this->dom->addChild(
+            $gpBioDiferenca,
+            "qBCBioComb",
+            $std->qBCBioComb,
+            true,
+            "Quantidade de Biocombustível (EAC) a recolher ou a ressarcir (IBS Ad Rem)"
+        );
+
+        $this->dom->addChild(
+            $gpBioDiferenca,
+            "vIBSDiferenca",
+            $std->vIBSDiferenca,
+            true,
+            "Valor do IBS correspondente à diferença em relação ao pBioObrigatorio"
+        );
+
+        $this->dom->appChild($gIBSMonoAdRem, $gpBioDiferenca, "Inclusão do node gpBioDiferenca (IBS Ad Rem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gpBioDiferenca;
+    }
+
+    /* =========================================================================
+     * IBS MONOFÁSICO AD VALOREM
+     * ========================================================================= */
+
+    /**
+     * Cria tag gMonoPadrao para IBS Ad Valorem [UB91]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGIBSMonoAdValoremPadrao($std)
+    {
+        $possible = [
+            'item',
+            'vBCMono',
+            'pAliqMonoUF',
+            'vIBSMonoUF',
+            'pAliqMonoMun',
+            'vIBSMonoMun',
+            'vIBSMono'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gIBSMonoAdValorem = $this->getOrCreateGIBSMonoAdValorem($gIBSCBSMono);
+
+        $gMonoPadrao = $this->dom->createElement("gMonoPadrao");
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "vBCMono",
+            $std->vBCMono,
+            true,
+            "Valor tributado na monofasia (IBS Ad Valorem)"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "pAliqMonoUF",
+            $std->pAliqMonoUF,
+            true,
+            "Alíquota ad valorem do IBS Estadual"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "vIBSMonoUF",
+            $std->vIBSMonoUF,
+            true,
+            "Valor do IBS monofásico Estadual"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "pAliqMonoMun",
+            $std->pAliqMonoMun,
+            true,
+            "Alíquota ad valorem do IBS Municipal"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "vIBSMonoMun",
+            $std->vIBSMonoMun,
+            true,
+            "Valor do IBS monofásico Municipal"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "vIBSMono",
+            $std->vIBSMono,
+            true,
+            "Valor do IBS monofásico (soma Estadual + Municipal)"
+        );
+
+        $this->dom->appChild($gIBSMonoAdValorem, $gMonoPadrao, "Inclusão do node gMonoPadrao (IBS Ad Valorem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gMonoPadrao;
+    }
+
+    /**
+     * Cria tag gMonoReten para IBS Ad Valorem [UB92]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGIBSMonoAdValoremReten($std)
+    {
+        $possible = [
+            'item',
+            'vBCMonoReten',
+            'pAliqMonoReten',
+            'vIBSMonoReten'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gIBSMonoAdValorem = $this->getOrCreateGIBSMonoAdValorem($gIBSCBSMono);
+
+        $gMonoReten = $this->dom->createElement("gMonoReten");
+
+        $this->dom->addChild(
+            $gMonoReten,
+            "vBCMonoReten",
+            $std->vBCMonoReten,
+            true,
+            "Valor tributado sujeito à retenção na monofasia (IBS Ad Valorem)"
+        );
+
+        $this->dom->addChild(
+            $gMonoReten,
+            "pAliqMonoReten",
+            $std->pAliqMonoReten,
+            true,
+            "Alíquota ad valorem do IBS sujeito à retenção"
+        );
+
+        $this->dom->addChild(
+            $gMonoReten,
+            "vIBSMonoReten",
+            $std->vIBSMonoReten,
+            true,
+            "Valor do IBS monofásico sujeito à retenção"
+        );
+
+        $this->dom->appChild($gIBSMonoAdValorem, $gMonoReten, "Inclusão do node gMonoReten (IBS Ad Valorem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gMonoReten;
+    }
+
+    /**
+     * Cria tag gMonoRet para IBS Ad Valorem [UB93]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGIBSMonoAdValoremRet($std)
+    {
+        $possible = [
+            'item',
+            'vIBSMonoRet'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gIBSMonoAdValorem = $this->getOrCreateGIBSMonoAdValorem($gIBSCBSMono);
+
+        $gMonoRet = $this->dom->createElement("gMonoRet");
+
+        $this->dom->addChild(
+            $gMonoRet,
+            "vIBSMonoRet",
+            $std->vIBSMonoRet,
+            true,
+            "Valor do IBS retido anteriormente (IBS Ad Valorem)"
+        );
+
+        $this->dom->appChild($gIBSMonoAdValorem, $gMonoRet, "Inclusão do node gMonoRet (IBS Ad Valorem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gMonoRet;
+    }
+
+    /**
+     * Cria tag gpBioDiferenca para IBS Ad Valorem [UB94]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGIBSMonoAdValoremBioDiferenca($std)
+    {
+        $possible = [
+            'item',
+            'qBCBioComb',
+            'vIBSDiferenca'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gIBSMonoAdValorem = $this->getOrCreateGIBSMonoAdValorem($gIBSCBSMono);
+
+        $gpBioDiferenca = $this->dom->createElement("gpBioDiferenca");
+
+        $this->dom->addChild(
+            $gpBioDiferenca,
+            "qBCBioComb",
+            $std->qBCBioComb,
+            true,
+            "Quantidade de Biocombustível (EAC) a recolher ou a ressarcir (IBS Ad Valorem)"
+        );
+
+        $this->dom->addChild(
+            $gpBioDiferenca,
+            "vIBSDiferenca",
+            $std->vIBSDiferenca,
+            true,
+            "Valor do IBS correspondente à diferença em relação ao pBioObrigatorio"
+        );
+
+        $this->dom->appChild($gIBSMonoAdValorem, $gpBioDiferenca, "Inclusão do node gpBioDiferenca (IBS Ad Valorem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gpBioDiferenca;
+    }
+
+    /* =========================================================================
+     * CBS MONOFÁSICA AD REM
+     * ========================================================================= */
+
+    /**
+     * Cria tag gMonoPadrao para CBS Ad Rem [UB96]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGCBSMonoAdRemPadrao($std)
+    {
+        $possible = [
+            'item',
+            'qBCMono',
+            'adRemCBS',
+            'vCBSMono'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gCBSMonoAdRem = $this->getOrCreateGCBSMonoAdRem($gIBSCBSMono);
+
+        $gMonoPadrao = $this->dom->createElement("gMonoPadrao");
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "qBCMono",
+            $std->qBCMono,
+            true,
+            "Quantidade tributada na monofasia (CBS Ad Rem)"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "adRemCBS",
+            $std->adRemCBS,
+            true,
+            "Alíquota ad rem da CBS"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "vCBSMono",
+            $std->vCBSMono,
+            true,
+            "Valor da CBS monofásica"
+        );
+
+        $this->dom->appChild($gCBSMonoAdRem, $gMonoPadrao, "Inclusão do node gMonoPadrao (CBS Ad Rem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gMonoPadrao;
+    }
+
+    /**
+     * Cria tag gMonoReten para CBS Ad Rem [UB97]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGCBSMonoAdRemReten($std)
+    {
+        $possible = [
+            'item',
+            'qBCMonoReten',
+            'adRemCBSReten',
+            'vCBSMonoReten'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gCBSMonoAdRem = $this->getOrCreateGCBSMonoAdRem($gIBSCBSMono);
+
+        $gMonoReten = $this->dom->createElement("gMonoReten");
+
+        $this->dom->addChild(
+            $gMonoReten,
+            "qBCMonoReten",
+            $std->qBCMonoReten,
+            true,
+            "Quantidade tributada sujeita à retenção na monofasia (CBS Ad Rem)"
         );
 
         $this->dom->addChild(
@@ -10348,7 +10867,7 @@ class Make
             "adRemCBSReten",
             $std->adRemCBSReten,
             true,
-            "Adicional do CBS Mono Retido"
+            "Alíquota ad rem da CBS sujeita à retenção"
         );
 
         $this->dom->addChild(
@@ -10356,157 +10875,381 @@ class Make
             "vCBSMonoReten",
             $std->vCBSMonoReten,
             true,
-            "Valor do CBS Mono Retido"
+            "Valor da CBS monofásica sujeita à retenção"
         );
 
-        if (isset($this->aIBSCBS[$std->item])) {
+        $this->dom->appChild($gCBSMonoAdRem, $gMonoReten, "Inclusão do node gMonoReten (CBS Ad Rem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
 
-            $gIBSCBSMono = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBSMono")->item(0);
-
-            if (!empty($gIBSCBSMono)) {
-
-                $this->dom->appChild($gIBSCBSMono, $gMonoReten, "Inclusão do node gMonoReten");
-
-                $this->fixtagGIBSCBSMono($gIBSCBSMono);
-            }
-        }
+        return $gMonoReten;
     }
 
     /**
-     * create tag gMonoRet[UC02C]
-     * UC02C|qBCMonoRet|adRemIBSRet|vIBSMonoRet|adRemCBSRet|vCBSMonoRet|
+     * Cria tag gMonoRet para CBS Ad Rem [UB98]
+     * @param stdClass $std
+     * @return \DOMElement|null
      */
-    public function tagGMonoRet($std)
+    public function tagGCBSMonoAdRemRet($std)
     {
-
         $possible = [
             'item',
-            'qBCMonoRet',
-            'adRemIBSRet',
-            'vIBSMonoRet',
-            'adRemCBSRet',
             'vCBSMonoRet'
         ];
 
         $std = $this->equilizeParameters($std, $possible);
 
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gCBSMonoAdRem = $this->getOrCreateGCBSMonoAdRem($gIBSCBSMono);
+
         $gMonoRet = $this->dom->createElement("gMonoRet");
-
-        $this->dom->addChild(
-            $gMonoRet,
-            "qBCMonoRet",
-            $std->qBCMonoRet,
-            true,
-            "Quantidade tributada na operação"
-        );
-
-        $this->dom->addChild(
-            $gMonoRet,
-            "adRemIBSRet",
-            $std->adRemIBSRet,
-            true,
-            "Adicional do IBS Mono Retido"
-        );
-
-        $this->dom->addChild(
-            $gMonoRet,
-            "vIBSMonoRet",
-            $std->vIBSMonoRet,
-            true,
-            "Valor do IBS Mono Retido"
-        );
-
-        $this->dom->addChild(
-            $gMonoRet,
-            "adRemCBSRet",
-            $std->adRemCBSRet,
-            true,
-            "Adicional do CBS Mono Retido"
-        );
 
         $this->dom->addChild(
             $gMonoRet,
             "vCBSMonoRet",
             $std->vCBSMonoRet,
             true,
-            "Valor do CBS Mono Retido"
+            "Valor da CBS retida anteriormente (CBS Ad Rem)"
         );
 
-        if (isset($this->aIBSCBS[$std->item])) {
+        $this->dom->appChild($gCBSMonoAdRem, $gMonoRet, "Inclusão do node gMonoRet (CBS Ad Rem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
 
-            $gIBSCBSMono = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBSMono")->item(0);
-
-            if (!empty($gIBSCBSMono)) {
-
-                $this->dom->appChild($gIBSCBSMono, $gMonoRet, "Inclusão do node gMonoRet");
-
-                $this->fixtagGIBSCBSMono($gIBSCBSMono);
-            }
-        }
+        return $gMonoRet;
     }
 
     /**
-     * create tag gMonoDif[UC02D]
-     * UC02D|pDifIBS|vIBSMonoDif|pDifCBS|vCBSMonoDif|
+     * Cria tag gpBioDiferenca para CBS Ad Rem [UB99]
+     * @param stdClass $std
+     * @return \DOMElement|null
      */
-    public function tagGMonoDif($std)
+    public function tagGCBSMonoAdRemBioDiferenca($std)
     {
-
         $possible = [
             'item',
-            'pDifIBS',
-            'vIBSMonoDif',
-            'pDifCBS',
-            'vCBSMonoDif'
+            'qBCBioComb',
+            'vCBSDiferenca'
         ];
 
         $std = $this->equilizeParameters($std, $possible);
 
-        $gMonoDif = $this->dom->createElement("gMonoDif");
-
-        $this->dom->addChild(
-            $gMonoDif,
-            "pDifIBS",
-            $std->pDifIBS,
-            true,
-            "Percentual do Diferimento do IBS Mono"
-        );
-
-        $this->dom->addChild(
-            $gMonoDif,
-            "vIBSMonoDif",
-            $std->vIBSMonoDif,
-            true,
-            "Valor do Diferimento do IBS Mono"
-        );
-
-        $this->dom->addChild(
-            $gMonoDif,
-            "pDifCBS",
-            $std->pDifCBS,
-            true,
-            "Percentual do Diferimento do CBS Mono"
-        );
-
-        $this->dom->addChild(
-            $gMonoDif,
-            "vCBSMonoDif",
-            $std->vCBSMonoDif,
-            true,
-            "Valor do Diferimento do CBS Mono"
-        );
-
-        if (isset($this->aIBSCBS[$std->item])) {
-
-            $gIBSCBSMono = $this->aIBSCBS[$std->item]->getElementsByTagName("gIBSCBSMono")->item(0);
-
-            if (!empty($gIBSCBSMono)) {
-
-                $this->dom->appChild($gIBSCBSMono, $gMonoDif, "Inclusão do node gMonoDif");
-
-                $this->fixtagGIBSCBSMono($gIBSCBSMono);
-            }
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
         }
+
+        $gCBSMonoAdRem = $this->getOrCreateGCBSMonoAdRem($gIBSCBSMono);
+
+        $gpBioDiferenca = $this->dom->createElement("gpBioDiferenca");
+
+        $this->dom->addChild(
+            $gpBioDiferenca,
+            "qBCBioComb",
+            $std->qBCBioComb,
+            true,
+            "Quantidade de Biocombustível (EAC) a recolher ou a ressarcir (CBS Ad Rem)"
+        );
+
+        $this->dom->addChild(
+            $gpBioDiferenca,
+            "vCBSDiferenca",
+            $std->vCBSDiferenca,
+            true,
+            "Valor da CBS correspondente à diferença em relação ao pBioObrigatorio"
+        );
+
+        $this->dom->appChild($gCBSMonoAdRem, $gpBioDiferenca, "Inclusão do node gpBioDiferenca (CBS Ad Rem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gpBioDiferenca;
+    }
+
+    /* =========================================================================
+     * CBS MONOFÁSICA AD VALOREM
+     * ========================================================================= */
+
+    /**
+     * Cria tag gMonoPadrao para CBS Ad Valorem [UB101]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGCBSMonoAdValoremPadrao($std)
+    {
+        $possible = [
+            'item',
+            'vBCMono',
+            'pAliqMonoCBS',
+            'vCBSMono'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gCBSMonoAdValorem = $this->getOrCreateGCBSMonoAdValorem($gIBSCBSMono);
+
+        $gMonoPadrao = $this->dom->createElement("gMonoPadrao");
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "vBCMono",
+            $std->vBCMono,
+            true,
+            "Valor tributado na monofasia (CBS Ad Valorem)"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "pAliqMonoCBS",
+            $std->pAliqMonoCBS,
+            true,
+            "Alíquota ad valorem da CBS"
+        );
+
+        $this->dom->addChild(
+            $gMonoPadrao,
+            "vCBSMono",
+            $std->vCBSMono,
+            true,
+            "Valor da CBS monofásica"
+        );
+
+        $this->dom->appChild($gCBSMonoAdValorem, $gMonoPadrao, "Inclusão do node gMonoPadrao (CBS Ad Valorem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gMonoPadrao;
+    }
+
+    /**
+     * Cria tag gMonoReten para CBS Ad Valorem [UB102]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGCBSMonoAdValoremReten($std)
+    {
+        $possible = [
+            'item',
+            'vBCMonoReten',
+            'pAliqMonoReten',
+            'vCBSMonoReten'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gCBSMonoAdValorem = $this->getOrCreateGCBSMonoAdValorem($gIBSCBSMono);
+
+        $gMonoReten = $this->dom->createElement("gMonoReten");
+
+        $this->dom->addChild(
+            $gMonoReten,
+            "vBCMonoReten",
+            $std->vBCMonoReten,
+            true,
+            "Valor tributado sujeito à retenção na monofasia (CBS Ad Valorem)"
+        );
+
+        $this->dom->addChild(
+            $gMonoReten,
+            "pAliqMonoReten",
+            $std->pAliqMonoReten,
+            true,
+            "Alíquota ad valorem da CBS sujeito à retenção"
+        );
+
+        $this->dom->addChild(
+            $gMonoReten,
+            "vCBSMonoReten",
+            $std->vCBSMonoReten,
+            true,
+            "Valor da CBS monofásica sujeita à retenção"
+        );
+
+        $this->dom->appChild($gCBSMonoAdValorem, $gMonoReten, "Inclusão do node gMonoReten (CBS Ad Valorem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gMonoReten;
+    }
+
+    /**
+     * Cria tag gMonoRet para CBS Ad Valorem [UB103]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGCBSMonoAdValoremRet($std)
+    {
+        $possible = [
+            'item',
+            'vCBSMonoRet'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gCBSMonoAdValorem = $this->getOrCreateGCBSMonoAdValorem($gIBSCBSMono);
+
+        $gMonoRet = $this->dom->createElement("gMonoRet");
+
+        $this->dom->addChild(
+            $gMonoRet,
+            "vCBSMonoRet",
+            $std->vCBSMonoRet,
+            true,
+            "Valor da CBS retida anteriormente (CBS Ad Valorem)"
+        );
+
+        $this->dom->appChild($gCBSMonoAdValorem, $gMonoRet, "Inclusão do node gMonoRet (CBS Ad Valorem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gMonoRet;
+    }
+
+    /**
+     * Cria tag gpBioDiferenca para CBS Ad Valorem [UB104]
+     * @param stdClass $std
+     * @return \DOMElement|null
+     */
+    public function tagGCBSMonoAdValoremBioDiferenca($std)
+    {
+        $possible = [
+            'item',
+            'qBCBioComb',
+            'vCBSDiferenca'
+        ];
+
+        $std = $this->equilizeParameters($std, $possible);
+
+        $gIBSCBSMono = $this->getOrCreateGIBSCBSMono($std->item);
+        if (!$gIBSCBSMono) {
+            return null;
+        }
+
+        $gCBSMonoAdValorem = $this->getOrCreateGCBSMonoAdValorem($gIBSCBSMono);
+
+        $gpBioDiferenca = $this->dom->createElement("gpBioDiferenca");
+
+        $this->dom->addChild(
+            $gpBioDiferenca,
+            "qBCBioComb",
+            $std->qBCBioComb,
+            true,
+            "Quantidade de Biocombustível (EAC) a recolher ou a ressarcir (CBS Ad Valorem)"
+        );
+
+        $this->dom->addChild(
+            $gpBioDiferenca,
+            "vCBSDiferenca",
+            $std->vCBSDiferenca,
+            true,
+            "Valor da CBS correspondente à diferença em relação ao pBioObrigatorio"
+        );
+
+        $this->dom->appChild($gCBSMonoAdValorem, $gpBioDiferenca, "Inclusão do node gpBioDiferenca (CBS Ad Valorem)");
+        $this->fixtagGIBSCBSMono($gIBSCBSMono);
+
+        return $gpBioDiferenca;
+    }
+
+    /* =========================================================================
+     * MÉTODOS LEGADOS (RETROCOMPATIBILIDADE)
+     * ========================================================================= */
+
+    /**
+     * @deprecated Utilizar tagGIBSMonoAdRemPadrao, tagGCBSMonoAdRemPadrao ou versões AdValorem
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagGMonoPadrao($std)
+    {
+        if (isset($std->adRemIBS) || isset($std->qBCMono) || isset($std->vIBSMono)) {
+            $stdIBS = new \stdClass();
+            $stdIBS->item = $std->item;
+            $stdIBS->qBCMono = isset($std->qBCMono) ? $std->qBCMono : null;
+            $stdIBS->adRemIBS = isset($std->adRemIBS) ? $std->adRemIBS : null;
+            $stdIBS->vIBSMono = isset($std->vIBSMono) ? $std->vIBSMono : null;
+            $this->tagGIBSMonoAdRemPadrao($stdIBS);
+        }
+
+        if (isset($std->adRemCBS) || isset($std->vCBSMono)) {
+            $stdCBS = new \stdClass();
+            $stdCBS->item = $std->item;
+            $stdCBS->qBCMono = isset($std->qBCMono) ? $std->qBCMono : null;
+            $stdCBS->adRemCBS = isset($std->adRemCBS) ? $std->adRemCBS : null;
+            $stdCBS->vCBSMono = isset($std->vCBSMono) ? $std->vCBSMono : null;
+            $this->tagGCBSMonoAdRemPadrao($stdCBS);
+        }
+    }
+
+    /**
+     * @deprecated Utilizar tagGIBSMonoAdRemReten, tagGCBSMonoAdRemReten ou versões AdValorem
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagGMonoReten($std)
+    {
+        if (isset($std->adRemIBSReten) || isset($std->qBCMonoReten) || isset($std->vIBSMonoReten)) {
+            $stdIBS = new \stdClass();
+            $stdIBS->item = $std->item;
+            $stdIBS->qBCMonoReten = isset($std->qBCMonoReten) ? $std->qBCMonoReten : null;
+            $stdIBS->adRemIBSReten = isset($std->adRemIBSReten) ? $std->adRemIBSReten : null;
+            $stdIBS->vIBSMonoReten = isset($std->vIBSMonoReten) ? $std->vIBSMonoReten : null;
+            $this->tagGIBSMonoAdRemReten($stdIBS);
+        }
+
+        if (isset($std->adRemCBSReten) || isset($std->vCBSMonoReten)) {
+            $stdCBS = new \stdClass();
+            $stdCBS->item = $std->item;
+            $stdCBS->qBCMonoReten = isset($std->qBCMonoReten) ? $std->qBCMonoReten : null;
+            $stdCBS->adRemCBSReten = isset($std->adRemCBSReten) ? $std->adRemCBSReten : null;
+            $stdCBS->vCBSMonoReten = isset($std->vCBSMonoReten) ? $std->vCBSMonoReten : null;
+            $this->tagGCBSMonoAdRemReten($stdCBS);
+        }
+    }
+
+    /**
+     * @deprecated Utilizar tagGIBSMonoAdRemRet, tagGCBSMonoAdRemRet ou versões AdValorem
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagGMonoRet($std)
+    {
+        if (isset($std->vIBSMonoRet)) {
+            $stdIBS = new \stdClass();
+            $stdIBS->item = $std->item;
+            $stdIBS->vIBSMonoRet = $std->vIBSMonoRet;
+            $this->tagGIBSMonoAdRemRet($stdIBS);
+        }
+
+        if (isset($std->vCBSMonoRet)) {
+            $stdCBS = new \stdClass();
+            $stdCBS->item = $std->item;
+            $stdCBS->vCBSMonoRet = $std->vCBSMonoRet;
+            $this->tagGCBSMonoAdRemRet($stdCBS);
+        }
+    }
+
+    /**
+     * @deprecated Grupo gMonoDif extinto na NT 2025.002-RTC v1.50/v1.52
+     * @param stdClass $std
+     * @return void
+     */
+    public function tagGMonoDif($std)
+    {
+        // No-op para manter compatibilidade com códigos legados
     }
 
     /**

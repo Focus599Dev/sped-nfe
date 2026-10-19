@@ -2051,6 +2051,50 @@ class Parser
     }
 
     /**
+     * create tag gMonoPadrao IBS Ad Rem [UC02A1]
+     * UC02A1|qBCMono|adRemIBS|vIBSMono|
+     */
+    protected function uc02a1Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGIBSMonoAdRemPadrao($std);
+    }
+
+    /**
+     * create tag gMonoReten IBS Ad Rem [UC02A2]
+     * UC02A2|qBCMonoReten|adRemIBSReten|vIBSMonoReten|
+     */
+    protected function uc02a2Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGIBSMonoAdRemReten($std);
+    }
+
+    /**
+     * create tag gMonoRet IBS Ad Rem [UC02A3]
+     * UC02A3|vIBSMonoRet|
+     */
+    protected function uc02a3Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGIBSMonoAdRemRet($std);
+    }
+
+    /**
+     * create tag gpBioDiferenca IBS Ad Rem [UC02A4]
+     * UC02A4|qBCBioComb|vIBSDiferenca|
+     */
+    protected function uc02a4Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGIBSMonoAdRemBioDiferenca($std);
+    }
+
+    /**
      * create tag gMonoReten [UC02B]
      * UC02B|qBCMonoReten|adRemIBSReten|vIBSMonoReten|adRemCBSReten|vCBSMonoReten|
      */
@@ -2059,6 +2103,50 @@ class Parser
         $std->item = $this->item;
 
         $this->make->tagGMonoReten($std);
+    }
+
+    /**
+     * create tag gMonoPadrao IBS Ad Valorem [UC02B1]
+     * UC02B1|vBCMono|pAliqMonoUF|vIBSMonoUF|pAliqMonoMun|vIBSMonoMun|vIBSMono|
+     */
+    protected function uc02b1Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGIBSMonoAdValoremPadrao($std);
+    }
+
+    /**
+     * create tag gMonoReten IBS Ad Valorem [UC02B2]
+     * UC02B2|vBCMonoReten|pAliqMonoReten|vIBSMonoReten|
+     */
+    protected function uc02b2Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGIBSMonoAdValoremReten($std);
+    }
+
+    /**
+     * create tag gMonoRet IBS Ad Valorem [UC02B3]
+     * UC02B3|vIBSMonoRet|
+     */
+    protected function uc02b3Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGIBSMonoAdValoremRet($std);
+    }
+
+    /**
+     * create tag gpBioDiferenca IBS Ad Valorem [UC02B4]
+     * UC02B4|qBCBioComb|vIBSDiferenca|
+     */
+    protected function uc02b4Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGIBSMonoAdValoremBioDiferenca($std);
     }
 
     /**
@@ -2073,6 +2161,50 @@ class Parser
     }
 
     /**
+     * create tag gMonoPadrao CBS Ad Rem [UC02C1]
+     * UC02C1|qBCMono|adRemCBS|vCBSMono|
+     */
+    protected function uc02c1Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGCBSMonoAdRemPadrao($std);
+    }
+
+    /**
+     * create tag gMonoReten CBS Ad Rem [UC02C2]
+     * UC02C2|qBCMonoReten|adRemCBSReten|vCBSMonoReten|
+     */
+    protected function uc02c2Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGCBSMonoAdRemReten($std);
+    }
+
+    /**
+     * create tag gMonoRet CBS Ad Rem [UC02C3]
+     * UC02C3|vCBSMonoRet|
+     */
+    protected function uc02c3Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGCBSMonoAdRemRet($std);
+    }
+
+    /**
+     * create tag gpBioDiferenca CBS Ad Rem [UC02C4]
+     * UC02C4|qBCBioComb|vCBSDiferenca|
+     */
+    protected function uc02c4Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGCBSMonoAdRemBioDiferenca($std);
+    }
+
+    /**
      * create tag gMonoDif[UC02D]
      * UC02D|pDifIBS|vIBSMonoDif|pDifCBS|vCBSMonoDif|
      */
@@ -2081,6 +2213,50 @@ class Parser
         $std->item = $this->item;
 
         $this->make->tagGMonoDif($std);
+    }
+
+    /**
+     * create tag gMonoPadrao CBS Ad Valorem [UC02D1]
+     * UC02D1|vBCMono|pAliqMonoCBS|vCBSMono|
+     */
+    protected function uc02d1Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGCBSMonoAdValoremPadrao($std);
+    }
+
+    /**
+     * create tag gMonoReten CBS Ad Valorem [UC02D2]
+     * UC02D2|vBCMonoReten|pAliqMonoReten|vCBSMonoReten|
+     */
+    protected function uc02d2Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGCBSMonoAdValoremReten($std);
+    }
+
+    /**
+     * create tag gMonoRet CBS Ad Valorem [UC02D3]
+     * UC02D3|vCBSMonoRet|
+     */
+    protected function uc02d3Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGCBSMonoAdValoremRet($std);
+    }
+
+    /**
+     * create tag gpBioDiferenca CBS Ad Valorem [UC02D4]
+     * UC02D4|qBCBioComb|vCBSDiferenca|
+     */
+    protected function uc02d4Entity($std)
+    {
+        $std->item = $this->item;
+
+        $this->make->tagGCBSMonoAdValoremBioDiferenca($std);
     }
 
     /**
