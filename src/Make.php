@@ -2307,7 +2307,10 @@ class Make
             true,
             $identificador . "[item $std->item] Valor Total Bruto dos Produtos ou Serviços"
         );
-        if (isset($std->vUnComLiq) || isset($std->vProdLiq)) {
+        if (
+            (isset($std->vUnComLiq) && $std->vUnComLiq !== '' && $std->vUnComLiq !== null) ||
+            (isset($std->vProdLiq) && $std->vProdLiq !== '' && $std->vProdLiq !== null)
+        ) {
             $this->dom->addChild(
                 $prod,
                 "vUnComLiq",
@@ -2588,11 +2591,29 @@ class Make
             'vProdLiq'
         ];
         $std = $this->equilizeParameters($std, $possible);
-        if (!empty($std->vProdLiq)) {
-            $this->stdTot->vProdLiqTot += (float) $std->vProdLiq;
+        if (
+            (!isset($std->vUnComLiq) || $std->vUnComLiq === '' || $std->vUnComLiq === null) &&
+            (!isset($std->vProdLiq) || $std->vProdLiq === '' || $std->vProdLiq === null)
+        ) {
+            return;
         }
         if (isset($this->aProd[$std->item])) {
             $prod = $this->aProd[$std->item];
+
+            // Valida se os nós ja existem e remove para evitar duplicidade
+            $existingUnComLiq = $prod->getElementsByTagName("vUnComLiq");
+            while ($existingUnComLiq->length > 0) {
+                $prod->removeChild($existingUnComLiq->item(0));
+            }
+            $existingProdLiq = $prod->getElementsByTagName("vProdLiq");
+            while ($existingProdLiq->length > 0) {
+                $prod->removeChild($existingProdLiq->item(0));
+            }
+
+            if (!empty($std->vProdLiq)) {
+                $this->stdTot->vProdLiqTot += (float) $std->vProdLiq;
+            }
+
             $node = $prod->getElementsByTagName("cEANTrib")->item(0);
 
             $vUnComLiqNode = $this->dom->createElement("vUnComLiq", $std->vUnComLiq);
@@ -7766,7 +7787,14 @@ class Make
      */
     public function tagvProdLiqTot(stdClass $std)
     {
+        if (!isset($std->vProdLiqTot) || $std->vProdLiqTot === '' || $std->vProdLiqTot === null) {
+            return;
+        }
         $this->buildTotal();
+        $existingTot = $this->total->getElementsByTagName("vProdLiqTot");
+        while ($existingTot->length > 0) {
+            $this->total->removeChild($existingTot->item(0));
+        }
         $node = $this->total->getElementsByTagName("ICMSTot")->item(0);
         $vProdLiqTot = $this->dom->createElement("vProdLiqTot", $this->transformMoney($std->vProdLiqTot, 2, '.', ''));
         if ($node) {
