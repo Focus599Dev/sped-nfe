@@ -1712,6 +1712,10 @@ class Tools extends ToolsCommon
                 $std->alias = 'envEvento';
                 $std->desc = 'Manifestação sobre Pedido de Transferência de Crédito de CBS em Operação de Sucessão';
                 break;
+            case 112120:
+                $std->alias = 'envEvento';
+                $std->desc = 'Importação em ALC/ZFM não convertida em isenção';
+                break;
             case 112110:
                 $std->alias = 'envEvento';
                 $std->desc = 'Informação de efetivo pagamento integral para liberar crédito presumido do adquirente';
