@@ -2786,7 +2786,7 @@ class Make
             $adi,
             "nAdicao",
             $std->nAdicao,
-            true,
+            false,
             $identificador . "[item $std->item] Número da Adição"
         );
         $this->dom->addChild(
@@ -2806,7 +2806,7 @@ class Make
         $this->dom->addChild(
             $adi,
             "vDescDI",
-            $std->vDescDI,
+            $this->conditionalNumberFormatting($std->vDescDI),
             false,
             $identificador . "[item $std->item] Valor do desconto do item da DI Adição"
         );
